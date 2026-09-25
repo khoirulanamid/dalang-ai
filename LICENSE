@@ -1,21 +1,37 @@
-MIT License
+DALANG-AI NON-COMMERCIAL PUBLIC LICENSE (CC BY-NC 4.0 EQUIVALENT)
 
-Copyright (c) 2026 Khoirul Anam (Bos Muda)
+Copyright (c) 2026 Khoirul Anam (Bos Muda) / Dalang-AI Contributors
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+KETENTUAN PENGGUNAAN / TERMS OF USE:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. GRATIS & BEBAS DIGUNAKAN (FREE TO USE):
+   Perangkat lunak ini ("Dalang-AI") sepenuhnya GRATIS untuk digunakan, dimodifikasi,
+   dipelajari, dikembangkan ulang, dan didistribusikan untuk kepentingan pribadi,
+   edukasi, penelitian, komunitas, dan non-komersial.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. DILARANG DIPERJUALBELIKAN (STRICTLY NON-COMMERCIAL):
+   DILARANG KERAS memperjualbelikan perangkat lunak ini, baik seluruhnya maupun
+   sebagian, kode sumber, turunan (derivative works), binari, paket installer,
+   maupun sebagai bagian dari layanan berbayar langsung, TANPA PENGECUALIAN.
+   
+   - Anda TIDAK BOLEH menjual kode ini di marketplace atau platform manapun.
+   - Anda TIDAK BOLEH memungut biaya lisensi atas perangkat lunak ini.
+   - Anda TIDAK BOLEH mengemas ulang proyek ini lalu menjualnya sebagai software komersial berbayar.
+
+3. ATRIBUSI (ATTRIBUTION):
+   Setiap salinan, modifikasi, atau distribusi ulang wajib menyertakan pemberitahuan
+   hak cipta ini dan mencantumkan tautan asli ke repositori resmi:
+   https://github.com/khoirulanamid/dalang-ai
+
+4. TANPA JAMINAN (NO WARRANTY):
+   PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA" (AS IS), TANPA JAMINAN
+   DALAM BENTUK APA PUN, BAIK TERSURAT MAUPUN TERSIRAT. PENCIPTA TIDAK
+   BERTANGGUNG JAWAB ATAS SEGALA KLAIM, KERUSAKAN, ATAU TANGGUNG JAWAB LAINNYA.
+
+==================================================================================
+RINGKASAN SINGKAT:
+Boleh dipakai? BOLEH.
+Boleh dimodifikasi? BOLEH.
+Boleh dibagikan ke orang lain? BOLEH (harus tetap gratis).
+Boleh dijual? TIDAK BOLEH SAMA SEKALI.
+==================================================================================

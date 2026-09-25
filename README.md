@@ -1,5 +1,11 @@
 <div align="center">
 
+> 🎁 **SEPENUHNYA GRATIS** — Boleh dipakai, dimodifikasi, dan dibagikan oleh siapa saja.
+> 🚫 **DILARANG DIPERJUALBELIKAN** — Kode ini tidak boleh dijual dalam bentuk apapun.
+> Lihat [`LICENSE`](./LICENSE) untuk ketentuan lengkap.
+
+---
+
 # 🎭 Dalang-AI
 
 **Multi-Agent Autonomous Studio — dengan filosofi Wayang Nusantara**
@@ -11,7 +17,7 @@
 [![Docker](https://img.shields.io/badge/Docker-CIS%20Hardened-2496ed?style=flat-square&logo=docker)](./workspace/Dockerfile)
 [![Security](https://img.shields.io/badge/Security%20Audit-Grade%20B%2B-f59e0b?style=flat-square&logo=owasp)](./workspace/SECURITY_AUDIT.md)
 [![Anti-Slop](https://img.shields.io/badge/Anti--AI--Slop-enforced-ef4444?style=flat-square)](https://github.com/miqdadbadjuber/anti-slop)
-[![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](./LICENSE)
+[![License](https://img.shields.io/badge/License-Non--Commercial%20(Gratis)-red?style=flat-square)](./LICENSE)
 
 <br/>
 
@@ -327,7 +333,20 @@ Pull request terbuka untuk siapa saja. Sebelum membuka PR, pastikan:
 
 ## Lisensi
 
-MIT License — bebas digunakan, dimodifikasi, dan didistribusikan.
+**Non-Commercial Public License** — Bebas digunakan dan dibagikan, **DILARANG DIPERJUALBELIKAN.**
+
+| Tindakan | Status |
+|---|:---:|
+| Pakai untuk proyek pribadi | ✅ Boleh |
+| Modifikasi kode | ✅ Boleh |
+| Bagikan ke orang lain (gratis) | ✅ Boleh |
+| Dipakai untuk riset / edukasi | ✅ Boleh |
+| Fork dan kembangkan sendiri | ✅ Boleh |
+| Dijual / dikomersialisasikan | 🚫 **TIDAK BOLEH** |
+| Dijual ulang dengan nama lain | 🚫 **TIDAK BOLEH** |
+| Dikemas sebagai SaaS berbayar | 🚫 **TIDAK BOLEH** |
+
+Lihat [`LICENSE`](./LICENSE) untuk teks hukum lengkap.
 
 ---
 
