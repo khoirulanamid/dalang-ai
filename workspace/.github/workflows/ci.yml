@@ -1,0 +1,379 @@
+# =============================================================================
+# Ripple10 Auth API — CI/CD Pipeline
+# =============================================================================
+# Stages (run on every push and pull-request):
+#   1. lint      — Ruff (fast linter) + Flake8 (style gate, max-line 120)
+#   2. test      — pytest with coverage report
+#   3. security  — Bandit SAST scan (fail on MEDIUM+ severity)
+#   4. docker    — Multi-stage Docker build + smoke-test the /health endpoint
+#
+# Release stage (push to `main` only):
+#   5. publish   — Tag & push image to GitHub Container Registry (GHCR)
+# =============================================================================
+
+name: CI
+
+on:
+  push:
+    branches: ["main", "develop", "release/**", "hotfix/**"]
+  pull_request:
+    branches: ["main", "develop"]
+  # Allow manual trigger from the Actions UI
+  workflow_dispatch:
+
+# Cancel in-progress runs for the same branch/PR to save runner minutes
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Minimal default permissions — each job opts in to what it needs
+permissions:
+  contents: read
+
+# ---------------------------------------------------------------------------
+# Shared environment variables
+# ---------------------------------------------------------------------------
+env:
+  PYTHON_VERSION: "3.11"
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/ripple10-auth
+  # Safe dummy secret used only during CI test runs (never deployed)
+  JWT_SECRET_KEY: "ci-test-only-secret-key-not-used-in-production-at-least-64-chars-long"
+
+# =============================================================================
+# JOB 1 — Lint
+# =============================================================================
+jobs:
+  lint:
+    name: "Lint (Ruff + Flake8)"
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install linting tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff flake8
+
+      # ── Ruff: fast, opinionated linter (replaces isort, pyupgrade, etc.) ──
+      - name: Ruff — check for errors and code-style issues
+        run: |
+          ruff check \
+            --select E,W,F,I,UP,B,S \
+            --ignore S101,S105,S106,S107,B008 \
+            --line-length 120 \
+            auth_api.py auth_models.py token_service.py
+
+      # ── Flake8: PEP-8 style gate (max line length 120 to match project) ──
+      - name: Flake8 — PEP-8 style gate
+        run: |
+          flake8 auth_api.py auth_models.py token_service.py \
+            --max-line-length=120 \
+            --extend-ignore=E203,W503
+
+      - name: Ruff — check test files (relaxed rules)
+        run: |
+          ruff check \
+            --select E,W,F \
+            --ignore E501 \
+            test_auth_api.py test_frontend_auth.py test_security.py test_token.py
+
+# =============================================================================
+# JOB 2 — Test (pytest + coverage)
+# =============================================================================
+  test:
+    name: "Test (pytest)"
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    # Tests can run in parallel with lint — no dependency
+    needs: []
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install application dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          # Test-only extras
+          pip install pytest pytest-cov httpx
+
+      - name: Run pytest with coverage
+        env:
+          JWT_SECRET_KEY: ${{ env.JWT_SECRET_KEY }}
+        run: |
+          pytest \
+            --tb=short \
+            --strict-markers \
+            -q \
+            --cov=auth_api \
+            --cov=auth_models \
+            --cov=token_service \
+            --cov-report=term-missing \
+            --cov-report=xml:coverage.xml \
+            --cov-fail-under=80 \
+            test_auth_api.py test_security.py test_token.py
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage.xml
+          retention-days: 14
+
+# =============================================================================
+# JOB 3 — Security (Bandit SAST)
+# =============================================================================
+  security:
+    name: "Security (Bandit SAST)"
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    needs: []
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install Bandit
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit[toml]
+
+      # ── Bandit SAST scan ──────────────────────────────────────────────────
+      # Skipped checks (justified):
+      #   B104 — bind-all-interfaces: intentional in container (0.0.0.0)
+      #   B105 — hardcoded_password_string: false positives on test fixtures
+      #          and enum values (e.g. PASS = "✓") — documented in SECURITY_AUDIT.md
+      - name: Bandit — SAST scan on application source
+        run: |
+          bandit \
+            --recursive \
+            --skip B104,B105 \
+            --severity-level medium \
+            --confidence-level medium \
+            --format txt \
+            auth_api.py auth_models.py token_service.py
+
+      - name: Bandit — generate JSON report (artifact)
+        if: always()
+        run: |
+          bandit \
+            --recursive \
+            --skip B104,B105 \
+            --format json \
+            --output bandit-report.json \
+            auth_api.py auth_models.py token_service.py || true
+
+      - name: Upload Bandit report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bandit-report
+          path: bandit-report.json
+          retention-days: 30
+
+# =============================================================================
+# JOB 4 — Docker Build & Smoke Test
+# =============================================================================
+  docker:
+    name: "Docker Build & Smoke Test"
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    # Only build after lint, test, and security all pass
+    needs: [lint, test, security]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Docker Buildx for multi-platform support ──────────────────────────
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # ── Build the production image (runtime stage) ────────────────────────
+      - name: Build Docker image (runtime stage)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          target: runtime
+          push: false
+          load: true
+          tags: ripple10-auth:ci-${{ github.sha }}
+          # Inline cache speeds up subsequent builds on the same runner
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+
+      # ── Validate docker-compose configuration ─────────────────────────────
+      - name: Validate docker-compose.yml
+        run: |
+          docker compose config --quiet
+        env:
+          JWT_SECRET_KEY: ${{ env.JWT_SECRET_KEY }}
+
+      # ── Smoke test: start the container and hit /health ───────────────────
+      - name: Smoke test — start container and probe /health
+        run: |
+          # Start the container in detached mode
+          docker run -d \
+            --name ripple10-smoke \
+            --publish 8000:8000 \
+            --env JWT_SECRET_KEY="${JWT_SECRET_KEY}" \
+            --env JWT_ALGORITHM="HS256" \
+            --env APP_LOG_LEVEL="warning" \
+            ripple10-auth:ci-${{ github.sha }}
+
+          # Wait up to 30 s for the service to become healthy
+          echo "Waiting for /health endpoint..."
+          for i in $(seq 1 15); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/health || true)
+            if [ "$STATUS" = "200" ]; then
+              echo "✅ /health returned HTTP 200 on attempt $i"
+              break
+            fi
+            echo "  attempt $i — got HTTP $STATUS, retrying in 2 s..."
+            sleep 2
+          done
+
+          # Final assertion
+          FINAL=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/health)
+          if [ "$FINAL" != "200" ]; then
+            echo "❌ Smoke test FAILED — /health returned HTTP $FINAL"
+            docker logs ripple10-smoke
+            exit 1
+          fi
+
+          # Validate response body contains expected fields
+          BODY=$(curl -s http://localhost:8000/health)
+          echo "Response body: $BODY"
+          echo "$BODY" | python3 -c "
+          import sys, json
+          data = json.load(sys.stdin)
+          assert data.get('status') == 'ok', f'Expected status=ok, got: {data}'
+          assert 'timestamp' in data, f'Missing timestamp field: {data}'
+          print('✅ Response body validated')
+          "
+        env:
+          JWT_SECRET_KEY: ${{ env.JWT_SECRET_KEY }}
+
+      # ── Verify non-root user ──────────────────────────────────────────────
+      - name: Verify container runs as non-root user
+        run: |
+          WHOAMI=$(docker exec ripple10-smoke whoami)
+          echo "Container user: $WHOAMI"
+          if [ "$WHOAMI" = "root" ]; then
+            echo "❌ Container is running as root — security violation!"
+            exit 1
+          fi
+          echo "✅ Container is running as non-root user: $WHOAMI"
+
+      # ── Cleanup ───────────────────────────────────────────────────────────
+      - name: Cleanup smoke-test container
+        if: always()
+        run: |
+          docker stop ripple10-smoke 2>/dev/null || true
+          docker rm  ripple10-smoke 2>/dev/null || true
+
+      # ── Collect container logs on failure ─────────────────────────────────
+      - name: Dump container logs on failure
+        if: failure()
+        run: docker logs ripple10-smoke 2>/dev/null || true
+
+# =============================================================================
+# JOB 5 — Publish to GHCR (main branch only)
+# =============================================================================
+  publish:
+    name: "Publish Image to GHCR"
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    # Only publish after the full CI suite passes, and only on main
+    needs: [docker]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    permissions:
+      contents: read
+      packages: write   # Required to push to GHCR
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── Derive image tags ─────────────────────────────────────────────────
+      - name: Extract Docker metadata (tags & labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            # Tag with the short commit SHA (e.g. sha-a1b2c3d)
+            type=sha,prefix=sha-,format=short
+            # Tag with the branch name (e.g. main)
+            type=ref,event=branch
+            # Semantic version tags from git tags (e.g. v1.2.3 → 1.2.3, 1.2, 1)
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            # Always update the `latest` tag on main
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      # ── Build and push the final production image ─────────────────────────
+      - name: Build and push image to GHCR
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          target: runtime
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          # Provenance attestation for supply-chain security (SLSA Level 1)
+          provenance: true
+          sbom: true
+
+      - name: Image digest summary
+        run: |
+          echo "### 🐳 Image Published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Registry:** \`ghcr.io\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** \`${{ env.IMAGE_NAME }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Tags:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY

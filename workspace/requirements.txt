@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+PyJWT
+cryptography
+bcrypt
+passlib[bcrypt]
+httpx
+pyyaml

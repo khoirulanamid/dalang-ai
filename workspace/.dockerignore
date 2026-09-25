@@ -1,0 +1,54 @@
+# =============================================================================
+# .dockerignore — Ripple10 Auth API build context exclusions
+# =============================================================================
+
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Python artifacts & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment and secrets (prevent accidental leakage)
+.env
+.env.*
+!.env.example
+
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Test files (production container does not need test suites)
+test_*.py
+tests/
+
+# Documentation and design artifacts
+docs/
+*.md
+
+# Compose and deployment configs
+docker-compose*.yml
+deploy/
+
+# Frontend assets (served separately via Nginx frontend container)
+frontend_auth/

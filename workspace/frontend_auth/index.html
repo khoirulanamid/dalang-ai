@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ripple10 Auth Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ── Skip Navigation (WCAG 2.4.1) ── -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-container">
+    <!-- Header / Brand -->
+    <header class="app-header" role="banner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">Ripple10 Auth</h1>
+          <p class="brand-subtitle">Secure Authentication Portal</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <!-- API URL Config Toggle -->
+        <button
+          id="toggle-settings-btn"
+          class="icon-button"
+          title="Configure API Server"
+          aria-label="API Settings"
+          aria-expanded="false"
+          aria-controls="settings-panel"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Settings Panel -->
+    <div
+      id="settings-panel"
+      class="settings-panel hidden"
+      role="region"
+      aria-label="API Server Configuration"
+    >
+      <div class="settings-inner">
+        <label for="api-base-url" class="settings-label">API Base URL</label>
+        <div class="input-inline">
+          <input
+            type="url"
+            id="api-base-url"
+            class="input"
+            placeholder="https://api.example.com"
+            autocomplete="url"
+            aria-describedby="api-base-url-hint"
+          >
+          <span id="api-base-url-hint" class="sr-only">Leave blank to use the current origin. Example: https://api.example.com</span>
+          <button id="save-settings-btn" class="btn btn-primary btn-sm">Save</button>
+          <button id="reset-settings-btn" class="btn btn-outline btn-sm">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Live Region for dynamic status announcements (WCAG 4.1.3) ── -->
+    <div
+      id="aria-status"
+      class="sr-only"
+      aria-live="polite"
+      aria-atomic="true"
+      role="status"
+    ></div>
+
+    <!-- Toast Notification -->
+    <div
+      id="notification"
+      class="notification hidden"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <span id="notification-message"></span>
+      <button
+        id="notification-close"
+        class="notification-close"
+        aria-label="Dismiss notification"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <main id="main-content" class="app-main" role="main">
+
+      <!-- ── Auth Section ── -->
+      <section
+        id="auth-section"
+        class="card-container"
+        aria-label="Authentication"
+      >
+        <div class="card">
+
+          <!-- Tab Navigation (WCAG 4.1.2 — proper ARIA tab pattern) -->
+          <div class="tabs" role="tablist" aria-label="Authentication options">
+            <button
+              id="tab-login"
+              class="tab-btn active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="login-pane"
+              data-target="login-pane"
+            >Sign In</button>
+            <button
+              id="tab-register"
+              class="tab-btn"
+              role="tab"
+              aria-selected="false"
+              aria-controls="register-pane"
+              data-target="register-pane"
+            >Register</button>
+          </div>
+
+          <!-- Login Pane -->
+          <div
+            id="login-pane"
+            class="tab-pane"
+            role="tabpanel"
+            aria-labelledby="tab-login"
+            tabindex="0"
+          >
+            <h2 class="pane-title">Welcome back</h2>
+            <p class="pane-subtitle">Sign in to your Ripple10 account</p>
+
+            <form id="login-form" novalidate aria-label="Sign in form">
+              <div class="form-group">
+                <label for="login-username" class="form-label">
+                  Username <span class="required-indicator" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="login-username"
+                    name="username"
+                    class="input"
+                    placeholder="your_username"
+                    autocomplete="username"
+                    required
+                    aria-required="true"
+                    aria-describedby="login-username-error"
+                  >
+                </div>
+                <span
+                  id="login-username-error"
+                  class="form-error hidden"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label for="login-password" class="form-label">
+                  Password <span class="required-indicator" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="password"
+                    id="login-password"
+                    name="password"
+                    class="input"
+                    placeholder="••••••••"
+                    autocomplete="current-password"
+                    required
+                    aria-required="true"
+                    aria-describedby="login-password-error"
+                  >
+                  <button
+                    type="button"
+                    class="toggle-password"
+                    data-for="login-password"
+                    aria-label="Show password"
+                    aria-pressed="false"
+                  >
+                    <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                </div>
+                <span
+                  id="login-password-error"
+                  class="form-error hidden"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
+              </div>
+
+              <div class="form-group checkbox-group">
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    id="remember-me"
+                    name="remember_me"
+                    checked
+                    aria-describedby="remember-me-hint"
+                  >
+                  <span>Remember me</span>
+                </label>
+                <span id="remember-me-hint" class="sr-only">When checked, your session will persist across browser restarts using localStorage.</span>
+              </div>
+
+              <!-- Login form-level error -->
+              <div
+                id="login-form-error"
+                class="form-error hidden"
+                role="alert"
+                aria-live="assertive"
+                tabindex="-1"
+              ></div>
+
+              <button
+                type="submit"
+                id="login-submit"
+                class="btn btn-primary btn-block"
+                aria-describedby="login-form-error"
+              >
+                <span class="btn-text">Sign In</span>
+                <span class="spinner hidden" aria-hidden="true"></span>
+              </button>
+            </form>
+
+            <div class="pane-footer">
+              <p>Don't have an account?
+                <a href="#" id="switch-to-register" aria-label="Switch to registration form">Create one</a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Register Pane -->
+          <div
+            id="register-pane"
+            class="tab-pane hidden"
+            role="tabpanel"
+            aria-labelledby="tab-register"
+            tabindex="0"
+          >
+            <h2 class="pane-title">Create account</h2>
+            <p class="pane-subtitle">Join Ripple10 — it's free</p>
+
+            <form id="register-form" novalidate aria-label="Registration form">
+              <div class="form-group">
+                <label for="register-username" class="form-label">
+                  Username <span class="required-indicator" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="register-username"
+                    name="username"
+                    class="input"
+                    placeholder="choose_a_username"
+                    autocomplete="username"
+                    required
+                    aria-required="true"
+                    aria-describedby="register-username-hint register-username-error"
+                  >
+                </div>
+                <span id="register-username-hint" class="form-hint">3–30 characters, letters, numbers, underscores only.</span>
+                <span
+                  id="register-username-error"
+                  class="form-error hidden"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label for="register-email" class="form-label">
+                  Email <span class="required-indicator" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="email"
+                    id="register-email"
+                    name="email"
+                    class="input"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                    aria-describedby="register-email-error"
+                  >
+                </div>
+                <span
+                  id="register-email-error"
+                  class="form-error hidden"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label for="register-fullname" class="form-label">Full Name</label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="register-fullname"
+                    name="full_name"
+                    class="input"
+                    placeholder="Jane Doe"
+                    autocomplete="name"
+                    aria-describedby="register-fullname-error"
+                  >
+                </div>
+                <span
+                  id="register-fullname-error"
+                  class="form-error hidden"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label for="register-role" class="form-label">Role</label>
+                <div class="input-wrapper select-wrapper">
+                  <select
+                    id="register-role"
+                    name="role"
+                    class="input"
+                    aria-describedby="register-role-hint"
+                  >
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+                <span id="register-role-hint" class="sr-only">Select your account role. Most users should select User.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="register-password" class="form-label">
+                  Password <span class="required-indicator" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="password"
+                    id="register-password"
+                    name="password"
+                    class="input"
+                    placeholder="••••••••"
+                    autocomplete="new-password"
+                    required
+                    aria-required="true"
+                    aria-describedby="password-strength-desc register-password-error"
+                  >
+                  <button
+                    type="button"
+                    class="toggle-password"
+                    data-for="register-password"
+                    aria-label="Show password"
+                    aria-pressed="false"
+                  >
+                    <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                </div>
+                <!-- Password strength meter -->
+                <div class="password-strength" aria-hidden="true">
+                  <div class="strength-bar">
+                    <div class="strength-fill" id="strength-fill"></div>
+                  </div>
+                  <span class="strength-label" id="strength-label"></span>
+                </div>
+                <!-- Screen-reader accessible strength description -->
+                <span id="password-strength-desc" class="sr-only" aria-live="polite"></span>
+                <span
+                  id="register-password-error"
+                  class="form-error hidden"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label for="register-confirm-password" class="form-label">
+                  Confirm Password <span class="required-indicator" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="password"
+                    id="register-confirm-password"
+                    name="confirm_password"
+                    class="input"
+                    placeholder="••••••••"
+                    autocomplete="new-password"
+                    required
+                    aria-required="true"
+                    aria-describedby="register-confirm-password-error"
+                  >
+                  <button
+                    type="button"
+                    class="toggle-password"
+                    data-for="register-confirm-password"
+                    aria-label="Show confirm password"
+                    aria-pressed="false"
+                  >
+                    <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                </div>
+                <span
+                  id="register-confirm-password-error"
+                  class="form-error hidden"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
+              </div>
+
+              <!-- Register form-level error -->
+              <div
+                id="register-form-error"
+                class="form-error hidden"
+                role="alert"
+                aria-live="assertive"
+                tabindex="-1"
+              ></div>
+
+              <button
+                type="submit"
+                id="register-submit"
+                class="btn btn-primary btn-block"
+                aria-describedby="register-form-error"
+              >
+                <span class="btn-text">Create Account</span>
+                <span class="spinner hidden" aria-hidden="true"></span>
+              </button>
+            </form>
+
+            <div class="pane-footer">
+              <p>Already have an account?
+                <a href="#" id="switch-to-login" aria-label="Switch to sign in form">Sign in</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── Dashboard Section ── -->
+      <section
+        id="dashboard-section"
+        class="dashboard hidden"
+        aria-label="User Dashboard"
+        aria-live="polite"
+        aria-busy="false"
+      >
+        <div class="dashboard-header">
+          <div class="dashboard-user">
+            <div class="avatar-badge" aria-hidden="true">
+              <span id="avatar-initials">?</span>
+            </div>
+            <div class="user-info">
+              <h2 id="dashboard-username" class="user-name">Loading…</h2>
+              <p id="dashboard-email" class="user-email">—</p>
+            </div>
+          </div>
+          <button
+            id="logout-btn"
+            class="btn btn-outline btn-sm"
+            aria-label="Sign out of your account"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Sign Out</span>
+          </button>
+        </div>
+
+        <div class="dashboard-body">
+
+          <!-- Profile Details Section -->
+          <div class="section-block">
+            <h3 class="section-title">Profile Details</h3>
+            <dl class="details-grid">
+              <div class="detail-item">
+                <dt class="detail-label">Username</dt>
+                <dd id="detail-username" class="detail-value">—</dd>
+              </div>
+              <div class="detail-item">
+                <dt class="detail-label">Email</dt>
+                <dd id="detail-email" class="detail-value">—</dd>
+              </div>
+              <div class="detail-item">
+                <dt class="detail-label">Full Name</dt>
+                <dd id="detail-fullname" class="detail-value">—</dd>
+              </div>
+              <div class="detail-item">
+                <dt class="detail-label">Role</dt>
+                <dd id="detail-role" class="detail-value">—</dd>
+              </div>
+              <div class="detail-item">
+                <dt class="detail-label">Account Status</dt>
+                <dd id="detail-status" class="detail-value"><span class="badge badge-success">Active</span></dd>
+              </div>
+              <div class="detail-item">
+                <dt class="detail-label">User ID</dt>
+                <dd id="detail-id" class="detail-value font-mono">—</dd>
+              </div>
+              <div class="detail-item">
+                <dt class="detail-label">Registered At</dt>
+                <dd id="detail-created" class="detail-value">—</dd>
+              </div>
+              <div class="detail-item">
+                <dt class="detail-label">Last Updated</dt>
+                <dd id="detail-updated" class="detail-value">—</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Token Management Section -->
+          <div class="section-block">
+            <h3 class="section-title">Session &amp; Token Inspector</h3>
+            <div class="token-boxes">
+              <div class="token-box">
+                <div class="token-header">
+                  <span id="access-token-label">Access Token (Bearer)</span>
+                  <button
+                    id="copy-access-token"
+                    class="btn-mini"
+                    title="Copy access token to clipboard"
+                    aria-label="Copy access token to clipboard"
+                    aria-describedby="access-token-label"
+                  >Copy</button>
+                </div>
+                <pre
+                  id="access-token-display"
+                  class="token-snippet font-mono"
+                  aria-label="Access token value"
+                  tabindex="0"
+                >No token present</pre>
+              </div>
+              <div class="token-box">
+                <div class="token-header">
+                  <span id="refresh-token-label">Refresh Token</span>
+                  <button
+                    id="copy-refresh-token"
+                    class="btn-mini"
+                    title="Copy refresh token to clipboard"
+                    aria-label="Copy refresh token to clipboard"
+                    aria-describedby="refresh-token-label"
+                  >Copy</button>
+                </div>
+                <pre
+                  id="refresh-token-display"
+                  class="token-snippet font-mono"
+                  aria-label="Refresh token value"
+                  tabindex="0"
+                >No token present</pre>
+              </div>
+            </div>
+
+            <div class="dashboard-actions">
+              <button id="refresh-token-btn" class="btn btn-secondary">
+                <span class="btn-text">Refresh Access Token</span>
+                <span class="spinner hidden" aria-hidden="true"></span>
+              </button>
+              <button id="reload-profile-btn" class="btn btn-outline">
+                <span class="btn-text">Reload Profile</span>
+                <span class="spinner hidden" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="app-footer" role="contentinfo">
+      <p>Ripple10 Authentication Platform &bull; FastAPI + Vanilla JS SPA</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
