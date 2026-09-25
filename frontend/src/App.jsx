@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { Cpu, Terminal, Sparkles, UserCheck, Coffee, Building2, Monitor, Compass, ShieldAlert, CheckCircle2 } from "lucide-react";
+import { Sparkles, Coffee, Users, Laptop } from "lucide-react";
 
 // 8 Para Wayang Roster & Detailed Office Profiles
 const AGENTS = {
@@ -216,6 +215,198 @@ function createRugTexture(baseColorHex, patternColorHex) {
   return new THREE.CanvasTexture(canvas);
 }
 
+// 4. Procedural 75" 4K Presentation Display Texture for Meeting Room
+function createMeetingScreenTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1024;
+  canvas.height = 576;
+  const ctx = canvas.getContext("2d");
+
+  // Deep tech gradient background
+  const bgGrad = ctx.createLinearGradient(0, 0, 1024, 576);
+  bgGrad.addColorStop(0, "#090d16");
+  bgGrad.addColorStop(1, "#0f172a");
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, 1024, 576);
+
+  // Grid
+  ctx.strokeStyle = "rgba(56, 189, 248, 0.08)";
+  ctx.lineWidth = 1;
+  for (let x = 0; x < 1024; x += 40) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, 576);
+    ctx.stroke();
+  }
+  for (let y = 0; y < 576; y += 40) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(1024, y);
+    ctx.stroke();
+  }
+
+  // Top header bar
+  ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
+  ctx.fillRect(36, 24, 952, 68);
+  ctx.strokeStyle = "rgba(56, 189, 248, 0.35)";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(36, 24, 952, 68);
+
+  ctx.fillStyle = "#38bdf8";
+  ctx.font = "bold 28px system-ui, sans-serif";
+  ctx.fillText("🎭 DALANG-AI • SPRINT ALL-HANDS SYNC", 60, 68);
+
+  ctx.fillStyle = "#10b981";
+  ctx.font = "bold 17px system-ui, sans-serif";
+  ctx.fillText("● LIVE IN MEETING ROOM", 730, 68);
+
+  // Left card: Sprint metrics
+  ctx.fillStyle = "rgba(30, 41, 59, 0.75)";
+  ctx.fillRect(36, 110, 460, 430);
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+  ctx.strokeRect(36, 110, 460, 430);
+
+  ctx.fillStyle = "#f8fafc";
+  ctx.font = "bold 22px system-ui, sans-serif";
+  ctx.fillText("Sprint 8: Full Autonomous", 60, 150);
+
+  ctx.fillStyle = "#94a3b8";
+  ctx.font = "16px system-ui, sans-serif";
+  ctx.fillText("Status: v1.0.0 Stable Deployment", 60, 185);
+  ctx.fillText("Velocity: 98.4% (Optimal Output)", 60, 215);
+  ctx.fillText("Active Wayang: 8 Agents Ready", 60, 245);
+  ctx.fillText("Unit Tests: 182 / 182 Passing (100%)", 60, 275);
+  ctx.fillText("Security: Zero-Defect Enforced", 60, 305);
+
+  // Progress Bar
+  ctx.fillStyle = "#1e293b";
+  ctx.fillRect(60, 345, 410, 26);
+  ctx.fillStyle = "#38bdf8";
+  ctx.fillRect(60, 345, 395, 26);
+  ctx.fillStyle = "#0f172a";
+  ctx.font = "bold 13px system-ui, sans-serif";
+  ctx.fillText("96.5% SPRINT BURNDOWN REACHED", 140, 363);
+
+  // Quote
+  ctx.fillStyle = "#cbd5e1";
+  ctx.font = "italic 14px system-ui, sans-serif";
+  ctx.fillText('"Karya Anak Bangsa — Bebas Modif & Non-Komersial"', 60, 420);
+  ctx.fillStyle = "#64748b";
+  ctx.font = "13px system-ui, sans-serif";
+  ctx.fillText("Dalang Master Orchestrator • Auto Router • Academy", 60, 450);
+
+  // Right card: Agenda & Speaker
+  ctx.fillStyle = "rgba(30, 41, 59, 0.75)";
+  ctx.fillRect(520, 110, 468, 430);
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+  ctx.strokeRect(520, 110, 468, 430);
+
+  ctx.fillStyle = "#f8fafc";
+  ctx.font = "bold 22px system-ui, sans-serif";
+  ctx.fillText("Agenda Rapat & Diskusi", 545, 150);
+
+  const items = [
+    "1. Risko (Dalang): Evaluasi Lakon & Roadmap",
+    "2. Lulu: Review Visual 3D Isometrik & Humanoid",
+    "3. Zaki: Optimasi Frontend 60FPS Three.js Loop",
+    "4. Nova: Pipeline Docker & Pre-commit Lint Guard",
+    "5. Kai: Security Penetration & OWASP Review",
+    "6. Ren: QA Regression & 182 Passing Tests",
+    "7. Sesi Tanya Jawab & Coffee Break di Pantry",
+  ];
+  items.forEach((item, idx) => {
+    ctx.fillStyle = idx === 0 ? "#38bdf8" : "#cbd5e1";
+    ctx.font = (idx === 0 ? "bold " : "") + "15px system-ui, sans-serif";
+    ctx.fillText(item, 545, 195 + idx * 36);
+  });
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.anisotropy = 16;
+  return texture;
+}
+
+// 5. Office Waypoints and Key Location Coordinates
+const DESK_SPOTS = {
+  risko: { pos: [0, 0, 0.58], rotY: 0 },
+  pingot: { pos: [-3.8, 0, -1.92], rotY: 0 },
+  zaki: { pos: [3.8, 0, -1.92], rotY: 0 },
+  lulu: { pos: [-3.8, 0, 3.58], rotY: 0 },
+  mika: { pos: [3.8, 0, 3.58], rotY: 0 },
+  nova: { pos: [0, 0, -4.92], rotY: 0 },
+  kai: { pos: [-7.2, 0, 0.58], rotY: 0 },
+  ren: { pos: [7.2, 0, 0.58], rotY: 0 },
+};
+
+const LOCATION_SPOTS = {
+  WORK: DESK_SPOTS,
+  DESK: DESK_SPOTS,
+  MEETING: {
+    risko: { pos: [14.5, 0, -4.0], rotY: 0 },
+    pingot: { pos: [13.2, 0, -5.2], rotY: Math.PI / 2 },
+    zaki: { pos: [13.2, 0, -6.5], rotY: Math.PI / 2 },
+    lulu: { pos: [13.2, 0, -7.8], rotY: Math.PI / 2 },
+    mika: { pos: [15.8, 0, -5.2], rotY: -Math.PI / 2 },
+    nova: { pos: [15.8, 0, -6.5], rotY: -Math.PI / 2 },
+    kai: { pos: [15.8, 0, -7.8], rotY: -Math.PI / 2 },
+    ren: { pos: [14.5, 0, -9.8], rotY: Math.PI },
+  },
+  LOUNGE: {
+    risko: { pos: [7.2, 0, 7.3], rotY: 0 },
+    lulu: { pos: [8.4, 0, 7.3], rotY: 0 },
+    pingot: { pos: [9.6, 0, 7.3], rotY: 0 },
+    zaki: { pos: [9.6, 0, 5.8], rotY: -Math.PI / 2 },
+    mika: { pos: [6.6, 0, 6.2], rotY: Math.PI / 4 },
+    nova: { pos: [10.6, 0, 7.8], rotY: -Math.PI / 3 },
+    kai: { pos: [7.5, 0, 5.5], rotY: Math.PI },
+    ren: { pos: [8.6, 0, 5.5], rotY: Math.PI },
+  },
+  PANTRY: {
+    risko: { pos: [-11.2, 0, -6.1], rotY: 0 },
+    pingot: { pos: [-12.8, 0, -6.1], rotY: 0 },
+    lulu: { pos: [-13.4, 0, -6.8], rotY: Math.PI / 2 },
+    zaki: { pos: [-10.2, 0, -7.2], rotY: Math.PI },
+    mika: { pos: [-14.2, 0, -6.5], rotY: 0 },
+    nova: { pos: [-9.6, 0, -5.8], rotY: -Math.PI / 3 },
+    kai: { pos: [-12.0, 0, -4.8], rotY: 0 },
+    ren: { pos: [-13.2, 0, -4.8], rotY: 0 },
+  },
+};
+
+function getWaypoints(startPos, endPos) {
+  const wps = [];
+  const sx = startPos.x;
+  const sz = startPos.z;
+  const ex = endPos.x;
+  const ez = endPos.z;
+
+  const isStartInMeeting = sx > 12.0;
+  const isEndInMeeting = ex > 12.0;
+
+  if (isStartInMeeting && !isEndInMeeting) {
+    wps.push(new THREE.Vector3(14.5, 0, 0));
+    wps.push(new THREE.Vector3(11.5, 0, 0));
+    wps.push(new THREE.Vector3(ex, 0, 0));
+    wps.push(new THREE.Vector3(ex, 0, ez));
+    return wps;
+  }
+
+  if (!isStartInMeeting && isEndInMeeting) {
+    wps.push(new THREE.Vector3(sx, 0, 0));
+    wps.push(new THREE.Vector3(11.5, 0, 0));
+    wps.push(new THREE.Vector3(14.5, 0, 0));
+    wps.push(new THREE.Vector3(ex, 0, ez));
+    return wps;
+  }
+
+  if (Math.hypot(ex - sx, ez - sz) > 1.2) {
+    wps.push(new THREE.Vector3(sx, 0, 0));
+    wps.push(new THREE.Vector3(ex, 0, 0));
+  }
+  wps.push(new THREE.Vector3(ex, 0, ez));
+  return wps;
+}
+
+
 // Procedural Whiteboard Diagram Texture
 function createWhiteboardTexture() {
   const canvas = document.createElement("canvas");
@@ -307,6 +498,20 @@ function createWhiteboardTexture() {
 }
 
 export default function App() {
+  const [officeMode, setOfficeMode] = useState("WORK");
+  useEffect(() => { window.__officeMode = officeMode; }, [officeMode]);
+  const [agentModes, setAgentModes] = useState({
+    risko: "WORK",
+    pingot: "WORK",
+    zaki: "WORK",
+    lulu: "WORK",
+    mika: "WORK",
+    nova: "WORK",
+    kai: "WORK",
+    ren: "WORK",
+  });
+  const agentNavRef = useRef(null);
+
   const mountRef = useRef(null);
   const [events, setEvents] = useState([]);
   const [agentStatus, setAgentStatus] = useState({});
@@ -351,7 +556,8 @@ export default function App() {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     // GLTF Model Loader for Real 3D Characters
-    const gltfLoader = new GLTFLoader();
+    // GLTF Loader ready
+    // const gltfLoader = new GLTFLoader();
     const mixers = [];
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
@@ -465,8 +671,9 @@ export default function App() {
     glassPane.position.set(-15.7, 3.3, 0);
     roomGroup.add(glassPane);
 
-    // 5. Frameless Glass Partition Wall (Meeting Room Boundary)
-    const glassWallGeo = new THREE.BoxGeometry(0.08, 5.4, 11);
+    // 5. Frameless Glass Partition Wall (Meeting Room Boundary) with Doorway
+    // Section 1: South Glass Wall (z = -9.5 to z = -1.5)
+    const glassWallGeo1 = new THREE.BoxGeometry(0.08, 5.4, 8.0);
     const officeGlassMat = new THREE.MeshPhysicalMaterial({
       color: 0xecfeff,
       transmission: 0.88,
@@ -476,18 +683,141 @@ export default function App() {
       ior: 1.5,
       thickness: 0.1,
     });
-    const glassWall = new THREE.Mesh(glassWallGeo, officeGlassMat);
-    glassWall.position.set(11.8, 2.7, -4);
-    roomGroup.add(glassWall);
+    const glassWall1 = new THREE.Mesh(glassWallGeo1, officeGlassMat);
+    glassWall1.position.set(11.8, 2.7, -5.5);
+    roomGroup.add(glassWall1);
+
+    // Section 2: Glass Header above Doorway (z = -1.5 to 1.5, y = 3.8 to 5.4)
+    const glassDoorHeaderGeo = new THREE.BoxGeometry(0.08, 1.6, 3.0);
+    const glassDoorHeader = new THREE.Mesh(glassDoorHeaderGeo, officeGlassMat);
+    glassDoorHeader.position.set(11.8, 4.6, 0);
+    roomGroup.add(glassDoorHeader);
+
+    // Top sliding rail for glass door
+    const doorRailGeo = new THREE.BoxGeometry(0.12, 0.12, 3.2);
+    const doorRailMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.2 });
+    const doorRail = new THREE.Mesh(doorRailGeo, doorRailMat);
+    doorRail.position.set(11.8, 3.8, 0);
+    roomGroup.add(doorRail);
 
     // Glass Wall Metal Mullions / Posts
-    [-9.5, -4, 1.5].forEach((pz) => {
+    [-9.5, -5.5, -1.5, 1.5].forEach((pz) => {
       const postGeo = new THREE.BoxGeometry(0.14, 5.5, 0.14);
       const postMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.2 });
       const post = new THREE.Mesh(postGeo, postMat);
       post.position.set(11.8, 2.75, pz);
       roomGroup.add(post);
     });
+
+    // 5B. CONFERENCE MEETING ROOM INTERIOR
+    // Modern Scandinavian Walnut Conference Table
+    const confTableGroup = new THREE.Group();
+    confTableGroup.position.set(14.5, 0, -6.5);
+
+    const confTableTopGeo = new THREE.BoxGeometry(2.3, 0.08, 4.6);
+    const confTableMat = new THREE.MeshStandardMaterial({ color: 0x2e1810, roughness: 0.4, metalness: 0.1 });
+    const confTableTop = new THREE.Mesh(confTableTopGeo, confTableMat);
+    confTableTop.position.y = 0.74;
+    confTableTop.castShadow = true;
+    confTableTop.receiveShadow = true;
+    confTableGroup.add(confTableTop);
+
+    // Metal Sled Legs for Conference Table
+    const sledLegMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.85, roughness: 0.2 });
+    [-1.7, 1.7].forEach((lz) => {
+      const legFrame = new THREE.Group();
+      legFrame.position.set(0, 0.35, lz);
+      const bGeo = new THREE.BoxGeometry(1.9, 0.06, 0.08);
+      const bMesh = new THREE.Mesh(bGeo, sledLegMat);
+      bMesh.position.y = -0.32;
+      legFrame.add(bMesh);
+      [-0.85, 0.85].forEach((sx) => {
+        const uGeo = new THREE.BoxGeometry(0.08, 0.7, 0.08);
+        const uMesh = new THREE.Mesh(uGeo, sledLegMat);
+        uMesh.position.set(sx, 0.03, 0);
+        legFrame.add(uMesh);
+      });
+      confTableGroup.add(legFrame);
+    });
+
+    // Center aluminum cable well with soft glow
+    const wellGeo = new THREE.BoxGeometry(0.35, 0.015, 1.6);
+    const wellMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7, emissiveIntensity: 0.5, metalness: 0.9 });
+    const wellMesh = new THREE.Mesh(wellGeo, wellMat);
+    wellMesh.position.set(0, 0.785, 0);
+    confTableGroup.add(wellMesh);
+
+    roomGroup.add(confTableGroup);
+
+    // 5C. Conference Swivel Chairs (Around the Table)
+    const confChairGeo = new THREE.BoxGeometry(0.52, 0.08, 0.52);
+    const confBackGeo = new THREE.BoxGeometry(0.5, 0.55, 0.06);
+    const chairLeatherMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+    const chairBaseMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.9, roughness: 0.2 });
+
+    const createConfChair = (cx, cz, rotY) => {
+      const chair = new THREE.Group();
+      chair.position.set(cx, 0, cz);
+      chair.rotation.y = rotY;
+
+      const seat = new THREE.Mesh(confChairGeo, chairLeatherMat);
+      seat.position.y = 0.46;
+      seat.castShadow = true;
+      chair.add(seat);
+
+      const back = new THREE.Mesh(confBackGeo, chairLeatherMat);
+      back.position.set(0, 0.74, 0.24);
+      back.castShadow = true;
+      chair.add(back);
+
+      const stemGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.42, 12);
+      const stem = new THREE.Mesh(stemGeo, chairBaseMat);
+      stem.position.y = 0.21;
+      chair.add(stem);
+
+      const baseGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.04, 16);
+      const base = new THREE.Mesh(baseGeo, chairBaseMat);
+      base.position.y = 0.02;
+      chair.add(base);
+
+      return chair;
+    };
+
+    [-8.0, -6.5, -5.0].forEach((cz) => {
+      roomGroup.add(createConfChair(13.2, cz, Math.PI / 2));
+    });
+    [-8.0, -6.5, -5.0].forEach((cz) => {
+      roomGroup.add(createConfChair(15.8, cz, -Math.PI / 2));
+    });
+    roomGroup.add(createConfChair(14.5, -4.0, 0));
+
+    // 5D. 75" 4K Presentation Display TV Wall
+    const tvGroup = new THREE.Group();
+    tvGroup.position.set(14.5, 3.1, -13.7);
+
+    const tvFrameGeo = new THREE.BoxGeometry(4.0, 2.3, 0.12);
+    const tvFrameMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.2 });
+    const tvFrame = new THREE.Mesh(tvFrameGeo, tvFrameMat);
+    tvGroup.add(tvFrame);
+
+    const tvScreenTex = createMeetingScreenTexture();
+    const tvScreenGeo = new THREE.PlaneGeometry(3.88, 2.18);
+    const tvScreenMat = new THREE.MeshStandardMaterial({
+      map: tvScreenTex,
+      emissive: 0xffffff,
+      emissiveMap: tvScreenTex,
+      emissiveIntensity: 0.9,
+      roughness: 0.2,
+    });
+    const tvScreen = new THREE.Mesh(tvScreenGeo, tvScreenMat);
+    tvScreen.position.z = 0.07;
+    tvGroup.add(tvScreen);
+
+    const meetingLight = new THREE.PointLight(0xbae6fd, 1.2, 8, 2);
+    meetingLight.position.set(14.5, 4.8, -6.5);
+    roomGroup.add(meetingLight);
+
+    roomGroup.add(tvGroup);
 
     // 6. Large Glass Whiteboard with System Architecture
     const wbTexture = createWhiteboardTexture();
@@ -957,7 +1287,7 @@ export default function App() {
     // shirt collar, ID lanyard, articulate arms & legs.
     // ==========================================
     const createStylizedHuman = (id, data) => {
-      const [x, y, z] = data.pos;
+      const [x, , z] = data.pos;
       const deskObjects = createWorkstation(x, z, data);
 
       const humanRoot = new THREE.Group();
@@ -983,44 +1313,61 @@ export default function App() {
         roughness: 0.8,
       });
 
-      // ---- LOWER BODY (Seated Ergonomic Legs) ----
-      // Thighs: Capsule forward towards -Z (under desk)
-      const thighGeo = new THREE.CapsuleGeometry(0.068, 0.28, 8, 14);
-      [-0.135, 0.135].forEach((sx) => {
+      // ---- ARTICULATED LOWER BODY (Hips + Knees + Shoes) ----
+      const makeLeg = (side) => {
+        const hipPivot = new THREE.Group();
+        hipPivot.position.set(side * 0.135, 0.46, 0);
+
+        // Thigh
+        const thighGeo = new THREE.CapsuleGeometry(0.068, 0.24, 8, 14);
         const thigh = new THREE.Mesh(thighGeo, pantsMat);
-        thigh.rotation.x = Math.PI / 2;
-        thigh.position.set(sx, 0.455, -0.16);
+        thigh.position.y = -0.12;
         thigh.castShadow = true;
-        humanRoot.add(thigh);
-      });
+        hipPivot.add(thigh);
 
-      // Calves: From knee down to floor
-      const calfGeo = new THREE.CapsuleGeometry(0.058, 0.3, 8, 14);
-      [-0.135, 0.135].forEach((sx) => {
+        // Knee joint
+        const kneePivot = new THREE.Group();
+        kneePivot.position.y = -0.24;
+        hipPivot.add(kneePivot);
+
+        const kneeBall = new THREE.Mesh(new THREE.SphereGeometry(0.058, 10, 8), pantsMat);
+        kneePivot.add(kneeBall);
+
+        // Calf
+        const calfGeo = new THREE.CapsuleGeometry(0.056, 0.24, 8, 14);
         const calf = new THREE.Mesh(calfGeo, pantsMat);
-        calf.rotation.x = -0.22;
-        calf.position.set(sx, 0.2, -0.36);
+        calf.position.y = -0.12;
         calf.castShadow = true;
-        humanRoot.add(calf);
-      });
+        kneePivot.add(calf);
 
-      // Modern Sneakers with White Rubber Soles
-      [-0.135, 0.135].forEach((sx) => {
-        // Shoe Body
-        const shoeGeo = new THREE.SphereGeometry(0.075, 14, 10);
-        shoeGeo.scale(1.0, 0.55, 1.6);
-        const shoe = new THREE.Mesh(shoeGeo, new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6 }));
-        shoe.position.set(sx, 0.065, -0.48);
+        // Sneaker
+        const shoeGeo = new THREE.SphereGeometry(0.072, 14, 10);
+        shoeGeo.scale(1.0, 0.55, 1.5);
+        const shoeMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6 });
+        const shoe = new THREE.Mesh(shoeGeo, shoeMat);
+        shoe.position.set(0, -0.24, -0.05);
         shoe.castShadow = true;
-        humanRoot.add(shoe);
+        kneePivot.add(shoe);
 
-        // White Sole Strip
-        const soleGeo = new THREE.BoxGeometry(0.14, 0.03, 0.26);
+        // White rubber sole
+        const soleGeo = new THREE.BoxGeometry(0.13, 0.03, 0.24);
         const soleMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.4 });
         const sole = new THREE.Mesh(soleGeo, soleMat);
-        sole.position.set(sx, 0.02, -0.48);
-        humanRoot.add(sole);
-      });
+        sole.position.set(0, -0.275, -0.05);
+        kneePivot.add(sole);
+
+        humanRoot.add(hipPivot);
+        return { hipPivot, kneePivot };
+      };
+
+      const leftLeg = makeLeg(-1);
+      const rightLeg = makeLeg(1);
+
+      // Default seated at desk
+      leftLeg.hipPivot.rotation.x = -Math.PI / 2;
+      rightLeg.hipPivot.rotation.x = -Math.PI / 2;
+      leftLeg.kneePivot.rotation.x = Math.PI / 2;
+      rightLeg.kneePivot.rotation.x = Math.PI / 2;
 
       // ---- UPPER BODY PIVOT ----
       const torsoPivot = new THREE.Group();
@@ -1051,7 +1398,6 @@ export default function App() {
         lanyard.position.set(0, 0.44, -0.07);
         torsoPivot.add(lanyard);
 
-        // Badge Card
         const badgeGeo = new THREE.BoxGeometry(0.08, 0.11, 0.01);
         const badgeMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc });
         const badge = new THREE.Mesh(badgeGeo, badgeMat);
@@ -1059,7 +1405,7 @@ export default function App() {
         torsoPivot.add(badge);
       }
 
-      // Neck (Smooth Anatomical Cylinder)
+      // Neck
       const neckGeo = new THREE.CylinderGeometry(0.075, 0.085, 0.14, 16);
       const neck = new THREE.Mesh(neckGeo, skinMat);
       neck.position.y = 0.5;
@@ -1069,14 +1415,13 @@ export default function App() {
       const headGroup = new THREE.Group();
       headGroup.position.set(0, 0.64, 0);
 
-      // Anatomical Head (Ellipsoid with Jaw Shape)
       const headGeo = new THREE.SphereGeometry(0.155, 28, 22);
       headGeo.scale(0.95, 1.15, 1.05);
       const head = new THREE.Mesh(headGeo, skinMat);
       head.castShadow = true;
       headGroup.add(head);
 
-      // Ears (Left & Right)
+      // Ears
       [-0.155, 0.155].forEach((ex) => {
         const earGeo = new THREE.SphereGeometry(0.038, 10, 8);
         earGeo.scale(0.4, 1.0, 0.7);
@@ -1085,37 +1430,29 @@ export default function App() {
         headGroup.add(ear);
       });
 
-      // Gentle Nose Curve
+      // Nose
       const noseGeo = new THREE.ConeGeometry(0.024, 0.06, 12);
       const nose = new THREE.Mesh(noseGeo, skinMat);
       nose.rotation.x = -Math.PI / 2.2;
       nose.position.set(0, -0.01, -0.17);
       headGroup.add(nose);
 
-      // Eyes (White Sclera + Colored Pupil looking forward at screen)
+      // Eyes
       [-0.052, 0.052].forEach((ex) => {
-        // Eye Sclera
         const eyeGeo = new THREE.SphereGeometry(0.025, 12, 10);
         eyeGeo.scale(1.2, 0.8, 0.6);
         const eye = new THREE.Mesh(eyeGeo, new THREE.MeshBasicMaterial({ color: 0xffffff }));
-        eye.position.set(ex, 0.03, -0.155);
+        eye.position.set(ex, 0.03, -0.16);
         headGroup.add(eye);
 
-        // Pupil Focus
-        const pupilGeo = new THREE.SphereGeometry(0.012, 8, 8);
-        const pupil = new THREE.Mesh(pupilGeo, new THREE.MeshBasicMaterial({ color: 0x0f172a }));
-        pupil.position.set(ex, 0.03, -0.168);
+        const pupilGeo = new THREE.SphereGeometry(0.013, 8, 8);
+        const pupilMat = new THREE.MeshBasicMaterial({ color: 0x0f172a });
+        const pupil = new THREE.Mesh(pupilGeo, pupilMat);
+        pupil.position.set(ex, 0.03, -0.174);
         headGroup.add(pupil);
-
-        // Eyebrow
-        const browGeo = new THREE.BoxGeometry(0.045, 0.012, 0.01);
-        const brow = new THREE.Mesh(browGeo, hairMat);
-        brow.position.set(ex, 0.065, -0.155);
-        brow.rotation.z = ex > 0 ? -0.1 : 0.1;
-        headGroup.add(brow);
       });
 
-      // Glasses (Risko, Mika, Pingot, Ren)
+      // Glasses
       if (data.hasGlasses) {
         const frameMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.2 });
         [-0.052, 0.052].forEach((gx) => {
@@ -1124,21 +1461,19 @@ export default function App() {
           rim.position.set(gx, 0.03, -0.168);
           headGroup.add(rim);
         });
-        // Bridge
         const bridgeGeo = new THREE.BoxGeometry(0.04, 0.006, 0.006);
         const bridge = new THREE.Mesh(bridgeGeo, frameMat);
         bridge.position.set(0, 0.03, -0.168);
         headGroup.add(bridge);
       }
 
-      // Volumetric Hair Styling
+      // Hair
       const hairDomeGeo = new THREE.SphereGeometry(0.172, 22, 18, 0, Math.PI * 2, 0, Math.PI / 1.75);
       const hairDome = new THREE.Mesh(hairDomeGeo, hairMat);
       hairDome.position.set(0, 0.045, 0.01);
       hairDome.castShadow = true;
       headGroup.add(hairDome);
 
-      // Ponytail for Lulu
       if (data.hairStyle === "ponytail") {
         const ponyGeo = new THREE.CapsuleGeometry(0.045, 0.24, 8, 12);
         const pony = new THREE.Mesh(ponyGeo, hairMat);
@@ -1147,7 +1482,6 @@ export default function App() {
         headGroup.add(pony);
       }
 
-      // Over-Ear Developer Headphones (Zaki)
       if (data.hasHeadphones) {
         const bandGeo = new THREE.TorusGeometry(0.18, 0.016, 8, 24, Math.PI);
         const hpMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.3 });
@@ -1156,29 +1490,27 @@ export default function App() {
         headGroup.add(band);
 
         [-0.17, 0.17].forEach((hx) => {
-          const cupGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.04, 16);
-          const cup = new THREE.Mesh(cupGeo, hpMat);
-          cup.rotation.z = Math.PI / 2;
-          cup.position.set(hx, 0.02, 0);
-          headGroup.add(cup);
+          const cupMeshGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.04, 16);
+          const cupMesh = new THREE.Mesh(cupMeshGeo, hpMat);
+          cupMesh.rotation.z = Math.PI / 2;
+          cupMesh.position.set(hx, 0.02, 0);
+          headGroup.add(cupMesh);
         });
       }
 
       torsoPivot.add(headGroup);
 
-      // ---- 2-SEGMENT ARTICULATED ARMS (Shoulder & Elbow) ----
+      // ---- 2-SEGMENT ARTICULATED ARMS ----
       const makeArm = (side) => {
         const shoulder = new THREE.Group();
         shoulder.position.set(side * 0.255, 0.38, 0);
 
-        // Upper Arm
         const upperArmGeo = new THREE.CapsuleGeometry(0.055, 0.18, 8, 14);
         const upperArm = new THREE.Mesh(upperArmGeo, clothesMat);
         upperArm.position.y = -0.1;
         upperArm.castShadow = true;
         shoulder.add(upperArm);
 
-        // Elbow Joint
         const elbowPivot = new THREE.Group();
         elbowPivot.position.y = -0.23;
         shoulder.add(elbowPivot);
@@ -1186,14 +1518,12 @@ export default function App() {
         const elbowBall = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 10), clothesMat);
         elbowPivot.add(elbowBall);
 
-        // Forearm
         const forearmGeo = new THREE.CapsuleGeometry(0.042, 0.17, 8, 14);
         const forearm = new THREE.Mesh(forearmGeo, skinMat);
         forearm.position.y = -0.12;
         forearm.castShadow = true;
         elbowPivot.add(forearm);
 
-        // Smartwatch (Nova / DevOps)
         if (data.hasSmartwatch && side === -1) {
           const watchGeo = new THREE.CylinderGeometry(0.046, 0.046, 0.03, 14);
           const watchMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, emissive: 0x38bdf8, emissiveIntensity: 0.8 });
@@ -1202,7 +1532,6 @@ export default function App() {
           elbowPivot.add(watch);
         }
 
-        // Hand Fist Resting on Keyboard
         const handGeo = new THREE.SphereGeometry(0.045, 14, 12);
         handGeo.scale(1.2, 0.7, 1.0);
         const hand = new THREE.Mesh(handGeo, skinMat);
@@ -1223,6 +1552,14 @@ export default function App() {
       torsoPivot.add(rightShoulder);
       humanRoot.add(torsoPivot);
 
+      // Coffee Mug in Hand (Visible when in Pantry or Lounge)
+      const mugGeo = new THREE.CylinderGeometry(0.038, 0.03, 0.08, 14);
+      const mugMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.3 });
+      const coffeeCup = new THREE.Mesh(mugGeo, mugMat);
+      coffeeCup.position.set(0, -0.22, 0.06);
+      coffeeCup.visible = false;
+      rightElbow.add(coffeeCup);
+
       // Floating Name Sprite directly to scene
       const nameSprite = createNameLabel(data.name, data.role, data.color & 0xffffff);
       nameSprite.position.set(humanRoot.position.x, 2.08, humanRoot.position.z);
@@ -1241,36 +1578,6 @@ export default function App() {
       haloRing.position.y = 0.03;
       humanRoot.add(haloRing);
 
-      // ==========================================
-      // 🚀 GLTF / GLB AVATAR LOADER (Hybrid Engine)
-      // Loads rigged human GLB mesh if available,
-      // seamlessly swaps and assigns AnimationMixer.
-      // ==========================================
-      gltfLoader.load(
-        "/models/xbot.glb",
-        (gltf) => {
-          // GLB Ready: We can enable skeleton animation mixer
-          const model = gltf.scene.clone();
-          model.scale.set(0.72, 0.72, 0.72);
-          model.position.set(0, 0, 0);
-
-          // Find animations
-          if (gltf.animations && gltf.animations.length > 0) {
-            const mixer = new THREE.AnimationMixer(model);
-            const idleClip = gltf.animations.find((a) => a.name.toLowerCase().includes("idle")) || gltf.animations[0];
-            if (idleClip) {
-              const idleAction = mixer.clipAction(idleClip);
-              idleAction.play();
-              mixers.push(mixer);
-            }
-          }
-        },
-        undefined,
-        (err) => {
-          // Fallback to high-detail procedural avatar (already rendered)
-        }
-      );
-
       scene.add(humanRoot);
 
       agentMeshesRef.current[id] = {
@@ -1281,12 +1588,21 @@ export default function App() {
         rightShoulder,
         leftElbow,
         rightElbow,
+        leftLeg,
+        rightLeg,
         haloRing,
         nameSprite,
         deskObjects,
+        coffeeCup,
         isWorking: false,
+        isWalking: false,
+        currentMode: "WORK",
+        targetMode: "WORK",
         targetRotationY: 0,
         currentRotationY: 0,
+        walkTime: 0,
+        waypoints: [],
+        deskPos: [x, 0, z + 0.58],
       };
     };
 
@@ -1296,6 +1612,26 @@ export default function App() {
     });
 
     // 60FPS RAF Render Loop (MengTo Optimization)
+    // Setup Navigation Handler for App Controls
+    window.__agentMeshes = agentMeshesRef.current;
+    window.__agentNav = (id, mode) => agentNavRef.current && agentNavRef.current(id, mode);
+    agentNavRef.current = (agentId, targetMode) => {
+      const agent = agentMeshesRef.current[agentId];
+      if (!agent) return;
+      agent.targetMode = targetMode;
+      agent.currentMode = targetMode;
+
+      const targetConfig = LOCATION_SPOTS[targetMode]?.[agentId];
+      if (!targetConfig) return;
+
+      const [tx, ty, tz] = targetConfig.pos;
+      const targetPos = new THREE.Vector3(tx, ty, tz);
+      const wps = getWaypoints(agent.humanRoot.position, targetPos);
+      agent.waypoints = wps;
+      agent.targetRotationY = targetConfig.rotY;
+      agent.walkTime = 0;
+    };
+
     let clock = new THREE.Clock();
     let animId;
 
@@ -1305,7 +1641,6 @@ export default function App() {
       const elapsed = clock.getElapsedTime();
       controls.update();
 
-      // Update all GLTF AnimationMixers
       mixers.forEach((m) => m.update(delta));
 
       Object.entries(agentMeshesRef.current).forEach(([id, agent]) => {
@@ -1317,74 +1652,202 @@ export default function App() {
           rightShoulder,
           leftElbow,
           rightElbow,
+          leftLeg,
+          rightLeg,
           haloRing,
           nameSprite,
           deskObjects,
+          coffeeCup,
           isWorking,
         } = agent;
 
-        // Karakter SELALU menghadap laptop (meja di -Z)
-        // WORKING: tepat lurus ke meja (rotation.y = 0)
-        // IDLE: santai goyang halus di kursi (±6 derajat)
-        agent.targetRotationY = isWorking
-          ? 0
-          : Math.sin(elapsed * 0.35 + (id.charCodeAt(0) * 1.3)) * 0.08;
-        agent.currentRotationY = THREE.MathUtils.lerp(agent.currentRotationY, agent.targetRotationY, 0.06);
-        humanRoot.rotation.y = agent.currentRotationY;
+        // 1. Waypoint Walking Locomotion with smooth while consumption
+        let hasWaypoints = agent.waypoints && agent.waypoints.length > 0;
+        while (hasWaypoints) {
+          const targetWp = agent.waypoints[0];
+          const curPos = humanRoot.position;
+          const dx = targetWp.x - curPos.x;
+          const dz = targetWp.z - curPos.z;
+          const dist = Math.hypot(dx, dz);
 
-        // Update floating name sprite position
-        nameSprite.position.set(humanRoot.position.x, 2.08, humanRoot.position.z);
+          if (dist < 0.25) {
+            curPos.x = targetWp.x;
+            curPos.z = targetWp.z;
+            agent.waypoints.shift();
+            if (agent.waypoints.length === 0) {
+              agent.isWalking = false;
+              hasWaypoints = false;
+              break;
+            }
+          } else {
+            agent.isWalking = true;
+            const walkSpeed = 6.2;
+            const step = Math.min(dist, walkSpeed * delta);
+            curPos.x += (dx / dist) * step;
+            curPos.z += (dz / dist) * step;
 
-        if (isWorking) {
-          // ==========================================
-          // 💻 WORKING STATE: Menghadap Laptop & Ngetik Aktif
-          // ==========================================
-          torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, 0.18, 0.08);
+            const walkAngle = Math.atan2(dx, dz) + Math.PI;
+            humanRoot.rotation.y = THREE.MathUtils.lerp(humanRoot.rotation.y, walkAngle, 0.25);
 
-          // Head looks at screen
-          headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.32, 0.08);
-          headGroup.rotation.y = Math.sin(elapsed * 1.8) * 0.03;
+            agent.walkTime += delta * 14;
+            const swing = Math.sin(agent.walkTime);
 
-          // 2-segment arm typing animation
-          const leftTyping = Math.sin(elapsed * 24) * 0.10;
-          const rightTyping = Math.cos(elapsed * 24 + 1.2) * 0.10;
-          leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, -0.52 + leftTyping, 0.1);
-          leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.18, 0.08);
-          rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, -0.52 + rightTyping, 0.1);
-          rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.18, 0.08);
+            leftLeg.hipPivot.rotation.x = swing * 0.52;
+            rightLeg.hipPivot.rotation.x = -swing * 0.52;
+            leftLeg.kneePivot.rotation.x = Math.max(0, -swing) * 0.6;
+            rightLeg.kneePivot.rotation.x = Math.max(0, swing) * 0.6;
 
-          leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, -0.9 + leftTyping, 0.12);
-          rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, -0.9 + rightTyping, 0.12);
+            leftShoulder.rotation.x = -swing * 0.42;
+            rightShoulder.rotation.x = swing * 0.42;
+            leftElbow.rotation.x = -0.3;
+            rightElbow.rotation.x = -0.3;
 
-          // Laptop glowing bright with code flicker
-          deskObjects.displayMat.emissiveIntensity = 0.95 + Math.sin(elapsed * 9) * 0.18;
-          deskObjects.lapLight.intensity = 1.1 + Math.sin(elapsed * 7) * 0.2;
-
-          haloRing.material.opacity = THREE.MathUtils.lerp(haloRing.material.opacity, 0.85, 0.06);
-          haloRing.rotation.z = elapsed * 1.2;
-        } else {
-          // ==========================================
-          // ☕ IDLE STATE: Santai di Meja Tetap Menghadap Laptop
-          // ==========================================
-          torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, -0.04, 0.05);
-          torsoPivot.position.y = 0.52 + Math.sin(elapsed * 1.6 + id.charCodeAt(0)) * 0.012; // breathing
-
-          headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.04, 0.05);
-          headGroup.rotation.y = Math.sin(elapsed * 0.5 + id.charCodeAt(1)) * 0.15;
-
-          // Arms resting naturally
-          leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, 0.12, 0.08);
-          leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.16, 0.08);
-          rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, 0.12, 0.08);
-          rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.16, 0.08);
-          leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, -0.15, 0.08);
-          rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, -0.15, 0.08);
-
-          deskObjects.displayMat.emissiveIntensity = 0.25;
-          deskObjects.lapLight.intensity = 0.15;
-
-          haloRing.material.opacity = THREE.MathUtils.lerp(haloRing.material.opacity, 0, 0.08);
+            torsoPivot.position.y = 0.52 + Math.abs(Math.sin(agent.walkTime * 2)) * 0.04;
+            torsoPivot.rotation.x = 0.05;
+            break;
+          }
         }
+
+        if (!hasWaypoints) {
+          // 2. Stationary State Postures
+          agent.isWalking = false;
+          humanRoot.rotation.y = THREE.MathUtils.lerp(humanRoot.rotation.y, agent.targetRotationY, 0.08);
+
+          if (agent.currentMode === "WORK") {
+            coffeeCup.visible = false;
+            leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
+            rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
+            leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+            rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+
+            if (isWorking) {
+              torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, 0.18, 0.08);
+              headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.32, 0.08);
+              headGroup.rotation.y = Math.sin(elapsed * 1.8) * 0.03;
+
+              const leftTyping = Math.sin(elapsed * 24) * 0.10;
+              const rightTyping = Math.cos(elapsed * 24 + 1.2) * 0.10;
+              leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, -0.52 + leftTyping, 0.1);
+              leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.18, 0.08);
+              rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, -0.52 + rightTyping, 0.1);
+              rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.18, 0.08);
+
+              leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, -0.9 + leftTyping, 0.12);
+              rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, -0.9 + rightTyping, 0.12);
+
+              deskObjects.displayMat.emissiveIntensity = 0.95 + Math.sin(elapsed * 9) * 0.18;
+              deskObjects.lapLight.intensity = 1.1 + Math.sin(elapsed * 7) * 0.2;
+
+              haloRing.material.opacity = THREE.MathUtils.lerp(haloRing.material.opacity, 0.85, 0.06);
+              haloRing.rotation.z = elapsed * 1.2;
+            } else {
+              torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, -0.04, 0.05);
+              torsoPivot.position.y = 0.52 + Math.sin(elapsed * 1.6 + id.charCodeAt(0)) * 0.012;
+              headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.05, 0.05);
+
+              leftShoulder.rotation.set(-0.2, 0, -0.12);
+              rightShoulder.rotation.set(-0.2, 0, 0.12);
+              leftElbow.rotation.x = -0.5;
+              rightElbow.rotation.x = -0.5;
+
+              deskObjects.displayMat.emissiveIntensity = 0.45;
+              deskObjects.lapLight.intensity = 0.45;
+              haloRing.material.opacity = THREE.MathUtils.lerp(haloRing.material.opacity, 0, 0.08);
+            }
+          } else if (agent.currentMode === "MEETING") {
+            coffeeCup.visible = false;
+            const isStandingPresenter = id === "ren";
+            if (isStandingPresenter) {
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, 0, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, 0, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, 0, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, 0, 0.1);
+              torsoPivot.position.y = 0.52 + Math.sin(elapsed * 2) * 0.01;
+
+              leftShoulder.rotation.set(-0.4 + Math.sin(elapsed * 2.5) * 0.25, 0, -0.3);
+              rightShoulder.rotation.set(-0.7 + Math.cos(elapsed * 2.0) * 0.3, 0, 0.4);
+              rightElbow.rotation.x = -0.8;
+              headGroup.rotation.y = Math.sin(elapsed * 1.5) * 0.25;
+            } else {
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+
+              torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, 0.08, 0.05);
+              torsoPivot.position.y = 0.52 + Math.sin(elapsed * 1.4 + id.charCodeAt(0)) * 0.01;
+
+              headGroup.rotation.x = Math.sin(elapsed * 1.8 + id.charCodeAt(0)) * 0.06;
+              headGroup.rotation.y = Math.sin(elapsed * 0.8 + id.charCodeAt(0)) * 0.12;
+
+              leftShoulder.rotation.set(-0.35, 0, -0.15);
+              rightShoulder.rotation.set(-0.35, 0, 0.15);
+              leftElbow.rotation.x = -0.7;
+              rightElbow.rotation.x = -0.7;
+            }
+            deskObjects.displayMat.emissiveIntensity = 0.2;
+            deskObjects.lapLight.intensity = 0.2;
+            haloRing.material.opacity = THREE.MathUtils.lerp(haloRing.material.opacity, 0.3, 0.05);
+          } else if (agent.currentMode === "LOUNGE") {
+            coffeeCup.visible = true;
+            const isStandingLounge = id === "kai" || id === "mika" || id === "ren";
+            if (isStandingLounge) {
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, 0, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, 0, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, 0, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, 0, 0.1);
+              torsoPivot.position.y = 0.52;
+              torsoPivot.rotation.x = -0.02;
+              headGroup.rotation.y = Math.sin(elapsed * 1.2 + id.charCodeAt(0)) * 0.2;
+
+              rightShoulder.rotation.set(-0.6, 0, 0.2);
+              rightElbow.rotation.x = -1.1;
+              leftShoulder.rotation.set(-0.1, 0, -0.1);
+            } else {
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+
+              torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, -0.14, 0.05);
+              torsoPivot.position.y = 0.44 + Math.sin(elapsed * 1.2 + id.charCodeAt(0)) * 0.01;
+
+              rightShoulder.rotation.set(-0.5, 0, 0.3);
+              rightElbow.rotation.x = -1.0;
+              leftShoulder.rotation.set(-0.1, 0, -0.2);
+              leftElbow.rotation.x = -0.4;
+            }
+            haloRing.material.opacity = 0;
+            deskObjects.displayMat.emissiveIntensity = 0.2;
+            deskObjects.lapLight.intensity = 0.2;
+          } else if (agent.currentMode === "PANTRY") {
+            coffeeCup.visible = true;
+            const isStool = id === "risko" || id === "pingot";
+            if (isStool) {
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, -Math.PI / 2.6, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, -Math.PI / 2.6, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2.6, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2.6, 0.1);
+              torsoPivot.position.y = 0.65;
+            } else {
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, 0, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, 0, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, 0, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, 0, 0.1);
+              torsoPivot.position.y = 0.52;
+            }
+            rightShoulder.rotation.set(-0.55 + Math.sin(elapsed * 1.5 + id.charCodeAt(0)) * 0.15, 0, 0.25);
+            rightElbow.rotation.x = -1.1;
+            leftShoulder.rotation.set(-0.15, 0, -0.15);
+            leftElbow.rotation.x = -0.3;
+
+            haloRing.material.opacity = 0;
+            deskObjects.displayMat.emissiveIntensity = 0.2;
+            deskObjects.lapLight.intensity = 0.2;
+          }
+        }
+
+        nameSprite.position.set(humanRoot.position.x, humanRoot.position.y + 2.08, humanRoot.position.z);
       });
 
       renderer.render(scene, camera);
@@ -1401,6 +1864,29 @@ export default function App() {
       renderer.setSize(w, h);
     };
     window.addEventListener("resize", handleResize);
+
+    // Autonomous Smart Office Simulator
+    const autoInterval = setInterval(() => {
+      if (window.__officeMode !== "AUTONOMOUS") return;
+      const idleAgents = Object.entries(agentMeshesRef.current).filter(
+        ([, a]) => !a.isWorking && (!a.waypoints || a.waypoints.length === 0)
+      );
+      if (idleAgents.length > 0 && Math.random() < 0.45) {
+        const [chosenId, chosenAgent] = idleAgents[Math.floor(Math.random() * idleAgents.length)];
+        if (chosenAgent.currentMode === "WORK") {
+          const destination = Math.random() < 0.5 ? "PANTRY" : "LOUNGE";
+          if (agentNavRef.current) {
+            agentNavRef.current(chosenId, destination);
+            setAgentModes((prev) => ({ ...prev, [chosenId]: destination }));
+          }
+        } else {
+          if (agentNavRef.current) {
+            agentNavRef.current(chosenId, "WORK");
+            setAgentModes((prev) => ({ ...prev, [chosenId]: "WORK" }));
+          }
+        }
+      }
+    }, 14000);
 
     // ==========================================
     // 🌐 WEBSOCKET LIVE SYNC DENGAN BACKEND DALANG
@@ -1476,7 +1962,7 @@ export default function App() {
           }
         });
         setAgentStatus(statusMap);
-      } catch (e) {
+      } catch {
         // Backend offline
       }
     };
@@ -1486,6 +1972,7 @@ export default function App() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      clearInterval(autoInterval);
       clearInterval(iv);
       if (ws) ws.close();
       cancelAnimationFrame(animId);
@@ -1506,6 +1993,10 @@ export default function App() {
 
       if (mesh) {
         mesh.isWorking = nextVal;
+        if (nextVal && mesh.currentMode !== "WORK" && agentNavRef.current) {
+          agentNavRef.current(agentId, "WORK");
+          setAgentModes((m) => ({ ...m, [agentId]: "WORK" }));
+        }
       }
 
       if (nextVal) {
@@ -1536,6 +2027,30 @@ export default function App() {
       }
       return nextMap;
     });
+  };
+
+  const handleAllMode = (mode) => {
+    setOfficeMode(mode);
+    Object.keys(AGENTS).forEach((id, idx) => {
+      let targetLoc = mode;
+      if (mode === "LOUNGE") {
+        targetLoc = idx % 2 === 0 ? "LOUNGE" : "PANTRY";
+      } else if (mode === "AUTONOMOUS") {
+        targetLoc = "WORK";
+      }
+      if (agentNavRef.current) {
+        agentNavRef.current(id, targetLoc);
+      }
+      setAgentModes((prev) => ({ ...prev, [id]: targetLoc }));
+    });
+  };
+
+  const handleAgentNav = (agentId, targetLoc, e) => {
+    if (e) e.stopPropagation();
+    if (agentNavRef.current) {
+      agentNavRef.current(agentId, targetLoc);
+    }
+    setAgentModes((prev) => ({ ...prev, [agentId]: targetLoc }));
   };
 
   return (
@@ -1572,6 +2087,94 @@ export default function App() {
             <span style={{ color: "#38bdf8", fontWeight: "700" }}>● Bekerja: {activeWayangCount}</span>
             <span style={{ color: "#64748b" }}>•</span>
             <span style={{ color: "#94a3b8" }}>Istirahat (Idle): {8 - activeWayangCount}</span>
+          </div>
+
+          <div style={{ height: 16, width: 1, backgroundColor: "rgba(255, 255, 255, 0.15)" }} />
+
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <button
+              onClick={() => handleAllMode("WORK")}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "6px 12px",
+                borderRadius: 8,
+                border: officeMode === "WORK" ? "1px solid #38bdf8" : "1px solid rgba(255,255,255,0.1)",
+                backgroundColor: officeMode === "WORK" ? "rgba(56, 189, 248, 0.2)" : "rgba(30, 41, 59, 0.6)",
+                color: officeMode === "WORK" ? "#38bdf8" : "#94a3b8",
+                fontSize: "0.75rem",
+                fontWeight: "700",
+                cursor: "pointer",
+                transition: "all 0.2s ease"
+              }}
+              title="Semua Wayang duduk di meja kerja menghadap laptop"
+            >
+              <Laptop size={14} /> Meja Kerja
+            </button>
+
+            <button
+              onClick={() => handleAllMode("MEETING")}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "6px 12px",
+                borderRadius: 8,
+                border: officeMode === "MEETING" ? "1px solid #818cf8" : "1px solid rgba(255,255,255,0.1)",
+                backgroundColor: officeMode === "MEETING" ? "rgba(99, 102, 241, 0.25)" : "rgba(30, 41, 59, 0.6)",
+                color: officeMode === "MEETING" ? "#a5b4fc" : "#94a3b8",
+                fontSize: "0.75rem",
+                fontWeight: "700",
+                cursor: "pointer",
+                transition: "all 0.2s ease"
+              }}
+              title="Semua Wayang jalan ke Ruang Rapat kaca untuk Sprint All-Hands Sync"
+            >
+              <Users size={14} /> Ruang Rapat
+            </button>
+
+            <button
+              onClick={() => handleAllMode("LOUNGE")}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "6px 12px",
+                borderRadius: 8,
+                border: officeMode === "LOUNGE" ? "1px solid #f59e0b" : "1px solid rgba(255,255,255,0.1)",
+                backgroundColor: officeMode === "LOUNGE" ? "rgba(245, 158, 11, 0.2)" : "rgba(30, 41, 59, 0.6)",
+                color: officeMode === "LOUNGE" ? "#fbbf24" : "#94a3b8",
+                fontSize: "0.75rem",
+                fontWeight: "700",
+                cursor: "pointer",
+                transition: "all 0.2s ease"
+              }}
+              title="Tim jalan santai ngopi di sofa cognac & barista bar pantry"
+            >
+              <Coffee size={14} /> Santai Ngopi
+            </button>
+
+            <button
+              onClick={() => handleAllMode("AUTONOMOUS")}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "6px 12px",
+                borderRadius: 8,
+                border: officeMode === "AUTONOMOUS" ? "1px solid #10b981" : "1px solid rgba(255,255,255,0.1)",
+                backgroundColor: officeMode === "AUTONOMOUS" ? "rgba(16, 185, 129, 0.2)" : "rgba(30, 41, 59, 0.6)",
+                color: officeMode === "AUTONOMOUS" ? "#34d399" : "#94a3b8",
+                fontSize: "0.75rem",
+                fontWeight: "700",
+                cursor: "pointer",
+                transition: "all 0.2s ease"
+              }}
+              title="Mode Otonom: Karakter bergerak dinamis & mandiri di kantor"
+            >
+              <Sparkles size={14} /> Mode Otonom
+            </button>
           </div>
         </div>
 
@@ -1687,6 +2290,78 @@ export default function App() {
                 </div>
                 <div style={{ fontSize: "0.72rem", color: "#64748b", marginTop: 4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                   {info.action}
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 8, paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                  <span style={{ fontSize: "0.68rem", color: "#94a3b8", display: "flex", alignItems: "center", gap: 4 }}>
+                    {agentModes[id] === "WORK" && "📍 Di Meja"}
+                    {agentModes[id] === "MEETING" && "📍 Di Rapat"}
+                    {agentModes[id] === "LOUNGE" && "📍 Di Sofa"}
+                    {agentModes[id] === "PANTRY" && "📍 Di Pantry"}
+                  </span>
+
+                  <div style={{ display: "flex", gap: 4 }}>
+                    <button
+                      onClick={(e) => handleAgentNav(id, "WORK", e)}
+                      style={{
+                        fontSize: "0.65rem",
+                        padding: "2px 6px",
+                        borderRadius: 4,
+                        backgroundColor: agentModes[id] === "WORK" ? "rgba(56, 189, 248, 0.25)" : "rgba(255,255,255,0.05)",
+                        color: agentModes[id] === "WORK" ? "#38bdf8" : "#94a3b8",
+                        border: "none",
+                        cursor: "pointer"
+                      }}
+                      title="Suruh ke Meja Kerja"
+                    >
+                      Meja
+                    </button>
+                    <button
+                      onClick={(e) => handleAgentNav(id, "MEETING", e)}
+                      style={{
+                        fontSize: "0.65rem",
+                        padding: "2px 6px",
+                        borderRadius: 4,
+                        backgroundColor: agentModes[id] === "MEETING" ? "rgba(99, 102, 241, 0.3)" : "rgba(255,255,255,0.05)",
+                        color: agentModes[id] === "MEETING" ? "#a5b4fc" : "#94a3b8",
+                        border: "none",
+                        cursor: "pointer"
+                      }}
+                      title="Suruh ke Ruang Rapat"
+                    >
+                      Rapat
+                    </button>
+                    <button
+                      onClick={(e) => handleAgentNav(id, "LOUNGE", e)}
+                      style={{
+                        fontSize: "0.65rem",
+                        padding: "2px 6px",
+                        borderRadius: 4,
+                        backgroundColor: agentModes[id] === "LOUNGE" ? "rgba(245, 158, 11, 0.25)" : "rgba(255,255,255,0.05)",
+                        color: agentModes[id] === "LOUNGE" ? "#fbbf24" : "#94a3b8",
+                        border: "none",
+                        cursor: "pointer"
+                      }}
+                      title="Suruh Santai di Sofa"
+                    >
+                      Sofa
+                    </button>
+                    <button
+                      onClick={(e) => handleAgentNav(id, "PANTRY", e)}
+                      style={{
+                        fontSize: "0.65rem",
+                        padding: "2px 6px",
+                        borderRadius: 4,
+                        backgroundColor: agentModes[id] === "PANTRY" ? "rgba(16, 185, 129, 0.25)" : "rgba(255,255,255,0.05)",
+                        color: agentModes[id] === "PANTRY" ? "#34d399" : "#94a3b8",
+                        border: "none",
+                        cursor: "pointer"
+                      }}
+                      title="Suruh Ngopi di Pantry"
+                    >
+                      Pantry
+                    </button>
+                  </div>
                 </div>
               </div>
             );

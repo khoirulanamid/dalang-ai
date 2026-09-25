@@ -62,3 +62,7 @@ playground/
 workspace/playground/
 *.demo.*
 screenshot_*.png
+
+# Screenshots & Local Verification
+shot_*.png
+verify_dashboard.py
