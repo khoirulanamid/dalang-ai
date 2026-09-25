@@ -1,19 +1,180 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Cpu, Terminal, Sparkles, UserCheck, Coffee } from "lucide-react";
+import { Cpu, Terminal, Sparkles, UserCheck, Coffee, Building2, Monitor, Compass } from "lucide-react";
 
-// 8 Wayang Roster & Visual Styles
+// 8 Para Wayang Roster & Specialized Outfits
 const AGENTS = {
-  risko: { name: "Risko", role: "Sang Dalang", title: "Master Orchestrator", color: 0x6366f1, hex: "#6366f1", pos: [0, 0, 0] },
-  pingot: { name: "Pingot", role: "Wayang Data", title: "Data Architect", color: 0x10b981, hex: "#10b981", pos: [-3, 0, -2.5] },
-  zaki: { name: "Zaki", role: "Wayang Backend", title: "API & System Engineer", color: 0xf59e0b, hex: "#f59e0b", pos: [3, 0, -2.5] },
-  lulu: { name: "Lulu", role: "Wayang Visual", title: "UI/UX & 3D Designer", color: 0xec4899, hex: "#ec4899", pos: [-3, 0, 3] },
-  mika: { name: "Mika", role: "Wayang Pujangga", title: "Technical Writer", color: 0x06b6d4, hex: "#06b6d4", pos: [3, 0, 3] },
-  nova: { name: "Nova", role: "Wayang Patih", title: "DevOps & CI/CD", color: 0xf97316, hex: "#f97316", pos: [0, 0, -5] },
-  kai: { name: "Kai", role: "Wayang Senopati", title: "Security Auditor", color: 0xef4444, hex: "#ef4444", pos: [-5.5, 0, 0] },
-  ren: { name: "Ren", role: "Wayang Jaksa", title: "QA & Test Automation", color: 0x8b5cf6, hex: "#8b5cf6", pos: [5.5, 0, 0] },
+  risko: {
+    name: "Risko",
+    role: "Sang Dalang",
+    title: "Master Orchestrator",
+    color: 0x4f46e5, // Indigo Hoodie
+    hex: "#4f46e5",
+    hairColor: 0x1e1b4b,
+    hairStyle: "pompadour",
+    pos: [0, 0, 0],
+    screenColor: 0x818cf8,
+    action: "Memimpin orkestrasi lakon proyek",
+  },
+  pingot: {
+    name: "Pingot",
+    role: "Wayang Data",
+    title: "Data Architect",
+    color: 0x059669, // Forest Green Jacket
+    hex: "#10b981",
+    hairColor: 0x27272a,
+    hairStyle: "fade",
+    pos: [-3.8, 0, -2.5],
+    screenColor: 0x34d399,
+    action: "Audit skema & pipeline data",
+  },
+  zaki: {
+    name: "Zaki",
+    role: "Wayang Backend",
+    title: "API & System Engineer",
+    color: 0xd97706, // Amber Sweater
+    hex: "#f59e0b",
+    hairColor: 0x451a03,
+    hairStyle: "curls",
+    pos: [3.8, 0, -2.5],
+    screenColor: 0xfbbf24,
+    action: "Mengembangkan endpoint FastAPI",
+  },
+  lulu: {
+    name: "Lulu",
+    role: "Wayang Visual",
+    title: "UI/UX & 3D Designer",
+    color: 0xdb2777, // Rose Pink Cardigan
+    hex: "#ec4899",
+    hairColor: 0x831843,
+    hairStyle: "bob",
+    pos: [-3.8, 0, 3],
+    screenColor: 0xf472b6,
+    action: "Merancang desain & 3D isometrik",
+  },
+  mika: {
+    name: "Mika",
+    role: "Wayang Pujangga",
+    title: "Technical Writer",
+    color: 0x0891b2, // Cyan Turtleneck
+    hex: "#06b6d4",
+    hairColor: 0x1e293b,
+    hairStyle: "ponytail",
+    pos: [3.8, 0, 3],
+    screenColor: 0x38bdf8,
+    action: "Menulis dokumentasi & standar",
+  },
+  nova: {
+    name: "Nova",
+    role: "Wayang Patih",
+    title: "DevOps & CI/CD",
+    color: 0xea580c, // Rust Orange Vest
+    hex: "#f97316",
+    hairColor: 0x171717,
+    hairStyle: "buzz",
+    pos: [0, 0, -5.5],
+    screenColor: 0xfb923c,
+    action: "Pipeline CI/CD & Docker build",
+  },
+  kai: {
+    name: "Kai",
+    role: "Wayang Senopati",
+    title: "Security Auditor",
+    color: 0xdc2626, // Crimson Bomber Jacket
+    hex: "#ef4444",
+    hairColor: 0x18181b,
+    hairStyle: "sidepart",
+    pos: [-7.2, 0, 0],
+    screenColor: 0xf87171,
+    action: "Audit keamanan OWASP & token",
+  },
+  ren: {
+    name: "Ren",
+    role: "Wayang Jaksa",
+    title: "QA & Test Automation",
+    color: 0x7c3aed, // Violet Blazer
+    hex: "#8b5cf6",
+    hairColor: 0x2e1065,
+    hairStyle: "parted",
+    pos: [7.2, 0, 0],
+    screenColor: 0xa78bfa,
+    action: "Menjalankan 182 test suite",
+  },
 };
+
+// Procedural Parquet Wood Floor Texture (MengTo Standard PBR)
+function createParquetTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1024;
+  canvas.height = 1024;
+  const ctx = canvas.getContext("2d");
+
+  // Warm Oak Base
+  ctx.fillStyle = "#a27b5c";
+  ctx.fillRect(0, 0, 1024, 1024);
+
+  const plankW = 128;
+  const plankH = 32;
+
+  for (let y = 0; y < 1024; y += plankH) {
+    const rowOffset = (Math.floor(y / plankH) % 2) * (plankW / 2);
+    for (let x = -plankW; x < 1024 + plankW; x += plankW) {
+      const px = x + rowOffset;
+      // Slight plank shade variation
+      const shade = 0.92 + Math.random() * 0.16;
+      ctx.fillStyle = `rgb(${Math.floor(162 * shade)}, ${Math.floor(123 * shade)}, ${Math.floor(92 * shade)})`;
+      ctx.fillRect(px + 1, y + 1, plankW - 2, plankH - 2);
+
+      // Subtle grain lines
+      ctx.fillStyle = "rgba(74, 53, 37, 0.15)";
+      for (let g = 0; g < 4; g++) {
+        const gy = y + 4 + Math.random() * (plankH - 8);
+        ctx.fillRect(px + 2, gy, plankW - 4, 1);
+      }
+    }
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(4, 4);
+  return texture;
+}
+
+// Procedural Carpet Rug Texture
+function createRugTexture(baseColorHex, patternColorHex) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = baseColorHex;
+  ctx.fillRect(0, 0, 512, 512);
+
+  ctx.strokeStyle = patternColorHex;
+  ctx.lineWidth = 4;
+  // Modern Scandinavian Diamond Grid
+  for (let i = -512; i < 1024; i += 64) {
+    ctx.beginPath();
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i + 512, 512);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(i + 512, 0);
+    ctx.lineTo(i, 512);
+    ctx.stroke();
+  }
+
+  // Border
+  ctx.strokeStyle = patternColorHex;
+  ctx.lineWidth = 16;
+  ctx.strokeRect(8, 8, 496, 496);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  return texture;
+}
 
 export default function App() {
   const mountRef = useRef(null);
@@ -22,12 +183,12 @@ export default function App() {
   const [activeTask, setActiveTask] = useState(null);
   const [connected, setConnected] = useState(false);
   const [workingMap, setWorkingMap] = useState({});
-  const activeWayangCount = Object.values(workingMap).filter(Boolean).length;
 
+  const activeWayangCount = Object.values(workingMap).filter(Boolean).length;
   const sceneRef = useRef(null);
   const agentMeshesRef = useRef({});
 
-  // 1. Setup Three.js 3D Isometric Office Studio
+  // 1. Setup Three.js Cinematic Isometric Studio (MengTo PBR Standards)
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
@@ -36,103 +197,309 @@ export default function App() {
     const height = container.clientHeight;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0a0f1d);
-    scene.fog = new THREE.FogExp2(0x0a0f1d, 0.025);
+    // Warm, welcoming ambient background instead of pitch black void
+    scene.background = new THREE.Color(0x13192b);
+    scene.fog = new THREE.FogExp2(0x13192b, 0.015);
     sceneRef.current = scene;
 
-    // Camera: Isometric perspective
-    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-    camera.position.set(16, 18, 22);
-    camera.lookAt(0, 1, 0);
+    // Cinematic Isometric Camera Setup
+    const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 1000);
+    camera.position.set(22, 24, 28);
+    camera.lookAt(0, 1.2, 0);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      powerPreference: "high-performance",
+      preserveDrawingBuffer: true,
+    });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
     container.appendChild(renderer.domElement);
 
-    // OrbitControls for smooth interactive navigation
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.maxPolarAngle = Math.PI / 2.1;
-    controls.minDistance = 8;
-    controls.maxDistance = 45;
-    controls.target.set(0, 1, 0);
+    controls.maxPolarAngle = Math.PI / 2.15;
+    controls.minDistance = 10;
+    controls.maxDistance = 55;
+    controls.target.set(0, 1.2, 0);
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xdbeafe, 0.85);
+    // ==========================================
+    // 💡 THREE-POINT CINEMATIC PBR LIGHTING
+    // ==========================================
+    // 1. Warm Golden Daylight Sun (Key Light)
+    const sunLight = new THREE.DirectionalLight(0xfff5e6, 2.4);
+    sunLight.position.set(20, 32, 18);
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.width = 1024;
+    sunLight.shadow.mapSize.height = 1024;
+    sunLight.shadow.camera.near = 0.5;
+    sunLight.shadow.camera.far = 75;
+    sunLight.shadow.camera.left = -22;
+    sunLight.shadow.camera.right = 22;
+    sunLight.shadow.camera.top = 22;
+    sunLight.shadow.camera.bottom = -22;
+    sunLight.shadow.bias = -0.0003;
+    scene.add(sunLight);
+
+    // 2. Soft Sky Blue Ambient Fill (Prevents harsh dark shadows)
+    const ambientLight = new THREE.AmbientLight(0xdbeafe, 0.95);
     scene.add(ambientLight);
 
-    const mainLight = new THREE.DirectionalLight(0xffffff, 1.8);
-    mainLight.position.set(15, 25, 12);
-    mainLight.castShadow = true;
-    mainLight.shadow.mapSize.width = 2048;
-    mainLight.shadow.mapSize.height = 2048;
-    mainLight.shadow.camera.near = 0.5;
-    mainLight.shadow.camera.far = 60;
-    mainLight.shadow.camera.left = -15;
-    mainLight.shadow.camera.right = 15;
-    mainLight.shadow.camera.top = 15;
-    mainLight.shadow.camera.bottom = -15;
-    mainLight.shadow.bias = -0.0005;
-    scene.add(mainLight);
+    // 3. Cool Rim / Edge Backlight (Carves out characters & edges)
+    const rimLight = new THREE.DirectionalLight(0x7dd3fc, 0.8);
+    rimLight.position.set(-20, 16, -18);
+    scene.add(rimLight);
 
-    // Subtle blue fill light
-    const fillLight = new THREE.DirectionalLight(0x38bdf8, 0.6);
-    fillLight.position.set(-15, 10, -10);
-    scene.add(fillLight);
+    // 4. Warm Interior Pendants (Cozy Office Glow)
+    const interiorGlow = new THREE.PointLight(0xfef08a, 1.2, 18);
+    interiorGlow.position.set(0, 6, 0);
+    scene.add(interiorGlow);
 
-    // Grid Floor
-    const grid = new THREE.GridHelper(24, 24, 0x1e293b, 0x0f172a);
-    grid.position.y = 0.01;
-    scene.add(grid);
+    // ==========================================
+    // 🏢 ARCHITECTURAL OFFICE ROOM (Cutaway Style)
+    // ==========================================
+    const roomGroup = new THREE.Group();
 
-    // Main Studio Floor
-    const floorGeo = new THREE.PlaneGeometry(28, 28);
+    // 1. Warm Oak Parquet Floor
+    const parquetTexture = createParquetTexture();
+    const floorGeo = new THREE.PlaneGeometry(30, 26);
     const floorMat = new THREE.MeshStandardMaterial({
-      color: 0x0f172a,
-      roughness: 0.6,
-      metalness: 0.1,
+      map: parquetTexture,
+      roughness: 0.65,
+      metalness: 0.05,
     });
     const floor = new THREE.Mesh(floorGeo, floorMat);
     floor.rotation.x = -Math.PI / 2;
     floor.receiveShadow = true;
-    scene.add(floor);
+    roomGroup.add(floor);
 
-    // Outer Room Border Ring
-    const borderGeo = new THREE.RingGeometry(13.8, 14.2, 64);
-    const borderMat = new THREE.MeshBasicMaterial({ color: 0x1e293b, side: THREE.DoubleSide });
-    const border = new THREE.Mesh(borderGeo, borderMat);
-    border.rotation.x = -Math.PI / 2;
-    border.position.y = 0.02;
-    scene.add(border);
+    // 2. Central Scandinavian Area Rug
+    const rugTexture = createRugTexture("#2e384d", "#4b5563");
+    const rugGeo = new THREE.PlaneGeometry(18, 14);
+    const rugMat = new THREE.MeshStandardMaterial({
+      map: rugTexture,
+      roughness: 0.95,
+      metalness: 0.0,
+    });
+    const rug = new THREE.Mesh(rugGeo, rugMat);
+    rug.rotation.x = -Math.PI / 2;
+    rug.position.set(0, 0.015, 0);
+    rug.receiveShadow = true;
+    roomGroup.add(rug);
 
-    // Function to create a Modern Workspace Desk + Opened Laptop
-    const createDeskWithLaptop = (x, z) => {
+    // 3. Back Wall (Nordic Sage Slate with Wood Paneling)
+    const backWallGeo = new THREE.BoxGeometry(30, 5.5, 0.4);
+    const wallMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.85 });
+    const backWall = new THREE.Mesh(backWallGeo, wallMat);
+    backWall.position.set(0, 2.75, -13);
+    backWall.receiveShadow = true;
+    roomGroup.add(backWall);
+
+    // Left Wall with Big Modern Industrial Windows
+    const leftWallGeo = new THREE.BoxGeometry(0.4, 5.5, 26);
+    const leftWall = new THREE.Mesh(leftWallGeo, wallMat);
+    leftWall.position.set(-15, 2.75, 0);
+    leftWall.receiveShadow = true;
+    roomGroup.add(leftWall);
+
+    // Wall Baseboard (Skirting)
+    const baseboardGeo = new THREE.BoxGeometry(30, 0.25, 0.45);
+    const baseboardMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.5 });
+    const baseboard = new THREE.Mesh(baseboardGeo, baseboardMat);
+    baseboard.position.set(0, 0.125, -12.8);
+    roomGroup.add(baseboard);
+
+    // 4. Large Sunlight Window Frame on Left Wall
+    const windowFrameGeo = new THREE.BoxGeometry(0.3, 3.2, 10);
+    const windowFrameMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.3 });
+    const windowFrame = new THREE.Mesh(windowFrameGeo, windowFrameMat);
+    windowFrame.position.set(-14.8, 3.2, 0);
+    roomGroup.add(windowFrame);
+
+    // Luminous Window Glass (Sky Daylight emission)
+    const glassPaneGeo = new THREE.PlaneGeometry(9.6, 2.8);
+    const glassPaneMat = new THREE.MeshStandardMaterial({
+      color: 0xbae6fd,
+      emissive: 0x38bdf8,
+      emissiveIntensity: 0.6,
+      roughness: 0.1,
+    });
+    const glassPane = new THREE.Mesh(glassPaneGeo, glassPaneMat);
+    glassPane.rotation.y = Math.PI / 2;
+    glassPane.position.set(-14.7, 3.2, 0);
+    roomGroup.add(glassPane);
+
+    // 5. Motivational Neon Wall Sign ("DALANG STUDIO • OTONOM")
+    const signBoardGeo = new THREE.BoxGeometry(7, 1.2, 0.08);
+    const signBoardMat = new THREE.MeshStandardMaterial({ color: 0x090d16, roughness: 0.4 });
+    const signBoard = new THREE.Mesh(signBoardGeo, signBoardMat);
+    signBoard.position.set(0, 4.2, -12.75);
+    roomGroup.add(signBoard);
+
+    // Neon Glow Strip
+    const neonGeo = new THREE.BoxGeometry(6.6, 0.06, 0.12);
+    const neonMat = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      emissive: 0x38bdf8,
+      emissiveIntensity: 1.8,
+    });
+    const neonStrip = new THREE.Mesh(neonGeo, neonMat);
+    neonStrip.position.set(0, 4.2, -12.7);
+    roomGroup.add(neonStrip);
+
+    // 6. Wall Bookshelf & Storage Cabinet
+    const shelfGeo = new THREE.BoxGeometry(5.5, 3.4, 0.7);
+    const shelfMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.5 });
+    const shelf = new THREE.Mesh(shelfGeo, shelfMat);
+    shelf.position.set(9.5, 1.7, -12.4);
+    shelf.castShadow = true;
+    shelf.receiveShadow = true;
+    roomGroup.add(shelf);
+
+    // Books & Folders inside Shelf
+    for (let b = 0; b < 14; b++) {
+      const bookColors = [0xef4444, 0x3b82f6, 0x10b981, 0xf59e0b, 0x8b5cf6, 0xec4899];
+      const bColor = bookColors[b % bookColors.length];
+      const bookGeo = new THREE.BoxGeometry(0.12, 0.55 + Math.random() * 0.2, 0.45);
+      const bookMat = new THREE.MeshStandardMaterial({ color: bColor, roughness: 0.6 });
+      const book = new THREE.Mesh(bookGeo, bookMat);
+      book.position.set(7.4 + b * 0.32, 2.4, -12.3);
+      roomGroup.add(book);
+    }
+
+    // 7. Indoor Plants (Biophilic Office Greenery)
+    const makePottedPlant = (px, pz, scale = 1) => {
+      const plantGroup = new THREE.Group();
+      plantGroup.position.set(px, 0, pz);
+      plantGroup.scale.set(scale, scale, scale);
+
+      // Ceramic Planter Pot
+      const potGeo = new THREE.CylinderGeometry(0.42, 0.3, 0.75, 18);
+      const potMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.3 });
+      const pot = new THREE.Mesh(potGeo, potMat);
+      pot.position.y = 0.375;
+      pot.castShadow = true;
+      plantGroup.add(pot);
+
+      // Soil
+      const soilGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.1, 16);
+      const soilMat = new THREE.MeshStandardMaterial({ color: 0x3f2e1e, roughness: 0.9 });
+      const soil = new THREE.Mesh(soilGeo, soilMat);
+      soil.position.y = 0.72;
+      plantGroup.add(soil);
+
+      // Lush Monstera Leaves
+      const leafMat = new THREE.MeshStandardMaterial({ color: 0x15803d, roughness: 0.4 });
+      for (let l = 0; l < 8; l++) {
+        const leafGeo = new THREE.SphereGeometry(0.35, 8, 8);
+        leafGeo.scale(1.2, 0.1, 0.7);
+        const leaf = new THREE.Mesh(leafGeo, leafMat);
+        const angle = (l / 8) * Math.PI * 2;
+        leaf.position.set(Math.cos(angle) * 0.45, 0.85 + (l % 3) * 0.2, Math.sin(angle) * 0.45);
+        leaf.rotation.set(0.3, angle, 0.4);
+        leaf.castShadow = true;
+        plantGroup.add(leaf);
+      }
+      return plantGroup;
+    };
+
+    roomGroup.add(makePottedPlant(-13.5, -11.5, 1.3)); // Corner plant
+    roomGroup.add(makePottedPlant(13.2, 10.5, 1.2)); // Front right plant
+    roomGroup.add(makePottedPlant(-13.5, 10.5, 1.1)); // Front left plant
+
+    // 8. Pantry & Coffee Breakout Corner
+    const barGeo = new THREE.BoxGeometry(4.2, 1.05, 1.2);
+    const barMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.3 });
+    const bar = new THREE.Mesh(barGeo, barMat);
+    bar.position.set(-11.5, 0.525, -6.5);
+    bar.castShadow = true;
+    roomGroup.add(bar);
+
+    // Marble Countertop
+    const counterGeo = new THREE.BoxGeometry(4.4, 0.08, 1.35);
+    const counterMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.15 });
+    const counter = new THREE.Mesh(counterGeo, counterMat);
+    counter.position.set(-11.5, 1.09, -6.5);
+    counter.castShadow = true;
+    roomGroup.add(counter);
+
+    // Espresso Machine
+    const espressoGeo = new THREE.BoxGeometry(0.7, 0.55, 0.55);
+    const espressoMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.85, roughness: 0.2 });
+    const espresso = new THREE.Mesh(espressoGeo, espressoMat);
+    espresso.position.set(-12.5, 1.4, -6.5);
+    espresso.castShadow = true;
+    roomGroup.add(espresso);
+
+    // Glass Water Dispenser
+    const dispenserGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.7, 16);
+    const dispenserMat = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.6,
+      roughness: 0.1,
+    });
+    const dispenser = new THREE.Mesh(dispenserGeo, dispenserMat);
+    dispenser.position.set(-10.2, 1.48, -6.5);
+    roomGroup.add(dispenser);
+
+    // Bar Stools
+    [-12.2, -10.8].forEach((bx) => {
+      const stoolGroup = new THREE.Group();
+      stoolGroup.position.set(bx, 0, -5.2);
+      const stoolSeatGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.06, 16);
+      const stoolSeatMat = new THREE.MeshStandardMaterial({ color: 0xa16207, roughness: 0.6 });
+      const stoolSeat = new THREE.Mesh(stoolSeatGeo, stoolSeatMat);
+      stoolSeat.position.y = 0.78;
+      stoolGroup.add(stoolSeat);
+
+      const stoolLegGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.78, 8);
+      const stoolLegMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8 });
+      const stoolLeg = new THREE.Mesh(stoolLegGeo, stoolLegMat);
+      stoolLeg.position.y = 0.39;
+      stoolGroup.add(stoolLeg);
+      roomGroup.add(stoolGroup);
+    });
+
+    scene.add(roomGroup);
+
+    // ==========================================
+    // 🪑 WORKSPACE DESKS & WORKSTATIONS
+    // ==========================================
+    const createWorkstation = (x, z, agentData) => {
       const deskGroup = new THREE.Group();
       deskGroup.position.set(x, 0, z);
 
-      // Desk Top (Matte Charcoal Wood)
-      const topGeo = new THREE.BoxGeometry(1.9, 0.08, 1.1);
-      const topMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4 });
+      // 1. Premium Matte Wood Desk
+      const topGeo = new THREE.BoxGeometry(2.1, 0.08, 1.25);
+      const topMat = new THREE.MeshStandardMaterial({ color: 0x232d3f, roughness: 0.3, metalness: 0.05 });
       const top = new THREE.Mesh(topGeo, topMat);
       top.position.y = 0.76;
       top.castShadow = true;
       top.receiveShadow = true;
       deskGroup.add(top);
 
-      // Desk Metal Legs
-      const legGeo = new THREE.CylinderGeometry(0.03, 0.03, 0.74, 12);
-      const legMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.2 });
+      // Chamfered Desk Edge Trim
+      const trimGeo = new THREE.BoxGeometry(2.14, 0.02, 1.29);
+      const trimMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.5 });
+      const trim = new THREE.Mesh(trimGeo, trimMat);
+      trim.position.y = 0.72;
+      deskGroup.add(trim);
+
+      // Steel Matte Desk Legs
+      const legGeo = new THREE.CylinderGeometry(0.035, 0.035, 0.74, 14);
+      const legMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.2 });
       [
-        [-0.85, -0.45],
-        [0.85, -0.45],
-        [-0.85, 0.45],
-        [0.85, 0.45],
+        [-0.95, -0.52],
+        [0.95, -0.52],
+        [-0.95, 0.52],
+        [0.95, 0.52],
       ].forEach(([lx, lz]) => {
         const leg = new THREE.Mesh(legGeo, legMat);
         leg.position.set(lx, 0.37, lz);
@@ -140,262 +507,328 @@ export default function App() {
         deskGroup.add(leg);
       });
 
-      // Laptop Base
-      const lapBaseGeo = new THREE.BoxGeometry(0.52, 0.02, 0.38);
-      const lapBaseMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.6, roughness: 0.3 });
-      const lapBase = new THREE.Mesh(lapBaseGeo, lapBaseMat);
-      lapBase.position.set(0, 0.81, 0.05);
+      // Leather Desk Mat (Blotter)
+      const matGeo = new THREE.BoxGeometry(1.2, 0.008, 0.75);
+      const matMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.85 });
+      const blotter = new THREE.Mesh(matGeo, matMat);
+      blotter.position.set(0, 0.804, 0.02);
+      deskGroup.add(blotter);
+
+      // Sleek Modern Laptop
+      const laptopBaseGeo = new THREE.BoxGeometry(0.56, 0.018, 0.4);
+      const laptopBaseMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.75, roughness: 0.25 });
+      const lapBase = new THREE.Mesh(laptopBaseGeo, laptopBaseMat);
+      lapBase.position.set(0, 0.815, 0.08);
       lapBase.castShadow = true;
       deskGroup.add(lapBase);
 
-      // Laptop Keyboard Area
-      const kbGeo = new THREE.BoxGeometry(0.44, 0.005, 0.2);
-      const kbMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.9 });
-      const kb = new THREE.Mesh(kbGeo, kbMat);
-      kb.position.set(0, 0.825, 0.08);
-      deskGroup.add(kb);
+      // Opened Tilted Screen Lid
+      const screenPivot = new THREE.Group();
+      screenPivot.position.set(0, 0.824, -0.12);
 
-      // Laptop Screen (Opened & Tilted 105 degrees)
-      const screenGroup = new THREE.Group();
-      screenGroup.position.set(0, 0.82, -0.14);
-
-      // Screen Lid
-      const lidGeo = new THREE.BoxGeometry(0.52, 0.35, 0.015);
-      const lidMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.6, roughness: 0.3 });
+      const lidGeo = new THREE.BoxGeometry(0.56, 0.38, 0.015);
+      const lidMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.75, roughness: 0.25 });
       const lid = new THREE.Mesh(lidGeo, lidMat);
-      lid.position.set(0, 0.175, 0);
+      lid.position.set(0, 0.19, 0);
       lid.castShadow = true;
-      screenGroup.add(lid);
+      screenPivot.add(lid);
 
-      // Screen Display Face (Emissive — glows brighter when coding!)
-      const displayGeo = new THREE.PlaneGeometry(0.48, 0.31);
+      // Glowing Code Display
+      const displayGeo = new THREE.PlaneGeometry(0.52, 0.34);
       const displayMat = new THREE.MeshStandardMaterial({
-        color: 0x000000,
-        emissive: 0x38bdf8,
+        color: 0x020617,
+        emissive: agentData.screenColor,
         emissiveIntensity: 0.15,
-        roughness: 0.2,
+        roughness: 0.1,
       });
       const display = new THREE.Mesh(displayGeo, displayMat);
-      display.position.set(0, 0.175, 0.009);
-      screenGroup.add(display);
+      display.position.set(0, 0.19, 0.009);
+      screenPivot.add(display);
 
-      // Tilt screen backward like an open laptop
-      screenGroup.rotation.x = THREE.MathUtils.degToRad(-15);
-      deskGroup.add(screenGroup);
+      screenPivot.rotation.x = THREE.MathUtils.degToRad(-14);
+      deskGroup.add(screenPivot);
 
-      // Screen Glow PointLight (Illuminates face when working)
-      const screenLight = new THREE.PointLight(0x38bdf8, 0.1, 1.8);
-      screenLight.position.set(0, 1.0, -0.05);
-      deskGroup.add(screenLight);
+      // Face Spotlight from Laptop Screen
+      const lapLight = new THREE.PointLight(agentData.screenColor, 0.1, 2.0);
+      lapLight.position.set(0, 1.05, 0.0);
+      deskGroup.add(lapLight);
 
-      // Modern Ergonomic Office Chair
+      // Ceramic Coffee Mug with Wayang Accent
+      const mugGeo = new THREE.CylinderGeometry(0.065, 0.055, 0.12, 14);
+      const mugMat = new THREE.MeshStandardMaterial({ color: agentData.color, roughness: 0.3 });
+      const mug = new THREE.Mesh(mugGeo, mugMat);
+      mug.position.set(0.68, 0.86, 0.22);
+      mug.castShadow = true;
+      deskGroup.add(mug);
+
+      // Desk Mini Succulent Plant
+      const plantPotGeo = new THREE.CylinderGeometry(0.07, 0.05, 0.09, 12);
+      const plantPotMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.5 });
+      const plantPot = new THREE.Mesh(plantPotGeo, plantPotMat);
+      plantPot.position.set(-0.72, 0.845, -0.32);
+      plantPot.castShadow = true;
+      deskGroup.add(plantPot);
+
+      const cactusGeo = new THREE.SphereGeometry(0.06, 8, 8);
+      const cactusMat = new THREE.MeshStandardMaterial({ color: 0x16a34a, roughness: 0.7 });
+      const cactus = new THREE.Mesh(cactusGeo, cactusMat);
+      cactus.position.set(-0.72, 0.92, -0.32);
+      deskGroup.add(cactus);
+
+      // Ergonomic Swivel Mesh Office Chair
       const chairGroup = new THREE.Group();
-      chairGroup.position.set(0, 0, 0.72);
+      chairGroup.position.set(0, 0, 0.78);
 
-      // Chair Seat
-      const seatGeo = new THREE.CylinderGeometry(0.3, 0.3, 0.06, 24);
+      const seatGeo = new THREE.BoxGeometry(0.55, 0.08, 0.52);
       const seatMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
       const seat = new THREE.Mesh(seatGeo, seatMat);
-      seat.position.y = 0.45;
+      seat.position.y = 0.46;
       seat.castShadow = true;
       chairGroup.add(seat);
 
-      // Chair Backrest
-      const backGeo = new THREE.BoxGeometry(0.42, 0.45, 0.06);
-      const backMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.8 });
-      const back = new THREE.Mesh(backGeo, backMat);
-      back.position.set(0, 0.75, 0.25);
-      back.castShadow = true;
-      chairGroup.add(back);
+      const backrestGeo = new THREE.BoxGeometry(0.52, 0.58, 0.06);
+      const backrestMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.85 });
+      const backrest = new THREE.Mesh(backrestGeo, backrestMat);
+      backrest.position.set(0, 0.82, 0.26);
+      backrest.castShadow = true;
+      chairGroup.add(backrest);
 
-      // Chair Stem & Wheels Base
-      const stemGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.45, 12);
-      const stemMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8 });
+      // Chrome Chair Base
+      const stemGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.44, 12);
+      const stemMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.9, roughness: 0.1 });
       const stem = new THREE.Mesh(stemGeo, stemMat);
-      stem.position.y = 0.225;
+      stem.position.y = 0.22;
       chairGroup.add(stem);
 
-      const baseGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.02, 5);
-      const base = new THREE.Mesh(baseGeo, stemMat);
-      base.position.y = 0.02;
-      chairGroup.add(base);
+      const casterGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.02, 5);
+      const caster = new THREE.Mesh(casterGeo, stemMat);
+      caster.position.y = 0.02;
+      chairGroup.add(caster);
 
       deskGroup.add(chairGroup);
       scene.add(deskGroup);
 
-      return { displayMat, screenLight };
+      return { displayMat, lapLight };
     };
 
-    // Function to create an Articulated Human Avatar (Wayang)
-    const createWayangHuman = (id, data) => {
+    // ==========================================
+    // 👤 STYLIZED HUMAN CHARACTER RIGGING (MengTo)
+    // ==========================================
+    const createStylizedHuman = (id, data) => {
       const [x, y, z] = data.pos;
-      const deskObjects = createDeskWithLaptop(x, z);
+      const deskObjects = createWorkstation(x, z, data);
 
-      // Human root group sits at the chair position
-      const humanGroup = new THREE.Group();
-      humanGroup.position.set(x, 0, z + 0.72);
+      const humanRoot = new THREE.Group();
+      humanRoot.position.set(x, 0, z + 0.78);
 
-      // 1. Lower Body / Legs (Sitting pose)
-      const pantsMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.7 });
+      // PBR Skin Material
+      const skinMat = new THREE.MeshStandardMaterial({
+        color: 0xf5cbb7,
+        roughness: 0.65,
+        metalness: 0.05,
+      });
 
-      // Thighs (horizontal forward towards desk)
-      const thighGeo = new THREE.BoxGeometry(0.12, 0.12, 0.34);
+      // Modern Casual Clothing (Hoodie / Jacket with PBR Cloth roughness)
+      const clothesMat = new THREE.MeshStandardMaterial({
+        color: data.color,
+        roughness: 0.85,
+        metalness: 0.05,
+      });
+
+      // Trousers
+      const pantsMat = new THREE.MeshStandardMaterial({
+        color: 0x1e293b, // Dark denim / charcoal
+        roughness: 0.9,
+      });
+
+      // 1. Lower Body (Legs seated naturally)
+      // Thighs
+      const thighGeo = new THREE.BoxGeometry(0.14, 0.13, 0.36);
       const leftThigh = new THREE.Mesh(thighGeo, pantsMat);
-      leftThigh.position.set(-0.11, 0.45, -0.14);
-      humanGroup.add(leftThigh);
+      leftThigh.position.set(-0.13, 0.46, -0.16);
+      humanRoot.add(leftThigh);
 
       const rightThigh = new THREE.Mesh(thighGeo, pantsMat);
-      rightThigh.position.set(0.11, 0.45, -0.14);
-      humanGroup.add(rightThigh);
+      rightThigh.position.set(0.13, 0.46, -0.16);
+      humanRoot.add(rightThigh);
 
-      // Calves (vertical down to floor)
-      const calfGeo = new THREE.BoxGeometry(0.11, 0.38, 0.11);
+      // Calves
+      const calfGeo = new THREE.BoxGeometry(0.12, 0.4, 0.12);
       const leftCalf = new THREE.Mesh(calfGeo, pantsMat);
-      leftCalf.position.set(-0.11, 0.22, -0.28);
-      humanGroup.add(leftCalf);
+      leftCalf.position.set(-0.13, 0.22, -0.32);
+      humanRoot.add(leftCalf);
 
       const rightCalf = new THREE.Mesh(calfGeo, pantsMat);
-      rightCalf.position.set(0.11, 0.22, -0.28);
-      humanGroup.add(rightCalf);
+      rightCalf.position.set(0.13, 0.22, -0.32);
+      humanRoot.add(rightCalf);
 
-      // Shoes
-      const shoeGeo = new THREE.BoxGeometry(0.12, 0.06, 0.18);
-      const shoeMat = new THREE.MeshStandardMaterial({ color: 0x020617 });
-      const leftShoe = new THREE.Mesh(shoeGeo, shoeMat);
-      leftShoe.position.set(-0.11, 0.03, -0.31);
-      humanGroup.add(leftShoe);
+      // Modern White-soled Sneakers
+      const sneakerMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.7 });
+      const soleMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.4 });
 
-      const rightShoe = new THREE.Mesh(shoeGeo, shoeMat);
-      rightShoe.position.set(0.11, 0.03, -0.31);
-      humanGroup.add(rightShoe);
+      [-0.13, 0.13].forEach((sx) => {
+        const shoe = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.08, 0.24), sneakerMat);
+        shoe.position.set(sx, 0.05, -0.34);
+        humanRoot.add(shoe);
 
-      // 2. Upper Body Pivot (for leaning & swiveling)
+        const sole = new THREE.Mesh(new THREE.BoxGeometry(0.135, 0.025, 0.245), soleMat);
+        sole.position.set(sx, 0.015, -0.34);
+        humanRoot.add(sole);
+      });
+
+      // 2. Articulated Upper Body Pivot (For smooth lean & swivel)
       const torsoPivot = new THREE.Group();
       torsoPivot.position.set(0, 0.52, 0);
 
-      // Torso / Shirt (Color of the Wayang)
-      const shirtMat = new THREE.MeshStandardMaterial({
-        color: data.color,
-        roughness: 0.4,
-        metalness: 0.1,
-      });
-      const torsoGeo = new THREE.BoxGeometry(0.36, 0.42, 0.22);
-      const torso = new THREE.Mesh(torsoGeo, shirtMat);
-      torso.position.y = 0.21;
+      // Torso / Hoodie (Rounded human shape)
+      const torsoGeo = new THREE.BoxGeometry(0.42, 0.46, 0.26);
+      const torso = new THREE.Mesh(torsoGeo, clothesMat);
+      torso.position.y = 0.23;
       torso.castShadow = true;
       torsoPivot.add(torso);
 
-      // Neck & Head
-      const skinMat = new THREE.MeshStandardMaterial({ color: 0xfbd0b3, roughness: 0.6 });
+      // Hoodie Pocket / Detail
+      const pocketGeo = new THREE.BoxGeometry(0.32, 0.16, 0.04);
+      const pocket = new THREE.Mesh(pocketGeo, clothesMat);
+      pocket.position.set(0, 0.14, -0.14);
+      torsoPivot.add(pocket);
 
-      const neckGeo = new THREE.CylinderGeometry(0.06, 0.07, 0.1, 12);
+      // Neck
+      const neckGeo = new THREE.CylinderGeometry(0.07, 0.08, 0.12, 14);
       const neck = new THREE.Mesh(neckGeo, skinMat);
-      neck.position.y = 0.45;
+      neck.position.y = 0.49;
       torsoPivot.add(neck);
 
-      // Head Group (for tilting & nodding)
+      // Head Group (for nodding & looking)
       const headGroup = new THREE.Group();
-      headGroup.position.set(0, 0.58, 0);
+      headGroup.position.set(0, 0.62, 0);
 
-      const headGeo = new THREE.SphereGeometry(0.14, 20, 20);
+      // Human Head
+      const headGeo = new THREE.SphereGeometry(0.16, 22, 22);
+      headGeo.scale(1.0, 1.15, 1.05);
       const head = new THREE.Mesh(headGeo, skinMat);
       head.castShadow = true;
       headGroup.add(head);
 
-      // Hair / Tech Visor (gives clear visual facing orientation)
-      const hairMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.9 });
-      const hairGeo = new THREE.SphereGeometry(0.145, 16, 16, 0, Math.PI * 2, 0, Math.PI / 1.8);
-      const hair = new THREE.Mesh(hairGeo, hairMat);
-      hair.position.y = 0.03;
-      headGroup.add(hair);
+      // Nose bridge
+      const noseGeo = new THREE.BoxGeometry(0.035, 0.06, 0.04);
+      const nose = new THREE.Mesh(noseGeo, skinMat);
+      nose.position.set(0, 0.01, -0.17);
+      headGroup.add(nose);
 
-      // Face Visor / Eyewear (Tech Accent)
-      const visorGeo = new THREE.BoxGeometry(0.18, 0.05, 0.08);
-      const visorMat = new THREE.MeshStandardMaterial({
-        color: 0x020617,
-        emissive: data.color,
-        emissiveIntensity: 0.4,
-        metalness: 0.9,
+      // Sculpted Hair Style
+      const hairMat = new THREE.MeshStandardMaterial({
+        color: data.hairColor,
+        roughness: 0.85,
       });
-      const visor = new THREE.Mesh(visorGeo, visorMat);
-      visor.position.set(0, 0.02, -0.12); // Front of face is negative Z
-      headGroup.add(visor);
+
+      const hairTopGeo = new THREE.SphereGeometry(0.17, 18, 18, 0, Math.PI * 2, 0, Math.PI / 1.7);
+      const hairTop = new THREE.Mesh(hairTopGeo, hairMat);
+      hairTop.position.set(0, 0.04, 0);
+      headGroup.add(hairTop);
+
+      // Pro Over-Ear Headphones (Classic Programmer Aesthetic)
+      const headphoneMat = new THREE.MeshStandardMaterial({
+        color: 0x090d16,
+        metalness: 0.8,
+        roughness: 0.2,
+      });
+      const phoneBandGeo = new THREE.TorusGeometry(0.18, 0.02, 10, 24, Math.PI);
+      const phoneBand = new THREE.Mesh(phoneBandGeo, headphoneMat);
+      phoneBand.rotation.z = Math.PI;
+      phoneBand.position.y = 0.05;
+      headGroup.add(phoneBand);
+
+      // Ear Cups with LED Accent
+      [-0.17, 0.17].forEach((hx) => {
+        const earcupGeo = new THREE.CylinderGeometry(0.055, 0.055, 0.04, 16);
+        const earcup = new THREE.Mesh(earcupGeo, headphoneMat);
+        earcup.rotation.z = Math.PI / 2;
+        earcup.position.set(hx, 0.02, 0);
+        headGroup.add(earcup);
+
+        // LED Ring on Earcup
+        const ledGeo = new THREE.TorusGeometry(0.04, 0.008, 8, 16);
+        const ledMat = new THREE.MeshStandardMaterial({
+          color: data.color,
+          emissive: data.color,
+          emissiveIntensity: 0.8,
+        });
+        const led = new THREE.Mesh(ledGeo, ledMat);
+        led.rotation.y = Math.PI / 2;
+        led.position.set(hx > 0 ? hx + 0.02 : hx - 0.02, 0.02, 0);
+        headGroup.add(led);
+      });
 
       torsoPivot.add(headGroup);
 
-      // 3. Arms & Hands with Articulated Shoulders
+      // 3. Articulated Shoulders & Arms (Natural Typing & Resting)
       // Left Arm
       const leftShoulder = new THREE.Group();
-      leftShoulder.position.set(-0.23, 0.38, 0);
-      const leftArmGeo = new THREE.CylinderGeometry(0.05, 0.045, 0.32, 12);
-      const leftArm = new THREE.Mesh(leftArmGeo, shirtMat);
-      leftArm.position.y = -0.16;
-      leftArm.castShadow = true;
-      leftShoulder.add(leftArm);
+      leftShoulder.position.set(-0.26, 0.4, 0);
 
-      const leftHandGeo = new THREE.SphereGeometry(0.045, 12, 12);
-      const leftHand = new THREE.Mesh(leftHandGeo, skinMat);
-      leftHand.position.y = -0.33;
+      const upperArmGeo = new THREE.CylinderGeometry(0.06, 0.055, 0.26, 14);
+      const leftUpperArm = new THREE.Mesh(upperArmGeo, clothesMat);
+      leftUpperArm.position.y = -0.13;
+      leftUpperArm.castShadow = true;
+      leftShoulder.add(leftUpperArm);
+
+      const leftHand = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 12), skinMat);
+      leftHand.position.y = -0.32;
       leftShoulder.add(leftHand);
       torsoPivot.add(leftShoulder);
 
       // Right Arm
       const rightShoulder = new THREE.Group();
-      rightShoulder.position.set(0.23, 0.38, 0);
-      const rightArmGeo = new THREE.CylinderGeometry(0.05, 0.045, 0.32, 12);
-      const rightArm = new THREE.Mesh(rightArmGeo, shirtMat);
-      rightArm.position.y = -0.16;
-      rightArm.castShadow = true;
-      rightShoulder.add(rightArm);
+      rightShoulder.position.set(0.26, 0.4, 0);
 
-      const rightHandGeo = new THREE.SphereGeometry(0.045, 12, 12);
-      const rightHand = new THREE.Mesh(rightHandGeo, skinMat);
-      rightHand.position.y = -0.33;
+      const rightUpperArm = new THREE.Mesh(upperArmGeo, clothesMat);
+      rightUpperArm.position.y = -0.13;
+      rightUpperArm.castShadow = true;
+      rightShoulder.add(rightUpperArm);
+
+      const rightHand = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 12), skinMat);
+      rightHand.position.y = -0.32;
       rightShoulder.add(rightHand);
       torsoPivot.add(rightShoulder);
 
-      humanGroup.add(torsoPivot);
+      humanRoot.add(torsoPivot);
 
-      // Active Energy Floor Ring
-      const ringGeo = new THREE.RingGeometry(0.65, 0.75, 36);
+      // Active Floor Hologram Ring (Subtle PBR Glow)
+      const ringGeo = new THREE.RingGeometry(0.68, 0.78, 40);
       const ringMat = new THREE.MeshBasicMaterial({
         color: data.color,
         side: THREE.DoubleSide,
         transparent: true,
         opacity: 0,
       });
-      const energyRing = new THREE.Mesh(ringGeo, ringMat);
-      energyRing.rotation.x = -Math.PI / 2;
-      energyRing.position.y = 0.03;
-      humanGroup.add(energyRing);
+      const haloRing = new THREE.Mesh(ringGeo, ringMat);
+      haloRing.rotation.x = -Math.PI / 2;
+      haloRing.position.y = 0.03;
+      humanRoot.add(haloRing);
 
-      scene.add(humanGroup);
+      scene.add(humanRoot);
 
-      // Store in Ref with animation state
       agentMeshesRef.current[id] = {
-        humanGroup,
+        humanRoot,
         torsoPivot,
         headGroup,
         leftShoulder,
         rightShoulder,
-        energyRing,
+        haloRing,
         deskObjects,
-        // State flags
         isWorking: false,
-        // Target Rotations
-        // Idle: Facing outward / toward user (rotation.y = 0 or slightly angled)
-        // Working: Swiveled facing directly into the laptop (rotation.y = PI)
-        targetRotationY: 0,
-        currentRotationY: 0,
+        targetRotationY: Math.PI * 0.75,
+        currentRotationY: Math.PI * 0.75,
       };
     };
 
-    // Spawn 8 Wayangs in Studio
+    // Instantiate all 8 Wayangs in Studio
     Object.entries(AGENTS).forEach(([id, data]) => {
-      createWayangHuman(id, data);
+      createStylizedHuman(id, data);
     });
 
-    // Main 60FPS Three.js Animation Loop
+    // 60FPS RAF Render Loop (MengTo Optimization)
     let clock = new THREE.Clock();
     let animId;
 
@@ -406,75 +839,73 @@ export default function App() {
 
       Object.entries(agentMeshesRef.current).forEach(([id, agent]) => {
         const {
-          humanGroup,
+          humanRoot,
           torsoPivot,
           headGroup,
           leftShoulder,
           rightShoulder,
-          energyRing,
+          haloRing,
           deskObjects,
           isWorking,
         } = agent;
 
-        // Smooth Swivel Animation (Lerp rotation)
-        const targetRot = isWorking ? 0 : Math.PI * 0.75; 
-        // Note on coordinates: Desk is at (0, 0, 0) relative to chair which is at +0.72 Z.
-        // Facing desk is towards -Z (rotation.y = 0).
-        // Facing away/idle is turned towards the room/camera (rotation.y = ~135 deg).
+        // Smooth Swivel transition between Idle and Working
+        // Desk is located at Z=0 relative to chair at Z=+0.78. Facing desk is rotation.y = 0.
+        // Idle is relaxed, swiveled towards room/camera (~135 degrees).
         agent.targetRotationY = isWorking ? 0 : Math.PI * 0.75;
-        agent.currentRotationY = THREE.MathUtils.lerp(agent.currentRotationY, agent.targetRotationY, 0.06);
-        humanGroup.rotation.y = agent.currentRotationY;
+        agent.currentRotationY = THREE.MathUtils.lerp(agent.currentRotationY, agent.targetRotationY, 0.07);
+        humanRoot.rotation.y = agent.currentRotationY;
 
         if (isWorking) {
           // ==========================================
-          // 💻 WORKING MODE: Menghadap Laptop & Ngetik
+          // 💻 WORKING STATE: Menghadap Laptop & Ngetik
           // ==========================================
-          // 1. Torso leans forward toward the desk
-          torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, 0.16, 0.08);
+          // Torso leans forward focused into the desk
+          torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, 0.18, 0.08);
 
-          // 2. Head looks down at laptop display
-          headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.28, 0.08);
-          headGroup.rotation.y = Math.sin(elapsed * 2) * 0.04;
+          // Head looks directly down at the screen
+          headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.32, 0.08);
+          headGroup.rotation.y = Math.sin(elapsed * 1.8) * 0.03; // slight focus drift
 
-          // 3. Arms extended forward onto the keyboard typing
-          const leftTyping = Math.sin(elapsed * 22) * 0.12;
-          const rightTyping = Math.cos(elapsed * 22 + 1) * 0.12;
-          leftShoulder.rotation.x = -1.1 + leftTyping;
-          leftShoulder.rotation.z = -0.2;
-          rightShoulder.rotation.x = -1.1 + rightTyping;
-          rightShoulder.rotation.z = 0.2;
+          // Arms resting on desk typing furiously
+          const leftTyping = Math.sin(elapsed * 24) * 0.14;
+          const rightTyping = Math.cos(elapsed * 24 + 1.2) * 0.14;
+          leftShoulder.rotation.x = -1.15 + leftTyping;
+          leftShoulder.rotation.z = -0.22;
+          rightShoulder.rotation.x = -1.15 + rightTyping;
+          rightShoulder.rotation.z = 0.22;
 
-          // 4. Laptop screen lights up with vivid pulse
-          deskObjects.displayMat.emissiveIntensity = 0.85 + Math.sin(elapsed * 8) * 0.15;
-          deskObjects.screenLight.intensity = 0.9 + Math.sin(elapsed * 6) * 0.2;
+          // Laptop screen emits bright coding light with screen flicker
+          deskObjects.displayMat.emissiveIntensity = 0.95 + Math.sin(elapsed * 9) * 0.18;
+          deskObjects.lapLight.intensity = 1.1 + Math.sin(elapsed * 7) * 0.2;
 
-          // 5. Active Energy Ring glows and rotates on floor
-          energyRing.material.opacity = THREE.MathUtils.lerp(energyRing.material.opacity, 0.8, 0.05);
-          energyRing.rotation.z = elapsed * 1.5;
+          // Active floor halo rotates
+          haloRing.material.opacity = THREE.MathUtils.lerp(haloRing.material.opacity, 0.85, 0.06);
+          haloRing.rotation.z = elapsed * 1.2;
         } else {
           // ==========================================
-          // ☕ IDLE MODE: Santai & Menghadap ke Luar
+          // ☕ IDLE STATE: Santai Menghadap Ruangan
           // ==========================================
-          // 1. Torso leans back comfortably in the chair
-          torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, -0.05, 0.05);
-          torsoPivot.position.y = 0.52 + Math.sin(elapsed * 1.8 + id.charCodeAt(0)) * 0.01; // gentle breathing
+          // Torso leans back comfortably
+          torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, -0.06, 0.05);
+          torsoPivot.position.y = 0.52 + Math.sin(elapsed * 1.6 + id.charCodeAt(0)) * 0.012; // breathing
 
-          // 2. Head looks around casually
+          // Head looks around casually at the room
           headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0, 0.05);
-          headGroup.rotation.y = Math.sin(elapsed * 0.7 + id.charCodeAt(1)) * 0.35; // looks left & right
+          headGroup.rotation.y = Math.sin(elapsed * 0.6 + id.charCodeAt(1)) * 0.32;
 
-          // 3. Arms rest down naturally at sides
-          leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, 0.15, 0.08);
-          leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.15, 0.08);
-          rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, 0.15, 0.08);
-          rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.15, 0.08);
+          // Arms rest down naturally at sides
+          leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, 0.12, 0.08);
+          leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.16, 0.08);
+          rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, 0.12, 0.08);
+          rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.16, 0.08);
 
-          // 4. Laptop Screen is dim (Screen Saver / Sleep)
-          deskObjects.displayMat.emissiveIntensity = 0.1;
-          deskObjects.screenLight.intensity = 0.05;
+          // Screen in low-power idle
+          deskObjects.displayMat.emissiveIntensity = 0.12;
+          deskObjects.lapLight.intensity = 0.05;
 
-          // 5. Energy Ring fades out
-          energyRing.material.opacity = THREE.MathUtils.lerp(energyRing.material.opacity, 0, 0.08);
+          // Halo fades away
+          haloRing.material.opacity = THREE.MathUtils.lerp(haloRing.material.opacity, 0, 0.08);
         }
       });
 
@@ -502,7 +933,7 @@ export default function App() {
     };
   }, []);
 
-  // 2. Connect to Dalang-AI Live Backend WebSocket Event Stream
+  // 2. WebSocket Realtime Events Stream
   useEffect(() => {
     let ws;
     let reconnectTimer;
@@ -538,8 +969,6 @@ export default function App() {
               m.isWorking = false;
             });
           }
-
-          // Active count is derived from workingMap
         } catch (err) {
           console.error("WS Parse Error", err);
         }
@@ -558,28 +987,22 @@ export default function App() {
     };
   }, []);
 
-  // 3. Periodic Sync with Backend Agent Status API
+  // 3. Periodic Sync with Backend API
   const fetchStatus = async () => {
     try {
       const res = await fetch("http://localhost:8765/agents/status");
       if (!res.ok) return;
       const data = await res.json();
       const statusMap = {};
-      let workingNow = 0;
-
       data.forEach((a) => {
         statusMap[a.agent] = a;
         const mesh = agentMeshesRef.current[a.agent];
-        if (mesh) {
-          // If agent has active/in_progress tasks, set working = true
-          const isActive = a.in_progress > 0;
-          mesh.isWorking = isActive;
-          if (isActive) workingNow++;
+        if (mesh && a.in_progress > 0) {
+          mesh.isWorking = true;
+          setWorkingMap((prev) => ({ ...prev, [a.agent]: true }));
         }
       });
-
       setAgentStatus(statusMap);
-      // activeWayangCount is derived from workingMap
     } catch (e) {
       // Backend maybe offline
     }
@@ -591,7 +1014,7 @@ export default function App() {
     return () => clearInterval(iv);
   }, []);
 
-  // Demo Trigger: Click on an agent card to toggle them working/idle (for instant visual testing)
+  // Interactive Click Toggle (Allows user to click any Wayang card to test their real 3D movement)
   const toggleAgentWorkState = (agentId) => {
     const mesh = agentMeshesRef.current[agentId];
     setWorkingMap((prev) => {
@@ -607,13 +1030,13 @@ export default function App() {
         setActiveTask({
           agent: agentId,
           id: `LAKON-${Math.floor(Math.random() * 899 + 100)}`,
-          task: `Menghadap laptop: fokus pengerjaan tugas & kode...`,
+          task: AGENTS[agentId]?.action || "Menghadap laptop: fokus pengerjaan tugas...",
         });
         setEvents((evs) => [
           {
             agent: agentId,
             event_type: "task_dispatched",
-            message: `Menghadap laptop: mulai bekerja mandiri.`,
+            message: `Menghadap laptop: ${AGENTS[agentId]?.action}`,
             timestamp: new Date().toISOString(),
           },
           ...evs.slice(0, 49),
@@ -623,7 +1046,7 @@ export default function App() {
           {
             agent: agentId,
             event_type: "task_completed",
-            message: `Tugas selesai. Menghadap santai (idle).`,
+            message: `Tugas selesai. Menghadap santai menikmati kopi.`,
             timestamp: new Date().toISOString(),
           },
           ...evs.slice(0, 49),
@@ -635,50 +1058,44 @@ export default function App() {
   };
 
   return (
-    <div style={{ display: "flex", height: "100vh", backgroundColor: "#060913", color: "#f8fafc", fontFamily: "system-ui, -apple-system, sans-serif", overflow: "hidden" }}>
-      {/* LEFT: 3D Isometric Studio Viewport */}
+    <div style={{ display: "flex", height: "100vh", backgroundColor: "#0b0f19", color: "#f8fafc", fontFamily: "system-ui, -apple-system, sans-serif", overflow: "hidden" }}>
+      {/* LEFT: Cinematic 3D Studio Canvas */}
       <div style={{ flex: 1, position: "relative", display: "flex", flexDirection: "column" }}>
         
-        {/* Top Header Bar: Clean & Autonomous (Tanpa Tombol Start/Stop) */}
+        {/* Top Header: Clean, Architectural & Autonomous */}
         <div style={{
-          padding: "14px 24px",
+          padding: "14px 28px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           borderBottom: "1px solid rgba(255,255,255,0.08)",
-          backgroundColor: "rgba(10, 15, 29, 0.95)",
-          backdropFilter: "blur(12px)",
+          backgroundColor: "rgba(11, 15, 25, 0.92)",
+          backdropFilter: "blur(14px)",
           zIndex: 10
         }}>
-          {/* Logo & Autonomous Dalang Badge */}
+          {/* Logo & Studio Badge */}
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ fontSize: "1.3rem" }}>🎭</span>
-              <h1 style={{ margin: 0, fontSize: "1.15rem", fontWeight: "800", letterSpacing: "0.5px" }}>
-                DALANG<span style={{ color: "#38bdf8" }}>-AI</span>
-              </h1>
-              <span style={{
-                fontSize: "0.68rem",
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                backgroundColor: "#1e293b",
-                color: "#94a3b8",
-                padding: "2px 8px",
-                borderRadius: "4px",
-                border: "1px solid #334155"
-              }}>
-                Studio 3D Isometrik
-              </span>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <span style={{ fontSize: "1.4rem" }}>🎭</span>
+              <div>
+                <h1 style={{ margin: 0, fontSize: "1.18rem", fontWeight: "800", letterSpacing: "0.5px" }}>
+                  DALANG<span style={{ color: "#38bdf8" }}>-AI</span>
+                </h1>
+                <div style={{ fontSize: "0.68rem", color: "#94a3b8", display: "flex", alignItems: "center", gap: 4 }}>
+                  <Building2 size={12} style={{ color: "#38bdf8" }} />
+                  Studio Kantor Isometrik • Karya Bos Muda
+                </div>
+              </div>
             </div>
 
-            {/* Live Autopilot Status */}
+            {/* Autonomous Realtime Indicator */}
             <div style={{
               display: "flex",
               alignItems: "center",
               gap: "8px",
               padding: "4px 12px",
-              backgroundColor: "rgba(16, 185, 129, 0.1)",
-              border: "1px solid rgba(16, 185, 129, 0.3)",
+              backgroundColor: "rgba(16, 185, 129, 0.12)",
+              border: "1px solid rgba(16, 185, 129, 0.35)",
               borderRadius: "20px"
             }}>
               <div style={{
@@ -686,31 +1103,30 @@ export default function App() {
                 height: 8,
                 borderRadius: "50%",
                 backgroundColor: "#10b981",
-                boxShadow: "0 0 8px #10b981"
+                boxShadow: "0 0 10px #10b981"
               }} />
-              <span style={{ fontSize: "0.75rem", fontWeight: "600", color: "#34d399", letterSpacing: "0.5px" }}>
+              <span style={{ fontSize: "0.75rem", fontWeight: "700", color: "#34d399", letterSpacing: "0.5px" }}>
                 OTONOM REALTIME
               </span>
             </div>
           </div>
 
-          {/* Realtime Studio Summary (Active vs Idle) */}
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.8rem", color: "#cbd5e1" }}>
-              <UserCheck size={15} style={{ color: "#38bdf8" }} />
-              <span>Bekerja: <strong style={{ color: "#38bdf8" }}>{activeWayangCount}</strong></span>
+          {/* Realtime Metrics Summary */}
+          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.82rem", color: "#cbd5e1" }}>
+              <UserCheck size={16} style={{ color: "#38bdf8" }} />
+              <span>Bekerja: <strong style={{ color: "#38bdf8", fontSize: "0.95rem" }}>{activeWayangCount}</strong></span>
             </div>
 
-            <div style={{ width: 1, height: 16, backgroundColor: "#334155" }} />
+            <div style={{ width: 1, height: 18, backgroundColor: "rgba(255,255,255,0.12)" }} />
 
-            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.8rem", color: "#94a3b8" }}>
-              <Coffee size={15} style={{ color: "#64748b" }} />
-              <span>Istirahat (Idle): <strong style={{ color: "#cbd5e1" }}>{8 - activeWayangCount}</strong></span>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.82rem", color: "#94a3b8" }}>
+              <Coffee size={16} style={{ color: "#a16207" }} />
+              <span>Istirahat (Idle): <strong style={{ color: "#cbd5e1", fontSize: "0.95rem" }}>{8 - activeWayangCount}</strong></span>
             </div>
 
-            <div style={{ width: 1, height: 16, backgroundColor: "#334155" }} />
+            <div style={{ width: 1, height: 18, backgroundColor: "rgba(255,255,255,0.12)" }} />
 
-            {/* Connection Indicator */}
             <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.75rem", color: connected ? "#10b981" : "#ef4444" }}>
               <div style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: connected ? "#10b981" : "#ef4444" }} />
               <span>{connected ? "Server Terhubung" : "Menghubungkan..."}</span>
@@ -721,41 +1137,40 @@ export default function App() {
         {/* 3D Canvas Mounting Area */}
         <div ref={mountRef} style={{ flex: 1, width: "100%", height: "100%", cursor: "grab" }} />
 
-        {/* Floating Active Task Card (Pop-up saat ada wayang ngetik di laptop) */}
+        {/* Floating Active Task Card */}
         {activeTask && (
           <div style={{
             position: "absolute",
-            bottom: 24,
-            left: 24,
-            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            bottom: 26,
+            left: 26,
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
             border: `1px solid ${AGENTS[activeTask.agent]?.hex || "#38bdf8"}`,
-            padding: "14px 20px",
-            borderRadius: 10,
-            maxWidth: 480,
-            boxShadow: "0 20px 40px rgba(0,0,0,0.6)",
-            backdropFilter: "blur(16px)",
-            animation: "fadeIn 0.3s ease-out"
+            padding: "16px 22px",
+            borderRadius: 12,
+            maxWidth: 500,
+            boxShadow: "0 25px 50px -12px rgba(0,0,0,0.7)",
+            backdropFilter: "blur(18px)",
           }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <span style={{
-                  width: 8,
-                  height: 8,
+                  width: 10,
+                  height: 10,
                   borderRadius: "50%",
                   backgroundColor: AGENTS[activeTask.agent]?.hex || "#38bdf8",
-                  boxShadow: `0 0 10px ${AGENTS[activeTask.agent]?.hex || "#38bdf8"}`
+                  boxShadow: `0 0 12px ${AGENTS[activeTask.agent]?.hex || "#38bdf8"}`
                 }} />
-                <span style={{ fontSize: "0.75rem", fontWeight: "700", color: AGENTS[activeTask.agent]?.hex || "#38bdf8", textTransform: "uppercase", letterSpacing: "1px" }}>
+                <span style={{ fontSize: "0.8rem", fontWeight: "800", color: AGENTS[activeTask.agent]?.hex || "#38bdf8", textTransform: "uppercase", letterSpacing: "1px" }}>
                   {AGENTS[activeTask.agent]?.name} • {AGENTS[activeTask.agent]?.role}
                 </span>
               </div>
-              <span style={{ fontSize: "0.7rem", color: "#64748b", fontFamily: "monospace" }}>{activeTask.id}</span>
+              <span style={{ fontSize: "0.72rem", color: "#64748b", fontFamily: "monospace" }}>{activeTask.id}</span>
             </div>
-            <div style={{ fontSize: "0.92rem", fontWeight: "600", color: "#f8fafc", lineHeight: "1.4" }}>
+            <div style={{ fontSize: "0.95rem", fontWeight: "600", color: "#f8fafc", lineHeight: "1.4" }}>
               {activeTask.task}
             </div>
-            <div style={{ marginTop: 8, fontSize: "0.72rem", color: "#94a3b8", display: "flex", alignItems: "center", gap: 4 }}>
-              <Sparkles size={12} style={{ color: "#38bdf8" }} /> Menghadap laptop & menjalankan tugas secara otonom
+            <div style={{ marginTop: 10, fontSize: "0.74rem", color: "#94a3b8", display: "flex", alignItems: "center", gap: 6 }}>
+              <Sparkles size={13} style={{ color: "#38bdf8" }} /> Menghadap laptop & mengetik kode secara otonom
             </div>
           </div>
         )}
@@ -765,69 +1180,71 @@ export default function App() {
           position: "absolute",
           bottom: 24,
           right: 24,
-          backgroundColor: "rgba(10, 15, 29, 0.75)",
-          border: "1px solid rgba(255,255,255,0.06)",
-          padding: "6px 12px",
-          borderRadius: 6,
-          fontSize: "0.7rem",
-          color: "#64748b",
-          pointerEvents: "none"
+          backgroundColor: "rgba(11, 15, 25, 0.8)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          padding: "8px 14px",
+          borderRadius: 8,
+          fontSize: "0.72rem",
+          color: "#94a3b8",
+          pointerEvents: "none",
+          display: "flex",
+          alignItems: "center",
+          gap: 6
         }}>
-          💡 Klik & geser mouse untuk putar ruangan 3D • Scroll untuk zoom
+          <Compass size={14} style={{ color: "#38bdf8" }} /> Putar ruangan: Klik & geser mouse • Zoom: Scroll
         </div>
       </div>
 
-      {/* RIGHT SIDEBAR: Roster Para Wayang & Live Terminal Feed */}
+      {/* RIGHT SIDEBAR: Roster 8 Wayang & Activity Feed */}
       <div style={{
-        width: 450,
+        width: 460,
         borderLeft: "1px solid rgba(255,255,255,0.08)",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#0a0f1d"
+        backgroundColor: "#0d1322"
       }}>
-        {/* Roster Para Wayang */}
-        <div style={{ padding: "18px 20px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-          <div style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: "700", letterSpacing: "1px", textTransform: "uppercase", marginBottom: 14, display: "flex", alignItems: "center", gap: 8 }}>
-            <Cpu size={15} style={{ color: "#38bdf8" }} />
-            ROSTER 8 WAYANG (KLIK KARTU UNTUK TES GERAK)
+        {/* Roster 8 Wayang */}
+        <div style={{ padding: "20px 22px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+          <div style={{ fontSize: "0.8rem", color: "#94a3b8", fontWeight: "800", letterSpacing: "1px", textTransform: "uppercase", marginBottom: 14, display: "flex", alignItems: "center", gap: 8 }}>
+            <Cpu size={16} style={{ color: "#38bdf8" }} />
+            ROSTER 8 PARA WAYANG (KLIK UNTUK TES GERAK)
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 9 }}>
             {Object.entries(AGENTS).map(([id, info]) => {
               const isWorking = Boolean(workingMap[id]);
-              const st = agentStatus[id] || { completed: 0, total_tasks: 0 };
-
               return (
                 <div
                   key={id}
                   onClick={() => toggleAgentWorkState(id)}
                   style={{
-                    backgroundColor: isWorking ? "rgba(30, 41, 59, 0.9)" : "rgba(15, 23, 42, 0.6)",
-                    padding: "10px 12px",
+                    backgroundColor: isWorking ? "rgba(30, 41, 59, 0.95)" : "rgba(15, 23, 42, 0.6)",
+                    padding: "11px 13px",
                     borderRadius: 8,
                     borderLeft: `4px solid ${info.hex}`,
-                    border: isWorking ? `1px solid ${info.hex}` : "1px solid rgba(255,255,255,0.04)",
+                    border: isWorking ? `1px solid ${info.hex}` : "1px solid rgba(255,255,255,0.05)",
                     borderLeftWidth: "4px",
                     cursor: "pointer",
-                    transition: "all 0.2s ease",
+                    transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                    transform: isWorking ? "scale(1.02)" : "scale(1)",
                   }}
                   title="Klik untuk mensimulasikan tugas ke wayang ini"
                 >
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: "0.85rem", fontWeight: "700", color: "#f8fafc" }}>{info.name}</span>
+                    <span style={{ fontSize: "0.88rem", fontWeight: "700", color: "#f8fafc" }}>{info.name}</span>
                     <span style={{
                       fontSize: "0.65rem",
-                      fontWeight: "700",
-                      padding: "2px 6px",
+                      fontWeight: "800",
+                      padding: "2px 7px",
                       borderRadius: 4,
-                      backgroundColor: isWorking ? "rgba(56, 189, 248, 0.2)" : "rgba(100, 116, 139, 0.2)",
+                      backgroundColor: isWorking ? "rgba(56, 189, 248, 0.2)" : "rgba(100, 116, 139, 0.18)",
                       color: isWorking ? "#38bdf8" : "#94a3b8"
                     }}>
                       {isWorking ? "💻 NGETIK" : "☕ IDLE"}
                     </span>
                   </div>
-                  <div style={{ fontSize: "0.72rem", color: "#94a3b8", marginTop: 2 }}>{info.role}</div>
-                  <div style={{ fontSize: "0.68rem", color: "#64748b", marginTop: 4 }}>
+                  <div style={{ fontSize: "0.73rem", color: "#94a3b8", marginTop: 2 }}>{info.role}</div>
+                  <div style={{ fontSize: "0.68rem", color: isWorking ? "#38bdf8" : "#64748b", marginTop: 5, fontWeight: "500" }}>
                     {isWorking ? "Menghadap Laptop" : "Menghadap Santai"}
                   </div>
                 </div>
@@ -839,51 +1256,51 @@ export default function App() {
         {/* Live Activity Feed */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
           <div style={{
-            padding: "12px 20px",
+            padding: "14px 22px",
             borderBottom: "1px solid rgba(255,255,255,0.08)",
-            fontSize: "0.78rem",
+            fontSize: "0.8rem",
             color: "#94a3b8",
-            fontWeight: "700",
+            fontWeight: "800",
             letterSpacing: "1px",
             textTransform: "uppercase",
             display: "flex",
             alignItems: "center",
             gap: 8
           }}>
-            <Terminal size={15} style={{ color: "#38bdf8" }} />
-            LOG AKTIVITAS STUDIO ({events.length})
+            <Terminal size={16} style={{ color: "#38bdf8" }} />
+            LOG AKTIVITAS LAKON ({events.length})
           </div>
 
-          <div style={{ flex: 1, overflowY: "auto", padding: 14, display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={{ flex: 1, overflowY: "auto", padding: 16, display: "flex", flexDirection: "column", gap: 10 }}>
             {events.length === 0 ? (
-              <div style={{ textAlign: "center", color: "#64748b", marginTop: 60, fontSize: "0.85rem" }}>
-                <Coffee size={28} style={{ margin: "0 auto 10px", opacity: 0.5 }} />
-                Semua Wayang saat ini sedang santai (Idle).<br />
-                Karakter akan otomatis berputar menghadap laptop saat ada lakon tugas baru!
+              <div style={{ textAlign: "center", color: "#64748b", marginTop: 70, fontSize: "0.85rem", padding: "0 20px" }}>
+                <Coffee size={32} style={{ margin: "0 auto 12px", opacity: 0.4 }} />
+                Semua Wayang saat ini sedang santai di kantor isometrik.<br />
+                Karakter otomatis memutar kursi dan mengetik di laptop saat ada tugas masuk!
               </div>
             ) : (
               events.map((ev, idx) => (
                 <div
                   key={idx}
                   style={{
-                    backgroundColor: "rgba(15, 23, 42, 0.7)",
-                    padding: "10px 12px",
-                    borderRadius: 6,
-                    fontSize: "0.78rem",
+                    backgroundColor: "rgba(15, 23, 42, 0.75)",
+                    padding: "11px 14px",
+                    borderRadius: 8,
+                    fontSize: "0.8rem",
                     borderLeft: `3px solid ${AGENTS[ev.agent]?.hex || "#64748b"}`,
                     border: "1px solid rgba(255,255,255,0.04)",
                     borderLeftWidth: "3px"
                   }}
                 >
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
                     <span style={{ fontWeight: "700", color: AGENTS[ev.agent]?.hex || "#f8fafc" }}>
                       {AGENTS[ev.agent]?.name || ev.agent?.toUpperCase()}
                     </span>
-                    <span style={{ color: "#64748b", fontSize: "0.68rem" }}>
+                    <span style={{ color: "#64748b", fontSize: "0.7rem" }}>
                       {ev.timestamp ? new Date(ev.timestamp).toLocaleTimeString() : ""}
                     </span>
                   </div>
-                  <div style={{ color: "#cbd5e1", lineHeight: "1.35" }}>{ev.message}</div>
+                  <div style={{ color: "#cbd5e1", lineHeight: "1.4" }}>{ev.message}</div>
                 </div>
               ))
             )}
