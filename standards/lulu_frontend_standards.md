@@ -47,3 +47,9 @@
 - **No Secrets in Client**: Jangan pernah embed JWT secret atau API keys di frontend bundle.
 - **Token Storage**: Gunakan `httpOnly` cookie untuk refresh token bila memungkinkan; jika di memory, simpan di closures/state, bukan `localStorage` tanpa enkripsi.
 - **Input Sanitization**: Escape semua user-generated content sebelum di-render ke DOM (cegah XSS).
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-09-25 10:01 UTC)
+Gunakan Tailwind CSS v3 sebagai framework styling utama. Hindari inline CSS dan vanilla CSS berlebihan. Pakai lucide-icons untuk ikonografi. Setiap komponen wajib dark-mode compatible.
