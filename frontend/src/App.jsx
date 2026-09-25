@@ -909,10 +909,12 @@ export default function App() {
       torsoPivot.add(rightShoulder);
       humanRoot.add(torsoPivot);
 
-      // ---- FLOATING NAME LABEL SPRITE (above head) ----
+      // ---- FLOATING NAME LABEL SPRITE (langsung ke scene, BUKAN child humanRoot) ----
+      // Agar label tidak ikut berputar saat badan dirotasi, sprite dimasukkan ke scene
+      // langsung dan posisinya diupdate setiap frame berdasarkan posisi humanRoot.
       const nameSprite = createNameLabel(data.name, data.role, data.color & 0xffffff);
-      nameSprite.position.set(0, 2.55, 0);
-      humanRoot.add(nameSprite);
+      nameSprite.position.set(humanRoot.position.x, 2.05, humanRoot.position.z);
+      scene.add(nameSprite);
 
       // ---- ACTIVE FLOOR HALO RING ----
       const ringGeo = new THREE.RingGeometry(0.68, 0.78, 44);
@@ -941,8 +943,8 @@ export default function App() {
         nameSprite,
         deskObjects,
         isWorking: false,
-        targetRotationY: Math.PI, // idle = badan menghadap kamera
-        currentRotationY: Math.PI,
+        targetRotationY: 0, // SELALU MENGHADAP LAPTOP
+        currentRotationY: 0,
       };
     };
 
@@ -974,12 +976,17 @@ export default function App() {
           isWorking,
         } = agent;
 
-        // Smooth Swivel transition between Idle and Working
-        // rotation.y = 0   saat WORKING → wajah (-Z) langsung menghadap meja/laptop
-        // rotation.y = PI  saat IDLE    → badan berbalik menghadap kamera/ruangan
-        agent.targetRotationY = isWorking ? 0 : Math.PI;
-        agent.currentRotationY = THREE.MathUtils.lerp(agent.currentRotationY, agent.targetRotationY, 0.07);
+        // Karakter SELALU menghadap laptop (meja di -Z, karakter spawn di z+0.58)
+        // WORKING: tepat lurus ke meja (rotation.y = 0)
+        // IDLE: sedikit goyang santai di kursi (±8 derajat) — TETAP MENGHADAP MEJA
+        agent.targetRotationY = isWorking
+          ? 0
+          : Math.sin(elapsed * 0.3 + (id.charCodeAt(0) * 1.3)) * 0.08;
+        agent.currentRotationY = THREE.MathUtils.lerp(agent.currentRotationY, agent.targetRotationY, 0.06);
         humanRoot.rotation.y = agent.currentRotationY;
+
+        // Update nama sprite label agar selalu tepat di atas kepala (scene-level, tidak ikut rotasi)
+        nameSprite.position.set(humanRoot.position.x, 2.08, humanRoot.position.z);
 
         if (isWorking) {
           // ==========================================
