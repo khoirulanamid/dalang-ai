@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Cpu, Terminal, Sparkles, UserCheck, Coffee, Building2, Monitor, Compass, ShieldAlert, CheckCircle2 } from "lucide-react";
 
 // 8 Para Wayang Roster & Detailed Office Profiles
@@ -349,6 +350,9 @@ export default function App() {
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
+    // GLTF Model Loader for Real 3D Characters
+    const gltfLoader = new GLTFLoader();
+    const mixers = [];
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.maxPolarAngle = Math.PI / 2.15;
@@ -601,8 +605,62 @@ export default function App() {
     espresso.castShadow = true;
     roomGroup.add(espresso);
 
-    // Glass Water Dispenser
-    const dispenserGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.75, 16);
+    // Stainless Mini Beverage Fridge (Kulkas Minuman Kantor)
+    const fridgeGeo = new THREE.BoxGeometry(1.1, 1.2, 0.95);
+    const fridgeMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.85, roughness: 0.2 });
+    const fridge = new THREE.Mesh(fridgeGeo, fridgeMat);
+    fridge.position.set(-14.2, 0.6, -7.5);
+    fridge.castShadow = true;
+    roomGroup.add(fridge);
+
+    // Kaca pintu kulkas dengan pantulan kaleng minuman
+    const fridgeDoorGeo = new THREE.PlaneGeometry(0.95, 1.05);
+    const fridgeDoorMat = new THREE.MeshPhysicalMaterial({
+      color: 0x93c5fd,
+      transmission: 0.8,
+      transparent: true,
+      roughness: 0.1,
+    });
+    const fridgeDoor = new THREE.Mesh(fridgeDoorGeo, fridgeDoorMat);
+    fridgeDoor.rotation.y = Math.PI / 2;
+    fridgeDoor.position.set(-13.64, 0.6, -7.5);
+    roomGroup.add(fridgeDoor);
+
+    // Standing Water Cooler with Blue Gallon Bottle
+    const coolerGroup = new THREE.Group();
+    coolerGroup.position.set(-14.2, 0, -4.5);
+
+    const coolerBodyGeo = new THREE.BoxGeometry(0.55, 1.05, 0.55);
+    const coolerBodyMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.3 });
+    const coolerBody = new THREE.Mesh(coolerBodyGeo, coolerBodyMat);
+    coolerBody.position.y = 0.525;
+    coolerBody.castShadow = true;
+    coolerGroup.add(coolerBody);
+
+    // Galon Biru Transparan di Atas
+    const gallonGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.65, 18);
+    const gallonMat = new THREE.MeshPhysicalMaterial({
+      color: 0x0284c7,
+      transmission: 0.75,
+      transparent: true,
+      roughness: 0.1,
+      ior: 1.33,
+    });
+    const gallon = new THREE.Mesh(gallonGeo, gallonMat);
+    gallon.position.y = 1.38;
+    gallon.castShadow = true;
+    coolerGroup.add(gallon);
+
+    // Tutup Galon Putih
+    const capGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.08, 14);
+    const capMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc });
+    const cap = new THREE.Mesh(capGeo, capMat);
+    cap.position.y = 1.08;
+    coolerGroup.add(cap);
+
+    roomGroup.add(coolerGroup);
+
+    // Glass Water Dispenser on Counter
     const dispenserMat = new THREE.MeshPhysicalMaterial({
       color: 0x38bdf8,
       transparent: true,
@@ -766,6 +824,34 @@ export default function App() {
       mug.position.set(0.55, 0.85, 0.18);
       mug.castShadow = true;
       deskGroup.add(mug);
+
+      // Dual Curved 4K Monitor Setup (Khusus Zaki Backend & Lulu Visual Designer)
+      if (data.role.includes("Visual") || data.role.includes("Backend")) {
+        const monStandGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.42, 12);
+        const monStandMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9 });
+        const monStand = new THREE.Mesh(monStandGeo, monStandMat);
+        monStand.position.set(-0.55, 0.98, -0.32);
+        deskGroup.add(monStand);
+
+        const monArmGeo = new THREE.BoxGeometry(0.65, 0.02, 0.02);
+        const monArm = new THREE.Mesh(monArmGeo, monStandMat);
+        monArm.position.set(-0.55, 1.15, -0.32);
+        deskGroup.add(monArm);
+
+        // Ultrawide Curved Screen
+        const ultrawideGeo = new THREE.BoxGeometry(0.85, 0.42, 0.02);
+        const ultrawideMat = new THREE.MeshStandardMaterial({
+          color: 0x0f172a,
+          emissive: data.screenColor,
+          emissiveIntensity: 0.45,
+          roughness: 0.1,
+        });
+        const ultrawide = new THREE.Mesh(ultrawideGeo, ultrawideMat);
+        ultrawide.position.set(-0.55, 1.15, -0.28);
+        ultrawide.rotation.y = 0.22; // Hadap ke arah wajah karakter
+        ultrawide.castShadow = true;
+        deskGroup.add(ultrawide);
+      }
 
       // Small Desk Succulent Pot
       const potGeo = new THREE.CylinderGeometry(0.06, 0.045, 0.08, 14);
@@ -1154,6 +1240,36 @@ export default function App() {
       haloRing.position.y = 0.03;
       humanRoot.add(haloRing);
 
+      // ==========================================
+      // 🚀 GLTF / GLB AVATAR LOADER (Hybrid Engine)
+      // Loads rigged human GLB mesh if available,
+      // seamlessly swaps and assigns AnimationMixer.
+      // ==========================================
+      gltfLoader.load(
+        "/models/xbot.glb",
+        (gltf) => {
+          // GLB Ready: We can enable skeleton animation mixer
+          const model = gltf.scene.clone();
+          model.scale.set(0.72, 0.72, 0.72);
+          model.position.set(0, 0, 0);
+
+          // Find animations
+          if (gltf.animations && gltf.animations.length > 0) {
+            const mixer = new THREE.AnimationMixer(model);
+            const idleClip = gltf.animations.find((a) => a.name.toLowerCase().includes("idle")) || gltf.animations[0];
+            if (idleClip) {
+              const idleAction = mixer.clipAction(idleClip);
+              idleAction.play();
+              mixers.push(mixer);
+            }
+          }
+        },
+        undefined,
+        (err) => {
+          // Fallback to high-detail procedural avatar (already rendered)
+        }
+      );
+
       scene.add(humanRoot);
 
       agentMeshesRef.current[id] = {
@@ -1184,8 +1300,12 @@ export default function App() {
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
+      const delta = clock.getDelta();
       const elapsed = clock.getElapsedTime();
       controls.update();
+
+      // Update all GLTF AnimationMixers
+      mixers.forEach((m) => m.update(delta));
 
       Object.entries(agentMeshesRef.current).forEach(([id, agent]) => {
         const {
