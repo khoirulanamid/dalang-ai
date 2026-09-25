@@ -693,32 +693,33 @@ export default function App() {
       });
 
       // ---- LOWER BODY (Seated — Organic Capsule Legs) ----
-      // Thighs: horizontal capsule rotated forward
-      const thighGeo = new THREE.CapsuleGeometry(0.065, 0.26, 8, 14);
+      // DEPAN = -Z (menuju laptop/meja), BELAKANG = +Z (menuju sandaran kursi)
+      // Thighs: horizontal capsule menjulur ke depan (-Z) dari panggul ke lutut
+      const thighGeo = new THREE.CapsuleGeometry(0.065, 0.28, 8, 14);
       [-0.13, 0.13].forEach((sx) => {
         const thigh = new THREE.Mesh(thighGeo, pantsMat);
         thigh.rotation.x = Math.PI / 2;
-        thigh.position.set(sx, 0.455, -0.12);
+        thigh.position.set(sx, 0.455, -0.16); // -Z = menjulur ke depan arah meja
         thigh.castShadow = true;
         humanRoot.add(thigh);
       });
 
-      // Calves: vertical capsule angled down from knee
-      const calfGeo = new THREE.CapsuleGeometry(0.055, 0.28, 8, 14);
+      // Calves: dari lutut (-0.30) turun ke lantai agak miring ke depan (-0.38)
+      const calfGeo = new THREE.CapsuleGeometry(0.055, 0.3, 8, 14);
       [-0.13, 0.13].forEach((sx) => {
         const calf = new THREE.Mesh(calfGeo, pantsMat);
-        calf.rotation.x = -0.25;
-        calf.position.set(sx, 0.22, -0.33);
+        calf.rotation.x = -0.22; // miring sedikit ke depan
+        calf.position.set(sx, 0.2, -0.36);
         calf.castShadow = true;
         humanRoot.add(calf);
       });
 
-      // Sneakers — small egg shape (not box)
+      // Sneakers — di ujung kaki, di bawah kolong meja (-Z)
       [-0.13, 0.13].forEach((sx) => {
         const shoeGeo = new THREE.SphereGeometry(0.075, 14, 10);
         shoeGeo.scale(1.0, 0.55, 1.6);
         const shoe = new THREE.Mesh(shoeGeo, new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.65 }));
-        shoe.position.set(sx, 0.055, -0.43);
+        shoe.position.set(sx, 0.055, -0.48); // di bawah meja
         shoe.castShadow = true;
         humanRoot.add(shoe);
       });
@@ -854,6 +855,8 @@ export default function App() {
       torsoPivot.add(headGroup);
 
       // ---- ARMS (CapsuleGeometry — fully rounded, zero boxes) ----
+      // Pivot di bahu kiri/kanan torso, lengan menjulur ke bawah (-Y default).
+      // rotation.x = -1.1 memutar lengan ke depan (-Z) = mengetik di meja.
       const makeArm = (side) => {
         const armGroup = new THREE.Group();
         armGroup.position.set(side * 0.255, 0.38, 0);
@@ -870,17 +873,17 @@ export default function App() {
         elbow.position.y = -0.24;
         armGroup.add(elbow);
 
-        // Forearm
-        const forearmGeo = new THREE.CapsuleGeometry(0.045, 0.16, 8, 14);
+        // Forearm — lebih panjang ke arah keyboard
+        const forearmGeo = new THREE.CapsuleGeometry(0.042, 0.18, 8, 14);
         const forearm = new THREE.Mesh(forearmGeo, skinMat);
-        forearm.position.y = -0.36;
+        forearm.position.y = -0.38;
         armGroup.add(forearm);
 
         // Hand — rounded fist sphere
-        const handGeo = new THREE.SphereGeometry(0.048, 14, 12);
-        handGeo.scale(1.1, 0.85, 0.85);
+        const handGeo = new THREE.SphereGeometry(0.045, 14, 12);
+        handGeo.scale(1.2, 0.75, 1.0);
         const hand = new THREE.Mesh(handGeo, skinMat);
-        hand.position.y = -0.48;
+        hand.position.y = -0.51;
         armGroup.add(hand);
 
         return armGroup;
@@ -922,8 +925,8 @@ export default function App() {
         nameSprite,
         deskObjects,
         isWorking: false,
-        targetRotationY: Math.PI * 0.75,
-        currentRotationY: Math.PI * 0.75,
+        targetRotationY: Math.PI, // idle = badan menghadap kamera
+        currentRotationY: Math.PI,
       };
     };
 
@@ -954,9 +957,9 @@ export default function App() {
         } = agent;
 
         // Smooth Swivel transition between Idle and Working
-        // Desk is located at Z=0 relative to chair at Z=+0.78. Facing desk is rotation.y = 0.
-        // Idle is relaxed, swiveled towards room/camera (~135 degrees).
-        agent.targetRotationY = isWorking ? 0 : Math.PI * 0.75;
+        // rotation.y = 0   saat WORKING → wajah (-Z) langsung menghadap meja/laptop
+        // rotation.y = PI  saat IDLE    → badan berbalik menghadap kamera/ruangan
+        agent.targetRotationY = isWorking ? 0 : Math.PI;
         agent.currentRotationY = THREE.MathUtils.lerp(agent.currentRotationY, agent.targetRotationY, 0.07);
         humanRoot.rotation.y = agent.currentRotationY;
 
