@@ -9,6 +9,7 @@ from typing import Callable, Coroutine, Dict, List, Optional
 import yaml
 from roadmap_parser import get_next_tasks, parse_roadmap
 from real_subagent_runner import RealSubAgentRunner
+from wayang_router import auto_route_task, partition_active_and_idle_wayang, WAYANG_ROSTER
 
 # Setup logging
 logging.basicConfig(
@@ -222,13 +223,33 @@ class RiskoOrchestrator:
                 message=f"Cycle {cycle}: Found {len(next_tasks)} runnable tasks: {[t['id'] for t in next_tasks]}",
             )
 
-            # Parallel dispatch to designated sub-agents
+            # Auto-route & dispatch to designated sub-agents
             agent_coroutines = []
+            assigned_this_cycle = set()
             for task in next_tasks:
-                assigned_agent = task.get("assigned") or "unassigned"
+                explicit = task.get("assigned") or task.get("agent")
+                if not explicit or explicit == "unassigned":
+                    assigned_agent, score = auto_route_task(task["title"], explicit_agent=None)
+                    logger.info(f"[Risko Routing] Task {task['id']} '{task['title']}' auto-assigned to [{assigned_agent}] (score={score:.1f})")
+                else:
+                    assigned_agent = explicit.lower()
+
+                assigned_this_cycle.add(assigned_agent)
                 # Update status to running
                 self.update_task_status(task["id"], new_status="in_progress", done=False)
                 agent_coroutines.append(self.real_subagent_worker(assigned_agent, task))
+
+            # Report idle wayang (tidak dapat tugas di siklus ini)
+            all_known = set(WAYANG_ROSTER.keys())
+            idle_now = all_known - assigned_this_cycle
+            if idle_now:
+                idle_names = [WAYANG_ROSTER[a]["title"] for a in idle_now if a in WAYANG_ROSTER]
+                self.emit_event(
+                    event_type="wayang_idle",
+                    agent="risko",
+                    message=f"Wayang standby/diam: {', '.join(idle_names)}",
+                    metadata={"idle_agents": list(idle_now)},
+                )
 
             # Wait for all parallel tasks in this batch to finish
             await asyncio.gather(*agent_coroutines)
