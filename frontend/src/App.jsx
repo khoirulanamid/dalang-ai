@@ -614,6 +614,57 @@ export default function App() {
     // ==========================================
     // 👤 STYLIZED HUMAN CHARACTER RIGGING (MengTo)
     // ==========================================
+    // ==========================================
+    // 🏷️ FLOATING NAME LABEL (Canvas Sprite)
+    // ==========================================
+    const createNameLabel = (name, role, color) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 512;
+      canvas.height = 112;
+      const ctx = canvas.getContext("2d");
+
+      // Background pill
+      ctx.clearRect(0, 0, 512, 112);
+      const colorHex = "#" + color.toString(16).padStart(6, "0");
+      ctx.fillStyle = "rgba(10, 15, 29, 0.82)";
+      ctx.beginPath();
+      ctx.roundRect(8, 8, 496, 96, 20);
+      ctx.fill();
+
+      // Accent left bar
+      ctx.fillStyle = colorHex;
+      ctx.beginPath();
+      ctx.roundRect(8, 8, 8, 96, [20, 0, 0, 20]);
+      ctx.fill();
+
+      // Name text
+      ctx.fillStyle = "#f8fafc";
+      ctx.font = "bold 44px system-ui, -apple-system, sans-serif";
+      ctx.textBaseline = "middle";
+      ctx.fillText(name, 36, 42);
+
+      // Role text
+      ctx.fillStyle = colorHex;
+      ctx.font = "500 30px system-ui, -apple-system, sans-serif";
+      ctx.fillText(role, 36, 80);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      const spriteMat = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        depthWrite: false,
+      });
+      const sprite = new THREE.Sprite(spriteMat);
+      // Scale: width = 2.4 world units, height proportional
+      sprite.scale.set(2.4, 0.52, 1);
+      return sprite;
+    };
+
+    // ==========================================
+    // 👤 ORGANIC STYLIZED HUMAN (No Roblox Boxes)
+    // CapsuleGeometry for limbs, ellipsoid head,
+    // rounded torso — zero BoxGeometry on body.
+    // ==========================================
     const createStylizedHuman = (id, data) => {
       const [x, y, z] = data.pos;
       const deskObjects = createWorkstation(x, z, data);
@@ -621,181 +672,233 @@ export default function App() {
       const humanRoot = new THREE.Group();
       humanRoot.position.set(x, 0, z + 0.78);
 
-      // PBR Skin Material
+      // PBR Materials
       const skinMat = new THREE.MeshStandardMaterial({
-        color: 0xf5cbb7,
-        roughness: 0.65,
-        metalness: 0.05,
+        color: 0xf0c4a0, // warm peach skin
+        roughness: 0.62,
+        metalness: 0.0,
       });
-
-      // Modern Casual Clothing (Hoodie / Jacket with PBR Cloth roughness)
       const clothesMat = new THREE.MeshStandardMaterial({
         color: data.color,
-        roughness: 0.85,
-        metalness: 0.05,
+        roughness: 0.88,
+        metalness: 0.04,
       });
-
-      // Trousers
       const pantsMat = new THREE.MeshStandardMaterial({
-        color: 0x1e293b, // Dark denim / charcoal
-        roughness: 0.9,
+        color: 0x1e293b,
+        roughness: 0.92,
+      });
+      const hairMat = new THREE.MeshStandardMaterial({
+        color: data.hairColor,
+        roughness: 0.82,
       });
 
-      // 1. Lower Body (Legs seated naturally)
-      // Thighs
-      const thighGeo = new THREE.BoxGeometry(0.14, 0.13, 0.36);
-      const leftThigh = new THREE.Mesh(thighGeo, pantsMat);
-      leftThigh.position.set(-0.13, 0.46, -0.16);
-      humanRoot.add(leftThigh);
-
-      const rightThigh = new THREE.Mesh(thighGeo, pantsMat);
-      rightThigh.position.set(0.13, 0.46, -0.16);
-      humanRoot.add(rightThigh);
-
-      // Calves
-      const calfGeo = new THREE.BoxGeometry(0.12, 0.4, 0.12);
-      const leftCalf = new THREE.Mesh(calfGeo, pantsMat);
-      leftCalf.position.set(-0.13, 0.22, -0.32);
-      humanRoot.add(leftCalf);
-
-      const rightCalf = new THREE.Mesh(calfGeo, pantsMat);
-      rightCalf.position.set(0.13, 0.22, -0.32);
-      humanRoot.add(rightCalf);
-
-      // Modern White-soled Sneakers
-      const sneakerMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.7 });
-      const soleMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.4 });
-
+      // ---- LOWER BODY (Seated — Organic Capsule Legs) ----
+      // Thighs: horizontal capsule rotated forward
+      const thighGeo = new THREE.CapsuleGeometry(0.065, 0.26, 8, 14);
       [-0.13, 0.13].forEach((sx) => {
-        const shoe = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.08, 0.24), sneakerMat);
-        shoe.position.set(sx, 0.05, -0.34);
-        humanRoot.add(shoe);
-
-        const sole = new THREE.Mesh(new THREE.BoxGeometry(0.135, 0.025, 0.245), soleMat);
-        sole.position.set(sx, 0.015, -0.34);
-        humanRoot.add(sole);
+        const thigh = new THREE.Mesh(thighGeo, pantsMat);
+        thigh.rotation.x = Math.PI / 2;
+        thigh.position.set(sx, 0.455, -0.12);
+        thigh.castShadow = true;
+        humanRoot.add(thigh);
       });
 
-      // 2. Articulated Upper Body Pivot (For smooth lean & swivel)
+      // Calves: vertical capsule angled down from knee
+      const calfGeo = new THREE.CapsuleGeometry(0.055, 0.28, 8, 14);
+      [-0.13, 0.13].forEach((sx) => {
+        const calf = new THREE.Mesh(calfGeo, pantsMat);
+        calf.rotation.x = -0.25;
+        calf.position.set(sx, 0.22, -0.33);
+        calf.castShadow = true;
+        humanRoot.add(calf);
+      });
+
+      // Sneakers — small egg shape (not box)
+      [-0.13, 0.13].forEach((sx) => {
+        const shoeGeo = new THREE.SphereGeometry(0.075, 14, 10);
+        shoeGeo.scale(1.0, 0.55, 1.6);
+        const shoe = new THREE.Mesh(shoeGeo, new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.65 }));
+        shoe.position.set(sx, 0.055, -0.43);
+        shoe.castShadow = true;
+        humanRoot.add(shoe);
+      });
+
+      // ---- UPPER BODY PIVOT ----
       const torsoPivot = new THREE.Group();
       torsoPivot.position.set(0, 0.52, 0);
 
-      // Torso / Hoodie (Rounded human shape)
-      const torsoGeo = new THREE.BoxGeometry(0.42, 0.46, 0.26);
+      // Torso: Capsule scaled to oval shoulder shape (not box!)
+      const torsoGeo = new THREE.CapsuleGeometry(0.19, 0.28, 10, 20);
+      torsoGeo.scale(1.15, 1.0, 0.72);
       const torso = new THREE.Mesh(torsoGeo, clothesMat);
-      torso.position.y = 0.23;
+      torso.position.y = 0.22;
       torso.castShadow = true;
       torsoPivot.add(torso);
 
-      // Hoodie Pocket / Detail
-      const pocketGeo = new THREE.BoxGeometry(0.32, 0.16, 0.04);
-      const pocket = new THREE.Mesh(pocketGeo, clothesMat);
-      pocket.position.set(0, 0.14, -0.14);
-      torsoPivot.add(pocket);
+      // Shoulder width pads (natural shoulder slope)
+      [-0.22, 0.22].forEach((sx) => {
+        const shoulderPadGeo = new THREE.SphereGeometry(0.1, 12, 10);
+        shoulderPadGeo.scale(1.0, 0.7, 0.8);
+        const pad = new THREE.Mesh(shoulderPadGeo, clothesMat);
+        pad.position.set(sx, 0.4, 0);
+        pad.castShadow = true;
+        torsoPivot.add(pad);
+      });
 
-      // Neck
-      const neckGeo = new THREE.CylinderGeometry(0.07, 0.08, 0.12, 14);
+      // Neck: slim capsule
+      const neckGeo = new THREE.CapsuleGeometry(0.058, 0.06, 8, 12);
       const neck = new THREE.Mesh(neckGeo, skinMat);
-      neck.position.y = 0.49;
+      neck.position.y = 0.52;
       torsoPivot.add(neck);
 
-      // Head Group (for nodding & looking)
+      // ---- HEAD GROUP ----
       const headGroup = new THREE.Group();
-      headGroup.position.set(0, 0.62, 0);
+      headGroup.position.set(0, 0.63, 0);
 
-      // Human Head
-      const headGeo = new THREE.SphereGeometry(0.16, 22, 22);
-      headGeo.scale(1.0, 1.15, 1.05);
+      // Head: non-uniform sphere (taller, slightly wider jaw)
+      const headGeo = new THREE.SphereGeometry(0.155, 28, 22);
+      headGeo.scale(1.0, 1.18, 0.97);
       const head = new THREE.Mesh(headGeo, skinMat);
       head.castShadow = true;
       headGroup.add(head);
 
-      // Nose bridge
-      const noseGeo = new THREE.BoxGeometry(0.035, 0.06, 0.04);
+      // Jaw / Chin rounding
+      const chinGeo = new THREE.SphereGeometry(0.09, 14, 10);
+      chinGeo.scale(0.85, 0.55, 0.75);
+      const chin = new THREE.Mesh(chinGeo, skinMat);
+      chin.position.set(0, -0.12, -0.04);
+      headGroup.add(chin);
+
+      // Cheeks (subtle volume)
+      [-0.1, 0.1].forEach((cx) => {
+        const cheekGeo = new THREE.SphereGeometry(0.065, 10, 10);
+        cheekGeo.scale(1.0, 0.72, 0.7);
+        const cheek = new THREE.Mesh(cheekGeo, skinMat);
+        cheek.position.set(cx, -0.02, -0.12);
+        headGroup.add(cheek);
+      });
+
+      // Nose (small sphere bump, not box)
+      const noseGeo = new THREE.SphereGeometry(0.028, 10, 8);
+      noseGeo.scale(1.0, 0.85, 1.2);
       const nose = new THREE.Mesh(noseGeo, skinMat);
-      nose.position.set(0, 0.01, -0.17);
+      nose.position.set(0, 0.01, -0.175);
       headGroup.add(nose);
 
-      // Sculpted Hair Style
-      const hairMat = new THREE.MeshStandardMaterial({
-        color: data.hairColor,
-        roughness: 0.85,
+      // Eyes (dark sphere inset)
+      [-0.065, 0.065].forEach((ex) => {
+        const eyeGeo = new THREE.SphereGeometry(0.022, 10, 8);
+        const eyeMat = new THREE.MeshStandardMaterial({ color: 0x1a1a2e, roughness: 0.2 });
+        const eye = new THREE.Mesh(eyeGeo, eyeMat);
+        eye.position.set(ex, 0.045, -0.155);
+        headGroup.add(eye);
+
+        // Eye white
+        const scleraGeo = new THREE.SphereGeometry(0.03, 10, 8);
+        const scleraMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.3 });
+        const sclera = new THREE.Mesh(scleraGeo, scleraMat);
+        sclera.position.set(ex, 0.045, -0.148);
+        headGroup.add(sclera);
       });
 
-      const hairTopGeo = new THREE.SphereGeometry(0.17, 18, 18, 0, Math.PI * 2, 0, Math.PI / 1.7);
-      const hairTop = new THREE.Mesh(hairTopGeo, hairMat);
-      hairTop.position.set(0, 0.04, 0);
-      headGroup.add(hairTop);
+      // Hair — full sculpted dome + side volume
+      const hairDomeGeo = new THREE.SphereGeometry(0.168, 20, 18, 0, Math.PI * 2, 0, Math.PI / 1.75);
+      const hairDome = new THREE.Mesh(hairDomeGeo, hairMat);
+      hairDome.position.set(0, 0.038, 0);
+      hairDome.castShadow = true;
+      headGroup.add(hairDome);
 
-      // Pro Over-Ear Headphones (Classic Programmer Aesthetic)
+      // Side hair volume (temples)
+      [-0.13, 0.13].forEach((hx) => {
+        const sideGeo = new THREE.SphereGeometry(0.09, 12, 10);
+        sideGeo.scale(0.6, 0.85, 0.9);
+        const side = new THREE.Mesh(sideGeo, hairMat);
+        side.position.set(hx, 0.02, 0.02);
+        headGroup.add(side);
+      });
+
+      // Over-Ear Headphones (curved torus band)
       const headphoneMat = new THREE.MeshStandardMaterial({
         color: 0x090d16,
-        metalness: 0.8,
-        roughness: 0.2,
+        metalness: 0.82,
+        roughness: 0.18,
       });
-      const phoneBandGeo = new THREE.TorusGeometry(0.18, 0.02, 10, 24, Math.PI);
-      const phoneBand = new THREE.Mesh(phoneBandGeo, headphoneMat);
-      phoneBand.rotation.z = Math.PI;
-      phoneBand.position.y = 0.05;
-      headGroup.add(phoneBand);
+      const bandGeo = new THREE.TorusGeometry(0.185, 0.018, 12, 30, Math.PI);
+      const band = new THREE.Mesh(bandGeo, headphoneMat);
+      band.rotation.z = Math.PI;
+      band.position.y = 0.07;
+      headGroup.add(band);
 
-      // Ear Cups with LED Accent
-      [-0.17, 0.17].forEach((hx) => {
-        const earcupGeo = new THREE.CylinderGeometry(0.055, 0.055, 0.04, 16);
-        const earcup = new THREE.Mesh(earcupGeo, headphoneMat);
-        earcup.rotation.z = Math.PI / 2;
-        earcup.position.set(hx, 0.02, 0);
-        headGroup.add(earcup);
+      // Ear cups (round disc, not cylinder slab)
+      [-0.185, 0.185].forEach((hx) => {
+        const cupGeo = new THREE.SphereGeometry(0.055, 14, 12);
+        cupGeo.scale(0.45, 1.0, 1.0);
+        const cup = new THREE.Mesh(cupGeo, headphoneMat);
+        cup.rotation.z = Math.PI / 2;
+        cup.position.set(hx, 0.02, 0);
+        headGroup.add(cup);
 
-        // LED Ring on Earcup
-        const ledGeo = new THREE.TorusGeometry(0.04, 0.008, 8, 16);
+        // LED Accent ring
+        const ledGeo = new THREE.TorusGeometry(0.038, 0.007, 8, 18);
         const ledMat = new THREE.MeshStandardMaterial({
           color: data.color,
           emissive: data.color,
-          emissiveIntensity: 0.8,
+          emissiveIntensity: 0.9,
         });
         const led = new THREE.Mesh(ledGeo, ledMat);
         led.rotation.y = Math.PI / 2;
-        led.position.set(hx > 0 ? hx + 0.02 : hx - 0.02, 0.02, 0);
+        led.position.set(hx > 0 ? hx + 0.028 : hx - 0.028, 0.02, 0);
         headGroup.add(led);
       });
 
       torsoPivot.add(headGroup);
 
-      // 3. Articulated Shoulders & Arms (Natural Typing & Resting)
-      // Left Arm
-      const leftShoulder = new THREE.Group();
-      leftShoulder.position.set(-0.26, 0.4, 0);
+      // ---- ARMS (CapsuleGeometry — fully rounded, zero boxes) ----
+      const makeArm = (side) => {
+        const armGroup = new THREE.Group();
+        armGroup.position.set(side * 0.255, 0.38, 0);
 
-      const upperArmGeo = new THREE.CylinderGeometry(0.06, 0.055, 0.26, 14);
-      const leftUpperArm = new THREE.Mesh(upperArmGeo, clothesMat);
-      leftUpperArm.position.y = -0.13;
-      leftUpperArm.castShadow = true;
-      leftShoulder.add(leftUpperArm);
+        const upperArmGeo = new THREE.CapsuleGeometry(0.055, 0.2, 8, 14);
+        const upperArm = new THREE.Mesh(upperArmGeo, clothesMat);
+        upperArm.position.y = -0.12;
+        upperArm.castShadow = true;
+        armGroup.add(upperArm);
 
-      const leftHand = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 12), skinMat);
-      leftHand.position.y = -0.32;
-      leftShoulder.add(leftHand);
+        // Elbow joint sphere
+        const elbowGeo = new THREE.SphereGeometry(0.052, 12, 10);
+        const elbow = new THREE.Mesh(elbowGeo, clothesMat);
+        elbow.position.y = -0.24;
+        armGroup.add(elbow);
+
+        // Forearm
+        const forearmGeo = new THREE.CapsuleGeometry(0.045, 0.16, 8, 14);
+        const forearm = new THREE.Mesh(forearmGeo, skinMat);
+        forearm.position.y = -0.36;
+        armGroup.add(forearm);
+
+        // Hand — rounded fist sphere
+        const handGeo = new THREE.SphereGeometry(0.048, 14, 12);
+        handGeo.scale(1.1, 0.85, 0.85);
+        const hand = new THREE.Mesh(handGeo, skinMat);
+        hand.position.y = -0.48;
+        armGroup.add(hand);
+
+        return armGroup;
+      };
+
+      const leftShoulder = makeArm(-1);
+      const rightShoulder = makeArm(1);
       torsoPivot.add(leftShoulder);
-
-      // Right Arm
-      const rightShoulder = new THREE.Group();
-      rightShoulder.position.set(0.26, 0.4, 0);
-
-      const rightUpperArm = new THREE.Mesh(upperArmGeo, clothesMat);
-      rightUpperArm.position.y = -0.13;
-      rightUpperArm.castShadow = true;
-      rightShoulder.add(rightUpperArm);
-
-      const rightHand = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 12), skinMat);
-      rightHand.position.y = -0.32;
-      rightShoulder.add(rightHand);
       torsoPivot.add(rightShoulder);
-
       humanRoot.add(torsoPivot);
 
-      // Active Floor Hologram Ring (Subtle PBR Glow)
-      const ringGeo = new THREE.RingGeometry(0.68, 0.78, 40);
+      // ---- FLOATING NAME LABEL SPRITE (above head) ----
+      const nameSprite = createNameLabel(data.name, data.role, data.color & 0xffffff);
+      nameSprite.position.set(0, 2.55, 0);
+      humanRoot.add(nameSprite);
+
+      // ---- ACTIVE FLOOR HALO RING ----
+      const ringGeo = new THREE.RingGeometry(0.68, 0.78, 44);
       const ringMat = new THREE.MeshBasicMaterial({
         color: data.color,
         side: THREE.DoubleSide,
@@ -816,6 +919,7 @@ export default function App() {
         leftShoulder,
         rightShoulder,
         haloRing,
+        nameSprite,
         deskObjects,
         isWorking: false,
         targetRotationY: Math.PI * 0.75,
