@@ -10,7 +10,7 @@
 
 **Multi-Agent Autonomous Studio — dengan filosofi Wayang Nusantara**
 
-[![Tests](https://img.shields.io/badge/tests-155%20passed-22c55e?style=flat-square&logo=pytest)](./workspace/)
+[![Tests](https://img.shields.io/badge/tests-182%20passed-22c55e?style=flat-square&logo=pytest)](./)
 [![Python](https://img.shields.io/badge/python-3.11%2B-3b82f6?style=flat-square&logo=python)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18%20+%20Three.js-61dafb?style=flat-square&logo=react)](https://react.dev)
@@ -106,17 +106,20 @@ Setiap wayang memiliki **knowledge base standar internasional** yang diinjeksika
 ## Cara Kerja
 
 ```
-1. Tulis ROADMAP.md
-   └─ Tentukan tasks, dependencies, dan agent yang bertanggung jawab
+1. Buat Proyek (Cukup Satu Kalimat!)
+   └─ ./dalang.py init "Nama Proyek" "Deskripsi apa yang ingin dibangun"
+   └─ Risko memecah tugas, memilih Wayang yang tepat, sisanya DIAM (idle)
 
-2. Jalankan orkestrasi
-   └─ POST /orchestrate/start → Risko mengambil alih
+2. Jalankan Lakon
+   └─ ./dalang.py run   (atau via Dashboard 3D: http://localhost:5173)
+   └─ Wayang bekerja paralel, saling menunggu dependensi secara tertib
 
-3. Lihat dashboard
-   └─ Buka http://localhost:5173 → Wayang bergerak di Kelir 3D
+3. Ajari Skill Baru Kapan Saja
+   └─ ./dalang.py teach <wayang> "Gunakan Tailwind CSS v3 / SQLAlchemy 2.0"
+   └─ Wayang langsung pintar dan menerapkan skill itu di proyek berikutnya!
 
 4. Selesai
-   └─ Semua artifact, kode, dan dokumen tersimpan di workspace/
+   └─ Kode, UI, dokumen, dan pengujian otomatis tersimpan di workspace/
 ```
 
 ---
@@ -134,7 +137,6 @@ Setiap wayang memiliki **knowledge base standar internasional** yang diinjeksika
 git clone https://github.com/khoirulanamid/dalang-ai.git
 cd dalang-ai
 
-# Backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r workspace/requirements.txt
@@ -154,35 +156,58 @@ OPENAI_API_KEY=your-api-key
 JWT_SECRET_KEY=$(python3 -c "import secrets; print(secrets.token_hex(64))")
 ```
 
-### 3. Jalankan Backend
+### 3. Jalankan Backend & Dashboard
 
 ```bash
-cd dalang-ai
-uvicorn backend.main:app --host 0.0.0.0 --port 8765 --reload
+# Terminal 1 — Backend
+uvicorn backend.main:app --host 0.0.0.0 --port 8765
+
+# Terminal 2 — Dashboard 3D
+cd frontend && npm install && npm run dev
 ```
 
-### 4. Jalankan Dashboard
+Dashboard: **http://localhost:5173**
+
+### 4. Mulai Proyek Pertamamu
 
 ```bash
-cd frontend
-npm install
-npm run dev
+# Cukup deskripsikan proyekmu — Risko yang urus sisanya
+./dalang.py init "Aplikasi Todo" "Aplikasi todo list web dengan tampilan bersih, bisa tambah, edit, hapus tugas, dan ada unit test"
+
+# Lihat apa yang Risko rencanakan
+./dalang.py status
+
+# Mulai lakon!
+./dalang.py run
 ```
 
-Dashboard tersedia di: **http://localhost:5173**
+---
 
-### 5. Tulis Roadmap & Mulai Lakon
-
-Edit `ROADMAP.md`, lalu:
+## Perintah CLI Dalang-AI
 
 ```bash
-python3 run_sprint.py
+./dalang.py init "Proyek" "Deskripsi"   # Buat proyek baru (Risko auto-plan)
+./dalang.py run [--cycles N]            # Mulai lakon orkestrasi
+./dalang.py status                      # Lihat progress ROADMAP
+./dalang.py roster                      # Lihat semua Wayang & keahlian
+./dalang.py teach <wayang> "skill"      # Ajarkan skill baru ke Wayang
+./dalang.py skills [--wayang <id>]      # Lihat ringkasan keahlian Wayang
 ```
 
-Atau via API:
+### Contoh Perintah `teach`
 
 ```bash
-curl -X POST http://localhost:8765/orchestrate/start?max_cycles=5
+# Ajari Lulu pakai Tailwind CSS
+./dalang.py teach lulu "Gunakan Tailwind CSS v3. Hindari inline CSS. Pakai lucide-icons."
+
+# Ajari Zaki pakai SQLAlchemy async
+./dalang.py teach zaki "Gunakan SQLAlchemy 2.0 async ORM. Pisahkan session factory dari business logic."
+
+# Ajari Nova deploy ke Railway
+./dalang.py teach nova "Target deployment: Railway.app. Sertakan railway.json di setiap proyek."
+
+# Lihat apa yang sudah dipelajari Lulu
+./dalang.py skills --wayang lulu
 ```
 
 ---
@@ -251,7 +276,7 @@ Output Dalang-AI adalah output yang **jujur, padat, dan bisa langsung digunakan.
 | Backend API | FastAPI, Uvicorn, Pydantic v2 |
 | Frontend | React 18, Three.js, Vite |
 | Auth | JWT (python-jose), bcrypt |
-| Testing | pytest, httpx (155 tests, 100% pass) |
+| Testing | pytest, httpx (182 tests, 100% pass) |
 | CI/CD | GitHub Actions (5 stages) |
 | Container | Docker, Docker Compose, nginx |
 | LLM | OpenAI-compatible endpoint (lokal atau cloud) |
@@ -261,14 +286,17 @@ Output Dalang-AI adalah output yang **jujur, padat, dan bisa langsung digunakan.
 ## Test Suite
 
 ```
+test_wayang_router.py     # 9 tests  — Risko auto-routing & wayang idle
+test_project_planner.py   # 9 tests  — Auto-decomposition dari deskripsi bebas
+test_wayang_academy.py    # 9 tests  — Perguruan wayang & skill upgrade
 workspace/
-├── test_token.py          # 33 unit tests — JWT & token service
-├── test_auth_api.py       # 33 integration tests — REST endpoints
-├── test_security.py       # 13 regression tests — OWASP ASVS
-├── test_e2e_flow.py       # 64 E2E scenarios — full auth flow
-└── test_bva_standards.py  # 12 tests — Boundary Value Analysis
+├── test_token.py         # 33 tests — JWT & token service
+├── test_auth_api.py      # 33 tests — REST endpoints
+├── test_security.py      # 13 tests — OWASP ASVS regression
+├── test_e2e_flow.py      # 64 tests — Full lifecycle E2E scenarios
+└── test_bva_standards.py # 12 tests — Boundary Value Analysis
 
-Total: 155 / 155 tests passed ✅
+Total: 182 / 182 tests passed ✅ (0 failures)
 ```
 
 ---
@@ -277,25 +305,28 @@ Total: 155 / 155 tests passed ✅
 
 ```
 dalang-ai/
-├── ROADMAP.md                  # Single source of truth
-├── risko_orchestrator.py       # Sang Dalang — engine utama
+├── dalang.py                   # 🎭 CLI utama Sang Dalang
+├── wayang_router.py            # Modul auto-routing & deteksi wayang idle
+├── project_planner.py          # Modul perencana proyek (auto-decompose)
+├── wayang_academy.py           # Perguruan wayang (teach & upgrade skill)
+├── ROADMAP.md                  # Naskah lakon (single source of truth)
+├── risko_orchestrator.py       # Engine orkestrator Risko
 ├── real_subagent_runner.py     # Sub-agent runner & LLM client
 ├── agent_tools.py              # Tool belt tiap wayang
-├── run_sprint.py               # CLI launcher
 │
-├── backend/                    # FastAPI API server
+├── backend/                    # FastAPI server (Gamelan)
 │   └── main.py
 │
-├── frontend/                   # 3D Isometric Dashboard
+├── frontend/                   # 3D Isometric Dashboard (Kelir)
 │   └── src/App.jsx             # Three.js + React
 │
-├── standards/                  # Knowledge base standar per agent
+├── standards/                  # Buku pintar keahlian tiap wayang
 │   ├── zaki_backend_standards.md
 │   ├── lulu_frontend_standards.md
 │   ├── kai_security_standards.md
 │   └── ...
 │
-└── workspace/                  # Output artifact para wayang
+└── workspace/                  # Output hasil kerja para wayang
     ├── auth_api.py
     ├── token_service.py
     ├── docs/
@@ -326,7 +357,7 @@ Pull request terbuka untuk siapa saja. Sebelum membuka PR, pastikan:
 
 1. Tambahkan task baru di `ROADMAP.md`
 2. Jalankan `python3 run_sprint.py` — biarkan wayang yang mengerjakan
-3. Pastikan semua 155 tests masih passing: `pytest workspace/test_*.py -q`
+3. Pastikan semua 182 tests masih passing: `pytest test_*.py workspace/test_*.py -q`
 4. Tidak ada AI slop di output kamu
 
 ---
