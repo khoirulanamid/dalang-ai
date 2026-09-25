@@ -575,9 +575,9 @@ export default function App() {
       cactus.position.set(-0.72, 0.92, -0.32);
       deskGroup.add(cactus);
 
-      // Ergonomic Swivel Mesh Office Chair
+      // Ergonomic Swivel Mesh Office Chair (jarak ergonomis ke meja)
       const chairGroup = new THREE.Group();
-      chairGroup.position.set(0, 0, 0.78);
+      chairGroup.position.set(0, 0, 0.58);
 
       const seatGeo = new THREE.BoxGeometry(0.55, 0.08, 0.52);
       const seatMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
@@ -670,7 +670,7 @@ export default function App() {
       const deskObjects = createWorkstation(x, z, data);
 
       const humanRoot = new THREE.Group();
-      humanRoot.position.set(x, 0, z + 0.78);
+      humanRoot.position.set(x, 0, z + 0.58);
 
       // PBR Materials
       const skinMat = new THREE.MeshStandardMaterial({
@@ -854,43 +854,57 @@ export default function App() {
 
       torsoPivot.add(headGroup);
 
-      // ---- ARMS (CapsuleGeometry — fully rounded, zero boxes) ----
-      // Pivot di bahu kiri/kanan torso, lengan menjulur ke bawah (-Y default).
-      // rotation.x = -1.1 memutar lengan ke depan (-Z) = mengetik di meja.
+      // ---- ARMS (CapsuleGeometry — artikulasi siku 2-segment) ----
+      // makeArm() returns { shoulder, elbowPivot } sehingga animasi bisa
+      // mengontrol siku secara terpisah untuk pose mengetik yang natural.
       const makeArm = (side) => {
-        const armGroup = new THREE.Group();
-        armGroup.position.set(side * 0.255, 0.38, 0);
+        // === BAHU (shoulder pivot) ===
+        const shoulder = new THREE.Group();
+        shoulder.position.set(side * 0.255, 0.38, 0);
 
-        const upperArmGeo = new THREE.CapsuleGeometry(0.055, 0.2, 8, 14);
+        // Lengan atas: capsule menggantung ke bawah dari pivot bahu
+        const upperArmGeo = new THREE.CapsuleGeometry(0.055, 0.18, 8, 14);
         const upperArm = new THREE.Mesh(upperArmGeo, clothesMat);
-        upperArm.position.y = -0.12;
+        upperArm.position.y = -0.1;
         upperArm.castShadow = true;
-        armGroup.add(upperArm);
+        shoulder.add(upperArm);
 
-        // Elbow joint sphere
-        const elbowGeo = new THREE.SphereGeometry(0.052, 12, 10);
-        const elbow = new THREE.Mesh(elbowGeo, clothesMat);
-        elbow.position.y = -0.24;
-        armGroup.add(elbow);
+        // === SIKU (elbow pivot — child dari shoulder) ===
+        const elbowPivot = new THREE.Group();
+        elbowPivot.position.y = -0.23; // posisi siku relatif ke bahu
+        shoulder.add(elbowPivot);
 
-        // Forearm — lebih panjang ke arah keyboard
-        const forearmGeo = new THREE.CapsuleGeometry(0.042, 0.18, 8, 14);
+        // Bola siku
+        const elbowGeo = new THREE.SphereGeometry(0.05, 12, 10);
+        const elbowBall = new THREE.Mesh(elbowGeo, clothesMat);
+        elbowBall.position.y = 0;
+        elbowBall.castShadow = true;
+        elbowPivot.add(elbowBall);
+
+        // Lengan bawah (forearm)
+        const forearmGeo = new THREE.CapsuleGeometry(0.04, 0.17, 8, 14);
         const forearm = new THREE.Mesh(forearmGeo, skinMat);
-        forearm.position.y = -0.38;
-        armGroup.add(forearm);
+        forearm.position.y = -0.12;
+        forearm.castShadow = true;
+        elbowPivot.add(forearm);
 
-        // Hand — rounded fist sphere
-        const handGeo = new THREE.SphereGeometry(0.045, 14, 12);
-        handGeo.scale(1.2, 0.75, 1.0);
+        // Tangan (hand) — di ujung forearm
+        const handGeo = new THREE.SphereGeometry(0.044, 14, 12);
+        handGeo.scale(1.2, 0.7, 1.0);
         const hand = new THREE.Mesh(handGeo, skinMat);
-        hand.position.y = -0.51;
-        armGroup.add(hand);
+        hand.position.y = -0.23;
+        hand.castShadow = true;
+        elbowPivot.add(hand);
 
-        return armGroup;
+        return { shoulder, elbowPivot };
       };
 
-      const leftShoulder = makeArm(-1);
-      const rightShoulder = makeArm(1);
+      const leftArm = makeArm(-1);
+      const rightArm = makeArm(1);
+      const leftShoulder = leftArm.shoulder;
+      const rightShoulder = rightArm.shoulder;
+      const leftElbow = leftArm.elbowPivot;
+      const rightElbow = rightArm.elbowPivot;
       torsoPivot.add(leftShoulder);
       torsoPivot.add(rightShoulder);
       humanRoot.add(torsoPivot);
@@ -921,6 +935,8 @@ export default function App() {
         headGroup,
         leftShoulder,
         rightShoulder,
+        leftElbow,
+        rightElbow,
         haloRing,
         nameSprite,
         deskObjects,
@@ -951,6 +967,8 @@ export default function App() {
           headGroup,
           leftShoulder,
           rightShoulder,
+          leftElbow,
+          rightElbow,
           haloRing,
           deskObjects,
           isWorking,
@@ -974,13 +992,18 @@ export default function App() {
           headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.32, 0.08);
           headGroup.rotation.y = Math.sin(elapsed * 1.8) * 0.03; // slight focus drift
 
-          // Arms resting on desk typing furiously
-          const leftTyping = Math.sin(elapsed * 24) * 0.14;
-          const rightTyping = Math.cos(elapsed * 24 + 1.2) * 0.14;
-          leftShoulder.rotation.x = -1.15 + leftTyping;
-          leftShoulder.rotation.z = -0.22;
-          rightShoulder.rotation.x = -1.15 + rightTyping;
-          rightShoulder.rotation.z = 0.22;
+          // Arms resting on desk typing — 2-segment articulation
+          // Bahu turun ke depan (sedikit, agar lengan atas tidak terlalu tegak)
+          const leftTyping = Math.sin(elapsed * 24) * 0.10;
+          const rightTyping = Math.cos(elapsed * 24 + 1.2) * 0.10;
+          leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, -0.52 + leftTyping, 0.1);
+          leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.18, 0.08);
+          rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, -0.52 + rightTyping, 0.1);
+          rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.18, 0.08);
+
+          // Siku: tekuk 90° ke arah meja (ke depan), tangan di atas keyboard
+          leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, -0.9 + leftTyping, 0.12);
+          rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, -0.9 + rightTyping, 0.12);
 
           // Laptop screen emits bright coding light with screen flicker
           deskObjects.displayMat.emissiveIntensity = 0.95 + Math.sin(elapsed * 9) * 0.18;
@@ -1006,6 +1029,8 @@ export default function App() {
           leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.16, 0.08);
           rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, 0.12, 0.08);
           rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.16, 0.08);
+          leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, -0.15, 0.08);
+          rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, -0.15, 0.08);
 
           // Screen in low-power idle
           deskObjects.displayMat.emissiveIntensity = 0.12;
