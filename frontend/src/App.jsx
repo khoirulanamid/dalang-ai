@@ -661,6 +661,7 @@ export default function App() {
     roomGroup.add(coolerGroup);
 
     // Glass Water Dispenser on Counter
+    const dispenserGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.75, 16);
     const dispenserMat = new THREE.MeshPhysicalMaterial({
       color: 0x38bdf8,
       transparent: true,
