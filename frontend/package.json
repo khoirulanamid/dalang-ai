@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "oxlint",
+    "build": "oxlint -c .oxlintrc.json -D no-undef && vite build",
+    "lint": "oxlint -c .oxlintrc.json -D no-undef",
     "preview": "vite preview"
   },
   "dependencies": {
