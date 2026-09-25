@@ -54,3 +54,11 @@ workspace/.env
 .ruff_cache/
 .coverage
 htmlcov/
+
+# Demos & Playgrounds (JANGAN DI-PUSH KE GITHUB)
+demos/
+workspace/demos/
+playground/
+workspace/playground/
+*.demo.*
+screenshot_*.png
