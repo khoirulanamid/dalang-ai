@@ -972,6 +972,7 @@ export default function App() {
           leftElbow,
           rightElbow,
           haloRing,
+          nameSprite,
           deskObjects,
           isWorking,
         } = agent;
