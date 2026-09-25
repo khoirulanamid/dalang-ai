@@ -13,6 +13,7 @@ import argparse
 import asyncio
 import sys
 from pathlib import Path
+from typing import Optional
 
 BASE_DIR = Path(__file__).parent
 ROADMAP_PATH = BASE_DIR / "ROADMAP.md"
@@ -103,6 +104,57 @@ def cmd_roster():
     print("  Tambah Wayang baru: edit wayang_router.py → WAYANG_ROSTER\n")
 
 
+def cmd_teach(agent_id: str, skill: str):
+    """Ajarkan skill baru kepada seorang Wayang secara permanen."""
+    from wayang_academy import teach_wayang
+
+    print(f"\n🎓 Bos Muda mengajarkan skill baru kepada [{agent_id.capitalize()}]...\n")
+    print(f"   Skill  : {skill}\n")
+
+    try:
+        result = teach_wayang(agent_id, skill, instructor="Bos Muda")
+        print(f"✅ [{result['wayang_name']} / {result['wayang_title']}] berhasil mempelajari skill baru!")
+        print(f"   Disimpan di : {result['file']}")
+        print(f"   Waktu belajar: {result['learned_at']}")
+        print(f"\n   Skill ini akan aktif digunakan di sprint/lakon berikutnya.\n")
+    except ValueError as e:
+        print(f"❌ Error: {e}\n")
+
+
+def cmd_skills(agent_id: Optional[str] = None):
+    """Tampilkan ringkasan keahlian satu atau semua Wayang."""
+    from wayang_academy import list_all_wayang_skills_summary, get_wayang_skills
+
+    if agent_id:
+        # Tampilkan detail lengkap satu wayang
+        agent_id = agent_id.lower()
+        try:
+            content = get_wayang_skills(agent_id)
+            from wayang_router import WAYANG_ROSTER
+            info = WAYANG_ROSTER.get(agent_id, {})
+            print(f"\n📚 Buku Keahlian {info.get('name', agent_id)} ({info.get('title', '')})\n")
+            print(content)
+        except ValueError as e:
+            print(f"❌ {e}")
+        return
+
+    # Tampilkan ringkasan semua wayang
+    summary = list_all_wayang_skills_summary()
+    icons = {
+        "pingot": "🟢", "zaki": "🟡", "lulu": "🩷",
+        "mika": "🩵", "nova": "🟠", "kai": "🔴", "ren": "🔵",
+    }
+    print("\n📚 DALANG-AI — RINGKASAN KEAHLIAN PARA WAYANG\n")
+    for s in summary:
+        icon = icons.get(s["id"], "⚪")
+        lessons_str = f"  🎓 {s['custom_lessons']} pelajaran tambahan" if s["custom_lessons"] > 0 else "  (belum ada pelajaran tambahan)"
+        print(f"  {icon} {s['name']:8} — {s['title']}")
+        print(f"       Knowledge base : {s['knowledge_base_kb']} KB")
+        print(f"       Keahlian inti  : {', '.join(s['core_keywords'])}, ...")
+        print(f"      {lessons_str}")
+        print()
+
+
 async def cmd_run(cycles: int):
     """Jalankan orkestrasi Dalang-AI dari ROADMAP.md yang sudah ada."""
     if not ROADMAP_PATH.exists():
@@ -141,6 +193,15 @@ def main():
     # dalang roster
     sub.add_parser("roster", help="Lihat daftar para Wayang dan keahliannya")
 
+    # dalang teach
+    p_teach = sub.add_parser("teach", help="Ajarkan skill baru kepada seorang Wayang")
+    p_teach.add_argument("wayang", help="Nama wayang (pingot/zaki/lulu/mika/nova/kai/ren)")
+    p_teach.add_argument("skill", help="Skill atau instruksi baru yang ingin diajarkan")
+
+    # dalang skills
+    p_skills = sub.add_parser("skills", help="Lihat ringkasan keahlian semua Wayang")
+    p_skills.add_argument("--wayang", default=None, help="Filter ke satu wayang saja (opsional)")
+
     args = parser.parse_args()
 
     if args.command == "init":
@@ -151,6 +212,10 @@ def main():
         cmd_status()
     elif args.command == "roster":
         cmd_roster()
+    elif args.command == "teach":
+        cmd_teach(args.wayang, args.skill)
+    elif args.command == "skills":
+        cmd_skills(args.wayang)
 
 
 if __name__ == "__main__":
