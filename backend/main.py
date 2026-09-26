@@ -10,7 +10,8 @@ import sys
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Optional
+from pydantic import BaseModel
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,6 +21,7 @@ from fastapi.responses import StreamingResponse, JSONResponse
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from risko_orchestrator import AgentEvent, RiskoOrchestrator
+from wayang_router import auto_route_task
 
 ROADMAP_PATH = Path(__file__).parent.parent / "ROADMAP.md"
 
@@ -173,6 +175,63 @@ async def orchestration_status():
         exc = orchestrator_task.exception() if not orchestrator_task.cancelled() else None
         return {"running": False, "status": "finished", "error": str(exc) if exc else None}
     return {"running": True, "status": "in_progress"}
+
+
+class TaskDispatchRequest(BaseModel):
+    title: str
+    description: str = ""
+    agent: Optional[str] = None
+    duration_seconds: Optional[int] = 12
+
+
+@app.post("/tasks/dispatch")
+async def dispatch_task(req: TaskDispatchRequest):
+    """
+    Kirim tugas spesifik atau umum ke tim Wayang.
+    Jika agen tidak diisi atau 'auto', Sang Dalang (Risko) otomatis memilih Wayang yang paling kompeten.
+    """
+    target = req.agent if req.agent and req.agent != "auto" else None
+    routed_agent, confidence = auto_route_task(req.title, req.description, target)
+    task_id = f"TASK-{int(datetime.now().timestamp()) % 10000:04d}"
+
+    # 1. Risko delegasikan tugas
+    orchestrator.emit_event(
+        event_type="task_ready",
+        agent="risko",
+        task_id=task_id,
+        message=f"Risko menugaskan {routed_agent.capitalize()}: {req.title}",
+        metadata={"target_agent": routed_agent, "title": req.title},
+    )
+
+    # 2. Wayang yang ditunjuk mulai bekerja (NGETIK)
+    orchestrator.emit_event(
+        event_type="task_dispatched",
+        agent=routed_agent,
+        task_id=task_id,
+        message=f"{req.title}" + (f" ({req.description})" if req.description else ""),
+        metadata={"duration": req.duration_seconds or 12},
+    )
+
+    # 3. Selesaikan tugas setelah durasi tertentu
+    async def finish_task():
+        await asyncio.sleep(req.duration_seconds or 12)
+        orchestrator.emit_event(
+            event_type="task_completed",
+            agent=routed_agent,
+            task_id=task_id,
+            message=f"Selesai: {req.title}",
+            metadata={"status": "success"},
+        )
+
+    asyncio.create_task(finish_task())
+
+    return {
+        "status": "dispatched",
+        "task_id": task_id,
+        "assigned_agent": routed_agent,
+        "confidence": confidence,
+        "message": f"Tugas '{req.title}' diserahkan ke {routed_agent.capitalize()}",
+    }
 
 
 # --- WebSocket endpoint ---

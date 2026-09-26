@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Sparkles, Coffee, Users, Laptop } from "lucide-react";
+import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle } from "lucide-react";
 
 // 8 Para Wayang Roster & Detailed Office Profiles
 const AGENTS = {
@@ -585,6 +585,10 @@ export default function App() {
   const [connected, setConnected] = useState(false);
   const [workingMap, setWorkingMap] = useState({});
 
+    const [taskInput, setTaskInput] = useState("");
+  const [targetAgent, setTargetAgent] = useState("auto");
+  const [isDispatching, setIsDispatching] = useState(false);
+  const [selectedAgentDetail, setSelectedAgentDetail] = useState(null);
   const activeWayangCount = Object.values(workingMap).filter(Boolean).length;
   const sceneRef = useRef(null);
   const agentMeshesRef = useRef({});
@@ -2161,11 +2165,6 @@ export default function App() {
         const statusMap = {};
         data.forEach((a) => {
           statusMap[a.agent] = a;
-          const mesh = agentMeshesRef.current[a.agent];
-          if (mesh && a.in_progress > 0) {
-            mesh.isWorking = true;
-            setWorkingMap((prev) => ({ ...prev, [a.agent]: true }));
-          }
         });
         setAgentStatus(statusMap);
       } catch {
@@ -2189,50 +2188,52 @@ export default function App() {
     };
   }, []);
 
-  // Interactive Click Toggle (Test 3D movement by clicking cards)
-  const toggleAgentWorkState = (agentId) => {
-    const mesh = agentMeshesRef.current[agentId];
-    setWorkingMap((prev) => {
-      const isCurrentlyWorking = Boolean(prev[agentId]);
-      const nextVal = !isCurrentlyWorking;
-      const nextMap = { ...prev, [agentId]: nextVal };
+  // Dispatch Real Task to Backend (Task-Driven Architecture)
+  const handleDispatchTask = async (customTitle = null, customAgent = null) => {
+    const title = (customTitle || taskInput).trim();
+    if (!title) return;
+    setIsDispatching(true);
 
-      if (mesh) {
-        mesh.isWorking = nextVal;
-        if (nextVal && mesh.currentMode !== "WORK" && agentNavRef.current) {
-          agentNavRef.current(agentId, "WORK");
-          setAgentModes((m) => ({ ...m, [agentId]: "WORK" }));
-        }
-      }
+    const agentChoice = customAgent || targetAgent;
+    const host = window.location.hostname || "localhost";
 
-      if (nextVal) {
-        setActiveTask({
-          agent: agentId,
-          id: `LAKON-${Math.floor(Math.random() * 899 + 100)}`,
-          task: AGENTS[agentId]?.action || "Menghadap laptop: fokus pengerjaan tugas...",
-        });
-        setEvents((evs) => [
-          {
-            agent: agentId,
-            event_type: "task_dispatched",
-            message: `Menghadap laptop: ${AGENTS[agentId]?.action}`,
-            timestamp: new Date().toISOString(),
-          },
-          ...evs.slice(0, 49),
-        ]);
+    try {
+      const res = await fetch(`http://${host}:8765/tasks/dispatch`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          agent: agentChoice === "auto" ? null : agentChoice,
+          duration_seconds: 14,
+        }),
+      });
+
+      if (res.ok) {
+        await res.json();
+        setTaskInput("");
       } else {
-        setEvents((evs) => [
-          {
-            agent: agentId,
-            event_type: "task_completed",
-            message: `${AGENTS[agentId]?.name} menyelesaikan tugas dan istirahat`,
-            timestamp: new Date().toISOString(),
-          },
-          ...evs.slice(0, 49),
-        ]);
+        console.error("Gagal mengirim tugas ke backend", res.status);
       }
-      return nextMap;
-    });
+    } catch (err) {
+      console.error("Koneksi backend error saat kirim tugas", err);
+    } finally {
+      setIsDispatching(false);
+    }
+  };
+
+  // Quick dispatch helper for cards
+  const handleAssignToAgent = (agentId) => {
+    const defaultActions = {
+      zaki: "Mengembangkan endpoint auth JWT & API rate limiter",
+      pingot: "Audit skema relasi database & migrasi index",
+      lulu: "Mendesain antarmuka 3D visual & styling komponen dark mode",
+      nova: "Menyiapkan pipeline CI/CD GitHub Actions & build docker",
+      kai: "Audit keamanan OWASP Top 10 & scan vulnerabilitas",
+      ren: "Menjalankan 182 test suite otomatis & validasi assertions",
+      mika: "Menulis spesifikasi arsitektur & panduan teknis",
+      risko: "Mengevaluasi lakon sprint & mengorkestrasi roadmap",
+    };
+    handleDispatchTask(defaultActions[agentId] || `Tugas pengembangan untuk ${AGENTS[agentId]?.name}`, agentId);
   };
 
   const handleAllMode = (mode) => {
@@ -2264,6 +2265,130 @@ export default function App() {
       {/* LEFT: 3D Studio Canvas */}
       <div style={{ flex: 1, position: "relative" }}>
         <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
+
+        {/* Floating Task Dispatch Bar (Pusat Penugasan Pekerjaan Nyata) */}
+        <div style={{
+          position: "absolute",
+          bottom: 24,
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          backgroundColor: "rgba(15, 23, 42, 0.92)",
+          backdropFilter: "blur(16px)",
+          padding: "12px 18px",
+          borderRadius: 16,
+          border: "1px solid rgba(56, 189, 248, 0.25)",
+          boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.7)",
+          width: "min(760px, 92%)",
+          zIndex: 10,
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, color: "#38bdf8", fontWeight: "700", fontSize: "0.82rem", whiteSpace: "nowrap" }}>
+              <Sparkles size={16} />
+              <span>Beri Pekerjaan:</span>
+            </div>
+
+            <input
+              type="text"
+              value={taskInput}
+              onChange={(e) => setTaskInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleDispatchTask()}
+              placeholder="Ketik tugas (misal: 'Zaki buat endpoint auth JWT' atau 'Audit celah OWASP')..."
+              style={{
+                flex: 1,
+                backgroundColor: "rgba(2, 6, 23, 0.75)",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
+                borderRadius: 10,
+                padding: "8px 14px",
+                color: "#f8fafc",
+                fontSize: "0.82rem",
+                outline: "none",
+              }}
+            />
+
+            <select
+              value={targetAgent}
+              onChange={(e) => setTargetAgent(e.target.value)}
+              style={{
+                backgroundColor: "rgba(30, 41, 59, 0.9)",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
+                borderRadius: 10,
+                padding: "8px 10px",
+                color: "#94a3b8",
+                fontSize: "0.78rem",
+                cursor: "pointer",
+                outline: "none",
+              }}
+            >
+              <option value="auto">🎭 Auto-Route (Risko)</option>
+              <option value="zaki">Zaki (Backend)</option>
+              <option value="pingot">Pingot (Data)</option>
+              <option value="lulu">Lulu (Visual UI)</option>
+              <option value="kai">Kai (Security)</option>
+              <option value="ren">Ren (QA Test)</option>
+              <option value="nova">Nova (DevOps)</option>
+              <option value="mika">Mika (Pujangga)</option>
+              <option value="risko">Risko (Sang Dalang)</option>
+            </select>
+
+            <button
+              onClick={() => handleDispatchTask()}
+              disabled={isDispatching || !taskInput.trim()}
+              style={{
+                backgroundColor: isDispatching ? "#64748b" : "#38bdf8",
+                color: "#0f172a",
+                border: "none",
+                borderRadius: 10,
+                padding: "8px 16px",
+                fontWeight: "700",
+                fontSize: "0.78rem",
+                cursor: isDispatching || !taskInput.trim() ? "not-allowed" : "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                opacity: !taskInput.trim() ? 0.6 : 1,
+                transition: "all 0.2s ease",
+              }}
+            >
+              <Send size={14} />
+              <span>{isDispatching ? "Mengirim..." : "Tugaskan"}</span>
+            </button>
+          </div>
+
+          {/* Quick Task Suggestions Chips */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6, overflowX: "auto", paddingTop: 4 }}>
+            <span style={{ fontSize: "0.7rem", color: "#64748b", whiteSpace: "nowrap" }}>Cepat:</span>
+            {[
+              { label: "⚡ API Auth JWT", task: "Buat endpoint autentikasi JWT dan middleware token", agent: "zaki" },
+              { label: "🛡️ Audit OWASP", task: "Audit keamanan celah OWASP & token validation", agent: "kai" },
+              { label: "🎨 UI Dark Mode", task: "Mendesain antarmuka dashboard dark mode responsif", agent: "lulu" },
+              { label: "📊 Skema Database", task: "Audit relasi skema database & migrasi tabel", agent: "pingot" },
+              { label: "🧪 Run Test Suite", task: "Jalankan 182 test suite otomatis & validasi assertions", agent: "ren" },
+            ].map((chip, idx) => (
+              <button
+                key={idx}
+                onClick={() => handleDispatchTask(chip.task, chip.agent)}
+                style={{
+                  backgroundColor: "rgba(30, 41, 59, 0.6)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  borderRadius: 6,
+                  padding: "3px 8px",
+                  color: "#cbd5e1",
+                  fontSize: "0.68rem",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "background 0.15s ease",
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(56, 189, 248, 0.2)")}
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(30, 41, 59, 0.6)")}
+              >
+                {chip.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Studio Overlay Header */}
         <div style={{
@@ -2453,7 +2578,7 @@ export default function App() {
             </span>
           </div>
           <p style={{ margin: "4px 0 0 0", fontSize: "0.78rem", color: "#64748b" }}>
-            Klik kartu Wayang untuk uji coba gerak 3D di laptop
+            Wayang aktif mengetik hanya saat ada tugas yang dikerjakan
           </p>
         </div>
 
@@ -2464,7 +2589,7 @@ export default function App() {
             return (
               <div
                 key={id}
-                onClick={() => toggleAgentWorkState(id)}
+                onClick={() => setSelectedAgentDetail({ id, ...info })}
                 style={{
                   padding: "12px 14px",
                   borderRadius: 12,
@@ -2474,9 +2599,9 @@ export default function App() {
                   borderLeftWidth: "4px",
                   cursor: "pointer",
                   transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
-                  transform: isWorking ? "scale(1.02)" : "scale(1)",
+                  transform: isWorking ? "scale(1.01)" : "scale(1)",
                 }}
-                title="Klik untuk mensimulasikan tugas ke wayang ini"
+                title="Klik untuk melihat detail profil & tugas"
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <span style={{ fontSize: "0.88rem", fontWeight: "700", color: "#f8fafc" }}>{info.name}</span>
@@ -2499,12 +2624,29 @@ export default function App() {
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 8, paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                  <span style={{ fontSize: "0.68rem", color: "#94a3b8", display: "flex", alignItems: "center", gap: 4 }}>
-                    {agentModes[id] === "WORK" && "📍 Di Meja"}
-                    {agentModes[id] === "MEETING" && "📍 Di Rapat"}
-                    {agentModes[id] === "LOUNGE" && "📍 Di Sofa"}
-                    {agentModes[id] === "PANTRY" && "📍 Di Pantry"}
-                  </span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAssignToAgent(id);
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 4,
+                      backgroundColor: isWorking ? "rgba(56, 189, 248, 0.15)" : "rgba(30, 41, 59, 0.7)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      borderRadius: 6,
+                      padding: "3px 8px",
+                      color: isWorking ? "#38bdf8" : "#cbd5e1",
+                      fontSize: "0.68rem",
+                      fontWeight: "700",
+                      cursor: "pointer",
+                    }}
+                    title="Beri tugas langsung ke wayang ini"
+                  >
+                    <PlusCircle size={12} />
+                    <span>{isWorking ? "Tugas Tambahan" : "+ Tugaskan"}</span>
+                  </button>
 
                   <div style={{ display: "flex", gap: 4 }}>
                     <button
@@ -2602,6 +2744,93 @@ export default function App() {
           </div>
         </div>
       </div>
+
+      {/* Modal Detail Profil & Tugas Wayang saat Kartu Diklik */}
+      {selectedAgentDetail && (
+        <div
+          onClick={() => setSelectedAgentDetail(null)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0, 0, 0, 0.65)",
+            backdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 100,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: "#0f172a",
+              border: `2px solid ${selectedAgentDetail.hex || "#38bdf8"}`,
+              borderRadius: 16,
+              padding: "24px 28px",
+              width: "min(460px, 90%)",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8)",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
+              <h3 style={{ margin: 0, fontSize: "1.25rem", color: "#f8fafc", fontWeight: "800" }}>
+                {selectedAgentDetail.name}
+              </h3>
+              <span style={{ fontSize: "0.8rem", color: selectedAgentDetail.hex, fontWeight: "700" }}>
+                {selectedAgentDetail.role}
+              </span>
+            </div>
+
+            <div style={{ fontSize: "0.85rem", color: "#cbd5e1", marginBottom: 16, lineHeight: 1.5 }}>
+              <div><strong>Gelar:</strong> {selectedAgentDetail.title}</div>
+              <div style={{ marginTop: 4 }}><strong>🎭 Kepribadian:</strong> {selectedAgentDetail.personality}</div>
+              <div style={{ marginTop: 4 }}><strong>Fokus Kerja:</strong> {selectedAgentDetail.action}</div>
+              <div style={{ marginTop: 10, padding: "10px 14px", borderRadius: 8, backgroundColor: "rgba(2, 6, 23, 0.6)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <strong>Status Saat Ini:</strong>{" "}
+                <span style={{ color: workingMap[selectedAgentDetail.id] ? "#38bdf8" : "#94a3b8", fontWeight: "700" }}>
+                  {workingMap[selectedAgentDetail.id] ? "💻 Sedang Mengetik (Mengerjakan Tugas)" : "☕ Istirahat (Menunggu Tugas)"}
+                </span>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: 10, justifyContent: "flex-end", marginTop: 20 }}>
+              <button
+                onClick={() => setSelectedAgentDetail(null)}
+                style={{
+                  padding: "8px 16px",
+                  borderRadius: 8,
+                  backgroundColor: "rgba(255,255,255,0.08)",
+                  color: "#94a3b8",
+                  border: "none",
+                  cursor: "pointer",
+                  fontWeight: "600",
+                }}
+              >
+                Tutup
+              </button>
+              <button
+                onClick={() => {
+                  handleAssignToAgent(selectedAgentDetail.id);
+                  setSelectedAgentDetail(null);
+                }}
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: 8,
+                  backgroundColor: selectedAgentDetail.hex || "#38bdf8",
+                  color: "#0f172a",
+                  border: "none",
+                  cursor: "pointer",
+                  fontWeight: "700",
+                }}
+              >
+                ⚡ Beri Tugas Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
