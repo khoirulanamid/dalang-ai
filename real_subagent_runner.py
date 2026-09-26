@@ -16,7 +16,7 @@ import httpx
 
 from agent_tools import AgentToolbox
 
-HERMES_BASE_URL = "http://192.168.1.100:20127/v1"
+HERMES_BASE_URL = os.getenv("HERMES_BASE_URL", "http://127.0.0.1:20127/v1")
 
 def _load_standards(agent_id: str) -> str:
     """Load corresponding international standard document for the agent."""

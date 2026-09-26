@@ -187,14 +187,16 @@ class TaskDispatchRequest(BaseModel):
 @app.post("/tasks/dispatch")
 async def dispatch_task(req: TaskDispatchRequest):
     """
-    Kirim tugas spesifik atau umum ke tim Wayang.
+    Kirim tugas spesifik atau umum ke tim Wayang untuk EKSEKUSI NYATA.
     Jika agen tidak diisi atau 'auto', Sang Dalang (Risko) otomatis memilih Wayang yang paling kompeten.
+    Sub-agent yang ditunjuk akan menjalankan loop LLM nyata dengan tools (write_file, run_command, etc.)
+    di workspace.
     """
     target = req.agent if req.agent and req.agent != "auto" else None
     routed_agent, confidence = auto_route_task(req.title, req.description, target)
     task_id = f"TASK-{int(datetime.now().timestamp()) % 10000:04d}"
 
-    # 1. Risko delegasikan tugas
+    # 1. Risko delegasikan tugas secara resmi
     orchestrator.emit_event(
         event_type="task_ready",
         agent="risko",
@@ -203,34 +205,24 @@ async def dispatch_task(req: TaskDispatchRequest):
         metadata={"target_agent": routed_agent, "title": req.title},
     )
 
-    # 2. Wayang yang ditunjuk mulai bekerja (NGETIK)
-    orchestrator.emit_event(
-        event_type="task_dispatched",
-        agent=routed_agent,
-        task_id=task_id,
-        message=f"{req.title}" + (f" ({req.description})" if req.description else ""),
-        metadata={"duration": req.duration_seconds or 12},
-    )
+    # 2. Persiapkan objek task nyata untuk real_subagent_worker
+    task_dict = {
+        "id": task_id,
+        "title": req.title,
+        "description": req.description,
+        "agent": routed_agent,
+        "artifacts": [],
+    }
 
-    # 3. Selesaikan tugas setelah durasi tertentu
-    async def finish_task():
-        await asyncio.sleep(req.duration_seconds or 12)
-        orchestrator.emit_event(
-            event_type="task_completed",
-            agent=routed_agent,
-            task_id=task_id,
-            message=f"Selesai: {req.title}",
-            metadata={"status": "success"},
-        )
-
-    asyncio.create_task(finish_task())
+    # 3. Jalankan eksekusi sub-agent nyata di background (Tools + LLM + Workspace)
+    asyncio.create_task(orchestrator.real_subagent_worker(routed_agent, task_dict))
 
     return {
         "status": "dispatched",
         "task_id": task_id,
         "assigned_agent": routed_agent,
         "confidence": confidence,
-        "message": f"Tugas '{req.title}' diserahkan ke {routed_agent.capitalize()}",
+        "message": f"Tugas '{req.title}' sedang dieksekusi nyata oleh {routed_agent.capitalize()}",
     }
 
 

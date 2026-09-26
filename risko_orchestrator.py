@@ -78,6 +78,9 @@ class RiskoOrchestrator:
         import re
 
         pattern = rf"- \[[ xX]\] \*\*{task_id}\*\*"
+        if not re.search(pattern, content):
+            return  # Task is an ad-hoc dispatch, not in ROADMAP.md
+
         repl = f"{check_str} **{task_id}**"
         content = re.sub(pattern, repl, content)
 

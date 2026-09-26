@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ripple10 Auth Portal</title>
+  <title>Dalang-AI Auth Portal</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -208,7 +208,7 @@
                 <label class="checkbox-label">
                   <input
                     type="checkbox"
-                    id="remember-me"
+                    id="login-remember"
                     name="remember_me"
                     checked
                     aria-describedby="remember-me-hint"
@@ -220,7 +220,7 @@
 
               <!-- Login form-level error -->
               <div
-                id="login-form-error"
+                id="login-error"
                 class="form-error hidden"
                 role="alert"
                 aria-live="assertive"
@@ -229,9 +229,9 @@
 
               <button
                 type="submit"
-                id="login-submit"
+                id="login-submit-btn"
                 class="btn btn-primary btn-block"
-                aria-describedby="login-form-error"
+                aria-describedby="login-error"
               >
                 <span class="btn-text">Sign In</span>
                 <span class="spinner hidden" aria-hidden="true"></span>
@@ -377,9 +377,9 @@
                 <!-- Password strength meter -->
                 <div class="password-strength" aria-hidden="true">
                   <div class="strength-bar">
-                    <div class="strength-fill" id="strength-fill"></div>
+                    <div class="strength-fill" id="password-strength-fill"></div>
                   </div>
-                  <span class="strength-label" id="strength-label"></span>
+                  <span class="strength-label" id="password-strength-text"></span>
                 </div>
                 <!-- Screen-reader accessible strength description -->
                 <span id="password-strength-desc" class="sr-only" aria-live="polite"></span>
@@ -430,18 +430,20 @@
 
               <!-- Register form-level error -->
               <div
-                id="register-form-error"
+                id="register-error"
                 class="form-error hidden"
                 role="alert"
                 aria-live="assertive"
                 tabindex="-1"
               ></div>
 
+              <div id="register-success" class="form-success hidden" role="status" aria-live="polite"></div>
+
               <button
                 type="submit"
-                id="register-submit"
+                id="register-submit-btn"
                 class="btn btn-primary btn-block"
-                aria-describedby="register-form-error"
+                aria-describedby="register-error"
               >
                 <span class="btn-text">Create Account</span>
                 <span class="spinner hidden" aria-hidden="true"></span>
@@ -469,10 +471,11 @@
         <div class="dashboard-header">
           <div class="dashboard-user">
             <div class="avatar-badge" aria-hidden="true">
-              <span id="avatar-initials">?</span>
+              <span id="user-avatar-initials">?</span>
             </div>
             <div class="user-info">
-              <h2 id="dashboard-username" class="user-name">Loading…</h2>
+              <h2 id="user-display-name" class="user-name">Loading…</h2>
+              <span id="user-role-badge" class="badge"></span>
               <p id="dashboard-email" class="user-email">—</p>
             </div>
           </div>
