@@ -2261,491 +2261,451 @@ export default function App() {
   };
 
   return (
-    <div style={{ display: "flex", width: "100vw", height: "100vh", backgroundColor: "#0b0f19", color: "#f8fafc", fontFamily: "'Inter', system-ui, sans-serif", overflow: "hidden" }}>
-      {/* LEFT: 3D Studio Canvas */}
-      <div style={{ flex: 1, position: "relative" }}>
-        <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
-
-        {/* Floating Task Dispatch Bar (Pusat Penugasan Pekerjaan Nyata) */}
-        <div style={{
-          position: "absolute",
-          bottom: 24,
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 8,
-          backgroundColor: "rgba(15, 23, 42, 0.92)",
-          backdropFilter: "blur(16px)",
-          padding: "12px 18px",
-          borderRadius: 16,
-          border: "1px solid rgba(56, 189, 248, 0.25)",
-          boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.7)",
-          width: "min(760px, 92%)",
-          zIndex: 10,
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6, color: "#38bdf8", fontWeight: "700", fontSize: "0.82rem", whiteSpace: "nowrap" }}>
-              <Sparkles size={16} />
-              <span>Beri Pekerjaan:</span>
-            </div>
-
-            <input
-              type="text"
-              value={taskInput}
-              onChange={(e) => setTaskInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleDispatchTask()}
-              placeholder="Ketik tugas (misal: 'Zaki buat endpoint auth JWT' atau 'Audit celah OWASP')..."
-              style={{
-                flex: 1,
-                backgroundColor: "rgba(2, 6, 23, 0.75)",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
-                borderRadius: 10,
-                padding: "8px 14px",
-                color: "#f8fafc",
-                fontSize: "0.82rem",
-                outline: "none",
-              }}
-            />
-
-            <select
-              value={targetAgent}
-              onChange={(e) => setTargetAgent(e.target.value)}
-              style={{
-                backgroundColor: "rgba(30, 41, 59, 0.9)",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
-                borderRadius: 10,
-                padding: "8px 10px",
-                color: "#94a3b8",
-                fontSize: "0.78rem",
-                cursor: "pointer",
-                outline: "none",
-              }}
-            >
-              <option value="auto">🎭 Auto-Route (Risko)</option>
-              <option value="zaki">Zaki (Backend)</option>
-              <option value="pingot">Pingot (Data)</option>
-              <option value="lulu">Lulu (Visual UI)</option>
-              <option value="kai">Kai (Security)</option>
-              <option value="ren">Ren (QA Test)</option>
-              <option value="nova">Nova (DevOps)</option>
-              <option value="mika">Mika (Pujangga)</option>
-              <option value="risko">Risko (Sang Dalang)</option>
-            </select>
-
-            <button
-              onClick={() => handleDispatchTask()}
-              disabled={isDispatching || !taskInput.trim()}
-              style={{
-                backgroundColor: isDispatching ? "#64748b" : "#38bdf8",
-                color: "#0f172a",
-                border: "none",
-                borderRadius: 10,
-                padding: "8px 16px",
-                fontWeight: "700",
-                fontSize: "0.78rem",
-                cursor: isDispatching || !taskInput.trim() ? "not-allowed" : "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                opacity: !taskInput.trim() ? 0.6 : 1,
-                transition: "all 0.2s ease",
-              }}
-            >
-              <Send size={14} />
-              <span>{isDispatching ? "Mengirim..." : "Tugaskan"}</span>
-            </button>
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "#08090a",
+      color: "#f7f8f8",
+      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      fontFeatureSettings: "'cv01', 'ss03'",
+      overflow: "hidden"
+    }}>
+      {/* 1. TOP SYSTEM DOCK (Linear-Engineered Header Bar) */}
+      <header style={{
+        height: 46,
+        backgroundColor: "#08090a",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.07)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0 18px",
+        flexShrink: 0,
+        zIndex: 20
+      }}>
+        {/* Brand & Connection State */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+            <span style={{ fontSize: "13px", fontWeight: "600", letterSpacing: "-0.02em", color: "#f7f8f8" }}>
+              DALANG-AI
+            </span>
+            <span style={{ fontSize: "10px", fontFamily: "'JetBrains Mono', monospace", color: "#8a8f98", padding: "1px 5px", backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 4, border: "1px solid rgba(255,255,255,0.06)" }}>
+              STUDIO v1.0
+            </span>
           </div>
 
-          {/* Quick Task Suggestions Chips */}
-          <div style={{ display: "flex", alignItems: "center", gap: 6, overflowX: "auto", paddingTop: 4 }}>
-            <span style={{ fontSize: "0.7rem", color: "#64748b", whiteSpace: "nowrap" }}>Cepat:</span>
-            {[
-              { label: "⚡ API Auth JWT", task: "Buat endpoint autentikasi JWT dan middleware token", agent: "zaki" },
-              { label: "🛡️ Audit OWASP", task: "Audit keamanan celah OWASP & token validation", agent: "kai" },
-              { label: "🎨 UI Dark Mode", task: "Mendesain antarmuka dashboard dark mode responsif", agent: "lulu" },
-              { label: "📊 Skema Database", task: "Audit relasi skema database & migrasi tabel", agent: "pingot" },
-              { label: "🧪 Run Test Suite", task: "Jalankan 182 test suite otomatis & validasi assertions", agent: "ren" },
-            ].map((chip, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleDispatchTask(chip.task, chip.agent)}
-                style={{
-                  backgroundColor: "rgba(30, 41, 59, 0.6)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  borderRadius: 6,
-                  padding: "3px 8px",
-                  color: "#cbd5e1",
-                  fontSize: "0.68rem",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  transition: "background 0.15s ease",
-                }}
-                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(56, 189, 248, 0.2)")}
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(30, 41, 59, 0.6)")}
-              >
-                {chip.label}
-              </button>
-            ))}
+          <div style={{ height: 14, width: 1, backgroundColor: "rgba(255, 255, 255, 0.08)" }} />
+
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "11px", color: "#8a8f98" }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: connected ? "#10b981" : "#ef4444" }} />
+            <span>{connected ? "Orchestrator Terhubung" : "Menghubungkan..."}</span>
           </div>
         </div>
 
-        {/* Studio Overlay Header */}
-        <div style={{
-          position: "absolute",
-          top: 20,
-          left: 24,
+        {/* Center: Mode Switcher (Discrete Segmented Control) */}
+        <nav style={{
           display: "flex",
           alignItems: "center",
-          gap: 16,
-          backgroundColor: "rgba(15, 23, 42, 0.85)",
-          backdropFilter: "blur(12px)",
-          padding: "10px 20px",
-          borderRadius: 14,
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)"
+          gap: 2,
+          backgroundColor: "#0f1011",
+          padding: 3,
+          borderRadius: 8,
+          border: "1px solid rgba(255, 255, 255, 0.07)"
         }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: connected ? "#10b981" : "#ef4444", boxShadow: connected ? "0 0 12px #10b981" : "none" }} />
-            <span style={{ fontSize: "0.82rem", fontWeight: "700", letterSpacing: "0.05em", color: "#94a3b8" }}>
-              DALANG-AI STUDIO • 3D ISOMETRIK
-            </span>
-          </div>
-
-          <div style={{ height: 16, width: 1, backgroundColor: "rgba(255, 255, 255, 0.15)" }} />
-
-          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.82rem", color: "#e2e8f0" }}>
-            <span style={{ color: "#38bdf8", fontWeight: "700" }}>● Bekerja: {activeWayangCount}</span>
-            <span style={{ color: "#64748b" }}>•</span>
-            <span style={{ color: "#94a3b8" }}>Istirahat (Idle): {8 - activeWayangCount}</span>
-          </div>
-
-          <div style={{ height: 16, width: 1, backgroundColor: "rgba(255, 255, 255, 0.15)" }} />
-
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <button
-              onClick={() => handleAllMode("WORK")}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 5,
-                padding: "6px 12px",
-                borderRadius: 8,
-                border: officeMode === "WORK" ? "1px solid #38bdf8" : "1px solid rgba(255,255,255,0.1)",
-                backgroundColor: officeMode === "WORK" ? "rgba(56, 189, 248, 0.2)" : "rgba(30, 41, 59, 0.6)",
-                color: officeMode === "WORK" ? "#38bdf8" : "#94a3b8",
-                fontSize: "0.75rem",
-                fontWeight: "700",
-                cursor: "pointer",
-                transition: "all 0.2s ease"
-              }}
-              title="Semua Wayang duduk di meja kerja menghadap laptop"
-            >
-              <Laptop size={14} /> Meja Kerja
-            </button>
-
-            <button
-              onClick={() => handleAllMode("MEETING")}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 5,
-                padding: "6px 12px",
-                borderRadius: 8,
-                border: officeMode === "MEETING" ? "1px solid #818cf8" : "1px solid rgba(255,255,255,0.1)",
-                backgroundColor: officeMode === "MEETING" ? "rgba(99, 102, 241, 0.25)" : "rgba(30, 41, 59, 0.6)",
-                color: officeMode === "MEETING" ? "#a5b4fc" : "#94a3b8",
-                fontSize: "0.75rem",
-                fontWeight: "700",
-                cursor: "pointer",
-                transition: "all 0.2s ease"
-              }}
-              title="Semua Wayang jalan ke Ruang Rapat kaca untuk Sprint All-Hands Sync"
-            >
-              <Users size={14} /> Ruang Rapat
-            </button>
-
-            <button
-              onClick={() => handleAllMode("LOUNGE")}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 5,
-                padding: "6px 12px",
-                borderRadius: 8,
-                border: officeMode === "LOUNGE" ? "1px solid #f59e0b" : "1px solid rgba(255,255,255,0.1)",
-                backgroundColor: officeMode === "LOUNGE" ? "rgba(245, 158, 11, 0.2)" : "rgba(30, 41, 59, 0.6)",
-                color: officeMode === "LOUNGE" ? "#fbbf24" : "#94a3b8",
-                fontSize: "0.75rem",
-                fontWeight: "700",
-                cursor: "pointer",
-                transition: "all 0.2s ease"
-              }}
-              title="Tim jalan santai ngopi di sofa cognac & barista bar pantry"
-            >
-              <Coffee size={14} /> Santai Ngopi
-            </button>
-
-            <button
-              onClick={() => handleAllMode("AUTONOMOUS")}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 5,
-                padding: "6px 12px",
-                borderRadius: 8,
-                border: officeMode === "AUTONOMOUS" ? "1px solid #10b981" : "1px solid rgba(255,255,255,0.1)",
-                backgroundColor: officeMode === "AUTONOMOUS" ? "rgba(16, 185, 129, 0.2)" : "rgba(30, 41, 59, 0.6)",
-                color: officeMode === "AUTONOMOUS" ? "#34d399" : "#94a3b8",
-                fontSize: "0.75rem",
-                fontWeight: "700",
-                cursor: "pointer",
-                transition: "all 0.2s ease"
-              }}
-              title="Mode Otonom: Karakter bergerak dinamis & mandiri di kantor"
-            >
-              <Sparkles size={14} /> Mode Otonom
-            </button>
-          </div>
-        </div>
-
-        {/* Active Task Floating Bar */}
-        {activeTask && (
-          <div style={{
-            position: "absolute",
-            bottom: 24,
-            left: 24,
-            right: 24,
-            maxWidth: 620,
-            backgroundColor: "rgba(15, 23, 42, 0.9)",
-            backdropFilter: "blur(12px)",
-            padding: "14px 20px",
-            borderRadius: 14,
-            border: "1px solid rgba(56, 189, 248, 0.3)",
-            display: "flex",
-            alignItems: "center",
-            gap: 14,
-            boxShadow: "0 12px 30px rgba(0,0,0,0.5)"
-          }}>
-            <div style={{
-              width: 40,
-              height: 40,
-              borderRadius: 10,
-              backgroundColor: AGENTS[activeTask.agent]?.hex || "#38bdf8",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: "bold",
-              color: "#fff",
-              fontSize: "1.1rem"
-            }}>
-              {AGENTS[activeTask.agent]?.name[0] || "D"}
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontWeight: "700", fontSize: "0.9rem", color: "#f8fafc" }}>
-                  {AGENTS[activeTask.agent]?.name} • {AGENTS[activeTask.agent]?.role}
-                </span>
-                <span style={{ fontSize: "0.72rem", padding: "2px 8px", borderRadius: 4, backgroundColor: "rgba(56, 189, 248, 0.2)", color: "#38bdf8", fontWeight: "600" }}>
-                  FOKUS NGETIK DI LAPTOP
-                </span>
-              </div>
-              <p style={{ margin: "2px 0 0 0", fontSize: "0.82rem", color: "#94a3b8", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                {activeTask.task}
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* RIGHT: Roster & Autonomous Activity Panel */}
-      <div style={{
-        width: 380,
-        backgroundColor: "#0d1322",
-        borderLeft: "1px solid rgba(255, 255, 255, 0.08)",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden"
-      }}>
-        {/* Panel Header */}
-        <div style={{ padding: "20px 24px", borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <h2 style={{ margin: 0, fontSize: "1.05rem", fontWeight: "800", color: "#f8fafc", letterSpacing: "-0.01em" }}>
-              🎭 Roster 8 Para Wayang
-            </h2>
-            <span style={{ fontSize: "0.72rem", backgroundColor: "rgba(99, 102, 241, 0.2)", color: "#818cf8", padding: "4px 8px", borderRadius: 6, fontWeight: "700" }}>
-              OTONOM
-            </span>
-          </div>
-          <p style={{ margin: "4px 0 0 0", fontSize: "0.78rem", color: "#64748b" }}>
-            Wayang aktif mengetik hanya saat ada tugas yang dikerjakan
-          </p>
-        </div>
-
-        {/* Wayang Cards List */}
-        <div style={{ flex: 1, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: 10 }}>
-          {Object.entries(AGENTS).map(([id, info]) => {
-            const isWorking = Boolean(workingMap[id]);
+          {[
+            { id: "WORK", label: "Meja Kerja", icon: Laptop },
+            { id: "MEETING", label: "Ruang Rapat", icon: Users },
+            { id: "LOUNGE", label: "Lounge & Pantry", icon: Coffee },
+            { id: "AUTONOMOUS", label: "Simulasi Otonom", icon: Sparkles },
+          ].map((mode) => {
+            const Icon = mode.icon;
+            const isActive = officeMode === mode.id;
             return (
-              <div
-                key={id}
-                onClick={() => setSelectedAgentDetail({ id, ...info })}
+              <button
+                key={mode.id}
+                onClick={() => handleAllMode(mode.id)}
                 style={{
-                  padding: "12px 14px",
-                  borderRadius: 12,
-                  backgroundColor: isWorking ? "rgba(30, 41, 59, 0.85)" : "rgba(15, 23, 42, 0.55)",
-                  borderLeft: `4px solid ${info.hex}`,
-                  border: isWorking ? `1px solid ${info.hex}` : "1px solid rgba(255,255,255,0.05)",
-                  borderLeftWidth: "4px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "4px 10px",
+                  borderRadius: 6,
+                  border: isActive ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid transparent",
+                  backgroundColor: isActive ? "rgba(255, 255, 255, 0.08)" : "transparent",
+                  color: isActive ? "#f7f8f8" : "#8a8f98",
+                  fontSize: "12px",
+                  fontWeight: isActive ? "500" : "400",
                   cursor: "pointer",
-                  transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
-                  transform: isWorking ? "scale(1.01)" : "scale(1)",
+                  transition: "all 0.15s ease",
+                  outline: "none"
                 }}
-                title="Klik untuk melihat detail profil & tugas"
               >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: "0.88rem", fontWeight: "700", color: "#f8fafc" }}>{info.name}</span>
-                  <span style={{
-                    fontSize: "0.65rem",
-                    fontWeight: "800",
-                    padding: "2px 7px",
-                    borderRadius: 4,
-                    backgroundColor: isWorking ? "rgba(56, 189, 248, 0.2)" : "rgba(100, 116, 139, 0.18)",
-                    color: isWorking ? "#38bdf8" : "#94a3b8"
-                  }}>
-                    {isWorking ? "💻 NGETIK" : "☕ IDLE"}
-                  </span>
-                </div>
-                <div style={{ fontSize: "0.74rem", color: info.hex, fontWeight: "600", marginTop: 2 }}>
-                  {info.role} • {info.title}
-                </div>
-                <div style={{ fontSize: "0.72rem", color: "#64748b", marginTop: 4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  {info.action}
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 8, paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAssignToAgent(id);
-                    }}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 4,
-                      backgroundColor: isWorking ? "rgba(56, 189, 248, 0.15)" : "rgba(30, 41, 59, 0.7)",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
-                      borderRadius: 6,
-                      padding: "3px 8px",
-                      color: isWorking ? "#38bdf8" : "#cbd5e1",
-                      fontSize: "0.68rem",
-                      fontWeight: "700",
-                      cursor: "pointer",
-                    }}
-                    title="Beri tugas langsung ke wayang ini"
-                  >
-                    <PlusCircle size={12} />
-                    <span>{isWorking ? "Tugas Tambahan" : "+ Tugaskan"}</span>
-                  </button>
-
-                  <div style={{ display: "flex", gap: 4 }}>
-                    <button
-                      onClick={(e) => handleAgentNav(id, "WORK", e)}
-                      style={{
-                        fontSize: "0.65rem",
-                        padding: "2px 6px",
-                        borderRadius: 4,
-                        backgroundColor: agentModes[id] === "WORK" ? "rgba(56, 189, 248, 0.25)" : "rgba(255,255,255,0.05)",
-                        color: agentModes[id] === "WORK" ? "#38bdf8" : "#94a3b8",
-                        border: "none",
-                        cursor: "pointer"
-                      }}
-                      title="Suruh ke Meja Kerja"
-                    >
-                      Meja
-                    </button>
-                    <button
-                      onClick={(e) => handleAgentNav(id, "MEETING", e)}
-                      style={{
-                        fontSize: "0.65rem",
-                        padding: "2px 6px",
-                        borderRadius: 4,
-                        backgroundColor: agentModes[id] === "MEETING" ? "rgba(99, 102, 241, 0.3)" : "rgba(255,255,255,0.05)",
-                        color: agentModes[id] === "MEETING" ? "#a5b4fc" : "#94a3b8",
-                        border: "none",
-                        cursor: "pointer"
-                      }}
-                      title="Suruh ke Ruang Rapat"
-                    >
-                      Rapat
-                    </button>
-                    <button
-                      onClick={(e) => handleAgentNav(id, "LOUNGE", e)}
-                      style={{
-                        fontSize: "0.65rem",
-                        padding: "2px 6px",
-                        borderRadius: 4,
-                        backgroundColor: agentModes[id] === "LOUNGE" ? "rgba(245, 158, 11, 0.25)" : "rgba(255,255,255,0.05)",
-                        color: agentModes[id] === "LOUNGE" ? "#fbbf24" : "#94a3b8",
-                        border: "none",
-                        cursor: "pointer"
-                      }}
-                      title="Suruh Santai di Sofa"
-                    >
-                      Sofa
-                    </button>
-                    <button
-                      onClick={(e) => handleAgentNav(id, "PANTRY", e)}
-                      style={{
-                        fontSize: "0.65rem",
-                        padding: "2px 6px",
-                        borderRadius: 4,
-                        backgroundColor: agentModes[id] === "PANTRY" ? "rgba(16, 185, 129, 0.25)" : "rgba(255,255,255,0.05)",
-                        color: agentModes[id] === "PANTRY" ? "#34d399" : "#94a3b8",
-                        border: "none",
-                        cursor: "pointer"
-                      }}
-                      title="Suruh Ngopi di Pantry"
-                    >
-                      Pantry
-                    </button>
-                  </div>
-                </div>
-              </div>
+                <Icon size={13} style={{ opacity: isActive ? 1 : 0.7 }} />
+                <span>{mode.label}</span>
+              </button>
             );
           })}
-        </div>
+        </nav>
 
-        {/* Live Event Stream Feed */}
-        <div style={{ height: 210, borderTop: "1px solid rgba(255, 255, 255, 0.08)", padding: "16px 20px", display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-            <span style={{ fontSize: "0.78rem", fontWeight: "700", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-              Aktivitas Studio Live
-            </span>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: connected ? "#10b981" : "#ef4444" }} />
+        {/* Right: Telemetry Counts (JetBrains Mono) */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: "11px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, color: activeWayangCount > 0 ? "#7170ff" : "#8a8f98" }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: activeWayangCount > 0 ? "#7170ff" : "#62666d" }} />
+            <span>{activeWayangCount} AKTIF</span>
           </div>
+          <span style={{ color: "rgba(255, 255, 255, 0.1)" }}>/</span>
+          <span style={{ color: "#8a8f98" }}>{8 - activeWayangCount} IDLE</span>
+        </div>
+      </header>
 
-          <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 8 }}>
-            {events.length === 0 ? (
-              <div style={{ fontSize: "0.75rem", color: "#475569", textAlign: "center", margin: "auto 0" }}>
-                Menunggu lakon tugas dari Sang Dalang...
-              </div>
-            ) : (
-              events.slice(0, 15).map((ev, i) => (
-                <div key={i} style={{ fontSize: "0.74rem", borderLeft: "2px solid rgba(56, 189, 248, 0.4)", paddingLeft: 8 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", color: "#64748b", fontSize: "0.68rem" }}>
-                    <span style={{ color: "#38bdf8", fontWeight: "600" }}>{ev.agent?.toUpperCase() || "DALANG"}</span>
-                    <span>{new Date(ev.timestamp || Date.now()).toLocaleTimeString()}</span>
-                  </div>
-                  <div style={{ color: "#cbd5e1", marginTop: 2 }}>{ev.message}</div>
+      {/* 2. BODY SPLIT: 3D Viewport (Left) + Inspector Sidebar (Right) */}
+      <div style={{ display: "flex", flex: 1, minHeight: 0, position: "relative" }}>
+        
+        {/* LEFT: 3D Studio Canvas */}
+        <div style={{ flex: 1, position: "relative", backgroundColor: "#08090a", overflow: "hidden" }}>
+          <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
+
+          {/* Integrated Linear-Style Command Dock (Bottom Center) */}
+          <div style={{
+            position: "absolute",
+            bottom: 18,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "min(720px, 94%)",
+            backgroundColor: "#0f1011",
+            border: "1px solid rgba(255, 255, 255, 0.09)",
+            borderRadius: 8,
+            boxShadow: "0 12px 32px -4px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.04)",
+            display: "flex",
+            flexDirection: "column",
+            zIndex: 10,
+            overflow: "hidden"
+          }}>
+            {/* Active Task Banner if running */}
+            {activeTask && (
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "6px 14px",
+                backgroundColor: "rgba(94, 106, 210, 0.08)",
+                borderBottom: "1px solid rgba(94, 106, 210, 0.15)",
+                fontSize: "11px"
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: "#7170ff" }} />
+                  <span style={{ fontWeight: "500", color: "#f7f8f8" }}>
+                    {AGENTS[activeTask.agent]?.name} ({AGENTS[activeTask.agent]?.role})
+                  </span>
+                  <span style={{ color: "#8a8f98" }}>•</span>
+                  <span style={{ color: "#d0d6e0", maxWidth: 360, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {activeTask.task}
+                  </span>
                 </div>
-              ))
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", color: "#7170ff", fontSize: "10px", fontWeight: "500" }}>
+                  MENGETIK
+                </span>
+              </div>
             )}
+
+            {/* Input Bar */}
+            <div style={{ display: "flex", alignItems: "center", padding: "8px 12px", gap: 8 }}>
+              <input
+                type="text"
+                value={taskInput}
+                onChange={(e) => setTaskInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleDispatchTask()}
+                placeholder="Perintahkan tugas (misal: 'Zaki buat endpoint auth JWT' atau 'Audit celah keamanan')..."
+                style={{
+                  flex: 1,
+                  backgroundColor: "transparent",
+                  border: "none",
+                  outline: "none",
+                  color: "#f7f8f8",
+                  fontSize: "13px",
+                  fontFamily: "'Inter', sans-serif",
+                }}
+              />
+
+              <select
+                value={targetAgent}
+                onChange={(e) => setTargetAgent(e.target.value)}
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  borderRadius: 6,
+                  padding: "4px 8px",
+                  color: "#d0d6e0",
+                  fontSize: "11px",
+                  cursor: "pointer",
+                  outline: "none"
+                }}
+              >
+                <option value="auto">Auto-Route (Risko)</option>
+                <option value="zaki">Zaki (Backend)</option>
+                <option value="pingot">Pingot (Data)</option>
+                <option value="lulu">Lulu (Visual UI)</option>
+                <option value="kai">Kai (Security)</option>
+                <option value="ren">Ren (QA Test)</option>
+                <option value="nova">Nova (DevOps)</option>
+                <option value="mika">Mika (Pujangga)</option>
+                <option value="risko">Risko (Dalang)</option>
+              </select>
+
+              <button
+                onClick={() => handleDispatchTask()}
+                disabled={isDispatching || !taskInput.trim()}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 5,
+                  padding: "5px 12px",
+                  borderRadius: 6,
+                  border: "none",
+                  backgroundColor: isDispatching || !taskInput.trim() ? "rgba(255, 255, 255, 0.05)" : "#5e6ad2",
+                  color: isDispatching || !taskInput.trim() ? "#62666d" : "#ffffff",
+                  fontSize: "12px",
+                  fontWeight: "500",
+                  cursor: isDispatching || !taskInput.trim() ? "not-allowed" : "pointer",
+                  transition: "background 0.15s ease"
+                }}
+              >
+                <Send size={12} />
+                <span>{isDispatching ? "Mengirim..." : "Tugaskan"}</span>
+              </button>
+            </div>
+
+            {/* Quick Dispatch Chips */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "4px 12px 8px",
+              borderTop: "1px solid rgba(255, 255, 255, 0.04)",
+              overflowX: "auto"
+            }}>
+              <span style={{ fontSize: "10px", color: "#62666d", textTransform: "uppercase", letterSpacing: "0.04em", whiteSpace: "nowrap" }}>
+                Rekomendasi:
+              </span>
+              {[
+                { label: "API Auth JWT", task: "Buat endpoint autentikasi JWT dan middleware token", agent: "zaki" },
+                { label: "Audit OWASP", task: "Audit keamanan celah OWASP & token validation", agent: "kai" },
+                { label: "UI Dark Mode", task: "Mendesain antarmuka dashboard dark mode responsif", agent: "lulu" },
+                { label: "Skema Database", task: "Audit relasi skema database & migrasi tabel", agent: "pingot" },
+                { label: "Run Test Suite", task: "Jalankan 182 test suite otomatis & validasi assertions", agent: "ren" },
+              ].map((chip, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleDispatchTask(chip.task, chip.agent)}
+                  style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.02)",
+                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    borderRadius: 4,
+                    padding: "2px 7px",
+                    color: "#8a8f98",
+                    fontSize: "11px",
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                    transition: "all 0.12s ease"
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
+                    e.currentTarget.style.color = "#d0d6e0";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.02)";
+                    e.currentTarget.style.color = "#8a8f98";
+                  }}
+                >
+                  {chip.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
+
+        {/* RIGHT: Inspector Sidebar (Clean Engineering Roster & Terminal Log) */}
+        <aside style={{
+          width: 360,
+          backgroundColor: "#08090a",
+          borderLeft: "1px solid rgba(255, 255, 255, 0.07)",
+          display: "flex",
+          flexDirection: "column",
+          flexShrink: 0
+        }}>
+          {/* Panel Header */}
+          <div style={{
+            padding: "14px 18px",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.07)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between"
+          }}>
+            <div>
+              <div style={{ fontSize: "13px", fontWeight: "600", color: "#f7f8f8", letterSpacing: "-0.01em" }}>
+                Tim Wayang
+              </div>
+              <div style={{ fontSize: "11px", color: "#8a8f98", marginTop: 2 }}>
+                Status kerja otonom berbasis antrean tugas
+              </div>
+            </div>
+            <span style={{ fontSize: "10px", fontFamily: "'JetBrains Mono', monospace", color: "#8a8f98", padding: "2px 6px", backgroundColor: "rgba(255,255,255,0.03)", borderRadius: 4, border: "1px solid rgba(255,255,255,0.06)" }}>
+              8 AGEN
+            </span>
+          </div>
+
+          {/* Wayang Cards (Zero Accent-Rail Slop, Linear Clean Item Style) */}
+          <div style={{ flex: 1, overflowY: "auto", padding: "10px 14px", display: "flex", flexDirection: "column", gap: 6 }}>
+            {Object.entries(AGENTS).map(([id, info]) => {
+              const isWorking = Boolean(workingMap[id]);
+              return (
+                <div
+                  key={id}
+                  onClick={() => setSelectedAgentDetail({ id, ...info })}
+                  style={{
+                    padding: "10px 12px",
+                    borderRadius: 6,
+                    backgroundColor: isWorking ? "rgba(94, 106, 210, 0.06)" : "rgba(255, 255, 255, 0.02)",
+                    border: isWorking ? "1px solid rgba(94, 106, 210, 0.28)" : "1px solid rgba(255, 255, 255, 0.05)",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease",
+                  }}
+                  onMouseOver={(e) => {
+                    if (!isWorking) e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.04)";
+                  }}
+                  onMouseOut={(e) => {
+                    if (!isWorking) e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.02)";
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: "50%",
+                        backgroundColor: isWorking ? "#10b981" : "#45474c"
+                      }} />
+                      <span style={{ fontSize: "13px", fontWeight: "500", color: "#f7f8f8" }}>
+                        {info.name}
+                      </span>
+                      <span style={{ fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", color: "#8a8f98" }}>
+                        {info.role}
+                      </span>
+                    </div>
+
+                    <span style={{
+                      fontSize: "10px",
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontWeight: "500",
+                      padding: "1px 6px",
+                      borderRadius: 4,
+                      backgroundColor: isWorking ? "rgba(16, 185, 129, 0.12)" : "rgba(255, 255, 255, 0.03)",
+                      color: isWorking ? "#10b981" : "#62666d",
+                      border: isWorking ? "1px solid rgba(16, 185, 129, 0.25)" : "1px solid rgba(255, 255, 255, 0.04)"
+                    }}>
+                      {isWorking ? "NGETIK" : "IDLE"}
+                    </span>
+                  </div>
+
+                  <div style={{ fontSize: "11px", color: "#8a8f98", marginTop: 4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {info.personality}
+                  </div>
+
+                  {/* Card Controls */}
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 8, paddingTop: 6, borderTop: "1px solid rgba(255, 255, 255, 0.04)" }}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAssignToAgent(id);
+                      }}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 4,
+                        backgroundColor: isWorking ? "rgba(94, 106, 210, 0.12)" : "rgba(255, 255, 255, 0.03)",
+                        border: isWorking ? "1px solid rgba(94, 106, 210, 0.25)" : "1px solid rgba(255, 255, 255, 0.06)",
+                        borderRadius: 4,
+                        padding: "2px 7px",
+                        color: isWorking ? "#828fff" : "#d0d6e0",
+                        fontSize: "11px",
+                        cursor: "pointer"
+                      }}
+                    >
+                      <PlusCircle size={11} />
+                      <span>{isWorking ? "Tugas Lain" : "Tugaskan"}</span>
+                    </button>
+
+                    <div style={{ display: "flex", gap: 3 }}>
+                      {[
+                        { loc: "WORK", label: "Meja" },
+                        { loc: "MEETING", label: "Rapat" },
+                        { loc: "LOUNGE", label: "Sofa" },
+                        { loc: "PANTRY", label: "Pantry" },
+                      ].map((btn) => (
+                        <button
+                          key={btn.loc}
+                          onClick={(e) => handleAgentNav(id, btn.loc, e)}
+                          style={{
+                            fontSize: "10px",
+                            padding: "2px 5px",
+                            borderRadius: 4,
+                            backgroundColor: agentModes[id] === btn.loc ? "rgba(255, 255, 255, 0.08)" : "transparent",
+                            color: agentModes[id] === btn.loc ? "#f7f8f8" : "#62666d",
+                            border: agentModes[id] === btn.loc ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid transparent",
+                            cursor: "pointer"
+                          }}
+                        >
+                          {btn.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Studio Audit Stream (Compact Terminal Log) */}
+          <div style={{
+            height: 180,
+            backgroundColor: "#050607",
+            borderTop: "1px solid rgba(255, 255, 255, 0.07)",
+            padding: "10px 14px",
+            display: "flex",
+            flexDirection: "column"
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+              <span style={{ fontSize: "10px", fontFamily: "'JetBrains Mono', monospace", color: "#62666d", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                Audit Log Studio
+              </span>
+              <span style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: connected ? "#10b981" : "#ef4444" }} />
+            </div>
+
+            <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 4, fontFamily: "'JetBrains Mono', monospace", fontSize: "11px" }}>
+              {events.length === 0 ? (
+                <div style={{ color: "#45474c", margin: "auto 0", textAlign: "center" }}>
+                  Menunggu lakon tugas...
+                </div>
+              ) : (
+                events.slice(0, 20).map((ev, i) => (
+                  <div key={i} style={{ color: "#8a8f98", lineHeight: 1.4 }}>
+                    <span style={{ color: "#62666d", marginRight: 6 }}>
+                      {new Date(ev.timestamp || Date.now()).toLocaleTimeString()}
+                    </span>
+                    <span style={{ color: "#7170ff", marginRight: 6, fontWeight: "500" }}>
+                      [{ev.agent?.toUpperCase() || "DALANG"}]
+                    </span>
+                    <span style={{ color: "#d0d6e0" }}>{ev.message}</span>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </aside>
       </div>
 
-      {/* Modal Detail Profil & Tugas Wayang saat Kartu Diklik */}
+      {/* 3. MODAL DETAIL WAYANG (Linear Dialog Standard) */}
       {selectedAgentDetail && (
         <div
           onClick={() => setSelectedAgentDetail(null)}
@@ -2755,8 +2715,8 @@ export default function App() {
             left: 0,
             width: "100vw",
             height: "100vh",
-            backgroundColor: "rgba(0, 0, 0, 0.65)",
-            backdropFilter: "blur(6px)",
+            backgroundColor: "rgba(0, 0, 0, 0.72)",
+            backdropFilter: "blur(4px)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -2766,46 +2726,46 @@ export default function App() {
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
-              backgroundColor: "#0f172a",
-              border: `2px solid ${selectedAgentDetail.hex || "#38bdf8"}`,
-              borderRadius: 16,
-              padding: "24px 28px",
-              width: "min(460px, 90%)",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8)",
+              backgroundColor: "#0f1011",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: 8,
+              padding: "20px 24px",
+              width: "min(420px, 92%)",
+              boxShadow: "0 20px 48px -8px rgba(0, 0, 0, 0.8)",
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
-              <h3 style={{ margin: 0, fontSize: "1.25rem", color: "#f8fafc", fontWeight: "800" }}>
+              <h3 style={{ margin: 0, fontSize: "16px", color: "#f7f8f8", fontWeight: "600" }}>
                 {selectedAgentDetail.name}
               </h3>
-              <span style={{ fontSize: "0.8rem", color: selectedAgentDetail.hex, fontWeight: "700" }}>
+              <span style={{ fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", color: "#8a8f98" }}>
                 {selectedAgentDetail.role}
               </span>
             </div>
 
-            <div style={{ fontSize: "0.85rem", color: "#cbd5e1", marginBottom: 16, lineHeight: 1.5 }}>
-              <div><strong>Gelar:</strong> {selectedAgentDetail.title}</div>
-              <div style={{ marginTop: 4 }}><strong>🎭 Kepribadian:</strong> {selectedAgentDetail.personality}</div>
-              <div style={{ marginTop: 4 }}><strong>Fokus Kerja:</strong> {selectedAgentDetail.action}</div>
-              <div style={{ marginTop: 10, padding: "10px 14px", borderRadius: 8, backgroundColor: "rgba(2, 6, 23, 0.6)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <strong>Status Saat Ini:</strong>{" "}
-                <span style={{ color: workingMap[selectedAgentDetail.id] ? "#38bdf8" : "#94a3b8", fontWeight: "700" }}>
-                  {workingMap[selectedAgentDetail.id] ? "💻 Sedang Mengetik (Mengerjakan Tugas)" : "☕ Istirahat (Menunggu Tugas)"}
+            <div style={{ fontSize: "12px", color: "#8a8f98", lineHeight: 1.6, marginBottom: 16 }}>
+              <div><strong style={{ color: "#d0d6e0" }}>Gelar:</strong> {selectedAgentDetail.title}</div>
+              <div style={{ marginTop: 4 }}><strong style={{ color: "#d0d6e0" }}>Kepribadian:</strong> {selectedAgentDetail.personality}</div>
+              <div style={{ marginTop: 4 }}><strong style={{ color: "#d0d6e0" }}>Spesialisasi:</strong> {selectedAgentDetail.action}</div>
+              <div style={{ marginTop: 10, padding: "8px 10px", borderRadius: 6, backgroundColor: "rgba(255, 255, 255, 0.02)", border: "1px solid rgba(255, 255, 255, 0.05)" }}>
+                <strong style={{ color: "#d0d6e0" }}>Status:</strong>{" "}
+                <span style={{ color: workingMap[selectedAgentDetail.id] ? "#10b981" : "#8a8f98", fontWeight: "500" }}>
+                  {workingMap[selectedAgentDetail.id] ? "Aktif Mengetik (Menyelesaikan Tugas)" : "Istirahat (Siap Menerima Tugas)"}
                 </span>
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: 10, justifyContent: "flex-end", marginTop: 20 }}>
+            <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
               <button
                 onClick={() => setSelectedAgentDetail(null)}
                 style={{
-                  padding: "8px 16px",
-                  borderRadius: 8,
-                  backgroundColor: "rgba(255,255,255,0.08)",
-                  color: "#94a3b8",
-                  border: "none",
+                  padding: "6px 12px",
+                  borderRadius: 6,
+                  backgroundColor: "rgba(255, 255, 255, 0.04)",
+                  color: "#8a8f98",
+                  border: "1px solid rgba(255, 255, 255, 0.06)",
                   cursor: "pointer",
-                  fontWeight: "600",
+                  fontSize: "12px",
                 }}
               >
                 Tutup
@@ -2816,16 +2776,17 @@ export default function App() {
                   setSelectedAgentDetail(null);
                 }}
                 style={{
-                  padding: "8px 18px",
-                  borderRadius: 8,
-                  backgroundColor: selectedAgentDetail.hex || "#38bdf8",
-                  color: "#0f172a",
+                  padding: "6px 14px",
+                  borderRadius: 6,
+                  backgroundColor: "#5e6ad2",
+                  color: "#ffffff",
                   border: "none",
                   cursor: "pointer",
-                  fontWeight: "700",
+                  fontSize: "12px",
+                  fontWeight: "500",
                 }}
               >
-                ⚡ Beri Tugas Sekarang
+                Tugaskan Sekarang
               </button>
             </div>
           </div>
