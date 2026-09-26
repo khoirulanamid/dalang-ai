@@ -159,45 +159,70 @@ const AGENTS = {
   },
 };
 
-// Procedural Parquet Wood Floor Texture (MengTo Standard PBR)
-function createParquetTexture() {
+// ==========================================
+// 🏢 HIGH-TECH PROCEDURAL TEXTURES (Silicon Valley Enterprise Standard)
+// ==========================================
+
+// 1. Polished Architectural Terrazzo Concrete Floor
+function createTerrazzoFloorTexture() {
   const canvas = document.createElement("canvas");
   canvas.width = 1024;
   canvas.height = 1024;
   const ctx = canvas.getContext("2d");
 
-  // Warm Oak Base
-  ctx.fillStyle = "#8a6642";
+  // Deep Obsidian / Slate Micro-Cement Base
+  ctx.fillStyle = "#121418";
   ctx.fillRect(0, 0, 1024, 1024);
 
-  const plankW = 128;
-  const plankH = 32;
+  // Micro stone aggregates & quartz specks
+  const speckColors = ["#1a1d24", "#252932", "#2e3440", "#384152", "#475569", "#1e222b"];
+  for (let i = 0; i < 2800; i++) {
+    const rx = Math.random() * 1024;
+    const ry = Math.random() * 1024;
+    const size = Math.random() * 2.8 + 0.8;
+    ctx.fillStyle = speckColors[Math.floor(Math.random() * speckColors.length)];
+    ctx.beginPath();
+    ctx.arc(rx, ry, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
-  for (let y = 0; y < 1024; y += plankH) {
-    const rowOffset = (Math.floor(y / plankH) % 2) * (plankW / 2);
-    for (let x = -plankW; x < 1024 + plankW; x += plankW) {
-      const px = x + rowOffset;
-      const shade = ((Math.sin(px * 12.3 + y * 7.1) + 1) / 2) * 22;
-      const r = Math.floor(138 + shade);
-      const g = Math.floor(102 + shade * 0.8);
-      const b = Math.floor(66 + shade * 0.6);
-      ctx.fillStyle = `rgb(${r},${g},${b})`;
-      ctx.fillRect(px + 1, y + 1, plankW - 2, plankH - 2);
+  // 256x256 Large Architectural Tile Grid & Expansion Seams
+  const tileSize = 256;
+  ctx.lineWidth = 1.5;
+  for (let x = 0; x <= 1024; x += tileSize) {
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.055)";
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, 1024);
+    ctx.stroke();
 
-      // Plank Grain
-      ctx.strokeStyle = `rgba(0, 0, 0, 0.08)`;
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(px, y + plankH * 0.35);
-      ctx.lineTo(px + plankW, y + plankH * 0.35);
-      ctx.moveTo(px, y + plankH * 0.7);
-      ctx.lineTo(px + plankW, y + plankH * 0.7);
-      ctx.stroke();
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.beginPath();
+    ctx.moveTo(x + 1, 0);
+    ctx.lineTo(x + 1, 1024);
+    ctx.stroke();
+  }
 
-      // Border Bevel
-      ctx.strokeStyle = "rgba(40, 25, 12, 0.35)";
-      ctx.lineWidth = 1.5;
-      ctx.strokeRect(px, y, plankW, plankH);
+  for (let y = 0; y <= 1024; y += tileSize) {
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.055)";
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(1024, y);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.beginPath();
+    ctx.moveTo(0, y + 1);
+    ctx.lineTo(1024, y + 1);
+    ctx.stroke();
+  }
+
+  // Brass Inlay Crosses at Tile Intersections
+  for (let x = tileSize; x < 1024; x += tileSize) {
+    for (let y = tileSize; y < 1024; y += tileSize) {
+      ctx.fillStyle = "rgba(212, 175, 55, 0.55)";
+      ctx.fillRect(x - 4, y - 1, 9, 2);
+      ctx.fillRect(x - 1, y - 4, 2, 9);
     }
   }
 
@@ -208,7 +233,151 @@ function createParquetTexture() {
   return texture;
 }
 
-// Procedural Scandinavian Area Rug Texture
+// 2. Vertical Walnut Acoustic Slat Baffle Texture
+function createWalnutSlatTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+  const ctx = canvas.getContext("2d");
+
+  // Acoustic black felt backing
+  ctx.fillStyle = "#0a0b0e";
+  ctx.fillRect(0, 0, 512, 512);
+
+  const slatW = 20;
+  const gap = 8;
+  const total = slatW + gap;
+
+  for (let x = 0; x < 512; x += total) {
+    // Slat wood gradient
+    const grad = ctx.createLinearGradient(x, 0, x + slatW, 0);
+    grad.addColorStop(0, "#2d1c13");
+    grad.addColorStop(0.3, "#3d271b");
+    grad.addColorStop(0.7, "#482e20");
+    grad.addColorStop(1, "#281810");
+    ctx.fillStyle = grad;
+    ctx.fillRect(x, 0, slatW, 512);
+
+    // Subtle natural wood grain lines
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.15)";
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 4; i++) {
+      const gx = x + 3 + i * 4;
+      ctx.beginPath();
+      ctx.moveTo(gx, 0);
+      ctx.lineTo(gx + (Math.sin(gx) * 2), 512);
+      ctx.stroke();
+    }
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(4, 1);
+  return texture;
+}
+
+// 3. 42U Data Center Server Rack Faceplate Texture
+function createServerRackTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 1024;
+  const ctx = canvas.getContext("2d");
+
+  // Matte Black Steel Rack Frame
+  ctx.fillStyle = "#0c0d10";
+  ctx.fillRect(0, 0, 512, 1024);
+
+  // Outer Rack Rails
+  ctx.fillStyle = "#1e2229";
+  ctx.fillRect(0, 0, 36, 1024);
+  ctx.fillRect(512 - 36, 0, 36, 1024);
+
+  // Rack Unit Mounting Holes
+  ctx.fillStyle = "#07080a";
+  for (let y = 16; y < 1024; y += 22) {
+    ctx.fillRect(14, y, 8, 8);
+    ctx.fillRect(512 - 22, y, 8, 8);
+  }
+
+  // 1U, 2U, and 4U Server Blades
+  let curY = 20;
+  while (curY < 1000) {
+    const uHeight = [24, 48, 72, 96][Math.floor(Math.random() * 4)];
+    if (curY + uHeight > 1000) break;
+
+    // Server chassis front
+    const serverGrad = ctx.createLinearGradient(40, curY, 512 - 40, curY);
+    serverGrad.addColorStop(0, "#15181f");
+    serverGrad.addColorStop(0.5, "#1f242d");
+    serverGrad.addColorStop(1, "#15181f");
+    ctx.fillStyle = serverGrad;
+    ctx.fillRect(40, curY, 512 - 80, uHeight - 2);
+
+    // Bevel edge
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.strokeRect(40, curY, 512 - 80, uHeight - 2);
+
+    // Ventilation honeycomb mesh on left
+    ctx.fillStyle = "rgba(0, 0, 0, 0.65)";
+    ctx.fillRect(48, curY + 4, 160, uHeight - 10);
+
+    // Drive bays or telemetry LED cluster on right
+    const ledX = 512 - 120;
+    const ledCount = Math.floor((uHeight - 10) / 10);
+    for (let l = 0; l < ledCount; l++) {
+      const ly = curY + 6 + l * 10;
+      // Activity LEDs (mostly green/cyan, occasional amber/blue)
+      const colors = ["#10b981", "#06b6d4", "#10b981", "#3b82f6", "#f59e0b"];
+      ctx.fillStyle = colors[(l + curY) % colors.length];
+      ctx.fillRect(ledX, ly, 6, 4);
+      ctx.fillRect(ledX + 12, ly, 6, 4);
+      ctx.fillRect(ledX + 24, ly, 6, 4);
+    }
+
+    curY += uHeight + 2;
+  }
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 4. Frosted Dusted Crystal Glass Privacy Band (Standard in Apple/Stripe HQs)
+function createPrivacyFilmTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+
+  // Transparent clear glass background
+  ctx.clearRect(0, 0, 512, 256);
+
+  // Center frosted gradient band
+  const bandGrad = ctx.createLinearGradient(0, 0, 0, 256);
+  bandGrad.addColorStop(0, "rgba(210, 230, 255, 0.0)");
+  bandGrad.addColorStop(0.2, "rgba(210, 230, 255, 0.35)");
+  bandGrad.addColorStop(0.5, "rgba(210, 230, 255, 0.65)");
+  bandGrad.addColorStop(0.8, "rgba(210, 230, 255, 0.35)");
+  bandGrad.addColorStop(1, "rgba(210, 230, 255, 0.0)");
+  ctx.fillStyle = bandGrad;
+  ctx.fillRect(0, 0, 512, 256);
+
+  // Micro dot-matrix architectural pattern inside band
+  ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
+  for (let x = 8; x < 512; x += 16) {
+    for (let y = 64; y < 192; y += 16) {
+      ctx.beginPath();
+      ctx.arc(x, y, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.repeat.set(6, 1);
+  return texture;
+}
+
+// 5. Procedural Tech Acoustic Area Rug Texture
 function createRugTexture(baseColorHex, patternColorHex) {
   const canvas = document.createElement("canvas");
   canvas.width = 512;
@@ -218,23 +387,24 @@ function createRugTexture(baseColorHex, patternColorHex) {
   ctx.fillStyle = baseColorHex;
   ctx.fillRect(0, 0, 512, 512);
 
+  // Minimalist technical grid & borders
   ctx.strokeStyle = patternColorHex;
-  ctx.lineWidth = 4;
-  for (let i = -512; i < 1024; i += 64) {
+  ctx.lineWidth = 1.5;
+  for (let i = 0; i <= 512; i += 64) {
     ctx.beginPath();
     ctx.moveTo(i, 0);
-    ctx.lineTo(i + 512, 512);
+    ctx.lineTo(i, 512);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(i + 512, 0);
-    ctx.lineTo(i, 512);
+    ctx.moveTo(0, i);
+    ctx.lineTo(512, i);
     ctx.stroke();
   }
 
-  ctx.strokeStyle = patternColorHex;
-  ctx.lineWidth = 16;
-  ctx.strokeRect(8, 8, 496, 496);
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+  ctx.lineWidth = 6;
+  ctx.strokeRect(6, 6, 500, 500);
 
   return new THREE.CanvasTexture(canvas);
 }
@@ -673,21 +843,21 @@ export default function App() {
     // ==========================================
     const roomGroup = new THREE.Group();
 
-    // 1. Warm Oak Parquet Floor
-    const parquetTexture = createParquetTexture();
+    // 1. High-Tech Polished Terrazzo Concrete Floor
+    const terrazzoTexture = createTerrazzoFloorTexture();
     const floorGeo = new THREE.PlaneGeometry(32, 28);
     const floorMat = new THREE.MeshStandardMaterial({
-      map: parquetTexture,
-      roughness: 0.62,
-      metalness: 0.05,
+      map: terrazzoTexture,
+      roughness: 0.38,
+      metalness: 0.08,
     });
     const floor = new THREE.Mesh(floorGeo, floorMat);
     floor.rotation.x = -Math.PI / 2;
     floor.receiveShadow = true;
     roomGroup.add(floor);
 
-    // 2. Central Scandinavian Area Rug
-    const rugTexture = createRugTexture("#1e293b", "#334155");
+    // 2. Central Engineering Acoustic Felt Inlay / Rug
+    const rugTexture = createRugTexture("#111317", "rgba(99, 102, 241, 0.16)");
     const rugGeo = new THREE.PlaneGeometry(18, 14);
     const rugMat = new THREE.MeshStandardMaterial({
       map: rugTexture,
@@ -700,31 +870,69 @@ export default function App() {
     rug.receiveShadow = true;
     roomGroup.add(rug);
 
-    // 3. Back Wall (Dark Slate Architect Wall)
+    // 2B. Conference Room Smoked Walnut Floor Inlay
+    const confFloorGeo = new THREE.PlaneGeometry(7.8, 11.6);
+    const confFloorMat = new THREE.MeshStandardMaterial({
+      color: 0x1a120d,
+      roughness: 0.45,
+      metalness: 0.05,
+    });
+    const confFloor = new THREE.Mesh(confFloorGeo, confFloorMat);
+    confFloor.rotation.x = -Math.PI / 2;
+    confFloor.position.set(14.5, 0.012, -6.5);
+    confFloor.receiveShadow = true;
+    roomGroup.add(confFloor);
+
+    // 3. Back Wall with Architectural Walnut Acoustic Slat Baffles
+    const slatTexture = createWalnutSlatTexture();
     const backWallGeo = new THREE.BoxGeometry(32, 5.8, 0.4);
-    const wallMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.88 });
-    const backWall = new THREE.Mesh(backWallGeo, wallMat);
+    const slatWallMat = new THREE.MeshStandardMaterial({
+      map: slatTexture,
+      roughness: 0.65,
+      metalness: 0.02,
+    });
+    const backWall = new THREE.Mesh(backWallGeo, slatWallMat);
     backWall.position.set(0, 2.9, -14);
     backWall.receiveShadow = true;
     roomGroup.add(backWall);
 
-    // Left Wall with Big Industrial Daylight Windows
+    // Architectural Recessed LED Cove Lighting (Washes down the walnut slats)
+    const coveLightGeo = new THREE.BoxGeometry(31.6, 0.05, 0.22);
+    const coveLightMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      emissive: 0xfff7ed,
+      emissiveIntensity: 2.2,
+      roughness: 0.2,
+    });
+    const coveLight = new THREE.Mesh(coveLightGeo, coveLightMat);
+    coveLight.position.set(0, 5.68, -13.7);
+    roomGroup.add(coveLight);
+
+    // Soft cove downlight wash
+    [-10, 0, 10].forEach((lx) => {
+      const washLight = new THREE.PointLight(0xfef3c7, 0.75, 7, 2);
+      washLight.position.set(lx, 5.5, -13.5);
+      roomGroup.add(washLight);
+    });
+
+    // Left Wall with Industrial Curtain Wall Daylight Windows
+    const leftWallMat = new THREE.MeshStandardMaterial({ color: 0x0f1115, roughness: 0.85 });
     const leftWallGeo = new THREE.BoxGeometry(0.4, 5.8, 28);
-    const leftWall = new THREE.Mesh(leftWallGeo, wallMat);
+    const leftWall = new THREE.Mesh(leftWallGeo, leftWallMat);
     leftWall.position.set(-16, 2.9, 0);
     leftWall.receiveShadow = true;
     roomGroup.add(leftWall);
 
-    // Baseboards
-    const baseboardGeo = new THREE.BoxGeometry(32, 0.25, 0.45);
-    const baseboardMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.5 });
+    // Baseboards (Matte Black Anodized Aluminum)
+    const baseboardGeo = new THREE.BoxGeometry(32, 0.2, 0.45);
+    const baseboardMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.85, roughness: 0.2 });
     const baseboard = new THREE.Mesh(baseboardGeo, baseboardMat);
-    baseboard.position.set(0, 0.125, -13.8);
+    baseboard.position.set(0, 0.1, -13.8);
     roomGroup.add(baseboard);
 
-    // 4. Large Sunlight Windows on Left Wall
+    // Large Daylight Windows on Left Wall
     const windowFrameGeo = new THREE.BoxGeometry(0.3, 3.4, 12);
-    const windowFrameMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.85, roughness: 0.25 });
+    const windowFrameMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.85, roughness: 0.25 });
     const windowFrame = new THREE.Mesh(windowFrameGeo, windowFrameMat);
     windowFrame.position.set(-15.8, 3.3, 0);
     roomGroup.add(windowFrame);
@@ -741,9 +949,123 @@ export default function App() {
     glassPane.position.set(-15.7, 3.3, 0);
     roomGroup.add(glassPane);
 
-    // 5. Frameless Glass Partition Wall (Meeting Room Boundary) with Doorway
-    // Section 1: South Glass Wall (z = -9.5 to z = -1.5)
-    const glassWallGeo1 = new THREE.BoxGeometry(0.08, 5.4, 8.0);
+    // ==========================================
+    // 🌐 4. GLASS-ENCLOSED SERVER ROOM & DATA CENTER CORE (High-Tech Feature)
+    // ==========================================
+    const serverCoreGroup = new THREE.Group();
+    serverCoreGroup.position.set(-11.5, 0, -11.8);
+
+    // Glass Enclosure Partitions for Server Room
+    const serverGlassMat = new THREE.MeshPhysicalMaterial({
+      color: 0x06b6d4,
+      transmission: 0.82,
+      opacity: 0.45,
+      transparent: true,
+      roughness: 0.1,
+      metalness: 0.1,
+      ior: 1.5,
+    });
+
+    // Server room front glass wall
+    const sFrontGlass = new THREE.Mesh(new THREE.BoxGeometry(4.2, 5.4, 0.06), serverGlassMat);
+    sFrontGlass.position.set(0, 2.7, 2.2);
+    serverCoreGroup.add(sFrontGlass);
+
+    // Server room side glass partition
+    const sSideGlass = new THREE.Mesh(new THREE.BoxGeometry(0.06, 5.4, 4.4), serverGlassMat);
+    sSideGlass.position.set(2.1, 2.7, 0);
+    serverCoreGroup.add(sSideGlass);
+
+    // Black Steel Structural Corner Posts
+    const postMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.88, roughness: 0.2 });
+    [[-2.1, 2.2], [2.1, 2.2], [2.1, -2.2]].forEach(([px, pz]) => {
+      const pMesh = new THREE.Mesh(new THREE.BoxGeometry(0.12, 5.5, 0.12), postMat);
+      pMesh.position.set(px, 2.75, pz);
+      serverCoreGroup.add(pMesh);
+    });
+
+    // 42U Server Racks (2 Units side by side)
+    const serverRackTex = createServerRackTexture();
+    const rackMat = new THREE.MeshStandardMaterial({
+      map: serverRackTex,
+      metalness: 0.85,
+      roughness: 0.25,
+    });
+
+    [-0.75, 0.75].forEach((rx) => {
+      const rack = new THREE.Mesh(new THREE.BoxGeometry(1.05, 2.35, 1.1), rackMat);
+      rack.position.set(rx, 1.175, 0);
+      rack.castShadow = true;
+      serverCoreGroup.add(rack);
+
+      // Top exhaust cooling fan unit
+      const fanTop = new THREE.Mesh(
+        new THREE.BoxGeometry(0.95, 0.08, 1.0),
+        new THREE.MeshStandardMaterial({ color: 0x1e2229, metalness: 0.9 })
+      );
+      fanTop.position.set(rx, 2.39, 0);
+      serverCoreGroup.add(fanTop);
+    });
+
+    // Overhead Cable Ladder Raceway & Fiber Optic Duct
+    const cableTray = new THREE.Mesh(
+      new THREE.BoxGeometry(3.8, 0.1, 0.45),
+      new THREE.MeshStandardMaterial({ color: 0xeab308, metalness: 0.5, roughness: 0.3 }) // Yellow fiber tray
+    );
+    cableTray.position.set(0, 3.8, 0);
+    serverCoreGroup.add(cableTray);
+
+    // Steel Ladder Bridge running into office
+    const ladderBridge = new THREE.Mesh(
+      new THREE.BoxGeometry(0.4, 0.08, 4.5),
+      new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.9, roughness: 0.2 })
+    );
+    ladderBridge.position.set(0, 3.8, 4.4);
+    serverCoreGroup.add(ladderBridge);
+
+    // Cool Cyber Cyan Ambient Glow from Server Core
+    const serverGlow = new THREE.PointLight(0x06b6d4, 2.4, 9, 2);
+    serverGlow.position.set(0, 2.2, 0.5);
+    serverCoreGroup.add(serverGlow);
+
+    // Telemetry Status Screen inside server room
+    const sStatusCanvas = document.createElement("canvas");
+    sStatusCanvas.width = 512;
+    sStatusCanvas.height = 256;
+    const sCtx = sStatusCanvas.getContext("2d");
+    sCtx.fillStyle = "#030712";
+    sCtx.fillRect(0, 0, 512, 256);
+    sCtx.fillStyle = "#10b981";
+    sCtx.font = "bold 28px monospace";
+    sCtx.fillText("● CORE TELEMETRY: ONLINE", 24, 48);
+    sCtx.fillStyle = "#38bdf8";
+    sCtx.font = "20px monospace";
+    sCtx.fillText("CLUSTER: DALANG CLOUD • 8 NODES", 24, 95);
+    sCtx.fillText("P99 LATENCY: 1.8ms  |  PUE: 1.08", 24, 135);
+    sCtx.fillText("ACTIVE THREADS: 182 | RAM: 32GB", 24, 175);
+    sCtx.fillStyle = "#a855f7";
+    sCtx.fillText("FASTAPI :8765  •  VITE :5173", 24, 215);
+
+    const sStatusTex = new THREE.CanvasTexture(sStatusCanvas);
+    const sStatusMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.4, 0.7),
+      new THREE.MeshStandardMaterial({
+        map: sStatusTex,
+        emissive: 0xffffff,
+        emissiveMap: sStatusTex,
+        emissiveIntensity: 0.9,
+      })
+    );
+    sStatusMesh.position.set(2.05, 2.2, 0);
+    sStatusMesh.rotation.y = -Math.PI / 2;
+    serverCoreGroup.add(sStatusMesh);
+
+    roomGroup.add(serverCoreGroup);
+
+    // ==========================================
+    // 🏛️ 5. EXECUTIVE WAR ROOM / CONFERENCE SUITE
+    // ==========================================
+    const privacyTexture = createPrivacyFilmTexture();
     const officeGlassMat = new THREE.MeshPhysicalMaterial({
       color: 0xecfeff,
       transmission: 0.88,
@@ -753,9 +1075,25 @@ export default function App() {
       ior: 1.5,
       thickness: 0.1,
     });
+
+    // Glass Wall with Dusted Crystal Privacy Band
+    const glassWallGeo1 = new THREE.BoxGeometry(0.08, 5.4, 8.0);
     const glassWall1 = new THREE.Mesh(glassWallGeo1, officeGlassMat);
     glassWall1.position.set(11.8, 2.7, -5.5);
     roomGroup.add(glassWall1);
+
+    // Privacy Film Band on Glass
+    const privacyBandGeo = new THREE.PlaneGeometry(8.0, 1.4);
+    const privacyBandMat = new THREE.MeshStandardMaterial({
+      map: privacyTexture,
+      transparent: true,
+      opacity: 0.75,
+      roughness: 0.3,
+    });
+    const privacyBand = new THREE.Mesh(privacyBandGeo, privacyBandMat);
+    privacyBand.rotation.y = Math.PI / 2;
+    privacyBand.position.set(11.75, 2.5, -5.5);
+    roomGroup.add(privacyBand);
 
     // Section 2: Glass Header above Doorway (z = -1.5 to 1.5, y = 3.8 to 5.4)
     const glassDoorHeaderGeo = new THREE.BoxGeometry(0.08, 1.6, 3.0);
@@ -765,35 +1103,45 @@ export default function App() {
 
     // Top sliding rail for glass door
     const doorRailGeo = new THREE.BoxGeometry(0.12, 0.12, 3.2);
-    const doorRailMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.2 });
+    const doorRailMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.85, roughness: 0.2 });
     const doorRail = new THREE.Mesh(doorRailGeo, doorRailMat);
     doorRail.position.set(11.8, 3.8, 0);
     roomGroup.add(doorRail);
 
-    // Glass Wall Metal Mullions / Posts
+    // Glass Wall Structural Mullions
     [-9.5, -5.5, -1.5, 1.5].forEach((pz) => {
       const postGeo = new THREE.BoxGeometry(0.14, 5.5, 0.14);
-      const postMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.2 });
-      const post = new THREE.Mesh(postGeo, postMat);
+      const post = new THREE.Mesh(postGeo, doorRailMat);
       post.position.set(11.8, 2.75, pz);
       roomGroup.add(post);
     });
 
     // 5B. CONFERENCE MEETING ROOM INTERIOR
-    // Modern Scandinavian Walnut Conference Table
+    // Monolithic Engineered Quartz & Walnut Conference Table
     const confTableGroup = new THREE.Group();
     confTableGroup.position.set(14.5, 0, -6.5);
 
     const confTableTopGeo = new THREE.BoxGeometry(1.7, 0.08, 5.2);
-    const confTableMat = new THREE.MeshStandardMaterial({ color: 0x2e1810, roughness: 0.4, metalness: 0.1 });
+    const confTableMat = new THREE.MeshStandardMaterial({
+      color: 0x221711, // Deep Smoked Walnut
+      roughness: 0.35,
+      metalness: 0.08,
+    });
     const confTableTop = new THREE.Mesh(confTableTopGeo, confTableMat);
     confTableTop.position.y = 0.74;
     confTableTop.castShadow = true;
     confTableTop.receiveShadow = true;
     confTableGroup.add(confTableTop);
 
-    // Metal Sled Legs for Conference Table
-    const sledLegMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.85, roughness: 0.2 });
+    // Undercut Chamfer Bevel on Tabletop
+    const chamferGeo = new THREE.BoxGeometry(1.64, 0.02, 5.14);
+    const chamferMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.9, roughness: 0.2 });
+    const chamfer = new THREE.Mesh(chamferGeo, chamferMat);
+    chamfer.position.y = 0.69;
+    confTableGroup.add(chamfer);
+
+    // Metal Sled Legs for Conference Table (Preserving clearance)
+    const sledLegMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.88, roughness: 0.2 });
     [-1.7, 1.7].forEach((lz) => {
       const legFrame = new THREE.Group();
       legFrame.position.set(0, 0.35, lz);
@@ -810,20 +1158,26 @@ export default function App() {
       confTableGroup.add(legFrame);
     });
 
-    // Center aluminum cable well with soft glow
-    const wellGeo = new THREE.BoxGeometry(0.35, 0.015, 1.6);
-    const wellMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7, emissiveIntensity: 0.5, metalness: 0.9 });
+    // Center Pop-up AV/Power Well with Cyan Accent Border
+    const wellGeo = new THREE.BoxGeometry(0.38, 0.015, 1.8);
+    const wellMat = new THREE.MeshStandardMaterial({
+      color: 0x0a0c10,
+      metalness: 0.9,
+      roughness: 0.2,
+      emissive: 0x06b6d4,
+      emissiveIntensity: 0.45,
+    });
     const wellMesh = new THREE.Mesh(wellGeo, wellMat);
     wellMesh.position.set(0, 0.785, 0);
     confTableGroup.add(wellMesh);
 
     roomGroup.add(confTableGroup);
 
-    // 5C. Conference Swivel Chairs (Around the Table)
+    // 5C. Executive Swivel Chairs (Around the Table)
     const confChairGeo = new THREE.BoxGeometry(0.52, 0.08, 0.52);
     const confBackGeo = new THREE.BoxGeometry(0.5, 0.55, 0.06);
-    const chairLeatherMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
-    const chairBaseMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.9, roughness: 0.2 });
+    const chairLeatherMat = new THREE.MeshStandardMaterial({ color: 0x181c24, roughness: 0.55 });
+    const chairBaseMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.92, roughness: 0.2 });
 
     const createConfChair = (cx, cz, rotY) => {
       const chair = new THREE.Group();
@@ -840,6 +1194,14 @@ export default function App() {
       back.castShadow = true;
       chair.add(back);
 
+      // Aluminum Armrests
+      [-0.26, 0.26].forEach((ax) => {
+        const armGeo = new THREE.BoxGeometry(0.04, 0.22, 0.32);
+        const arm = new THREE.Mesh(armGeo, chairBaseMat);
+        arm.position.set(ax, 0.62, 0.08);
+        chair.add(arm);
+      });
+
       const stemGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.42, 12);
       const stem = new THREE.Mesh(stemGeo, chairBaseMat);
       stem.position.y = 0.21;
@@ -853,30 +1215,30 @@ export default function App() {
       return chair;
     };
 
-    // West Chairs (facing East towards table, backrest towards glass wall)
+    // West Chairs (facing East towards table)
     [-8.2, -6.5, -4.8].forEach((cz) => {
       roomGroup.add(createConfChair(12.9, cz, -Math.PI / 2));
     });
-    // East Chairs (facing West towards table, backrest towards right wall)
+    // East Chairs (facing West towards table)
     [-8.2, -6.5, -4.8].forEach((cz) => {
       roomGroup.add(createConfChair(16.1, cz, Math.PI / 2));
     });
-    // South Head Chair (Risko facing North towards TV screen, backrest towards south)
+    // South Head Chair (Risko facing North)
     roomGroup.add(createConfChair(14.5, -3.4, Math.PI));
     // North Chair (Ren presenter area)
     roomGroup.add(createConfChair(14.5, -9.6, 0));
 
-    // 5D. 75" 4K Presentation Display TV Wall
+    // 5D. 85" Ultra-HD 4K Video Collaboration Wall
     const tvGroup = new THREE.Group();
     tvGroup.position.set(14.5, 3.1, -13.7);
 
-    const tvFrameGeo = new THREE.BoxGeometry(4.0, 2.3, 0.12);
-    const tvFrameMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.2 });
+    const tvFrameGeo = new THREE.BoxGeometry(4.2, 2.4, 0.12);
+    const tvFrameMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.9, roughness: 0.2 });
     const tvFrame = new THREE.Mesh(tvFrameGeo, tvFrameMat);
     tvGroup.add(tvFrame);
 
     const tvScreenTex = createMeetingScreenTexture();
-    const tvScreenGeo = new THREE.PlaneGeometry(3.88, 2.18);
+    const tvScreenGeo = new THREE.PlaneGeometry(4.08, 2.28);
     const tvScreenMat = new THREE.MeshStandardMaterial({
       map: tvScreenTex,
       emissive: 0xffffff,
@@ -888,16 +1250,31 @@ export default function App() {
     tvScreen.position.z = 0.07;
     tvGroup.add(tvScreen);
 
-    const meetingLight = new THREE.PointLight(0xbae6fd, 1.2, 8, 2);
+    // Integrated Soundbar with 4K PTZ Camera Lens
+    const soundbarGeo = new THREE.BoxGeometry(2.4, 0.14, 0.14);
+    const soundbarMat = new THREE.MeshStandardMaterial({ color: 0x1e2229, metalness: 0.85 });
+    const soundbar = new THREE.Mesh(soundbarGeo, soundbarMat);
+    soundbar.position.set(0, -1.35, 0.08);
+    tvGroup.add(soundbar);
+
+    // Camera Lens Ring
+    const lensGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.02, 16);
+    const lensMat = new THREE.MeshStandardMaterial({ color: 0x06b6d4, emissive: 0x06b6d4, emissiveIntensity: 0.6 });
+    const lens = new THREE.Mesh(lensGeo, lensMat);
+    lens.rotation.x = Math.PI / 2;
+    lens.position.set(0, -1.35, 0.16);
+    tvGroup.add(lens);
+
+    const meetingLight = new THREE.PointLight(0xbae6fd, 1.25, 9, 2);
     meetingLight.position.set(14.5, 4.8, -6.5);
     roomGroup.add(meetingLight);
 
     roomGroup.add(tvGroup);
 
-    // 6. Large Glass Whiteboard with System Architecture
+    // 6. Large Architectural Glass Whiteboard with System Architecture
     const wbTexture = createWhiteboardTexture();
     const wbFrameGeo = new THREE.BoxGeometry(6.6, 3.4, 0.12);
-    const wbFrameMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.8, roughness: 0.3 });
+    const wbFrameMat = new THREE.MeshStandardMaterial({ color: 0x1e2229, metalness: 0.85, roughness: 0.25 });
     const wbFrame = new THREE.Mesh(wbFrameGeo, wbFrameMat);
     wbFrame.position.set(0, 3.3, -13.75);
     roomGroup.add(wbFrame);
@@ -910,15 +1287,15 @@ export default function App() {
 
     // Marker Tray & Pens
     const trayGeo = new THREE.BoxGeometry(3.5, 0.06, 0.2);
-    const trayMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8 });
+    const trayMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.85 });
     const tray = new THREE.Mesh(trayGeo, trayMat);
     tray.position.set(0, 1.57, -13.65);
     roomGroup.add(tray);
 
     // 7. Suspended Architectural Linear LED Downlights (Above Desks)
     [-2, 2].forEach((pz) => {
-      const fixtureGeo = new THREE.BoxGeometry(14, 0.15, 0.25);
-      const fixtureMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.4 });
+      const fixtureGeo = new THREE.BoxGeometry(14, 0.14, 0.22);
+      const fixtureMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.85, roughness: 0.3 });
       const fixture = new THREE.Mesh(fixtureGeo, fixtureMat);
       fixture.position.set(0, 5.2, pz);
       roomGroup.add(fixture);
@@ -928,7 +1305,7 @@ export default function App() {
       const stripMat = new THREE.MeshStandardMaterial({
         color: 0xffffff,
         emissive: 0xfffbeb,
-        emissiveIntensity: 1.6,
+        emissiveIntensity: 1.8,
       });
       const strip = new THREE.Mesh(stripGeo, stripMat);
       strip.position.set(0, 5.12, pz);
@@ -936,7 +1313,7 @@ export default function App() {
 
       // Suspension wire
       [-6, 6].forEach((wx) => {
-        const wireGeo = new THREE.CylinderGeometry(0.015, 0.015, 1.8, 8);
+        const wireGeo = new THREE.CylinderGeometry(0.012, 0.012, 1.8, 8);
         const wireMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8 });
         const wire = new THREE.Mesh(wireGeo, wireMat);
         wire.position.set(wx, 6.1, pz);
@@ -944,85 +1321,120 @@ export default function App() {
       });
     });
 
-    // 8. Executive Breakout Lounge (Sofa Kulit Cognac L-Shape)
+    // 8. Silicon Valley Breakout Lounge (Deep Charcoal Acoustic Sectional)
     const sofaGroup = new THREE.Group();
     sofaGroup.position.set(8.5, 0, 7.5);
 
-    const leatherMat = new THREE.MeshStandardMaterial({ color: 0x9a3412, roughness: 0.55 }); // Cognac leather
+    const loungeFabricMat = new THREE.MeshStandardMaterial({ color: 0x242832, roughness: 0.85 }); // Charcoal acoustic weave
     // Main couch seat
     const couchBaseGeo = new THREE.BoxGeometry(4.2, 0.45, 1.8);
-    const couchBase = new THREE.Mesh(couchBaseGeo, leatherMat);
+    const couchBase = new THREE.Mesh(couchBaseGeo, loungeFabricMat);
     couchBase.position.set(0, 0.225, 0);
     couchBase.castShadow = true;
     sofaGroup.add(couchBase);
 
     // Couch Backrest
     const couchBackGeo = new THREE.BoxGeometry(4.2, 0.65, 0.35);
-    const couchBack = new THREE.Mesh(couchBackGeo, leatherMat);
+    const couchBack = new THREE.Mesh(couchBackGeo, loungeFabricMat);
     couchBack.position.set(0, 0.775, 0.72);
     couchBack.castShadow = true;
     sofaGroup.add(couchBack);
 
     // L-Section
     const lSectionGeo = new THREE.BoxGeometry(1.6, 0.45, 2.2);
-    const lSection = new THREE.Mesh(lSectionGeo, leatherMat);
+    const lSection = new THREE.Mesh(lSectionGeo, loungeFabricMat);
     lSection.position.set(1.3, 0.225, -1.8);
     lSection.castShadow = true;
     sofaGroup.add(lSection);
 
-    // Modern Round Marble Coffee Table
+    // Modern Round Travertine / Fluted Coffee Table
     const marbleTableGeo = new THREE.CylinderGeometry(0.9, 0.9, 0.06, 24);
-    const marbleMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.15, metalness: 0.1 });
+    const marbleMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.18, metalness: 0.05 });
     const marbleTable = new THREE.Mesh(marbleTableGeo, marbleMat);
     marbleTable.position.set(-0.8, 0.48, -0.6);
     marbleTable.castShadow = true;
     sofaGroup.add(marbleTable);
 
-    // Coffee Table Brass Legs
-    const brassMat = new THREE.MeshStandardMaterial({ color: 0xd97706, metalness: 0.8, roughness: 0.3 });
+    // Coffee Table Matte Black Metal Legs
     const tableLegGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.48, 12);
-    const tableLeg = new THREE.Mesh(tableLegGeo, brassMat);
+    const tableLeg = new THREE.Mesh(tableLegGeo, sledLegMat);
     tableLeg.position.set(-0.8, 0.24, -0.6);
     sofaGroup.add(tableLeg);
 
     roomGroup.add(sofaGroup);
 
-    // 9. Modern Pantry & Barista Bar
+    // 9. Silicon Valley Style Micro-Kitchen & Coffee Bar (Waterfall Calacatta Quartz)
     const barGeo = new THREE.BoxGeometry(4.6, 1.05, 1.3);
-    const barMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.35 });
+    const barMat = new THREE.MeshStandardMaterial({ color: 0x0c0e12, roughness: 0.35 });
     const bar = new THREE.Mesh(barGeo, barMat);
     bar.position.set(-12, 0.525, -7.5);
     bar.castShadow = true;
     roomGroup.add(bar);
 
+    // Waterfall Calacatta Marble Countertop
     const counterGeo = new THREE.BoxGeometry(4.8, 0.08, 1.45);
-    const counterMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.18 });
+    const counterMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.15, metalness: 0.05 });
     const counter = new THREE.Mesh(counterGeo, counterMat);
     counter.position.set(-12, 1.09, -7.5);
     counter.castShadow = true;
     roomGroup.add(counter);
 
-    // Espresso Machine (Stainless Steel Dual Group)
-    const espressoGeo = new THREE.BoxGeometry(0.85, 0.6, 0.65);
-    const espressoMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.9, roughness: 0.15 });
-    const espresso = new THREE.Mesh(espressoGeo, espressoMat);
-    espresso.position.set(-13, 1.43, -7.5);
-    espresso.castShadow = true;
-    roomGroup.add(espresso);
+    // Commercial Dual-Group Italian Espresso Machine (La Marzocco Linea PB Style)
+    const espressoGroup = new THREE.Group();
+    espressoGroup.position.set(-13, 1.13, -7.5);
 
-    // Stainless Mini Beverage Fridge (Kulkas Minuman Kantor)
+    const espressoBodyGeo = new THREE.BoxGeometry(0.88, 0.55, 0.62);
+    const espressoBodyMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.95, roughness: 0.12 });
+    const espressoBody = new THREE.Mesh(espressoBodyGeo, espressoBodyMat);
+    espressoBody.position.y = 0.275;
+    espressoGroup.add(espressoBody);
+
+    // Dual Chrome Groupheads & Portafilters
+    [-0.18, 0.18].forEach((gx) => {
+      const groupGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.12, 14);
+      const groupMesh = new THREE.Mesh(groupGeo, espressoBodyMat);
+      groupMesh.position.set(gx, 0.18, 0.35);
+      espressoGroup.add(groupMesh);
+
+      const handleGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.22, 12);
+      const handleMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.5 });
+      const handle = new THREE.Mesh(handleGeo, handleMat);
+      handle.rotation.x = Math.PI / 2;
+      handle.position.set(gx, 0.16, 0.48);
+      espressoGroup.add(handle);
+    });
+
+    // Dual Steam Wands
+    [-0.38, 0.38].forEach((wx) => {
+      const wandGeo = new THREE.CylinderGeometry(0.015, 0.015, 0.26, 8);
+      const wand = new THREE.Mesh(wandGeo, espressoBodyMat);
+      wand.rotation.z = wx < 0 ? -0.3 : 0.3;
+      wand.position.set(wx, 0.22, 0.32);
+      espressoGroup.add(wand);
+    });
+
+    roomGroup.add(espressoGroup);
+
+    // Conical Burr Coffee Grinder (Mahlkönig EK43 Style)
+    const grinderGeo = new THREE.CylinderGeometry(0.12, 0.14, 0.65, 16);
+    const grinderMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.4 });
+    const grinder = new THREE.Mesh(grinderGeo, grinderMat);
+    grinder.position.set(-11.6, 1.45, -7.5);
+    grinder.castShadow = true;
+    roomGroup.add(grinder);
+
+    // Glass Beverage Cooler with Illuminated Drinks Display
     const fridgeGeo = new THREE.BoxGeometry(1.1, 1.2, 0.95);
-    const fridgeMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.85, roughness: 0.2 });
+    const fridgeMat = new THREE.MeshStandardMaterial({ color: 0x1e2229, metalness: 0.85, roughness: 0.2 });
     const fridge = new THREE.Mesh(fridgeGeo, fridgeMat);
     fridge.position.set(-14.2, 0.6, -7.5);
     fridge.castShadow = true;
     roomGroup.add(fridge);
 
-    // Kaca pintu kulkas dengan pantulan kaleng minuman
     const fridgeDoorGeo = new THREE.PlaneGeometry(0.95, 1.05);
     const fridgeDoorMat = new THREE.MeshPhysicalMaterial({
       color: 0x93c5fd,
-      transmission: 0.8,
+      transmission: 0.85,
       transparent: true,
       roughness: 0.1,
     });
@@ -1031,65 +1443,23 @@ export default function App() {
     fridgeDoor.position.set(-13.64, 0.6, -7.5);
     roomGroup.add(fridgeDoor);
 
-    // Standing Water Cooler with Blue Gallon Bottle
+    // Standing Touchless Water Cooler
     const coolerGroup = new THREE.Group();
     coolerGroup.position.set(-14.2, 0, -4.5);
-
-    const coolerBodyGeo = new THREE.BoxGeometry(0.55, 1.05, 0.55);
-    const coolerBodyMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.3 });
-    const coolerBody = new THREE.Mesh(coolerBodyGeo, coolerBodyMat);
-    coolerBody.position.y = 0.525;
-    coolerBody.castShadow = true;
+    const coolerBody = new THREE.Mesh(new THREE.BoxGeometry(0.55, 1.15, 0.55), new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.2 }));
+    coolerBody.position.y = 0.575;
     coolerGroup.add(coolerBody);
-
-    // Galon Biru Transparan di Atas
-    const gallonGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.65, 18);
-    const gallonMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0284c7,
-      transmission: 0.75,
-      transparent: true,
-      roughness: 0.1,
-      ior: 1.33,
-    });
-    const gallon = new THREE.Mesh(gallonGeo, gallonMat);
-    gallon.position.y = 1.38;
-    gallon.castShadow = true;
-    coolerGroup.add(gallon);
-
-    // Tutup Galon Putih
-    const capGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.08, 14);
-    const capMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc });
-    const cap = new THREE.Mesh(capGeo, capMat);
-    cap.position.y = 1.08;
-    coolerGroup.add(cap);
-
     roomGroup.add(coolerGroup);
 
-    // Glass Water Dispenser on Counter
-    const dispenserGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.75, 16);
-    const dispenserMat = new THREE.MeshPhysicalMaterial({
-      color: 0x38bdf8,
-      transparent: true,
-      opacity: 0.65,
-      roughness: 0.1,
-    });
-    const dispenser = new THREE.Mesh(dispenserGeo, dispenserMat);
-    dispenser.position.set(-10.5, 1.5, -7.5);
-    roomGroup.add(dispenser);
-
-    // Bar Stools
+    // Modern Nordic Bar Stools
     [-12.8, -11.2].forEach((bx) => {
       const stoolGroup = new THREE.Group();
       stoolGroup.position.set(bx, 0, -6.1);
-      const stoolSeatGeo = new THREE.CylinderGeometry(0.25, 0.25, 0.06, 18);
-      const stoolSeatMat = new THREE.MeshStandardMaterial({ color: 0xa16207, roughness: 0.6 });
-      const stoolSeat = new THREE.Mesh(stoolSeatGeo, stoolSeatMat);
+      const stoolSeat = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.06, 18), new THREE.MeshStandardMaterial({ color: 0x3d271b, roughness: 0.5 }));
       stoolSeat.position.y = 0.78;
       stoolGroup.add(stoolSeat);
 
-      const stoolLegGeo = new THREE.CylinderGeometry(0.03, 0.03, 0.78, 12);
-      const stoolLegMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8 });
-      const stoolLeg = new THREE.Mesh(stoolLegGeo, stoolLegMat);
+      const stoolLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.78, 12), sledLegMat);
       stoolLeg.position.y = 0.39;
       stoolGroup.add(stoolLeg);
       roomGroup.add(stoolGroup);
@@ -1102,7 +1472,7 @@ export default function App() {
       plantGroup.scale.set(scale, scale, scale);
 
       const potGeo = new THREE.CylinderGeometry(0.45, 0.32, 0.8, 18);
-      const potMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.25 });
+      const potMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.3 }); // Matte black ceramic
       const pot = new THREE.Mesh(potGeo, potMat);
       pot.position.y = 0.4;
       pot.castShadow = true;
@@ -1138,17 +1508,17 @@ export default function App() {
     scene.add(roomGroup);
 
     // ==========================================
-    // 🖥️ ERGONOMIC WORKSTATION SETUP
+    // 🖥️ ERGONOMIC WORKSTATION SETUP (Silicon Valley Engineering Standard)
     // ==========================================
     const createWorkstation = (x, z, data) => {
       const deskGroup = new THREE.Group();
       deskGroup.position.set(x, 0, z);
 
-      // Natural Solid Oak Tabletop
-      const deskTopGeo = new THREE.BoxGeometry(2.1, 0.07, 1.25);
+      // 1. Dual-Motor Sit-Stand Architectural Desk (Chamfered Ash Wood)
+      const deskTopGeo = new THREE.BoxGeometry(2.1, 0.065, 1.25);
       const deskTopMat = new THREE.MeshStandardMaterial({
-        color: 0xebd9c4,
-        roughness: 0.45,
+        color: 0xdfd7cd, // Nordic Bleached Ash
+        roughness: 0.42,
         metalness: 0.02,
       });
       const deskTop = new THREE.Mesh(deskTopGeo, deskTopMat);
@@ -1157,26 +1527,43 @@ export default function App() {
       deskTop.receiveShadow = true;
       deskGroup.add(deskTop);
 
-      // Matte Black Steel Desk Frame & Legs
-      const legGeo = new THREE.BoxGeometry(0.07, 0.73, 0.07);
-      const frameMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.85, roughness: 0.25 });
-      [
-        [-0.95, -0.52],
-        [0.95, -0.52],
-        [-0.95, 0.52],
-        [0.95, 0.52],
-      ].forEach(([lx, lz]) => {
-        const leg = new THREE.Mesh(legGeo, frameMat);
-        leg.position.set(lx, 0.365, lz);
-        leg.castShadow = true;
-        deskGroup.add(leg);
+      // Undercut Bevel on Tabletop
+      const deskBevel = new THREE.Mesh(
+        new THREE.BoxGeometry(2.04, 0.02, 1.19),
+        new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.85, roughness: 0.2 })
+      );
+      deskBevel.position.y = 0.72;
+      deskGroup.add(deskBevel);
+
+      // Matte Black Dual Motor Lift Columns & Steel Feet
+      const frameMat = new THREE.MeshStandardMaterial({ color: 0x0a0c10, metalness: 0.88, roughness: 0.2 });
+      [-0.85, 0.85].forEach((lx) => {
+        // Telescopic motorized column
+        const col = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.72, 0.09), frameMat);
+        col.position.set(lx, 0.36, 0);
+        col.castShadow = true;
+        deskGroup.add(col);
+
+        // Floor skid foot
+        const foot = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.04, 1.1), frameMat);
+        foot.position.set(lx, 0.02, 0);
+        foot.castShadow = true;
+        deskGroup.add(foot);
       });
 
-      // Cable Grommet
-      const grommetGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.08, 16);
-      const grommet = new THREE.Mesh(grommetGeo, frameMat);
-      grommet.position.set(0.65, 0.77, -0.38);
-      deskGroup.add(grommet);
+      // Flexible Cable Spine Snake running from desk to floor
+      const snakeGeo = new THREE.CylinderGeometry(0.035, 0.035, 0.72, 8);
+      const snake = new THREE.Mesh(snakeGeo, frameMat);
+      snake.position.set(0.75, 0.36, -0.42);
+      deskGroup.add(snake);
+
+      // Large Acoustic Felt Desk Mat (Charcoal)
+      const matGeo = new THREE.BoxGeometry(1.6, 0.008, 0.75);
+      const feltMat = new THREE.MeshStandardMaterial({ color: 0x181a20, roughness: 0.95 });
+      const deskMat = new THREE.Mesh(matGeo, feltMat);
+      deskMat.position.set(0, 0.796, 0.02);
+      deskMat.receiveShadow = true;
+      deskGroup.add(deskMat);
 
       // Aluminum Laptop Base (MacBook Pro Style)
       const lapBaseGeo = new THREE.BoxGeometry(0.48, 0.016, 0.34);
@@ -1188,7 +1575,7 @@ export default function App() {
 
       // Keyboard & Trackpad
       const kbGeo = new THREE.BoxGeometry(0.42, 0.005, 0.16);
-      const kbMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+      const kbMat = new THREE.MeshStandardMaterial({ color: 0x1e2229, roughness: 0.6 });
       const kb = new THREE.Mesh(kbGeo, kbMat);
       kb.position.set(0, 0.815, -0.02);
       deskGroup.add(kb);
@@ -1218,10 +1605,58 @@ export default function App() {
       screenPivot.rotation.x = -0.22;
       deskGroup.add(screenPivot);
 
-      // Emissive Laptop Light (Casts on character and desk)
+      // Emissive Laptop Light
       const lapLight = new THREE.PointLight(data.screenColor, 1.1, 2.5);
       lapLight.position.set(0, 1.05, 0.05);
       deskGroup.add(lapLight);
+
+      // 34" Ultrawide Curved Monitor on Articulated Gas-Spring Arm (For all engineering workstations)
+      const armGroup = new THREE.Group();
+      armGroup.position.set(-0.55, 0.79, -0.38);
+
+      const armBase = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.08, 12), frameMat);
+      armBase.position.y = 0.04;
+      armGroup.add(armBase);
+
+      const armStem = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.42, 12), frameMat);
+      armStem.position.y = 0.25;
+      armGroup.add(armStem);
+
+      const armBoom = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.025, 0.025), frameMat);
+      armBoom.position.set(0.12, 0.46, 0.08);
+      armBoom.rotation.y = 0.3;
+      armGroup.add(armBoom);
+
+      // Ultrawide Curved Display Box
+      const ultrawideGeo = new THREE.BoxGeometry(0.98, 0.44, 0.025);
+      const ultrawideMat = new THREE.MeshStandardMaterial({
+        color: 0x0a0c10,
+        emissive: data.screenColor,
+        emissiveIntensity: 0.45,
+        roughness: 0.1,
+      });
+      const ultrawide = new THREE.Mesh(ultrawideGeo, ultrawideMat);
+      ultrawide.position.set(0.15, 0.46, 0.12);
+      ultrawide.rotation.y = 0.25; // angled toward user
+      ultrawide.castShadow = true;
+      armGroup.add(ultrawide);
+
+      // ScreenBar LED Light Bar (BenQ style) mounted on top of ultrawide monitor
+      const barFixture = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.012, 0.012, 0.65, 8),
+        frameMat
+      );
+      barFixture.rotation.z = Math.PI / 2;
+      barFixture.position.set(0.15, 0.7, 0.13);
+      barFixture.rotation.y = 0.25;
+      armGroup.add(barFixture);
+
+      // Soft downward ScreenBar glow
+      const taskGlow = new THREE.PointLight(0xfff7ed, 0.6, 1.8, 2);
+      taskGlow.position.set(0.15, 0.65, 0.18);
+      armGroup.add(taskGlow);
+
+      deskGroup.add(armGroup);
 
       // Ceramic Coffee Mug
       const mugGeo = new THREE.CylinderGeometry(0.055, 0.048, 0.11, 16);
@@ -1231,53 +1666,25 @@ export default function App() {
       mug.castShadow = true;
       deskGroup.add(mug);
 
-      // Dual Curved 4K Monitor Setup (Khusus Zaki Backend & Lulu Visual Designer)
-      if (data.role.includes("Visual") || data.role.includes("Backend")) {
-        const monStandGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.42, 12);
-        const monStandMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9 });
-        const monStand = new THREE.Mesh(monStandGeo, monStandMat);
-        monStand.position.set(-0.55, 0.98, -0.32);
-        deskGroup.add(monStand);
-
-        const monArmGeo = new THREE.BoxGeometry(0.65, 0.02, 0.02);
-        const monArm = new THREE.Mesh(monArmGeo, monStandMat);
-        monArm.position.set(-0.55, 1.15, -0.32);
-        deskGroup.add(monArm);
-
-        // Ultrawide Curved Screen
-        const ultrawideGeo = new THREE.BoxGeometry(0.85, 0.42, 0.02);
-        const ultrawideMat = new THREE.MeshStandardMaterial({
-          color: 0x0f172a,
-          emissive: data.screenColor,
-          emissiveIntensity: 0.45,
-          roughness: 0.1,
-        });
-        const ultrawide = new THREE.Mesh(ultrawideGeo, ultrawideMat);
-        ultrawide.position.set(-0.55, 1.15, -0.28);
-        ultrawide.rotation.y = 0.22; // Hadap ke arah wajah karakter
-        ultrawide.castShadow = true;
-        deskGroup.add(ultrawide);
-      }
-
       // Small Desk Succulent Pot
       const potGeo = new THREE.CylinderGeometry(0.06, 0.045, 0.08, 14);
-      const potMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.5 });
+      const potMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.5 });
       const pot = new THREE.Mesh(potGeo, potMat);
-      pot.position.set(-0.72, 0.835, -0.32);
+      pot.position.set(-0.75, 0.835, -0.15);
       deskGroup.add(pot);
 
       const cactusGeo = new THREE.SphereGeometry(0.048, 10, 8);
       const cactusMat = new THREE.MeshStandardMaterial({ color: 0x16a34a, roughness: 0.7 });
       const cactus = new THREE.Mesh(cactusGeo, cactusMat);
-      cactus.position.set(-0.72, 0.90, -0.32);
+      cactus.position.set(-0.75, 0.90, -0.15);
       deskGroup.add(cactus);
 
-      // Ergonomic Swivel Mesh Office Chair (Distance 0.58)
+      // Ergonomic Swivel Mesh Office Chair (Herman Miller Aeron Style, Distance 0.58 preserved)
       const chairGroup = new THREE.Group();
       chairGroup.position.set(0, 0, 0.58);
 
       const seatGeo = new THREE.BoxGeometry(0.55, 0.08, 0.52);
-      const seatMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
+      const seatMat = new THREE.MeshStandardMaterial({ color: 0x181c24, roughness: 0.8 });
       const seat = new THREE.Mesh(seatGeo, seatMat);
       seat.position.y = 0.46;
       seat.castShadow = true;
@@ -1285,16 +1692,27 @@ export default function App() {
 
       // Ergonomic Curved Mesh Backrest
       const backGeo = new THREE.BoxGeometry(0.52, 0.62, 0.06);
-      const backMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.7 });
+      const backMat = new THREE.MeshStandardMaterial({ color: 0x222834, roughness: 0.7 });
       const back = new THREE.Mesh(backGeo, backMat);
       back.position.set(0, 0.78, 0.29);
       back.rotation.x = 0.08;
       back.castShadow = true;
       chairGroup.add(back);
 
-      // Chrome 5-Star Base & Wheels
+      // Adjustable 3D Armrests
+      [-0.27, 0.27].forEach((ax) => {
+        const armPost = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.24, 0.05), frameMat);
+        armPost.position.set(ax, 0.58, 0.08);
+        chairGroup.add(armPost);
+
+        const armPad = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.03, 0.22), new THREE.MeshStandardMaterial({ color: 0x0a0c10, roughness: 0.5 }));
+        armPad.position.set(ax, 0.71, 0.08);
+        chairGroup.add(armPad);
+      });
+
+      // Chrome 5-Star Base & Pneumatic Stem
       const baseStemGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.38, 12);
-      const baseStemMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.9, roughness: 0.2 });
+      const baseStemMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.92, roughness: 0.2 });
       const baseStem = new THREE.Mesh(baseStemGeo, baseStemMat);
       baseStem.position.y = 0.22;
       chairGroup.add(baseStem);
@@ -1310,7 +1728,7 @@ export default function App() {
       return { displayMat, lapLight };
     };
 
-    // ==========================================
+        // ==========================================
     // 🏷️ FLOATING NAME LABEL (Billboard Canvas Sprite)
     // ==========================================
     const createNameLabel = (name, role, color) => {
