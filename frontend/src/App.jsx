@@ -341,34 +341,34 @@ const LOCATION_SPOTS = {
   WORK: DESK_SPOTS,
   DESK: DESK_SPOTS,
   MEETING: {
-    risko: { pos: [14.5, 0, -4.0], rotY: 0 },
-    pingot: { pos: [13.2, 0, -5.2], rotY: Math.PI / 2 },
-    zaki: { pos: [13.2, 0, -6.5], rotY: Math.PI / 2 },
-    lulu: { pos: [13.2, 0, -7.8], rotY: Math.PI / 2 },
-    mika: { pos: [15.8, 0, -5.2], rotY: -Math.PI / 2 },
-    nova: { pos: [15.8, 0, -6.5], rotY: -Math.PI / 2 },
-    kai: { pos: [15.8, 0, -7.8], rotY: -Math.PI / 2 },
-    ren: { pos: [14.5, 0, -9.8], rotY: Math.PI },
+    risko: { pos: [14.5, 0, -3.4], rotY: Math.PI },
+    pingot: { pos: [12.9, 0, -4.8], rotY: -Math.PI / 2 },
+    zaki: { pos: [12.9, 0, -6.5], rotY: -Math.PI / 2 },
+    lulu: { pos: [12.9, 0, -8.2], rotY: -Math.PI / 2 },
+    mika: { pos: [16.1, 0, -4.8], rotY: Math.PI / 2 },
+    nova: { pos: [16.1, 0, -6.5], rotY: Math.PI / 2 },
+    kai: { pos: [16.1, 0, -8.2], rotY: Math.PI / 2 },
+    ren: { pos: [14.5, 0, -9.6], rotY: 0 },
   },
   LOUNGE: {
-    risko: { pos: [7.2, 0, 7.3], rotY: 0 },
-    lulu: { pos: [8.4, 0, 7.3], rotY: 0 },
-    pingot: { pos: [9.6, 0, 7.3], rotY: 0 },
-    zaki: { pos: [9.6, 0, 5.8], rotY: -Math.PI / 2 },
-    mika: { pos: [6.6, 0, 6.2], rotY: Math.PI / 4 },
-    nova: { pos: [10.6, 0, 7.8], rotY: -Math.PI / 3 },
-    kai: { pos: [7.5, 0, 5.5], rotY: Math.PI },
-    ren: { pos: [8.6, 0, 5.5], rotY: Math.PI },
+    risko: { pos: [7.2, 0, 7.1], rotY: 0 },
+    lulu: { pos: [8.5, 0, 7.1], rotY: 0 },
+    pingot: { pos: [9.7, 0, 7.1], rotY: 0 },
+    zaki: { pos: [9.8, 0, 5.7], rotY: -Math.PI / 2 },
+    mika: { pos: [6.4, 0, 6.0], rotY: Math.PI / 4 },
+    nova: { pos: [10.8, 0, 7.7], rotY: -Math.PI / 3 },
+    kai: { pos: [7.6, 0, 5.2], rotY: Math.PI },
+    ren: { pos: [8.8, 0, 5.2], rotY: Math.PI },
   },
   PANTRY: {
-    risko: { pos: [-11.2, 0, -6.1], rotY: 0 },
-    pingot: { pos: [-12.8, 0, -6.1], rotY: 0 },
-    lulu: { pos: [-13.4, 0, -6.8], rotY: Math.PI / 2 },
-    zaki: { pos: [-10.2, 0, -7.2], rotY: Math.PI },
-    mika: { pos: [-14.2, 0, -6.5], rotY: 0 },
-    nova: { pos: [-9.6, 0, -5.8], rotY: -Math.PI / 3 },
-    kai: { pos: [-12.0, 0, -4.8], rotY: 0 },
-    ren: { pos: [-13.2, 0, -4.8], rotY: 0 },
+    risko: { pos: [-11.2, 0, -5.8], rotY: 0 },
+    pingot: { pos: [-12.8, 0, -5.8], rotY: 0 },
+    lulu: { pos: [-13.4, 0, -5.8], rotY: 0 },
+    zaki: { pos: [-10.2, 0, -5.8], rotY: 0 },
+    mika: { pos: [-14.2, 0, -5.8], rotY: 0 },
+    nova: { pos: [-9.6, 0, -5.8], rotY: 0 },
+    kai: { pos: [-12.0, 0, -4.6], rotY: 0 },
+    ren: { pos: [-13.2, 0, -4.6], rotY: 0 },
   },
 };
 
@@ -379,28 +379,70 @@ function getWaypoints(startPos, endPos) {
   const ex = endPos.x;
   const ez = endPos.z;
 
+  // Clear vertical aisle lines:
+  // -5.4 (West), -1.8 (Mid-West), 1.8 (Mid-East), 5.5 (East), 10.5 (Meeting corridor)
+  const AISLES_X = [-5.4, -1.8, 1.8, 5.5, 10.5];
+  const findAisle = (x) => {
+    let best = AISLES_X[0];
+    let minD = Math.abs(x - best);
+    for (let i = 1; i < AISLES_X.length; i++) {
+      const d = Math.abs(x - AISLES_X[i]);
+      if (d < minD) { minD = d; best = AISLES_X[i]; }
+    }
+    return best;
+  };
+
   const isStartInMeeting = sx > 12.0;
   const isEndInMeeting = ex > 12.0;
 
+  // 1. Moving OUT of Meeting Room to Main Office
   if (isStartInMeeting && !isEndInMeeting) {
+    // Walk to conference doorway corridor
+    wps.push(new THREE.Vector3(14.5, 0, -1.5));
     wps.push(new THREE.Vector3(14.5, 0, 0));
-    wps.push(new THREE.Vector3(11.5, 0, 0));
-    wps.push(new THREE.Vector3(ex, 0, 0));
+    wps.push(new THREE.Vector3(11.5, 0, 0)); // Through sliding doorway
+
+    const targetAisleX = findAisle(ex);
+    wps.push(new THREE.Vector3(targetAisleX, 0, 0));
+    // Walk down vertical aisle to target row, then step into target chair
+    if (Math.abs(ez) > 0.4) {
+      wps.push(new THREE.Vector3(targetAisleX, 0, ez > 0 ? ez + 0.6 : ez - 0.6));
+    }
     wps.push(new THREE.Vector3(ex, 0, ez));
     return wps;
   }
 
+  // 2. Moving INTO Meeting Room from Main Office
   if (!isStartInMeeting && isEndInMeeting) {
-    wps.push(new THREE.Vector3(sx, 0, 0));
-    wps.push(new THREE.Vector3(11.5, 0, 0));
-    wps.push(new THREE.Vector3(14.5, 0, 0));
+    const startAisleX = findAisle(sx);
+    // Step back from desk/chair into aisle
+    if (Math.abs(sz) > 0.4) {
+      wps.push(new THREE.Vector3(sx, 0, sz > 0 ? sz + 0.6 : sz - 0.6));
+    }
+    wps.push(new THREE.Vector3(startAisleX, 0, sz > 0 ? sz + 0.6 : sz - 0.6));
+    wps.push(new THREE.Vector3(startAisleX, 0, 0)); // Main horizontal hallway
+    wps.push(new THREE.Vector3(11.5, 0, 0));        // Doorway threshold
+    wps.push(new THREE.Vector3(14.5, 0, 0));        // Inside meeting room
+    wps.push(new THREE.Vector3(14.5, 0, -1.5));
+    // Final seat approach
     wps.push(new THREE.Vector3(ex, 0, ez));
     return wps;
   }
 
-  if (Math.hypot(ex - sx, ez - sz) > 1.2) {
-    wps.push(new THREE.Vector3(sx, 0, 0));
-    wps.push(new THREE.Vector3(ex, 0, 0));
+  // 3. Main Office internal movement (e.g. Desk <-> Lounge <-> Pantry)
+  const startAisleX = findAisle(sx);
+  const targetAisleX = findAisle(ex);
+
+  // Step back from current station
+  if (Math.abs(sz) > 0.4) {
+    wps.push(new THREE.Vector3(sx, 0, sz > 0 ? sz + 0.6 : sz - 0.6));
+  }
+  wps.push(new THREE.Vector3(startAisleX, 0, sz > 0 ? sz + 0.6 : sz - 0.6));
+  wps.push(new THREE.Vector3(startAisleX, 0, 1.8)); // Cross corridor
+  wps.push(new THREE.Vector3(targetAisleX, 0, 1.8));
+
+  if (Math.abs(ez - 1.8) > 0.5) {
+    wps.push(new THREE.Vector3(targetAisleX, 0, ez > 1.8 ? ez + 0.5 : ez - 0.5));
   }
   wps.push(new THREE.Vector3(ex, 0, ez));
   return wps;
@@ -536,9 +578,9 @@ export default function App() {
     scene.fog = new THREE.FogExp2(0x0e1320, 0.012);
     sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 1000);
-    camera.position.set(22, 24, 28);
-    camera.lookAt(0, 1.2, 0);
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+    camera.position.set(24, 25, 29);
+    camera.lookAt(1.5, 1.2, 0);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -714,7 +756,7 @@ export default function App() {
     const confTableGroup = new THREE.Group();
     confTableGroup.position.set(14.5, 0, -6.5);
 
-    const confTableTopGeo = new THREE.BoxGeometry(2.3, 0.08, 4.6);
+    const confTableTopGeo = new THREE.BoxGeometry(1.7, 0.08, 5.2);
     const confTableMat = new THREE.MeshStandardMaterial({ color: 0x2e1810, roughness: 0.4, metalness: 0.1 });
     const confTableTop = new THREE.Mesh(confTableTopGeo, confTableMat);
     confTableTop.position.y = 0.74;
@@ -783,13 +825,18 @@ export default function App() {
       return chair;
     };
 
-    [-8.0, -6.5, -5.0].forEach((cz) => {
-      roomGroup.add(createConfChair(13.2, cz, Math.PI / 2));
+    // West Chairs (facing East towards table, backrest towards glass wall)
+    [-8.2, -6.5, -4.8].forEach((cz) => {
+      roomGroup.add(createConfChair(12.9, cz, -Math.PI / 2));
     });
-    [-8.0, -6.5, -5.0].forEach((cz) => {
-      roomGroup.add(createConfChair(15.8, cz, -Math.PI / 2));
+    // East Chairs (facing West towards table, backrest towards right wall)
+    [-8.2, -6.5, -4.8].forEach((cz) => {
+      roomGroup.add(createConfChair(16.1, cz, Math.PI / 2));
     });
-    roomGroup.add(createConfChair(14.5, -4.0, 0));
+    // South Head Chair (Risko facing North towards TV screen, backrest towards south)
+    roomGroup.add(createConfChair(14.5, -3.4, Math.PI));
+    // North Chair (Ren presenter area)
+    roomGroup.add(createConfChair(14.5, -9.6, 0));
 
     // 5D. 75" 4K Presentation Display TV Wall
     const tvGroup = new THREE.Group();
@@ -1212,7 +1259,7 @@ export default function App() {
       const backGeo = new THREE.BoxGeometry(0.52, 0.62, 0.06);
       const backMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.7 });
       const back = new THREE.Mesh(backGeo, backMat);
-      back.position.set(0, 0.78, 0.26);
+      back.position.set(0, 0.78, 0.29);
       back.rotation.x = 0.08;
       back.castShadow = true;
       chairGroup.add(back);
@@ -1277,7 +1324,7 @@ export default function App() {
         depthWrite: false,
       });
       const sprite = new THREE.Sprite(spriteMat);
-      sprite.scale.set(2.4, 0.52, 1);
+      sprite.scale.set(1.9, 0.42, 1);
       return sprite;
     };
 
@@ -1316,44 +1363,45 @@ export default function App() {
       // ---- ARTICULATED LOWER BODY (Hips + Knees + Shoes) ----
       const makeLeg = (side) => {
         const hipPivot = new THREE.Group();
-        hipPivot.position.set(side * 0.135, 0.46, 0);
+        // Placed slightly forward (z = -0.04) and adjusted height (y = 0.46) to align with chair cushion
+        hipPivot.position.set(side * 0.125, 0.46, -0.04);
 
-        // Thigh
-        const thighGeo = new THREE.CapsuleGeometry(0.068, 0.24, 8, 14);
+        // Thigh: Extends forward (-Z when hip rotation.x = -PI/2)
+        const thighGeo = new THREE.CapsuleGeometry(0.062, 0.22, 8, 14);
         const thigh = new THREE.Mesh(thighGeo, pantsMat);
-        thigh.position.y = -0.12;
+        thigh.position.y = -0.11;
         thigh.castShadow = true;
         hipPivot.add(thigh);
 
         // Knee joint
         const kneePivot = new THREE.Group();
-        kneePivot.position.y = -0.24;
+        kneePivot.position.y = -0.22;
         hipPivot.add(kneePivot);
 
-        const kneeBall = new THREE.Mesh(new THREE.SphereGeometry(0.058, 10, 8), pantsMat);
+        const kneeBall = new THREE.Mesh(new THREE.SphereGeometry(0.054, 10, 8), pantsMat);
         kneePivot.add(kneeBall);
 
-        // Calf
-        const calfGeo = new THREE.CapsuleGeometry(0.056, 0.24, 8, 14);
+        // Calf: Hangs down to floor
+        const calfGeo = new THREE.CapsuleGeometry(0.052, 0.22, 8, 14);
         const calf = new THREE.Mesh(calfGeo, pantsMat);
-        calf.position.y = -0.12;
+        calf.position.y = -0.11;
         calf.castShadow = true;
         kneePivot.add(calf);
 
         // Sneaker
-        const shoeGeo = new THREE.SphereGeometry(0.072, 14, 10);
-        shoeGeo.scale(1.0, 0.55, 1.5);
+        const shoeGeo = new THREE.SphereGeometry(0.068, 14, 10);
+        shoeGeo.scale(1.0, 0.52, 1.45);
         const shoeMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6 });
         const shoe = new THREE.Mesh(shoeGeo, shoeMat);
-        shoe.position.set(0, -0.24, -0.05);
+        shoe.position.set(0, -0.22, -0.04);
         shoe.castShadow = true;
         kneePivot.add(shoe);
 
-        // White rubber sole
-        const soleGeo = new THREE.BoxGeometry(0.13, 0.03, 0.24);
+        // White rubber sole resting flush on floor
+        const soleGeo = new THREE.BoxGeometry(0.12, 0.025, 0.22);
         const soleMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.4 });
         const sole = new THREE.Mesh(soleGeo, soleMat);
-        sole.position.set(0, -0.275, -0.05);
+        sole.position.set(0, -0.25, -0.04);
         kneePivot.add(sole);
 
         humanRoot.add(hipPivot);
@@ -1632,13 +1680,15 @@ export default function App() {
       agent.walkTime = 0;
     };
 
-    let clock = new THREE.Clock();
+    let lastTime = performance.now();
     let animId;
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
-      const elapsed = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min(Math.max((now - lastTime) / 1000, 0.016), 0.1);
+      lastTime = now;
+      const elapsed = now / 1000;
       controls.update();
 
       mixers.forEach((m) => m.update(delta));
@@ -1661,9 +1711,9 @@ export default function App() {
           isWorking,
         } = agent;
 
-        // 1. Waypoint Walking Locomotion with smooth while consumption
-        let hasWaypoints = agent.waypoints && agent.waypoints.length > 0;
-        while (hasWaypoints) {
+        // 1. Clean Frame-Safe Waypoint Walking Locomotion
+        if (agent.waypoints && agent.waypoints.length > 0) {
+          agent.isWalking = true;
           const targetWp = agent.waypoints[0];
           const curPos = humanRoot.position;
           const dx = targetWp.x - curPos.x;
@@ -1676,39 +1726,32 @@ export default function App() {
             agent.waypoints.shift();
             if (agent.waypoints.length === 0) {
               agent.isWalking = false;
-              hasWaypoints = false;
-              break;
             }
           } else {
-            agent.isWalking = true;
-            const walkSpeed = 6.2;
-            const step = Math.min(dist, walkSpeed * delta);
+            const step = Math.min(dist, 7.5 * delta);
             curPos.x += (dx / dist) * step;
             curPos.z += (dz / dist) * step;
 
             const walkAngle = Math.atan2(dx, dz) + Math.PI;
             humanRoot.rotation.y = THREE.MathUtils.lerp(humanRoot.rotation.y, walkAngle, 0.25);
-
-            agent.walkTime += delta * 14;
-            const swing = Math.sin(agent.walkTime);
-
-            leftLeg.hipPivot.rotation.x = swing * 0.52;
-            rightLeg.hipPivot.rotation.x = -swing * 0.52;
-            leftLeg.kneePivot.rotation.x = Math.max(0, -swing) * 0.6;
-            rightLeg.kneePivot.rotation.x = Math.max(0, swing) * 0.6;
-
-            leftShoulder.rotation.x = -swing * 0.42;
-            rightShoulder.rotation.x = swing * 0.42;
-            leftElbow.rotation.x = -0.3;
-            rightElbow.rotation.x = -0.3;
-
-            torsoPivot.position.y = 0.52 + Math.abs(Math.sin(agent.walkTime * 2)) * 0.04;
-            torsoPivot.rotation.x = 0.05;
-            break;
           }
-        }
 
-        if (!hasWaypoints) {
+          agent.walkTime += delta * 12;
+          const swing = Math.sin(agent.walkTime);
+
+          leftLeg.hipPivot.rotation.x = swing * 0.52;
+          rightLeg.hipPivot.rotation.x = -swing * 0.52;
+          leftLeg.kneePivot.rotation.x = Math.max(0, -swing) * 0.6;
+          rightLeg.kneePivot.rotation.x = Math.max(0, swing) * 0.6;
+
+          leftShoulder.rotation.x = -swing * 0.42;
+          rightShoulder.rotation.x = swing * 0.42;
+          leftElbow.rotation.x = -0.3;
+          rightElbow.rotation.x = -0.3;
+
+          torsoPivot.position.y = 0.52 + Math.abs(Math.sin(agent.walkTime * 2)) * 0.04;
+          torsoPivot.rotation.x = 0.05;
+        } else {
           // 2. Stationary State Postures
           agent.isWalking = false;
           humanRoot.rotation.y = THREE.MathUtils.lerp(humanRoot.rotation.y, agent.targetRotationY, 0.08);
@@ -1847,7 +1890,10 @@ export default function App() {
           }
         }
 
-        nameSprite.position.set(humanRoot.position.x, humanRoot.position.y + 2.08, humanRoot.position.z);
+        const labelHeightOffset = agent.currentMode === "MEETING" 
+          ? (id === "risko" || id === "ren" ? 2.32 : (id === "pingot" || id === "mika" ? 2.18 : 2.04))
+          : 2.08;
+        nameSprite.position.set(humanRoot.position.x, humanRoot.position.y + labelHeightOffset, humanRoot.position.z);
       });
 
       renderer.render(scene, camera);
@@ -1912,6 +1958,10 @@ export default function App() {
             const agentMesh = agentMeshesRef.current[ev.agent];
             if (agentMesh) {
               agentMesh.isWorking = true;
+              if (agentMesh.currentMode !== "WORK" && agentNavRef.current) {
+                agentNavRef.current(ev.agent, "WORK");
+                setAgentModes((m) => ({ ...m, [ev.agent]: "WORK" }));
+              }
             }
             setWorkingMap((prev) => ({ ...prev, [ev.agent]: true }));
             setActiveTask({
