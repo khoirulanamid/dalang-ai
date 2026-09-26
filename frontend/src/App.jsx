@@ -20,6 +20,9 @@ const AGENTS = {
     action: "Memimpin orkestrasi & evaluasi lakon",
     hasGlasses: true,
     hasLanyard: true,
+    personality: "Visioner, berwibawa, analitis tinggi",
+    typingStyle: "commanding", // Ketukan mantap, sesekali jeda berpikir, anggukan kepala arsitektur
+    speedFactor: 1.0,
   },
   pingot: {
     name: "Pingot",
@@ -36,6 +39,9 @@ const AGENTS = {
     action: "Audit skema & pipeline data",
     hasGlasses: true,
     hasLanyard: true,
+    personality: "Metodis, tenang, kalkulatif & rapi",
+    typingStyle: "methodical", // Ritmik stabil seperti metronom, tangan kiri di numpad, sesekali benerin kacamata
+    speedFactor: 0.9,
   },
   zaki: {
     name: "Zaki",
@@ -52,6 +58,9 @@ const AGENTS = {
     action: "Mengembangkan endpoint FastAPI & worker",
     hasHeadphones: true,
     hasLanyard: true,
+    personality: "Enerjik, beat-driven, hacker sejati",
+    typingStyle: "furious", // Mengetik super kilat, kepala mengangguk santai ikut irama lagu di headphone
+    speedFactor: 1.45,
   },
   lulu: {
     name: "Lulu",
@@ -68,6 +77,9 @@ const AGENTS = {
     action: "Merancang antarmuka & estetika visual",
     hasGlasses: false,
     hasLanyard: true,
+    personality: "Perfeksionis, estetik, peka mikro-interaksi",
+    typingStyle: "perfectionist", // Tangan kanan sering bergerak luwes seperti pegang mouse/stylus pen
+    speedFactor: 1.1,
   },
   mika: {
     name: "Mika",
@@ -84,6 +96,9 @@ const AGENTS = {
     action: "Menulis dokumentasi & standar sistem",
     hasGlasses: true,
     hasLanyard: true,
+    personality: "Puitis, terstruktur, cermat merangkai kata",
+    typingStyle: "poetic", // Ketukan mengalir lembut bergantian jemari, sesekali menengadah mencari diksi terbaik
+    speedFactor: 0.95,
   },
   nova: {
     name: "Nova",
@@ -100,6 +115,9 @@ const AGENTS = {
     action: "Pipeline CI/CD & deployment cloud",
     hasSmartwatch: true,
     hasLanyard: true,
+    personality: "Tegas, gesit, waspada latensi server",
+    typingStyle: "frantic", // Mengetik cepat dalam burst kilat, sering melirik smartwatch di pergelangan tangan
+    speedFactor: 1.35,
   },
   kai: {
     name: "Kai",
@@ -116,6 +134,9 @@ const AGENTS = {
     action: "Audit keamanan OWASP & token gate",
     hasGlasses: false,
     hasLanyard: true,
+    personality: "Waspada, tajam, pemburu celah vulnerabilitas",
+    typingStyle: "hyperfocused", // Badan membungkuk intens mendekati layar, tatapan tajam, ketukan tajam terarah
+    speedFactor: 1.2,
   },
   ren: {
     name: "Ren",
@@ -132,6 +153,9 @@ const AGENTS = {
     action: "Menjalankan 182 test suite otomatis",
     hasGlasses: true,
     hasLanyard: true,
+    personality: "Kritis, teliti, zero-tolerance bug",
+    typingStyle: "rhythmic", // Mengetik dengan ritme audit tegas, sesekali mengangguk saat assertion pass
+    speedFactor: 1.15,
   },
 };
 
@@ -1580,14 +1604,25 @@ export default function App() {
           elbowPivot.add(watch);
         }
 
-        const handGeo = new THREE.SphereGeometry(0.045, 14, 12);
-        handGeo.scale(1.2, 0.7, 1.0);
-        const hand = new THREE.Mesh(handGeo, skinMat);
-        hand.position.y = -0.23;
-        hand.castShadow = true;
-        elbowPivot.add(hand);
+        // Articulated Wrist Joint for realistic typing on keyboard
+        const wristPivot = new THREE.Group();
+        wristPivot.position.y = -0.21;
+        elbowPivot.add(wristPivot);
 
-        return { shoulder, elbowPivot };
+        const handGeo = new THREE.SphereGeometry(0.042, 14, 12);
+        handGeo.scale(1.2, 0.65, 1.1);
+        const hand = new THREE.Mesh(handGeo, skinMat);
+        hand.position.set(0, -0.03, 0.02);
+        hand.castShadow = true;
+        wristPivot.add(hand);
+
+        // Fingertips indicator
+        const fingerGeo = new THREE.BoxGeometry(0.065, 0.015, 0.045);
+        const finger = new THREE.Mesh(fingerGeo, skinMat);
+        finger.position.set(0, -0.045, 0.045);
+        wristPivot.add(finger);
+
+        return { shoulder, elbowPivot, wristPivot };
       };
 
       const leftArm = makeArm(-1);
@@ -1596,6 +1631,8 @@ export default function App() {
       const rightShoulder = rightArm.shoulder;
       const leftElbow = leftArm.elbowPivot;
       const rightElbow = rightArm.elbowPivot;
+      const leftWrist = leftArm.wristPivot;
+      const rightWrist = rightArm.wristPivot;
       torsoPivot.add(leftShoulder);
       torsoPivot.add(rightShoulder);
       humanRoot.add(torsoPivot);
@@ -1636,6 +1673,8 @@ export default function App() {
         rightShoulder,
         leftElbow,
         rightElbow,
+        leftWrist,
+        rightWrist,
         leftLeg,
         rightLeg,
         haloRing,
@@ -1763,35 +1802,152 @@ export default function App() {
             leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
             rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
 
+            const { leftWrist, rightWrist } = agent;
+            const pInfo = AGENTS[id];
+            const speed = pInfo?.speedFactor || 1.0;
+            const pStyle = pInfo?.typingStyle || "methodical";
+
             if (isWorking) {
-              torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, 0.18, 0.08);
-              headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.32, 0.08);
-              headGroup.rotation.y = Math.sin(elapsed * 1.8) * 0.03;
+              // --- UNIQUE PERSONALITY TYPING BEHAVIORS ---
+              let lTyping = 0;
+              let rTyping = 0;
+              let lWristFlick = 0;
+              let rWristFlick = 0;
+              let torsoPitch = 0.18;
+              let headPitch = 0.32;
+              let headYaw = 0;
 
-              const leftTyping = Math.sin(elapsed * 24) * 0.10;
-              const rightTyping = Math.cos(elapsed * 24 + 1.2) * 0.10;
-              leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, -0.52 + leftTyping, 0.1);
-              leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.18, 0.08);
-              rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, -0.52 + rightTyping, 0.1);
-              rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.18, 0.08);
+              if (pStyle === "commanding") { // Risko: Wibawa, ketukan mantap berbobot
+                const burst = Math.sin(elapsed * 16 * speed);
+                lTyping = burst * 0.12;
+                rTyping = Math.cos(elapsed * 16 * speed + 0.8) * 0.12;
+                lWristFlick = Math.sin(elapsed * 18) * 0.14;
+                rWristFlick = Math.cos(elapsed * 18) * 0.14;
+                torsoPitch = 0.15;
+                headPitch = 0.28;
+                headYaw = Math.sin(elapsed * 1.2) * 0.04;
+              } else if (pStyle === "furious") { // Zaki: Hacker cepat kilat + headphone headbobbing
+                const burst = Math.sin(elapsed * 32 * speed);
+                lTyping = burst * 0.16;
+                rTyping = Math.cos(elapsed * 32 * speed + 1.4) * 0.16;
+                lWristFlick = Math.sin(elapsed * 34) * 0.22;
+                rWristFlick = Math.cos(elapsed * 34) * 0.22;
+                torsoPitch = 0.22;
+                headPitch = 0.34 + Math.sin(elapsed * 8) * 0.08; // Headbobbing to music!
+                headYaw = Math.sin(elapsed * 4) * 0.03;
+              } else if (pStyle === "methodical") { // Pingot: Metronomik, tenang, teratur
+                const clk = elapsed * 14 * speed;
+                lTyping = Math.sin(clk) * 0.09;
+                rTyping = Math.cos(clk + Math.PI / 2) * 0.09;
+                lWristFlick = Math.sin(clk) * 0.12;
+                rWristFlick = Math.cos(clk + Math.PI / 2) * 0.12;
+                torsoPitch = 0.14;
+                headPitch = 0.30;
+                headYaw = Math.sin(elapsed * 0.9) * 0.02;
+              } else if (pStyle === "perfectionist") { // Lulu: Desainer, tangan kanan aktif mouse/stylus
+                lTyping = Math.sin(elapsed * 18 * speed) * 0.08; // Tangan kiri di keyboard shortcuts
+                rTyping = Math.sin(elapsed * 9 * speed) * 0.04;  // Tangan kanan gerak luwes
+                lWristFlick = Math.sin(elapsed * 18) * 0.14;
+                rWristFlick = Math.cos(elapsed * 6) * 0.18; // Luwes di mousepad
+                torsoPitch = 0.17;
+                headPitch = 0.30;
+                headYaw = Math.sin(elapsed * 2.2) * 0.06; // Memeriksa kanvas visual
+              } else if (pStyle === "poetic") { // Mika: Santai, ritmis lembut, sering jeda diksi
+                const thoughtPause = Math.sin(elapsed * 1.5) > 0.4;
+                if (!thoughtPause) {
+                  const clk = elapsed * 20 * speed;
+                  lTyping = Math.sin(clk) * 0.10;
+                  rTyping = Math.cos(clk + 1.1) * 0.10;
+                  lWristFlick = Math.sin(clk) * 0.15;
+                  rWristFlick = Math.cos(clk) * 0.15;
+                  headPitch = 0.32;
+                } else {
+                  // Jeda sejenak mikir diksi kata
+                  headPitch = 0.18; // Dongak sedikit
+                  headYaw = 0.12;
+                }
+                torsoPitch = 0.14;
+              } else if (pStyle === "frantic") { // Nova: DevOps burst kilat, cek smartwatch
+                const clk = elapsed * 28 * speed;
+                lTyping = Math.sin(clk) * 0.14;
+                rTyping = Math.cos(clk + 0.9) * 0.14;
+                lWristFlick = Math.sin(clk) * 0.20;
+                rWristFlick = Math.cos(clk) * 0.20;
+                torsoPitch = 0.20;
+                headPitch = 0.35;
+                headYaw = Math.sin(elapsed * 3) * 0.05;
+              } else if (pStyle === "hyperfocused") { // Kai: Keamanan intens, nunduk tajam
+                const clk = elapsed * 24 * speed;
+                lTyping = Math.sin(clk) * 0.11;
+                rTyping = Math.cos(clk + 1.2) * 0.11;
+                lWristFlick = Math.sin(clk) * 0.16;
+                rWristFlick = Math.cos(clk) * 0.16;
+                torsoPitch = 0.24; // Nunduk intens ke monitor
+                headPitch = 0.38;
+                headYaw = Math.sin(elapsed * 1.4) * 0.02;
+              } else { // Ren & default: Tegas & audit
+                const clk = elapsed * 22 * speed;
+                lTyping = Math.sin(clk) * 0.11;
+                rTyping = Math.cos(clk + 1.0) * 0.11;
+                lWristFlick = Math.sin(clk) * 0.15;
+                rWristFlick = Math.cos(clk) * 0.15;
+                torsoPitch = 0.16;
+                headPitch = 0.31;
+                headYaw = Math.sin(elapsed * 1.5) * 0.03;
+              }
 
-              leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, -0.9 + leftTyping, 0.12);
-              rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, -0.9 + rightTyping, 0.12);
+              // Apply Articulation
+              torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, torsoPitch, 0.08);
+              headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, headPitch, 0.08);
+              headGroup.rotation.y = THREE.MathUtils.lerp(headGroup.rotation.y, headYaw, 0.08);
 
-              deskObjects.displayMat.emissiveIntensity = 0.95 + Math.sin(elapsed * 9) * 0.18;
-              deskObjects.lapLight.intensity = 1.1 + Math.sin(elapsed * 7) * 0.2;
+              // Bahu menjangkau ke atas meja laptop
+              leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, -0.54 + lTyping * 0.4, 0.12);
+              leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.16, 0.08);
+              rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, -0.54 + rTyping * 0.4, 0.12);
+              rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.16, 0.08);
+
+              // Siku menekuk tepat di ketinggian daun meja
+              leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, -0.92 + lTyping, 0.14);
+              rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, -0.92 + rTyping, 0.14);
+
+              // Pergelangan tangan mengetik di tuts keyboard (Active Hands & Fingers!)
+              if (leftWrist) {
+                leftWrist.rotation.x = THREE.MathUtils.lerp(leftWrist.rotation.x, 0.28 + lWristFlick, 0.18);
+                leftWrist.rotation.z = THREE.MathUtils.lerp(leftWrist.rotation.z, -0.12 + lTyping * 0.5, 0.14);
+              }
+              if (rightWrist) {
+                rightWrist.rotation.x = THREE.MathUtils.lerp(rightWrist.rotation.x, 0.28 + rWristFlick, 0.18);
+                rightWrist.rotation.z = THREE.MathUtils.lerp(rightWrist.rotation.z, 0.12 + rTyping * 0.5, 0.14);
+              }
+
+              deskObjects.displayMat.emissiveIntensity = 0.95 + Math.sin(elapsed * 9 * speed) * 0.18;
+              deskObjects.lapLight.intensity = 1.1 + Math.sin(elapsed * 7 * speed) * 0.2;
 
               haloRing.material.opacity = THREE.MathUtils.lerp(haloRing.material.opacity, 0.85, 0.06);
               haloRing.rotation.z = elapsed * 1.2;
             } else {
+              // --- UNIQUE PERSONALITY IDLE BEHAVIORS ---
               torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, -0.04, 0.05);
               torsoPivot.position.y = 0.52 + Math.sin(elapsed * 1.6 + id.charCodeAt(0)) * 0.012;
-              headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.05, 0.05);
+
+              if (pStyle === "furious") { // Zaki santai denger musik di headphone
+                headGroup.rotation.x = 0.05 + Math.sin(elapsed * 4.5) * 0.04;
+                headGroup.rotation.y = Math.sin(elapsed * 2.2) * 0.06;
+              } else if (pStyle === "commanding") { // Risko memandang studio dengan tenang
+                headGroup.rotation.x = 0.02;
+                headGroup.rotation.y = Math.sin(elapsed * 0.8) * 0.15;
+              } else {
+                headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, 0.05, 0.05);
+                headGroup.rotation.y = Math.sin(elapsed * 1.2 + id.charCodeAt(0)) * 0.08;
+              }
 
               leftShoulder.rotation.set(-0.2, 0, -0.12);
               rightShoulder.rotation.set(-0.2, 0, 0.12);
               leftElbow.rotation.x = -0.5;
               rightElbow.rotation.x = -0.5;
+              if (leftWrist) leftWrist.rotation.set(0, 0, 0);
+              if (rightWrist) rightWrist.rotation.set(0, 0, 0);
 
               deskObjects.displayMat.emissiveIntensity = 0.45;
               deskObjects.lapLight.intensity = 0.45;
