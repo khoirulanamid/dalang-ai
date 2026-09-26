@@ -1,9 +1,52 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle } from "lucide-react";
+import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle, Eye, Crown, ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 
 // 8 Para Wayang Roster & Detailed Office Profiles
+const AGENT_MINGLE_DIALOGUES = {
+  risko: {
+    greeting: "Selamat datang di lantai engineering, Bos Muda!",
+    quote: "Semua orkestrasi 8 wayang berjalan optimal dengan LLM tools nyata di workspace. Ada blueprint arsitektur atau keputusan teknis baru yang ingin Bos Muda arahkan?",
+    tip: "Risko adalah Tech Lead & Dalang yang mengorkestrasi pembagian tugas lintas agen secara otomatis.",
+  },
+  pingot: {
+    greeting: "Siang Bos Muda. Senang melihat Anda berkeliling.",
+    quote: "Integritas data dan validasi skema database 100% konsisten. Semua invariant runtime dan state agen tersinkronisasi tanpa ada data anomali.",
+    tip: "Pingot menjaga konsistensi schema, data model, dan state flow antarsistem.",
+  },
+  zaki: {
+    greeting: "Halo Bos Muda! Santai sejenak atau mau cek backend?",
+    quote: "Backend FastAPI lagi ngacir, zero downtime. Tadi saya baru nyeduh espresso pakai La Marzocco di pantry, mau saya racikkan secangkir?",
+    tip: "Zaki mengeksekusi implementasi backend, database CRUD, dan runner tools inti.",
+  },
+  lulu: {
+    greeting: "Hai Bos Muda! Senang banget Bos Muda jalan-jalan ke sini!",
+    quote: "Gimana tampilan pencahayaan PBR dan lantai terrazzo kantor barunya? Keren banget kan estetikanya! Shaders, lighting, dan UI Linear berjalan mulus di 60 FPS.",
+    tip: "Lulu bertanggung jawab atas visual 3D Three.js dan estetika sistem antislop.",
+  },
+  mika: {
+    greeting: "Salam hormat Bos Muda. Terima kasih sudah menyapa.",
+    quote: "Seluruh dokumentasi arsitektur, spesifikasi endpoint API, dan log audit sistem telah terdokumentasi rapi dan siap dipelajari tim.",
+    tip: "Mika menyusun dokumentasi teknis, API specs, dan panduan arsitektur.",
+  },
+  nova: {
+    greeting: "Siap Bos Muda! Ada instruksi terkait infrastruktur?",
+    quote: "Pipeline build hijau semua, monitoring resource stabil, dan container deployment berjalan mulus tanpa downtime!",
+    tip: "Nova mengelola otomatisasi CI/CD, build pipelines, dan container deployment.",
+  },
+  kai: {
+    greeting: "Lapor Bos Muda! Keamanan sistem dalam kondisi siaga penuh.",
+    quote: "Audit keamanan sistem dan verifikasi celah OWASP berjalan ketat. Seluruh akses tools diisolasi aman di dalam workspace.",
+    tip: "Kai memindai vulnerability, sanitasi input, dan audit keamanan berlapis.",
+  },
+  ren: {
+    greeting: "Halo Bos Muda! Semuanya berjalan sesuai standar kualitas tinggi.",
+    quote: "329 test suite otomatis kita (security, architecture, AAA, BVA, ASVS) semuanya lulus 100% tanpa error sama sekali!",
+    tip: "Ren memastikan seluruh unit, integrasi, dan regression tests lulus sempurna.",
+  },
+};
+
 const AGENTS = {
   risko: {
     name: "Risko",
@@ -759,6 +802,13 @@ export default function App() {
   const [targetAgent, setTargetAgent] = useState("auto");
   const [isDispatching, setIsDispatching] = useState(false);
   const [selectedAgentDetail, setSelectedAgentDetail] = useState(null);
+  const [cameraMode, setCameraMode] = useState("player"); // 'player' | 'orbit'
+  const cameraModeRef = useRef("player");
+  const [nearAgent, setNearAgent] = useState(null);
+  const nearAgentRef = useRef(null);
+  const [mingleModalAgent, setMingleModalAgent] = useState(null);
+  const playerRef = useRef(null);
+  const keysPressedRef = useRef({ w: false, a: false, s: false, d: false, up: false, down: false, left: false, right: false, shift: false });
   const activeWayangCount = Object.values(workingMap).filter(Boolean).length;
   const sceneRef = useRef(null);
   const agentMeshesRef = useRef({});
@@ -2115,10 +2165,312 @@ export default function App() {
       };
     };
 
+    // ==========================================
+    // FLOATING NAME LABEL FOR BOS MUDA (Canvas Sprite)
+    // ==========================================
+    const createPlayerNameLabel = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 512;
+      canvas.height = 120;
+      const ctx = canvas.getContext("2d");
+
+      ctx.clearRect(0, 0, 512, 120);
+
+      // Badge Background Pill (Dark Obsidian with Gold Border)
+      ctx.fillStyle = "rgba(15, 23, 42, 0.94)";
+      ctx.beginPath();
+      ctx.roundRect(8, 8, 496, 104, 22);
+      ctx.fill();
+
+      // Gold Border
+      ctx.strokeStyle = "rgba(245, 158, 11, 0.9)";
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      // Left Gold Accent Bar
+      ctx.fillStyle = "#f59e0b";
+      ctx.beginPath();
+      ctx.roundRect(8, 8, 12, 104, [22, 0, 0, 22]);
+      ctx.fill();
+
+      // Crown & Name Text
+      ctx.fillStyle = "#f59e0b";
+      ctx.font = "bold 40px system-ui, -apple-system, sans-serif";
+      ctx.textBaseline = "middle";
+      ctx.fillText("BOS MUDA", 36, 44);
+
+      // Subtitle Role
+      ctx.fillStyle = "#f8fafc";
+      ctx.font = "bold 24px system-ui, -apple-system, sans-serif";
+      ctx.fillText("FOUNDER & SANG EMPU", 36, 84);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      const spriteMat = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        depthWrite: false,
+      });
+      const sprite = new THREE.Sprite(spriteMat);
+      sprite.scale.set(2.1, 0.48, 1);
+      return sprite;
+    };
+
+    // ==========================================
+    // AVATAR BOS MUDA (FOUNDER & SANG EMPU)
+    // ==========================================
+    const createPlayerAvatar = () => {
+      const playerRoot = new THREE.Group();
+      playerRoot.position.set(0, 0, 7.2); // Spawns near lounge circulation area
+
+      const skinMat = new THREE.MeshStandardMaterial({
+        color: 0xf3c5a8,
+        roughness: 0.55,
+        metalness: 0.0,
+      });
+      const jacketMat = new THREE.MeshStandardMaterial({
+        color: 0x0f172a,
+        roughness: 0.75,
+        metalness: 0.08,
+      });
+      const pantsMat = new THREE.MeshStandardMaterial({
+        color: 0x1e293b,
+        roughness: 0.85,
+      });
+      const hairMat = new THREE.MeshStandardMaterial({
+        color: 0x171717,
+        roughness: 0.8,
+      });
+      const goldMat = new THREE.MeshStandardMaterial({
+        color: 0xd4af37,
+        metalness: 0.95,
+        roughness: 0.15,
+        emissive: 0x92400e,
+        emissiveIntensity: 0.25,
+      });
+
+      // ---- ARTICULATED LEGS (Standing by default) ----
+      const makePlayerLeg = (side) => {
+        const hipPivot = new THREE.Group();
+        hipPivot.position.set(side * 0.13, 0.46, 0);
+
+        const thighGeo = new THREE.CapsuleGeometry(0.065, 0.24, 8, 14);
+        const thigh = new THREE.Mesh(thighGeo, pantsMat);
+        thigh.position.y = -0.12;
+        thigh.castShadow = true;
+        hipPivot.add(thigh);
+
+        const kneePivot = new THREE.Group();
+        kneePivot.position.y = -0.24;
+        hipPivot.add(kneePivot);
+
+        const kneeBall = new THREE.Mesh(new THREE.SphereGeometry(0.056, 10, 8), pantsMat);
+        kneePivot.add(kneeBall);
+
+        const calfGeo = new THREE.CapsuleGeometry(0.054, 0.24, 8, 14);
+        const calf = new THREE.Mesh(calfGeo, pantsMat);
+        calf.position.y = -0.12;
+        calf.castShadow = true;
+        kneePivot.add(calf);
+
+        const shoeGeo = new THREE.SphereGeometry(0.07, 14, 10);
+        shoeGeo.scale(1.0, 0.52, 1.45);
+        const shoeMat = new THREE.MeshStandardMaterial({ color: 0x09090b, roughness: 0.5 });
+        const shoe = new THREE.Mesh(shoeGeo, shoeMat);
+        shoe.position.set(0, -0.23, -0.04);
+        shoe.castShadow = true;
+        kneePivot.add(shoe);
+
+        const soleGeo = new THREE.BoxGeometry(0.125, 0.025, 0.23);
+        const soleMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.3 });
+        const sole = new THREE.Mesh(soleGeo, soleMat);
+        sole.position.set(0, -0.255, -0.04);
+        kneePivot.add(sole);
+
+        playerRoot.add(hipPivot);
+        return { hipPivot, kneePivot };
+      };
+
+      const leftLeg = makePlayerLeg(-1);
+      const rightLeg = makePlayerLeg(1);
+
+      leftLeg.hipPivot.rotation.x = 0;
+      rightLeg.hipPivot.rotation.x = 0;
+      leftLeg.kneePivot.rotation.x = 0;
+      rightLeg.kneePivot.rotation.x = 0;
+
+      // ---- UPPER BODY PIVOT ----
+      const torsoPivot = new THREE.Group();
+      torsoPivot.position.set(0, 0.52, 0);
+
+      const torsoGeo = new THREE.CapsuleGeometry(0.20, 0.32, 10, 20);
+      torsoGeo.scale(1.15, 1.0, 0.72);
+      const torso = new THREE.Mesh(torsoGeo, jacketMat);
+      torso.position.y = 0.24;
+      torso.castShadow = true;
+      torsoPivot.add(torso);
+
+      const collarGeo = new THREE.TorusGeometry(0.125, 0.025, 8, 16, Math.PI);
+      const collarMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.5 });
+      const collar = new THREE.Mesh(collarGeo, collarMat);
+      collar.rotation.x = Math.PI / 2;
+      collar.position.set(0, 0.46, -0.06);
+      torsoPivot.add(collar);
+
+      const lanyardGeo = new THREE.TorusGeometry(0.145, 0.014, 8, 16, Math.PI);
+      const lanyard = new THREE.Mesh(lanyardGeo, goldMat);
+      lanyard.rotation.x = Math.PI / 2.2;
+      lanyard.position.set(0, 0.45, -0.07);
+      torsoPivot.add(lanyard);
+
+      const founderBadgeGeo = new THREE.BoxGeometry(0.085, 0.12, 0.012);
+      const founderBadgeMat = new THREE.MeshStandardMaterial({ color: 0x18181b, metalness: 0.5, roughness: 0.2 });
+      const founderBadge = new THREE.Mesh(founderBadgeGeo, founderBadgeMat);
+      founderBadge.position.set(0, 0.28, -0.165);
+      torsoPivot.add(founderBadge);
+
+      const emblem = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.03, 0.015), goldMat);
+      emblem.position.set(0, 0.29, -0.17);
+      torsoPivot.add(emblem);
+
+      const neckGeo = new THREE.CylinderGeometry(0.075, 0.085, 0.14, 16);
+      const neck = new THREE.Mesh(neckGeo, skinMat);
+      neck.position.y = 0.51;
+      torsoPivot.add(neck);
+
+      const headGroup = new THREE.Group();
+      headGroup.position.set(0, 0.65, 0);
+
+      const headGeo = new THREE.SphereGeometry(0.155, 28, 22);
+      headGeo.scale(0.95, 1.15, 1.05);
+      const head = new THREE.Mesh(headGeo, skinMat);
+      head.castShadow = true;
+      headGroup.add(head);
+
+      [-0.155, 0.155].forEach((ex) => {
+        const earGeo = new THREE.SphereGeometry(0.038, 10, 8);
+        earGeo.scale(0.4, 1.0, 0.7);
+        const ear = new THREE.Mesh(earGeo, skinMat);
+        ear.position.set(ex, 0.01, -0.01);
+        headGroup.add(ear);
+      });
+
+      const noseGeo = new THREE.ConeGeometry(0.024, 0.06, 12);
+      const nose = new THREE.Mesh(noseGeo, skinMat);
+      nose.rotation.x = -Math.PI / 2.2;
+      nose.position.set(0, -0.01, -0.17);
+      headGroup.add(nose);
+
+      [-0.052, 0.052].forEach((ex) => {
+        const eyeGeo = new THREE.SphereGeometry(0.025, 12, 10);
+        eyeGeo.scale(1.2, 0.8, 0.6);
+        const eye = new THREE.Mesh(eyeGeo, new THREE.MeshBasicMaterial({ color: 0xffffff }));
+        eye.position.set(ex, 0.03, -0.16);
+        headGroup.add(eye);
+
+        const pupilGeo = new THREE.SphereGeometry(0.013, 8, 8);
+        const pupilMat = new THREE.MeshBasicMaterial({ color: 0x0f172a });
+        const pupil = new THREE.Mesh(pupilGeo, pupilMat);
+        pupil.position.set(ex, 0.03, -0.174);
+        headGroup.add(pupil);
+      });
+
+      const hairDomeGeo = new THREE.SphereGeometry(0.175, 22, 18, 0, Math.PI * 2, 0, Math.PI / 1.75);
+      const hairDome = new THREE.Mesh(hairDomeGeo, hairMat);
+      hairDome.position.set(0, 0.05, 0.01);
+      hairDome.castShadow = true;
+      headGroup.add(hairDome);
+
+      torsoPivot.add(headGroup);
+
+      const makePlayerArm = (side) => {
+        const shoulder = new THREE.Group();
+        shoulder.position.set(side * 0.26, 0.38, 0);
+
+        const upperArmGeo = new THREE.CapsuleGeometry(0.056, 0.19, 8, 14);
+        const upperArm = new THREE.Mesh(upperArmGeo, jacketMat);
+        upperArm.position.y = -0.1;
+        upperArm.castShadow = true;
+        shoulder.add(upperArm);
+
+        const elbowPivot = new THREE.Group();
+        elbowPivot.position.y = -0.23;
+        shoulder.add(elbowPivot);
+
+        const elbowBall = new THREE.Mesh(new THREE.SphereGeometry(0.052, 12, 10), jacketMat);
+        elbowPivot.add(elbowBall);
+
+        const forearmGeo = new THREE.CapsuleGeometry(0.044, 0.17, 8, 14);
+        const forearm = new THREE.Mesh(forearmGeo, skinMat);
+        forearm.position.y = -0.12;
+        forearm.castShadow = true;
+        elbowPivot.add(forearm);
+
+        if (side === -1) {
+          const watchGeo = new THREE.CylinderGeometry(0.048, 0.048, 0.035, 14);
+          const watch = new THREE.Mesh(watchGeo, goldMat);
+          watch.position.y = -0.18;
+          elbowPivot.add(watch);
+        }
+
+        const handGeo = new THREE.SphereGeometry(0.044, 14, 12);
+        handGeo.scale(1.2, 0.65, 1.1);
+        const hand = new THREE.Mesh(handGeo, skinMat);
+        hand.position.set(0, -0.22, 0.02);
+        hand.castShadow = true;
+        elbowPivot.add(hand);
+
+        return { shoulder, elbowPivot };
+      };
+
+      const leftArm = makePlayerArm(-1);
+      const rightArm = makePlayerArm(1);
+      torsoPivot.add(leftArm.shoulder);
+      torsoPivot.add(rightArm.shoulder);
+
+      playerRoot.add(torsoPivot);
+
+      const nameSprite = createPlayerNameLabel();
+      nameSprite.position.set(playerRoot.position.x, 2.25, playerRoot.position.z);
+      scene.add(nameSprite);
+
+      const ringGeo = new THREE.RingGeometry(0.72, 0.84, 44);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0xf59e0b,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.85,
+      });
+      const haloRing = new THREE.Mesh(ringGeo, ringMat);
+      haloRing.rotation.x = Math.PI / 2;
+      haloRing.position.set(playerRoot.position.x, 0.02, playerRoot.position.z);
+      scene.add(haloRing);
+
+      scene.add(playerRoot);
+
+      return {
+        root: playerRoot,
+        leftLeg,
+        rightLeg,
+        leftArm,
+        rightArm,
+        torsoPivot,
+        headGroup,
+        haloRing,
+        nameSprite,
+        pos: playerRoot.position,
+        walkCycle: 0,
+        isWalking: false,
+        targetDest: null,
+      };
+    };
+
     // Instantiate all 8 Wayangs in Studio
     Object.entries(AGENTS).forEach(([id, data]) => {
       createStylizedHuman(id, data);
     });
+
+    // Instantiate Bos Muda Avatar
+    playerRef.current = createPlayerAvatar();
 
     // 60FPS RAF Render Loop (MengTo Optimization)
     // Setup Navigation Handler for App Controls
@@ -2474,6 +2826,118 @@ export default function App() {
         nameSprite.position.set(humanRoot.position.x, humanRoot.position.y + labelHeightOffset, humanRoot.position.z);
       });
 
+      // ==========================================
+      // BOS MUDA (PLAYER) LOCOMOTION & KINEMATICS & PROXIMITY
+      // ==========================================
+      if (playerRef.current) {
+        const player = playerRef.current;
+        const keys = keysPressedRef.current;
+        let moveX = 0;
+        let moveZ = 0;
+
+        if (keys.w) moveZ -= 1;
+        if (keys.s) moveZ += 1;
+        if (keys.a) moveX -= 1;
+        if (keys.d) moveX += 1;
+
+        if (moveX !== 0 || moveZ !== 0) {
+          player.targetDest = null;
+          const len = Math.hypot(moveX, moveZ);
+          const dirX = moveX / len;
+          const dirZ = moveZ / len;
+          const speed = keys.shift ? 7.8 : 4.6;
+
+          player.pos.x += dirX * speed * delta;
+          player.pos.z += dirZ * speed * delta;
+
+          player.pos.x = THREE.MathUtils.clamp(player.pos.x, -14.2, 14.2);
+          player.pos.z = THREE.MathUtils.clamp(player.pos.z, -12.6, 12.6);
+
+          const targetAngle = Math.atan2(dirX, dirZ) + Math.PI;
+          player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.22);
+          player.isWalking = true;
+        } else if (player.targetDest) {
+          const tdx = player.targetDest.x - player.pos.x;
+          const tdz = player.targetDest.z - player.pos.z;
+          const tdist = Math.hypot(tdx, tdz);
+
+          if (tdist < 0.25) {
+            player.targetDest = null;
+            player.isWalking = false;
+          } else {
+            const step = Math.min(tdist, 5.0 * delta);
+            player.pos.x += (tdx / tdist) * step;
+            player.pos.z += (tdz / tdist) * step;
+
+            player.pos.x = THREE.MathUtils.clamp(player.pos.x, -14.2, 14.2);
+            player.pos.z = THREE.MathUtils.clamp(player.pos.z, -12.6, 12.6);
+
+            const targetAngle = Math.atan2(tdx, tdz) + Math.PI;
+            player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.22);
+            player.isWalking = true;
+          }
+        } else {
+          player.isWalking = false;
+        }
+
+        if (player.isWalking) {
+          player.walkCycle += delta * (keys.shift ? 14 : 9.5);
+          player.leftLeg.hipPivot.rotation.x = Math.sin(player.walkCycle) * 0.72;
+          player.rightLeg.hipPivot.rotation.x = -Math.sin(player.walkCycle) * 0.72;
+          player.leftLeg.kneePivot.rotation.x = Math.max(0, -Math.sin(player.walkCycle)) * 0.65;
+          player.rightLeg.kneePivot.rotation.x = Math.max(0, Math.sin(player.walkCycle)) * 0.65;
+          player.leftArm.shoulder.rotation.x = -Math.sin(player.walkCycle) * 0.5;
+          player.rightArm.shoulder.rotation.x = Math.sin(player.walkCycle) * 0.5;
+          player.torsoPivot.position.y = 0.52 + Math.abs(Math.sin(player.walkCycle * 2)) * 0.025;
+        } else {
+          player.leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(player.leftLeg.hipPivot.rotation.x, 0, 0.15);
+          player.rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(player.rightLeg.hipPivot.rotation.x, 0, 0.15);
+          player.leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(player.leftLeg.kneePivot.rotation.x, 0, 0.15);
+          player.rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(player.rightLeg.kneePivot.rotation.x, 0, 0.15);
+          player.leftArm.shoulder.rotation.x = THREE.MathUtils.lerp(player.leftArm.shoulder.rotation.x, 0, 0.15);
+          player.rightArm.shoulder.rotation.x = THREE.MathUtils.lerp(player.rightArm.shoulder.rotation.x, 0, 0.15);
+          player.torsoPivot.position.y = 0.52 + Math.sin(elapsed * 2) * 0.008;
+        }
+
+        player.nameSprite.position.set(player.pos.x, 2.25, player.pos.z);
+        player.haloRing.position.set(player.pos.x, 0.02, player.pos.z);
+        player.haloRing.rotation.z += delta * 1.2;
+
+        if (cameraModeRef.current === "player") {
+          controls.target.lerp(new THREE.Vector3(player.pos.x, 1.2, player.pos.z), 0.08);
+          const desiredCamPos = new THREE.Vector3(player.pos.x + 9.5, player.pos.y + 13.5, player.pos.z + 14.5);
+          camera.position.lerp(desiredCamPos, 0.04);
+        }
+
+        let closest = null;
+        let minDist = 3.2;
+
+        Object.entries(agentMeshesRef.current).forEach(([aid, agent]) => {
+          const adx = player.pos.x - agent.humanRoot.position.x;
+          const adz = player.pos.z - agent.humanRoot.position.z;
+          const dist = Math.hypot(adx, adz);
+
+          if (dist < minDist) {
+            minDist = dist;
+            closest = {
+              id: aid,
+              name: AGENTS[aid]?.name || aid,
+              role: AGENTS[aid]?.role || "",
+              title: AGENTS[aid]?.title || "",
+              color: AGENTS[aid]?.color || 0x6366f1,
+              dialogue: AGENT_MINGLE_DIALOGUES[aid],
+              dist: dist.toFixed(1),
+            };
+
+            const lookAngle = Math.atan2(adx, adz);
+            agent.headGroup.rotation.y = THREE.MathUtils.lerp(agent.headGroup.rotation.y, lookAngle - agent.humanRoot.rotation.y, 0.15);
+          }
+        });
+
+        nearAgentRef.current = closest;
+        setNearAgent(closest);
+      }
+
       renderer.render(scene, camera);
     };
 
@@ -2488,6 +2952,74 @@ export default function App() {
       renderer.setSize(w, h);
     };
     window.addEventListener("resize", handleResize);
+
+    const handleKeyDown = (e) => {
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+      const k = e.key.toLowerCase();
+      if (k === "w" || e.key === "ArrowUp") keysPressedRef.current.w = true;
+      if (k === "s" || e.key === "ArrowDown") keysPressedRef.current.s = true;
+      if (k === "a" || e.key === "ArrowLeft") keysPressedRef.current.a = true;
+      if (k === "d" || e.key === "ArrowRight") keysPressedRef.current.d = true;
+      if (e.key === "Shift") keysPressedRef.current.shift = true;
+
+      if (k === "e") {
+        if (nearAgentRef.current) {
+          setMingleModalAgent(nearAgentRef.current);
+        }
+      }
+
+      if (k === "v") {
+        setCameraMode((prev) => {
+          const next = prev === "player" ? "orbit" : "player";
+          cameraModeRef.current = next;
+          return next;
+        });
+      }
+    };
+
+    const handleKeyUp = (e) => {
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+      const k = e.key.toLowerCase();
+      if (k === "w" || e.key === "ArrowUp") keysPressedRef.current.w = false;
+      if (k === "s" || e.key === "ArrowDown") keysPressedRef.current.s = false;
+      if (k === "a" || e.key === "ArrowLeft") keysPressedRef.current.a = false;
+      if (k === "d" || e.key === "ArrowRight") keysPressedRef.current.d = false;
+      if (e.key === "Shift") keysPressedRef.current.shift = false;
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let pointerDownPos = { x: 0, y: 0 };
+
+    const handlePointerDown = (e) => {
+      pointerDownPos = { x: e.clientX, y: e.clientY };
+    };
+
+    const handlePointerUp = (e) => {
+      const dist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
+      if (dist > 6) return;
+
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+      const targetPoint = new THREE.Vector3();
+      if (raycaster.ray.intersectPlane(plane, targetPoint)) {
+        if (targetPoint.x >= -14.5 && targetPoint.x <= 14.5 && targetPoint.z >= -13 && targetPoint.z <= 13) {
+          if (playerRef.current) {
+            playerRef.current.targetDest = { x: targetPoint.x, z: targetPoint.z };
+          }
+        }
+      }
+    };
+
+    renderer.domElement.addEventListener("pointerdown", handlePointerDown);
+    renderer.domElement.addEventListener("pointerup", handlePointerUp);
 
     // Autonomous Smart Office Simulator
     const autoInterval = setInterval(() => {
@@ -2595,6 +3127,10 @@ export default function App() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      renderer.domElement.removeEventListener("pointerdown", handlePointerDown);
+      renderer.domElement.removeEventListener("pointerup", handlePointerUp);
       clearInterval(autoInterval);
       clearInterval(iv);
       if (ws) ws.close();
@@ -2766,6 +3302,34 @@ export default function App() {
           })}
         </nav>
 
+        {/* Camera Perspective Mode Toggle (Bos Muda Follow vs Free Orbit) */}
+        <button
+          onClick={() => {
+            const next = cameraMode === "player" ? "orbit" : "player";
+            setCameraMode(next);
+            cameraModeRef.current = next;
+          }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            padding: "4px 10px",
+            borderRadius: 6,
+            border: cameraMode === "player" ? "1px solid rgba(245, 158, 11, 0.45)" : "1px solid rgba(255, 255, 255, 0.08)",
+            backgroundColor: cameraMode === "player" ? "rgba(245, 158, 11, 0.12)" : "#0f1011",
+            color: cameraMode === "player" ? "#fbbf24" : "#8a8f98",
+            fontSize: "12px",
+            fontWeight: "500",
+            cursor: "pointer",
+            outline: "none",
+            transition: "all 0.15s ease"
+          }}
+          title="Shortcut tombol [V] untuk beralih mode kamera"
+        >
+          {cameraMode === "player" ? <Crown size={13} color="#fbbf24" /> : <Eye size={13} />}
+          <span>{cameraMode === "player" ? "Mode Bos Muda (Follow)" : "Orbit Bebas"}</span>
+        </button>
+
         {/* Right: Telemetry Counts (JetBrains Mono) */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: "11px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 6, color: activeWayangCount > 0 ? "#7170ff" : "#8a8f98" }}>
@@ -2783,6 +3347,180 @@ export default function App() {
         {/* LEFT: 3D Studio Canvas */}
         <div style={{ flex: 1, position: "relative", backgroundColor: "#08090a", overflow: "hidden" }}>
           <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
+
+          {/* 🎮 Virtual On-Screen Controls for Bos Muda (Bottom-Left) */}
+          <div style={{
+            position: "absolute",
+            bottom: 20,
+            left: 20,
+            zIndex: 15,
+            backgroundColor: "rgba(15, 16, 17, 0.88)",
+            backdropFilter: "blur(8px)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+            borderRadius: 8,
+            padding: "10px 12px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5)",
+            pointerEvents: "auto"
+          }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "11px", fontWeight: "600", color: "#fbbf24" }}>
+                <Crown size={12} />
+                <span>KENDALI BOS MUDA</span>
+              </div>
+              <span style={{ fontSize: "9px", fontFamily: "'JetBrains Mono', monospace", color: "#8a8f98" }}>
+                WASD / PANAH
+              </span>
+            </div>
+
+            {/* Virtual Directional D-Pad */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+              <button
+                onMouseDown={() => { keysPressedRef.current.w = true; }}
+                onMouseUp={() => { keysPressedRef.current.w = false; }}
+                onTouchStart={() => { keysPressedRef.current.w = true; }}
+                onTouchEnd={() => { keysPressedRef.current.w = false; }}
+                style={{
+                  width: 32,
+                  height: 28,
+                  backgroundColor: "rgba(255, 255, 255, 0.06)",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  borderRadius: 4,
+                  color: "#f7f8f8",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer"
+                }}
+                title="Maju (W / Panah Atas)"
+              >
+                <ArrowUp size={13} />
+              </button>
+
+              <div style={{ display: "flex", gap: 4 }}>
+                <button
+                  onMouseDown={() => { keysPressedRef.current.a = true; }}
+                  onMouseUp={() => { keysPressedRef.current.a = false; }}
+                  onTouchStart={() => { keysPressedRef.current.a = true; }}
+                  onTouchEnd={() => { keysPressedRef.current.a = false; }}
+                  style={{
+                    width: 32,
+                    height: 28,
+                    backgroundColor: "rgba(255, 255, 255, 0.06)",
+                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    borderRadius: 4,
+                    color: "#f7f8f8",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer"
+                  }}
+                  title="Kiri (A / Panah Kiri)"
+                >
+                  <ArrowLeft size={13} />
+                </button>
+
+                <button
+                  onMouseDown={() => { keysPressedRef.current.s = true; }}
+                  onMouseUp={() => { keysPressedRef.current.s = false; }}
+                  onTouchStart={() => { keysPressedRef.current.s = true; }}
+                  onTouchEnd={() => { keysPressedRef.current.s = false; }}
+                  style={{
+                    width: 32,
+                    height: 28,
+                    backgroundColor: "rgba(255, 255, 255, 0.06)",
+                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    borderRadius: 4,
+                    color: "#f7f8f8",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer"
+                  }}
+                  title="Mundur (S / Panah Bawah)"
+                >
+                  <ArrowDown size={13} />
+                </button>
+
+                <button
+                  onMouseDown={() => { keysPressedRef.current.d = true; }}
+                  onMouseUp={() => { keysPressedRef.current.d = false; }}
+                  onTouchStart={() => { keysPressedRef.current.d = true; }}
+                  onTouchEnd={() => { keysPressedRef.current.d = false; }}
+                  style={{
+                    width: 32,
+                    height: 28,
+                    backgroundColor: "rgba(255, 255, 255, 0.06)",
+                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    borderRadius: 4,
+                    color: "#f7f8f8",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer"
+                  }}
+                  title="Kanan (D / Panah Kanan)"
+                >
+                  <ArrowRight size={13} />
+                </button>
+              </div>
+            </div>
+
+            <div style={{ fontSize: "10px", color: "#8a8f98", lineHeight: 1.4, textAlign: "center" }}>
+              Klik lantai untuk jalan cepat<br />
+              Tahan <span style={{ color: "#d0d6e0", fontFamily: "monospace" }}>[Shift]</span> untuk lari
+            </div>
+          </div>
+
+          {/* 💬 Proximity Interaction Floating Banner (When near an Employee) */}
+          {nearAgent && (
+            <div
+              onClick={() => setMingleModalAgent(nearAgent)}
+              style={{
+                position: "absolute",
+                bottom: 84,
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "rgba(15, 23, 42, 0.95)",
+                border: "1px solid rgba(245, 158, 11, 0.5)",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.7), 0 0 16px rgba(245, 158, 11, 0.25)",
+                borderRadius: 24,
+                padding: "8px 18px",
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                zIndex: 25,
+                cursor: "pointer",
+                transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                animation: "pulse 2s infinite"
+              }}
+            >
+              <div style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                backgroundColor: "#fbbf24",
+                boxShadow: "0 0 8px #fbbf24"
+              }} />
+              <div style={{ fontSize: "12px", color: "#f8fafc", fontWeight: "500" }}>
+                Dekat dengan <span style={{ color: "#fbbf24", fontWeight: "600" }}>{nearAgent.name}</span> ({nearAgent.role})
+              </div>
+              <div style={{
+                fontSize: "11px",
+                padding: "2px 8px",
+                backgroundColor: "rgba(245, 158, 11, 0.2)",
+                border: "1px solid rgba(245, 158, 11, 0.4)",
+                borderRadius: 12,
+                color: "#fef08a",
+                fontWeight: "600",
+                letterSpacing: "0.02em"
+              }}>
+                [E] Tekan untuk Berbaur
+              </div>
+            </div>
+          )}
 
           {/* Integrated Linear-Style Command Dock (Bottom Center) */}
           <div style={{
@@ -3122,6 +3860,250 @@ export default function App() {
           </div>
         </aside>
       </div>
+
+      {/* 👑 MODAL BERBAUR DENGAN KARYAWAN (Interaksi Tatap Muka Bos Muda) */}
+      {mingleModalAgent && (
+        <div
+          onClick={() => setMingleModalAgent(null)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0, 0, 0, 0.76)",
+            backdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 110,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: "#0d0f12",
+              border: "1px solid rgba(245, 158, 11, 0.35)",
+              borderRadius: 12,
+              padding: "24px 28px",
+              width: "min(480px, 94%)",
+              boxShadow: "0 24px 64px -8px rgba(0, 0, 0, 0.85), 0 0 24px rgba(245, 158, 11, 0.12)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 16
+            }}
+          >
+            {/* Header */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 8,
+                  backgroundColor: "rgba(245, 158, 11, 0.12)",
+                  border: "1px solid rgba(245, 158, 11, 0.3)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fbbf24"
+                }}>
+                  <Crown size={18} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "16px", fontWeight: "600", color: "#f7f8f8" }}>
+                    Berbincang dengan {mingleModalAgent.name}
+                  </div>
+                  <div style={{ fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", color: "#fbbf24" }}>
+                    {mingleModalAgent.role} • {mingleModalAgent.title}
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => setMingleModalAgent(null)}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  color: "#8a8f98",
+                  fontSize: "16px",
+                  cursor: "pointer",
+                  padding: "4px 8px"
+                }}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Conversation Speech Box */}
+            <div style={{
+              backgroundColor: "rgba(255, 255, 255, 0.03)",
+              border: "1px solid rgba(255, 255, 255, 0.06)",
+              borderRadius: 8,
+              padding: "14px 16px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 8
+            }}>
+              <div style={{ fontSize: "13px", fontWeight: "500", color: "#e2e8f0" }}>
+                "{mingleModalAgent.dialogue?.greeting}"
+              </div>
+              <div style={{ fontSize: "13px", color: "#94a3b8", lineHeight: 1.6, fontStyle: "italic" }}>
+                "{mingleModalAgent.dialogue?.quote}"
+              </div>
+              <div style={{
+                marginTop: 4,
+                paddingTop: 8,
+                borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+                fontSize: "11px",
+                color: "#64748b"
+              }}>
+                💡 {mingleModalAgent.dialogue?.tip}
+              </div>
+            </div>
+
+            {/* Interactive Actions with Employee */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <div style={{ fontSize: "11px", fontWeight: "600", color: "#8a8f98", letterSpacing: "0.04em" }}>
+                AKSI BERSAMA BOS MUDA:
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                <button
+                  onClick={() => {
+                    handleAgentNav(mingleModalAgent.id, "PANTRY");
+                    setMingleModalAgent(null);
+                  }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "8px 12px",
+                    borderRadius: 6,
+                    backgroundColor: "rgba(255, 255, 255, 0.04)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    color: "#f8fafc",
+                    fontSize: "12px",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease"
+                  }}
+                >
+                  <Coffee size={14} color="#f59e0b" />
+                  <span>Ajak Ngopi di Pantry</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    handleAgentNav(mingleModalAgent.id, "MEETING");
+                    setMingleModalAgent(null);
+                  }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "8px 12px",
+                    borderRadius: 6,
+                    backgroundColor: "rgba(255, 255, 255, 0.04)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    color: "#f8fafc",
+                    fontSize: "12px",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease"
+                  }}
+                >
+                  <Users size={14} color="#38bdf8" />
+                  <span>Ajak Rapat di War Room</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    handleAgentNav(mingleModalAgent.id, "LOUNGE");
+                    setMingleModalAgent(null);
+                  }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "8px 12px",
+                    borderRadius: 6,
+                    backgroundColor: "rgba(255, 255, 255, 0.04)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    color: "#f8fafc",
+                    fontSize: "12px",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease"
+                  }}
+                >
+                  <Sparkles size={14} color="#a855f7" />
+                  <span>Ajak Santai di Lounge</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    handleAgentNav(mingleModalAgent.id, "WORK");
+                    setMingleModalAgent(null);
+                  }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "8px 12px",
+                    borderRadius: 6,
+                    backgroundColor: "rgba(255, 255, 255, 0.04)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    color: "#f8fafc",
+                    fontSize: "12px",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease"
+                  }}
+                >
+                  <Laptop size={14} color="#10b981" />
+                  <span>Kembali ke Meja Kerja</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Direct Task Assignment & Close */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 4 }}>
+              <button
+                onClick={() => {
+                  handleAssignToAgent(mingleModalAgent.id);
+                  setMingleModalAgent(null);
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "6px 14px",
+                  borderRadius: 6,
+                  backgroundColor: "rgba(94, 106, 210, 0.15)",
+                  border: "1px solid rgba(94, 106, 210, 0.35)",
+                  color: "#a5b4fc",
+                  fontSize: "12px",
+                  fontWeight: "500",
+                  cursor: "pointer"
+                }}
+              >
+                <Send size={12} />
+                <span>Beri Tugas Langsung</span>
+              </button>
+
+              <button
+                onClick={() => setMingleModalAgent(null)}
+                style={{
+                  padding: "6px 14px",
+                  borderRadius: 6,
+                  backgroundColor: "rgba(255, 255, 255, 0.06)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  color: "#d0d6e0",
+                  fontSize: "12px",
+                  cursor: "pointer"
+                }}
+              >
+                Tutup Obrolan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 3. MODAL DETAIL WAYANG (Linear Dialog Standard) */}
       {selectedAgentDetail && (
