@@ -578,14 +578,14 @@ const LOCATION_SPOTS = {
   WORK: DESK_SPOTS,
   DESK: DESK_SPOTS,
   MEETING: {
-    risko: { pos: [14.5, 0, -3.4], rotY: Math.PI },
-    pingot: { pos: [12.9, 0, -4.8], rotY: -Math.PI / 2 },
-    zaki: { pos: [12.9, 0, -6.5], rotY: -Math.PI / 2 },
-    lulu: { pos: [12.9, 0, -8.2], rotY: -Math.PI / 2 },
-    mika: { pos: [16.1, 0, -4.8], rotY: Math.PI / 2 },
-    nova: { pos: [16.1, 0, -6.5], rotY: Math.PI / 2 },
-    kai: { pos: [16.1, 0, -8.2], rotY: Math.PI / 2 },
-    ren: { pos: [14.5, 0, -9.6], rotY: 0 },
+    risko: { pos: [14.5, 0, -3.4], rotY: 0 },
+    pingot: { pos: [12.9, 0, -4.8], rotY: Math.PI / 2 },
+    zaki: { pos: [12.9, 0, -6.5], rotY: Math.PI / 2 },
+    lulu: { pos: [12.9, 0, -8.2], rotY: Math.PI / 2 },
+    mika: { pos: [16.1, 0, -4.8], rotY: -Math.PI / 2 },
+    nova: { pos: [16.1, 0, -6.5], rotY: -Math.PI / 2 },
+    kai: { pos: [16.1, 0, -8.2], rotY: -Math.PI / 2 },
+    ren: { pos: [14.5, 0, -9.6], rotY: Math.PI },
   },
   LOUNGE: {
     risko: { pos: [7.2, 0, 7.1], rotY: 0 },
@@ -1360,16 +1360,16 @@ export default function App() {
 
     // West Chairs (facing East towards table)
     [-8.2, -6.5, -4.8].forEach((cz) => {
-      roomGroup.add(createConfChair(12.9, cz, -Math.PI / 2));
+      roomGroup.add(createConfChair(12.9, cz, Math.PI / 2));
     });
     // East Chairs (facing West towards table)
     [-8.2, -6.5, -4.8].forEach((cz) => {
-      roomGroup.add(createConfChair(16.1, cz, Math.PI / 2));
+      roomGroup.add(createConfChair(16.1, cz, -Math.PI / 2));
     });
-    // South Head Chair (Risko facing North)
-    roomGroup.add(createConfChair(14.5, -3.4, Math.PI));
-    // North Chair (Ren presenter area)
-    roomGroup.add(createConfChair(14.5, -9.6, 0));
+    // South Head Chair (Risko facing North towards TV & table)
+    roomGroup.add(createConfChair(14.5, -3.4, 0));
+    // North Chair (Ren facing South towards table)
+    roomGroup.add(createConfChair(14.5, -9.6, Math.PI));
 
     // 5D. 85" Ultra-HD 4K Video Collaboration Wall
     const tvGroup = new THREE.Group();
@@ -2832,10 +2832,12 @@ export default function App() {
               leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, 0, 0.1);
               rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, 0, 0.1);
               torsoPivot.position.y = 0.52 + Math.sin(elapsed * 2) * 0.01;
+              torsoPivot.rotation.x = 0;
 
-              leftShoulder.rotation.set(-0.4 + Math.sin(elapsed * 2.5) * 0.25, 0, -0.3);
-              rightShoulder.rotation.set(-0.7 + Math.cos(elapsed * 2.0) * 0.3, 0, 0.4);
-              rightElbow.rotation.x = -0.8;
+              leftShoulder.rotation.set(0.4 + Math.sin(elapsed * 2.5) * 0.15, 0, -0.2);
+              rightShoulder.rotation.set(0.7 + Math.cos(elapsed * 2.0) * 0.2, 0, 0.3);
+              leftElbow.rotation.x = 0.6;
+              rightElbow.rotation.x = 0.9;
               headGroup.rotation.y = Math.sin(elapsed * 1.5) * 0.25;
             } else {
               leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
@@ -2849,10 +2851,11 @@ export default function App() {
               headGroup.rotation.x = Math.sin(elapsed * 1.8 + id.charCodeAt(0)) * 0.06;
               headGroup.rotation.y = Math.sin(elapsed * 0.8 + id.charCodeAt(0)) * 0.12;
 
-              leftShoulder.rotation.set(-0.35, 0, -0.15);
-              rightShoulder.rotation.set(-0.35, 0, 0.15);
-              leftElbow.rotation.x = -0.7;
-              rightElbow.rotation.x = -0.7;
+              // Arms resting naturally forward on the conference table
+              leftShoulder.rotation.set(0.45, 0, -0.15);
+              rightShoulder.rotation.set(0.45, 0, 0.15);
+              leftElbow.rotation.x = 0.85;
+              rightElbow.rotation.x = 0.85;
             }
             deskObjects.displayMat.emissiveIntensity = 0.2;
             deskObjects.lapLight.intensity = 0.2;
@@ -2869,9 +2872,9 @@ export default function App() {
               torsoPivot.rotation.x = -0.02;
               headGroup.rotation.y = Math.sin(elapsed * 1.2 + id.charCodeAt(0)) * 0.2;
 
-              rightShoulder.rotation.set(-0.6, 0, 0.2);
-              rightElbow.rotation.x = -1.1;
-              leftShoulder.rotation.set(-0.1, 0, -0.1);
+              rightShoulder.rotation.set(0.6, 0, 0.2);
+              rightElbow.rotation.x = 1.1;
+              leftShoulder.rotation.set(0.1, 0, -0.1);
             } else {
               leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
               rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
@@ -2881,10 +2884,10 @@ export default function App() {
               torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, -0.14, 0.05);
               torsoPivot.position.y = 0.44 + Math.sin(elapsed * 1.2 + id.charCodeAt(0)) * 0.01;
 
-              rightShoulder.rotation.set(-0.5, 0, 0.3);
-              rightElbow.rotation.x = -1.0;
-              leftShoulder.rotation.set(-0.1, 0, -0.2);
-              leftElbow.rotation.x = -0.4;
+              rightShoulder.rotation.set(0.5, 0, 0.3);
+              rightElbow.rotation.x = 1.0;
+              leftShoulder.rotation.set(0.1, 0, -0.2);
+              leftElbow.rotation.x = 0.4;
             }
             haloRing.material.opacity = 0;
             deskObjects.displayMat.emissiveIntensity = 0.2;
@@ -2905,10 +2908,10 @@ export default function App() {
               rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, 0, 0.1);
               torsoPivot.position.y = 0.52;
             }
-            rightShoulder.rotation.set(-0.55 + Math.sin(elapsed * 1.5 + id.charCodeAt(0)) * 0.15, 0, 0.25);
-            rightElbow.rotation.x = -1.1;
-            leftShoulder.rotation.set(-0.15, 0, -0.15);
-            leftElbow.rotation.x = -0.3;
+            rightShoulder.rotation.set(0.55 + Math.sin(elapsed * 1.5 + id.charCodeAt(0)) * 0.15, 0, 0.25);
+            rightElbow.rotation.x = 1.1;
+            leftShoulder.rotation.set(0.15, 0, -0.15);
+            leftElbow.rotation.x = 0.3;
 
             haloRing.material.opacity = 0;
             deskObjects.displayMat.emissiveIntensity = 0.2;
