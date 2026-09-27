@@ -578,14 +578,14 @@ const LOCATION_SPOTS = {
   WORK: DESK_SPOTS,
   DESK: DESK_SPOTS,
   MEETING: {
-    risko: { pos: [14.5, 0, -3.4], rotY: 0 },
-    pingot: { pos: [12.9, 0, -4.8], rotY: Math.PI / 2 },
-    zaki: { pos: [12.9, 0, -6.5], rotY: Math.PI / 2 },
-    lulu: { pos: [12.9, 0, -8.2], rotY: Math.PI / 2 },
-    mika: { pos: [16.1, 0, -4.8], rotY: -Math.PI / 2 },
-    nova: { pos: [16.1, 0, -6.5], rotY: -Math.PI / 2 },
-    kai: { pos: [16.1, 0, -8.2], rotY: -Math.PI / 2 },
-    ren: { pos: [14.5, 0, -9.6], rotY: Math.PI },
+    risko: { pos: [14.5, 0, -3.8], rotY: -Math.PI }, // Facing North toward TV (-Z)
+    pingot: { pos: [13.4, 0, -4.8], rotY: Math.PI / 2 }, // West side facing East (+X toward table)
+    zaki: { pos: [13.4, 0, -6.5], rotY: Math.PI / 2 },
+    lulu: { pos: [13.4, 0, -8.2], rotY: Math.PI / 2 },
+    mika: { pos: [15.6, 0, -4.8], rotY: -Math.PI / 2 }, // East side facing West (-X toward table)
+    nova: { pos: [15.6, 0, -6.5], rotY: -Math.PI / 2 },
+    kai: { pos: [15.6, 0, -8.2], rotY: -Math.PI / 2 },
+    ren: { pos: [14.5, 0, -9.2], rotY: 0 }, // North side facing South (+Z toward table & team)
   },
   LOUNGE: {
     risko: { pos: [7.2, 0, 7.1], rotY: 0 },
@@ -1360,16 +1360,16 @@ export default function App() {
 
     // West Chairs (facing East towards table)
     [-8.2, -6.5, -4.8].forEach((cz) => {
-      roomGroup.add(createConfChair(12.9, cz, Math.PI / 2));
+      roomGroup.add(createConfChair(13.4, cz, Math.PI / 2));
     });
     // East Chairs (facing West towards table)
     [-8.2, -6.5, -4.8].forEach((cz) => {
-      roomGroup.add(createConfChair(16.1, cz, -Math.PI / 2));
+      roomGroup.add(createConfChair(15.6, cz, -Math.PI / 2));
     });
     // South Head Chair (Risko facing North towards TV & table)
-    roomGroup.add(createConfChair(14.5, -3.4, 0));
-    // North Chair (Ren facing South towards table)
-    roomGroup.add(createConfChair(14.5, -9.6, Math.PI));
+    roomGroup.add(createConfChair(14.5, -3.8, -Math.PI));
+    // North Chair (Ren facing South towards table & team)
+    roomGroup.add(createConfChair(14.5, -9.2, 0));
 
     // 5D. 85" Ultra-HD 4K Video Collaboration Wall
     const tvGroup = new THREE.Group();
@@ -2920,7 +2920,7 @@ export default function App() {
         }
 
         const labelHeightOffset = agent.currentMode === "MEETING" 
-          ? (id === "risko" || id === "ren" ? 2.32 : (id === "pingot" || id === "mika" ? 2.18 : 2.04))
+          ? (id === "risko" || id === "ren" ? 2.45 : (id === "pingot" || id === "zaki" || id === "lulu" ? 2.30 : 2.02))
           : 2.08;
         nameSprite.position.set(humanRoot.position.x, humanRoot.position.y + labelHeightOffset, humanRoot.position.z);
       });
