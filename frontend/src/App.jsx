@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle, Eye, Crown, ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
+import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle, Eye, Crown, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Volume2, VolumeX, Compass, Crosshair } from "lucide-react";
 
 // 8 Para Wayang Roster & Detailed Office Profiles
 const AGENT_MINGLE_DIALOGUES = {
@@ -802,18 +802,111 @@ export default function App() {
   const [targetAgent, setTargetAgent] = useState("auto");
   const [isDispatching, setIsDispatching] = useState(false);
   const [selectedAgentDetail, setSelectedAgentDetail] = useState(null);
-  const [cameraMode, setCameraMode] = useState("player"); // 'player' | 'orbit'
-  const cameraModeRef = useRef("player");
+  // 🎮 GAME ENGINE STATES
+  const [gameView, setGameView] = useState("third"); // 'third' | 'first' | 'orbit'
+  const gameViewRef = useRef("third");
+  const [isPointerLocked, setIsPointerLocked] = useState(false);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+  const isSoundEnabledRef = useRef(true);
   const [nearAgent, setNearAgent] = useState(null);
   const nearAgentRef = useRef(null);
   const [mingleModalAgent, setMingleModalAgent] = useState(null);
   const playerRef = useRef(null);
-  const keysPressedRef = useRef({ w: false, a: false, s: false, d: false, up: false, down: false, left: false, right: false, shift: false });
+  const camYawRef = useRef(0);
+  const camPitchRef = useRef(0.2);
+  const lastFootstepTimeRef = useRef(0);
+  const audioCtxRef = useRef(null);
+  const [radarState, setRadarState] = useState({ player: { x: 0, z: 7.2, rot: 0 }, agents: {} });
+  const keysPressedRef = useRef({
+    w: false, a: false, s: false, d: false,
+    up: false, down: false, left: false, right: false,
+    shift: false, space: false
+  });
   const activeWayangCount = Object.values(workingMap).filter(Boolean).length;
   const sceneRef = useRef(null);
   const agentMeshesRef = useRef({});
 
-  // 1. Setup Three.js Cinematic Studio
+
+  // 🔊 PROCEDURAL GAME SFX ENGINE (Web Audio API)
+  const initAudio = () => {
+    if (!audioCtxRef.current) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) audioCtxRef.current = new AudioCtx();
+    }
+    if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
+      audioCtxRef.current.resume();
+    }
+  };
+
+  const playFootstep = () => {
+    if (!isSoundEnabledRef.current) return;
+    initAudio();
+    const ctx = audioCtxRef.current;
+    if (!ctx) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(65, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(25, ctx.currentTime + 0.07);
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.07);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.07);
+    } catch {
+      // Audio fallback silent
+    }
+  };
+
+  const playJump = () => {
+    if (!isSoundEnabledRef.current) return;
+    initAudio();
+    const ctx = audioCtxRef.current;
+    if (!ctx) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(140, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.15);
+    } catch {
+      // Audio fallback silent
+    }
+  };
+
+  const playChime = () => {
+    if (!isSoundEnabledRef.current) return;
+    initAudio();
+    const ctx = audioCtxRef.current;
+    if (!ctx) return;
+    try {
+      const now = ctx.currentTime;
+      [587.33, 739.99, 880.00].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, now + i * 0.07);
+        gain.gain.setValueAtTime(0.08, now + i * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.22);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.07);
+        osc.stop(now + i * 0.07 + 0.22);
+      });
+    } catch {
+      // Audio fallback silent
+    }
+  };
+
+    // 1. Setup Three.js Cinematic Studio
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
@@ -2461,6 +2554,8 @@ export default function App() {
         walkCycle: 0,
         isWalking: false,
         targetDest: null,
+        vy: 0,
+        isGrounded: true,
       };
     };
 
@@ -2827,36 +2922,55 @@ export default function App() {
       });
 
       // ==========================================
-      // BOS MUDA (PLAYER) LOCOMOTION & KINEMATICS & PROXIMITY
+      // 🎮 FULL 3D GAME ENGINE: PHYSICS, CAMERA & INTERACTION
       // ==========================================
       if (playerRef.current) {
         const player = playerRef.current;
         const keys = keysPressedRef.current;
-        let moveX = 0;
-        let moveZ = 0;
+        const currentView = gameViewRef.current;
 
-        if (keys.w) moveZ -= 1;
-        if (keys.s) moveZ += 1;
-        if (keys.a) moveX -= 1;
-        if (keys.d) moveX += 1;
+        // 1. Directional Movement Relative to Camera Angle (Standard FPS/TPS Game Physics)
+        const yaw = camYawRef.current;
+        const sinY = Math.sin(yaw);
+        const cosY = Math.cos(yaw);
 
-        if (moveX !== 0 || moveZ !== 0) {
-          player.targetDest = null;
-          const len = Math.hypot(moveX, moveZ);
-          const dirX = moveX / len;
-          const dirZ = moveZ / len;
-          const speed = keys.shift ? 7.8 : 4.6;
+        let inputFwd = 0;
+        let inputStrafe = 0;
+        if (keys.w || keys.up) inputFwd += 1;
+        if (keys.s || keys.down) inputFwd -= 1;
+        if (keys.d || keys.right) inputStrafe += 1;
+        if (keys.a || keys.left) inputStrafe -= 1;
 
-          player.pos.x += dirX * speed * delta;
-          player.pos.z += dirZ * speed * delta;
+        if (inputFwd !== 0 || inputStrafe !== 0) {
+          player.targetDest = null; // Keyboard takes precedence
+          const len = Math.hypot(inputFwd, inputStrafe);
+          const normFwd = inputFwd / len;
+          const normStrafe = inputStrafe / len;
 
+          // Camera-relative forward & strafe vectors
+          const moveX = (sinY * normFwd + cosY * normStrafe);
+          const moveZ = (cosY * normFwd - sinY * normStrafe);
+
+          const moveSpeed = keys.shift ? 8.2 : 4.8;
+          player.pos.x += moveX * moveSpeed * delta;
+          player.pos.z += moveZ * moveSpeed * delta;
+
+          // Perimeter Collision Bounds
           player.pos.x = THREE.MathUtils.clamp(player.pos.x, -14.2, 14.2);
           player.pos.z = THREE.MathUtils.clamp(player.pos.z, -12.6, 12.6);
 
-          const targetAngle = Math.atan2(dirX, dirZ) + Math.PI;
-          player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.22);
+          // Rotate Avatar toward movement direction in TPS, or forward in FPS
+          const targetAngle = Math.atan2(moveX, moveZ);
+          player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.25);
           player.isWalking = true;
+
+          // Footstep SFX cadence
+          if (now - lastFootstepTimeRef.current > (keys.shift ? 260 : 380) && player.isGrounded) {
+            playFootstep();
+            lastFootstepTimeRef.current = now;
+          }
         } else if (player.targetDest) {
+          // Point-and-Click Walk Target
           const tdx = player.targetDest.x - player.pos.x;
           const tdz = player.targetDest.z - player.pos.z;
           const tdist = Math.hypot(tdx, tdz);
@@ -2865,29 +2979,52 @@ export default function App() {
             player.targetDest = null;
             player.isWalking = false;
           } else {
-            const step = Math.min(tdist, 5.0 * delta);
+            const step = Math.min(tdist, 5.2 * delta);
             player.pos.x += (tdx / tdist) * step;
             player.pos.z += (tdz / tdist) * step;
 
             player.pos.x = THREE.MathUtils.clamp(player.pos.x, -14.2, 14.2);
             player.pos.z = THREE.MathUtils.clamp(player.pos.z, -12.6, 12.6);
 
-            const targetAngle = Math.atan2(tdx, tdz) + Math.PI;
+            const targetAngle = Math.atan2(tdx, tdz);
             player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.22);
             player.isWalking = true;
+
+            if (now - lastFootstepTimeRef.current > 380 && player.isGrounded) {
+              playFootstep();
+              lastFootstepTimeRef.current = now;
+            }
           }
         } else {
           player.isWalking = false;
         }
 
+        // 2. Vertical Jump Kinematics & Gravity
+        if (keys.space && player.isGrounded) {
+          player.vy = 5.8; // jump impulse
+          player.isGrounded = false;
+          playJump();
+        }
+
+        if (!player.isGrounded) {
+          player.pos.y += player.vy * delta;
+          player.vy -= 18.0 * delta; // gravity
+          if (player.pos.y <= 0) {
+            player.pos.y = 0;
+            player.vy = 0;
+            player.isGrounded = true;
+          }
+        }
+
+        // 3. Humanoid Skeletal Walking Animation
         if (player.isWalking) {
-          player.walkCycle += delta * (keys.shift ? 14 : 9.5);
+          player.walkCycle += delta * (keys.shift ? 15 : 10);
           player.leftLeg.hipPivot.rotation.x = Math.sin(player.walkCycle) * 0.72;
           player.rightLeg.hipPivot.rotation.x = -Math.sin(player.walkCycle) * 0.72;
           player.leftLeg.kneePivot.rotation.x = Math.max(0, -Math.sin(player.walkCycle)) * 0.65;
           player.rightLeg.kneePivot.rotation.x = Math.max(0, Math.sin(player.walkCycle)) * 0.65;
-          player.leftArm.shoulder.rotation.x = -Math.sin(player.walkCycle) * 0.5;
-          player.rightArm.shoulder.rotation.x = Math.sin(player.walkCycle) * 0.5;
+          player.leftArm.shoulder.rotation.x = -Math.sin(player.walkCycle) * 0.52;
+          player.rightArm.shoulder.rotation.x = Math.sin(player.walkCycle) * 0.52;
           player.torsoPivot.position.y = 0.52 + Math.abs(Math.sin(player.walkCycle * 2)) * 0.025;
         } else {
           player.leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(player.leftLeg.hipPivot.rotation.x, 0, 0.15);
@@ -2899,16 +3036,44 @@ export default function App() {
           player.torsoPivot.position.y = 0.52 + Math.sin(elapsed * 2) * 0.008;
         }
 
-        player.nameSprite.position.set(player.pos.x, 2.25, player.pos.z);
+        player.nameSprite.position.set(player.pos.x, player.pos.y + 2.25, player.pos.z);
         player.haloRing.position.set(player.pos.x, 0.02, player.pos.z);
         player.haloRing.rotation.z += delta * 1.2;
 
-        if (cameraModeRef.current === "player") {
-          controls.target.lerp(new THREE.Vector3(player.pos.x, 1.2, player.pos.z), 0.08);
-          const desiredCamPos = new THREE.Vector3(player.pos.x + 9.5, player.pos.y + 13.5, player.pos.z + 14.5);
-          camera.position.lerp(desiredCamPos, 0.04);
+        // 4. Multi-Perspective Game Camera Rig
+        const pitch = camPitchRef.current;
+        if (currentView === "first") {
+          // FPS: Camera sits right at Bos Muda's eyes
+          controls.enabled = false;
+          camera.position.set(player.pos.x, player.pos.y + 1.62, player.pos.z);
+          camera.rotation.set(pitch, yaw + Math.PI, 0, "YXZ");
+          player.root.rotation.y = yaw;
+          player.headGroup.visible = false;
+          player.nameSprite.visible = false;
+          player.haloRing.visible = false;
+        } else if (currentView === "third") {
+          // TPS: Smooth Over-The-Shoulder RPG Camera
+          controls.enabled = false;
+          player.headGroup.visible = true;
+          player.nameSprite.visible = true;
+          player.haloRing.visible = true;
+
+          const camDist = 3.8;
+          const camX = player.pos.x - Math.sin(yaw) * camDist * Math.cos(pitch);
+          const camY = player.pos.y + 1.8 + Math.sin(pitch) * camDist;
+          const camZ = player.pos.z - Math.cos(yaw) * camDist * Math.cos(pitch);
+
+          camera.position.set(camX, Math.max(0.35, camY), camZ);
+          camera.lookAt(player.pos.x, player.pos.y + 1.35, player.pos.z);
+        } else {
+          // ORBIT: Free Architectural View
+          controls.enabled = true;
+          player.headGroup.visible = true;
+          player.nameSprite.visible = true;
+          player.haloRing.visible = true;
         }
 
+        // 5. Proximity Detection with All 8 Agents
         let closest = null;
         let minDist = 3.2;
 
@@ -2934,8 +3099,30 @@ export default function App() {
           }
         });
 
+        // Trigger chime once when approaching an agent
+        if (closest && !nearAgentRef.current) {
+          playChime();
+        }
+
         nearAgentRef.current = closest;
         setNearAgent(closest);
+
+        // 6. Mini-Map Radar State Update (Batched 10 times per second)
+        if (Math.floor(elapsed * 10) % 2 === 0) {
+          const radarAgents = {};
+          Object.entries(agentMeshesRef.current).forEach(([aid, agent]) => {
+            radarAgents[aid] = {
+              x: agent.humanRoot.position.x,
+              z: agent.humanRoot.position.z,
+              color: AGENTS[aid]?.colorHex || "#6366f1",
+              name: AGENTS[aid]?.name || aid,
+            };
+          });
+          setRadarState({
+            player: { x: player.pos.x, z: player.pos.z, rot: yaw },
+            agents: radarAgents,
+          });
+        }
       }
 
       renderer.render(scene, camera);
@@ -2953,6 +3140,7 @@ export default function App() {
     };
     window.addEventListener("resize", handleResize);
 
+    // 🎮 GAME ENGINE CONTROLS: WASD, MOUSE LOOK, JUMP, SPRINT
     const handleKeyDown = (e) => {
       if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
       const k = e.key.toLowerCase();
@@ -2961,17 +3149,25 @@ export default function App() {
       if (k === "a" || e.key === "ArrowLeft") keysPressedRef.current.a = true;
       if (k === "d" || e.key === "ArrowRight") keysPressedRef.current.d = true;
       if (e.key === "Shift") keysPressedRef.current.shift = true;
+      if (e.key === " " || e.code === "Space") {
+        e.preventDefault();
+        keysPressedRef.current.space = true;
+      }
 
+      // [E] Interaksi Tatap Muka
       if (k === "e") {
         if (nearAgentRef.current) {
           setMingleModalAgent(nearAgentRef.current);
+          if (document.pointerLockElement) document.exitPointerLock();
         }
       }
 
+      // [V] Ganti Sudut Pandang Kamera (First -> Third -> Orbit)
       if (k === "v") {
-        setCameraMode((prev) => {
-          const next = prev === "player" ? "orbit" : "player";
-          cameraModeRef.current = next;
+        setGameView((prev) => {
+          const cycle = { third: "first", first: "orbit", orbit: "third" };
+          const next = cycle[prev] || "third";
+          gameViewRef.current = next;
           return next;
         });
       }
@@ -2985,10 +3181,26 @@ export default function App() {
       if (k === "a" || e.key === "ArrowLeft") keysPressedRef.current.a = false;
       if (k === "d" || e.key === "ArrowRight") keysPressedRef.current.d = false;
       if (e.key === "Shift") keysPressedRef.current.shift = false;
+      if (e.key === " " || e.code === "Space") keysPressedRef.current.space = false;
     };
 
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+
+    // Mouse Look via Pointer Lock API
+    const handleMouseMove = (e) => {
+      if (document.pointerLockElement === renderer.domElement) {
+        camYawRef.current -= e.movementX * 0.0022;
+        camPitchRef.current = Math.max(-1.1, Math.min(1.1, camPitchRef.current - e.movementY * 0.0022));
+      }
+    };
+    document.addEventListener("mousemove", handleMouseMove);
+
+    const handleLockChange = () => {
+      const isLocked = document.pointerLockElement === renderer.domElement;
+      setIsPointerLocked(isLocked);
+    };
+    document.addEventListener("pointerlockchange", handleLockChange);
 
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
@@ -3001,6 +3213,11 @@ export default function App() {
     const handlePointerUp = (e) => {
       const dist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
       if (dist > 6) return;
+
+      // Click on canvas to lock mouse if in FPS or TPS mode
+      if (gameViewRef.current !== "orbit" && !document.pointerLockElement) {
+        renderer.domElement.requestPointerLock?.();
+      }
 
       const rect = renderer.domElement.getBoundingClientRect();
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -3129,6 +3346,8 @@ export default function App() {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("pointerlockchange", handleLockChange);
       renderer.domElement.removeEventListener("pointerdown", handlePointerDown);
       renderer.domElement.removeEventListener("pointerup", handlePointerUp);
       clearInterval(autoInterval);
@@ -3302,33 +3521,74 @@ export default function App() {
           })}
         </nav>
 
-        {/* Camera Perspective Mode Toggle (Bos Muda Follow vs Free Orbit) */}
-        <button
-          onClick={() => {
-            const next = cameraMode === "player" ? "orbit" : "player";
-            setCameraMode(next);
-            cameraModeRef.current = next;
-          }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-            padding: "4px 10px",
-            borderRadius: 6,
-            border: cameraMode === "player" ? "1px solid rgba(245, 158, 11, 0.45)" : "1px solid rgba(255, 255, 255, 0.08)",
-            backgroundColor: cameraMode === "player" ? "rgba(245, 158, 11, 0.12)" : "#0f1011",
-            color: cameraMode === "player" ? "#fbbf24" : "#8a8f98",
-            fontSize: "12px",
-            fontWeight: "500",
-            cursor: "pointer",
-            outline: "none",
-            transition: "all 0.15s ease"
-          }}
-          title="Shortcut tombol [V] untuk beralih mode kamera"
-        >
-          {cameraMode === "player" ? <Crown size={13} color="#fbbf24" /> : <Eye size={13} />}
-          <span>{cameraMode === "player" ? "Mode Bos Muda (Follow)" : "Orbit Bebas"}</span>
-        </button>
+        {/* 🎮 Game Perspective Selector (TPS / FPS / Orbit) */}
+        <div style={{ display: "flex", alignItems: "center", gap: 4, backgroundColor: "#0f1011", padding: 3, borderRadius: 8, border: "1px solid rgba(255, 255, 255, 0.08)" }}>
+          {[
+            { id: "third", label: "Orang Ke-3 (TPS)", icon: Crown },
+            { id: "first", label: "Mata Bos Muda (FPS)", icon: Crosshair },
+            { id: "orbit", label: "Orbit Bebas", icon: Eye },
+          ].map((mode) => {
+            const Icon = mode.icon;
+            const isActive = gameView === mode.id;
+            return (
+              <button
+                key={mode.id}
+                onClick={() => {
+                  setGameView(mode.id);
+                  gameViewRef.current = mode.id;
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "4px 8px",
+                  borderRadius: 6,
+                  border: isActive ? "1px solid rgba(245, 158, 11, 0.4)" : "1px solid transparent",
+                  backgroundColor: isActive ? "rgba(245, 158, 11, 0.12)" : "transparent",
+                  color: isActive ? "#fbbf24" : "#8a8f98",
+                  fontSize: "11px",
+                  fontWeight: isActive ? "600" : "400",
+                  cursor: "pointer",
+                  outline: "none",
+                  transition: "all 0.15s ease"
+                }}
+                title={`Kamera ${mode.label} (Tekan [V] untuk siklus)`}
+              >
+                <Icon size={12} />
+                <span>{mode.label}</span>
+              </button>
+            );
+          })}
+
+          <div style={{ width: 1, height: 14, backgroundColor: "rgba(255, 255, 255, 0.08)", margin: "0 2px" }} />
+
+          {/* Sound Toggle */}
+          <button
+            onClick={() => {
+              setIsSoundEnabled((prev) => {
+                const next = !prev;
+                isSoundEnabledRef.current = next;
+                return next;
+              });
+            }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+              padding: "4px 8px",
+              borderRadius: 6,
+              border: "1px solid transparent",
+              backgroundColor: isSoundEnabled ? "rgba(255, 255, 255, 0.05)" : "transparent",
+              color: isSoundEnabled ? "#38bdf8" : "#64748b",
+              fontSize: "11px",
+              cursor: "pointer",
+              outline: "none"
+            }}
+            title={isSoundEnabled ? "Suara Efek Aktif (Langkah & Lompat)" : "Suara Dibisukan"}
+          >
+            {isSoundEnabled ? <Volume2 size={13} /> : <VolumeX size={13} />}
+          </button>
+        </div>
 
         {/* Right: Telemetry Counts (JetBrains Mono) */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: "11px" }}>
@@ -3348,136 +3608,327 @@ export default function App() {
         <div style={{ flex: 1, position: "relative", backgroundColor: "#08090a", overflow: "hidden" }}>
           <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
 
-          {/* 🎮 Virtual On-Screen Controls for Bos Muda (Bottom-Left) */}
+          {/* 🎯 GAMING HUD: Crosshair Reticle (Center Screen) */}
+          <div style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            pointerEvents: "none",
+            zIndex: 18,
+            display: (isPointerLocked || gameView !== "orbit") ? "flex" : "none",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+            <div style={{
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              backgroundColor: nearAgent ? "#10b981" : "rgba(255, 255, 255, 0.75)",
+              boxShadow: nearAgent ? "0 0 10px #10b981, 0 0 4px #10b981" : "0 0 4px rgba(0, 0, 0, 0.8)",
+              transition: "all 0.15s ease",
+              transform: nearAgent ? "scale(1.6)" : "scale(1.0)"
+            }} />
+          </div>
+
+          {/* 🎮 POINTER LOCK BANNER / STATUS */}
+          {gameView !== "orbit" && (
+            <div
+              style={{
+                position: "absolute",
+                top: 14,
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: isPointerLocked ? "rgba(16, 185, 129, 0.15)" : "rgba(15, 23, 42, 0.92)",
+                border: isPointerLocked ? "1px solid rgba(16, 185, 129, 0.4)" : "1px solid rgba(245, 158, 11, 0.5)",
+                padding: "6px 16px",
+                borderRadius: 20,
+                fontSize: "11px",
+                fontWeight: "600",
+                color: isPointerLocked ? "#34d399" : "#fbbf24",
+                zIndex: 20,
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                boxShadow: "0 6px 24px rgba(0, 0, 0, 0.6)",
+                pointerEvents: "auto",
+                backdropFilter: "blur(6px)"
+              }}
+            >
+              <Crosshair size={13} />
+              <span>
+                {isPointerLocked
+                  ? "🎮 KURSOR MOUSE TERKUNCI • [ESC] UNTUK LEPAS"
+                  : "🎮 KLIK DI LAYAR UNTUK MENGUNCI MOUSE & MENOLEH BEBAS"}
+              </span>
+            </div>
+          )}
+
+          {/* 🗺️ MINI-MAP RADAR (Top-Right Blueprint & Agent Positions) */}
+          <div style={{
+            position: "absolute",
+            top: 14,
+            right: 14,
+            zIndex: 15,
+            width: 160,
+            backgroundColor: "rgba(10, 12, 16, 0.92)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: 8,
+            padding: "8px",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.65)",
+            backdropFilter: "blur(6px)",
+            pointerEvents: "auto"
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "10px", fontWeight: "600", color: "#fbbf24" }}>
+                <Compass size={11} />
+                <span>RADAR KANTOR</span>
+              </div>
+              <span style={{ fontSize: "9px", fontFamily: "'JetBrains Mono', monospace", color: "#8a8f98" }}>
+                LIVE
+              </span>
+            </div>
+
+            {/* Radar Canvas / SVG Layout */}
+            <div style={{
+              width: "100%",
+              height: 124,
+              backgroundColor: "rgba(15, 23, 42, 0.6)",
+              borderRadius: 4,
+              border: "1px solid rgba(255, 255, 255, 0.05)",
+              position: "relative",
+              overflow: "hidden"
+            }}>
+              <svg width="100%" height="100%" viewBox="0 0 144 124" style={{ display: "block" }}>
+                {/* Office Perimeter */}
+                <rect x="6" y="6" width="132" height="112" rx="4" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+
+                {/* Server Room (Left-Back) */}
+                <rect x="8" y="8" width="34" height="34" rx="2" fill="rgba(6, 182, 212, 0.08)" stroke="rgba(6, 182, 212, 0.35)" strokeWidth="0.8" />
+                <text x="12" y="26" fill="#38bdf8" fontSize="6" fontFamily="monospace">SERVER</text>
+
+                {/* War Room (Right-Back) */}
+                <rect x="102" y="8" width="34" height="38" rx="2" fill="rgba(99, 102, 241, 0.08)" stroke="rgba(99, 102, 241, 0.35)" strokeWidth="0.8" />
+                <text x="106" y="28" fill="#818cf8" fontSize="6" fontFamily="monospace">WAR ROOM</text>
+
+                {/* Pantry & Lounge (Left-Front) */}
+                <rect x="8" y="78" width="40" height="38" rx="2" fill="rgba(245, 158, 11, 0.08)" stroke="rgba(245, 158, 11, 0.35)" strokeWidth="0.8" />
+                <text x="12" y="98" fill="#fbbf24" fontSize="6" fontFamily="monospace">PANTRY</text>
+
+                {/* 8 Agent Dots */}
+                {Object.entries(radarState.agents).map(([aid, a]) => {
+                  const mx = ((a.x + 14.5) / 29) * 132 + 6;
+                  const my = ((a.z + 13.0) / 26) * 112 + 6;
+                  return (
+                    <g key={aid}>
+                      <circle cx={mx} cy={my} r="2.8" fill={a.color} />
+                      <circle cx={mx} cy={my} r="4.5" fill="none" stroke={a.color} strokeWidth="0.6" opacity="0.6" />
+                    </g>
+                  );
+                })}
+
+                {/* Player Dot (Bos Muda) with Heading Arrow */}
+                {(() => {
+                  const px = ((radarState.player.x + 14.5) / 29) * 132 + 6;
+                  const py = ((radarState.player.z + 13.0) / 26) * 112 + 6;
+                  const rot = radarState.player.rot;
+                  const dx = Math.sin(rot) * 7;
+                  const dy = Math.cos(rot) * 7;
+
+                  return (
+                    <g>
+                      <circle cx={px} cy={py} r="4" fill="#fbbf24" stroke="#ffffff" strokeWidth="1" />
+                      <line x1={px} y1={py} x2={px + dx} y2={py + dy} stroke="#fbbf24" strokeWidth="1.6" />
+                      <circle cx={px} cy={py} r="7" fill="none" stroke="#fbbf24" strokeWidth="0.8" opacity="0.8">
+                        <animate attributeName="r" values="4;9;4" dur="2s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.9;0.1;0.9" dur="2s" repeatCount="indefinite" />
+                      </circle>
+                    </g>
+                  );
+                })()}
+              </svg>
+            </div>
+
+            <div style={{ marginTop: 6, display: "flex", justifyContent: "space-between", fontSize: "9px", fontFamily: "'JetBrains Mono', monospace", color: "#8a8f98" }}>
+              <span>X: {radarState.player.x.toFixed(1)}</span>
+              <span>Z: {radarState.player.z.toFixed(1)}</span>
+            </div>
+          </div>
+
+          {/* 🎮 Virtual On-Screen Controls & Keybind Guide (Bottom-Left) */}
           <div style={{
             position: "absolute",
             bottom: 20,
             left: 20,
             zIndex: 15,
-            backgroundColor: "rgba(15, 16, 17, 0.88)",
+            backgroundColor: "rgba(10, 12, 16, 0.92)",
             backdropFilter: "blur(8px)",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
+            border: "1px solid rgba(255, 255, 255, 0.09)",
             borderRadius: 8,
-            padding: "10px 12px",
+            padding: "10px 14px",
             display: "flex",
             flexDirection: "column",
-            gap: 8,
-            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5)",
+            gap: 10,
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.65)",
             pointerEvents: "auto"
           }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "11px", fontWeight: "600", color: "#fbbf24" }}>
                 <Crown size={12} />
-                <span>KENDALI BOS MUDA</span>
-              </div>
-              <span style={{ fontSize: "9px", fontFamily: "'JetBrains Mono', monospace", color: "#8a8f98" }}>
-                WASD / PANAH
-              </span>
-            </div>
-
-            {/* Virtual Directional D-Pad */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-              <button
-                onMouseDown={() => { keysPressedRef.current.w = true; }}
-                onMouseUp={() => { keysPressedRef.current.w = false; }}
-                onTouchStart={() => { keysPressedRef.current.w = true; }}
-                onTouchEnd={() => { keysPressedRef.current.w = false; }}
-                style={{
-                  width: 32,
-                  height: 28,
-                  backgroundColor: "rgba(255, 255, 255, 0.06)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  borderRadius: 4,
-                  color: "#f7f8f8",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer"
-                }}
-                title="Maju (W / Panah Atas)"
-              >
-                <ArrowUp size={13} />
-              </button>
-
-              <div style={{ display: "flex", gap: 4 }}>
-                <button
-                  onMouseDown={() => { keysPressedRef.current.a = true; }}
-                  onMouseUp={() => { keysPressedRef.current.a = false; }}
-                  onTouchStart={() => { keysPressedRef.current.a = true; }}
-                  onTouchEnd={() => { keysPressedRef.current.a = false; }}
-                  style={{
-                    width: 32,
-                    height: 28,
-                    backgroundColor: "rgba(255, 255, 255, 0.06)",
-                    border: "1px solid rgba(255, 255, 255, 0.12)",
-                    borderRadius: 4,
-                    color: "#f7f8f8",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer"
-                  }}
-                  title="Kiri (A / Panah Kiri)"
-                >
-                  <ArrowLeft size={13} />
-                </button>
-
-                <button
-                  onMouseDown={() => { keysPressedRef.current.s = true; }}
-                  onMouseUp={() => { keysPressedRef.current.s = false; }}
-                  onTouchStart={() => { keysPressedRef.current.s = true; }}
-                  onTouchEnd={() => { keysPressedRef.current.s = false; }}
-                  style={{
-                    width: 32,
-                    height: 28,
-                    backgroundColor: "rgba(255, 255, 255, 0.06)",
-                    border: "1px solid rgba(255, 255, 255, 0.12)",
-                    borderRadius: 4,
-                    color: "#f7f8f8",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer"
-                  }}
-                  title="Mundur (S / Panah Bawah)"
-                >
-                  <ArrowDown size={13} />
-                </button>
-
-                <button
-                  onMouseDown={() => { keysPressedRef.current.d = true; }}
-                  onMouseUp={() => { keysPressedRef.current.d = false; }}
-                  onTouchStart={() => { keysPressedRef.current.d = true; }}
-                  onTouchEnd={() => { keysPressedRef.current.d = false; }}
-                  style={{
-                    width: 32,
-                    height: 28,
-                    backgroundColor: "rgba(255, 255, 255, 0.06)",
-                    border: "1px solid rgba(255, 255, 255, 0.12)",
-                    borderRadius: 4,
-                    color: "#f7f8f8",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer"
-                  }}
-                  title="Kanan (D / Panah Kanan)"
-                >
-                  <ArrowRight size={13} />
-                </button>
+                <span>KONTROL GAME BOS MUDA</span>
               </div>
             </div>
 
-            <div style={{ fontSize: "10px", color: "#8a8f98", lineHeight: 1.4, textAlign: "center" }}>
-              Klik lantai untuk jalan cepat<br />
-              Tahan <span style={{ color: "#d0d6e0", fontFamily: "monospace" }}>[Shift]</span> untuk lari
+            <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+              {/* Virtual Directional D-Pad */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                <button
+                  onMouseDown={() => { keysPressedRef.current.w = true; }}
+                  onMouseUp={() => { keysPressedRef.current.w = false; }}
+                  onTouchStart={() => { keysPressedRef.current.w = true; }}
+                  onTouchEnd={() => { keysPressedRef.current.w = false; }}
+                  style={{
+                    width: 32,
+                    height: 28,
+                    backgroundColor: "rgba(255, 255, 255, 0.06)",
+                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    borderRadius: 4,
+                    color: "#f7f8f8",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer"
+                  }}
+                  title="Maju (W / Panah Atas)"
+                >
+                  <ArrowUp size={13} />
+                </button>
+
+                <div style={{ display: "flex", gap: 4 }}>
+                  <button
+                    onMouseDown={() => { keysPressedRef.current.a = true; }}
+                    onMouseUp={() => { keysPressedRef.current.a = false; }}
+                    onTouchStart={() => { keysPressedRef.current.a = true; }}
+                    onTouchEnd={() => { keysPressedRef.current.a = false; }}
+                    style={{
+                      width: 32,
+                      height: 28,
+                      backgroundColor: "rgba(255, 255, 255, 0.06)",
+                      border: "1px solid rgba(255, 255, 255, 0.12)",
+                      borderRadius: 4,
+                      color: "#f7f8f8",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer"
+                    }}
+                    title="Kiri (A / Panah Kiri)"
+                  >
+                    <ArrowLeft size={13} />
+                  </button>
+
+                  <button
+                    onMouseDown={() => { keysPressedRef.current.s = true; }}
+                    onMouseUp={() => { keysPressedRef.current.s = false; }}
+                    onTouchStart={() => { keysPressedRef.current.s = true; }}
+                    onTouchEnd={() => { keysPressedRef.current.s = false; }}
+                    style={{
+                      width: 32,
+                      height: 28,
+                      backgroundColor: "rgba(255, 255, 255, 0.06)",
+                      border: "1px solid rgba(255, 255, 255, 0.12)",
+                      borderRadius: 4,
+                      color: "#f7f8f8",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer"
+                    }}
+                    title="Mundur (S / Panah Bawah)"
+                  >
+                    <ArrowDown size={13} />
+                  </button>
+
+                  <button
+                    onMouseDown={() => { keysPressedRef.current.d = true; }}
+                    onMouseUp={() => { keysPressedRef.current.d = false; }}
+                    onTouchStart={() => { keysPressedRef.current.d = true; }}
+                    onTouchEnd={() => { keysPressedRef.current.d = false; }}
+                    style={{
+                      width: 32,
+                      height: 28,
+                      backgroundColor: "rgba(255, 255, 255, 0.06)",
+                      border: "1px solid rgba(255, 255, 255, 0.12)",
+                      borderRadius: 4,
+                      color: "#f7f8f8",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer"
+                    }}
+                    title="Kanan (D / Panah Kanan)"
+                  >
+                    <ArrowRight size={13} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Action Buttons: Jump & Sprint */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <button
+                  onMouseDown={() => { keysPressedRef.current.space = true; }}
+                  onMouseUp={() => { keysPressedRef.current.space = false; }}
+                  onTouchStart={() => { keysPressedRef.current.space = true; }}
+                  onTouchEnd={() => { keysPressedRef.current.space = false; }}
+                  style={{
+                    padding: "5px 12px",
+                    backgroundColor: "rgba(245, 158, 11, 0.15)",
+                    border: "1px solid rgba(245, 158, 11, 0.35)",
+                    borderRadius: 4,
+                    color: "#fbbf24",
+                    fontSize: "11px",
+                    fontWeight: "600",
+                    cursor: "pointer"
+                  }}
+                >
+                  LOMPAT [SPASI]
+                </button>
+
+                <button
+                  onMouseDown={() => { keysPressedRef.current.shift = true; }}
+                  onMouseUp={() => { keysPressedRef.current.shift = false; }}
+                  onTouchStart={() => { keysPressedRef.current.shift = true; }}
+                  onTouchEnd={() => { keysPressedRef.current.shift = false; }}
+                  style={{
+                    padding: "5px 12px",
+                    backgroundColor: "rgba(255, 255, 255, 0.06)",
+                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    borderRadius: 4,
+                    color: "#f7f8f8",
+                    fontSize: "11px",
+                    fontWeight: "500",
+                    cursor: "pointer"
+                  }}
+                >
+                  LARI [SHIFT]
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Keybind Guide */}
+            <div style={{ fontSize: "10px", color: "#8a8f98", lineHeight: 1.5, borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 6 }}>
+              <div><strong style={{ color: "#d0d6e0" }}>WASD:</strong> Jalan • <strong style={{ color: "#d0d6e0" }}>Mouse:</strong> Menoleh</div>
+              <div><strong style={{ color: "#d0d6e0" }}>[V]:</strong> Ganti Kamera • <strong style={{ color: "#d0d6e0" }}>[E]:</strong> Bicara / Berbaur</div>
             </div>
           </div>
 
           {/* 💬 Proximity Interaction Floating Banner (When near an Employee) */}
           {nearAgent && (
             <div
-              onClick={() => setMingleModalAgent(nearAgent)}
+              onClick={() => {
+                setMingleModalAgent(nearAgent);
+                if (document.pointerLockElement) document.exitPointerLock();
+              }}
               style={{
                 position: "absolute",
                 bottom: 84,
