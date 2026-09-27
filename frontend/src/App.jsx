@@ -1822,9 +1822,9 @@ export default function App() {
       cactus.position.set(-0.75, 0.90, -0.15);
       deskGroup.add(cactus);
 
-      // Ergonomic Swivel Mesh Office Chair (Herman Miller Aeron Style, Distance 0.58 preserved)
+      // Ergonomic Swivel Mesh Office Chair (Herman Miller Aeron Style)
       const chairGroup = new THREE.Group();
-      chairGroup.position.set(0, 0, 0.58);
+      chairGroup.position.set(0, 0, 0.68);
 
       const seatGeo = new THREE.BoxGeometry(0.55, 0.08, 0.52);
       const seatMat = new THREE.MeshStandardMaterial({ color: 0x181c24, roughness: 0.8 });
@@ -1837,18 +1837,18 @@ export default function App() {
       const backGeo = new THREE.BoxGeometry(0.52, 0.62, 0.06);
       const backMat = new THREE.MeshStandardMaterial({ color: 0x222834, roughness: 0.7 });
       const back = new THREE.Mesh(backGeo, backMat);
-      back.position.set(0, 0.78, 0.29);
+      back.position.set(0, 0.78, 0.32);
       back.rotation.x = 0.08;
       back.castShadow = true;
       chairGroup.add(back);
 
       // Adjustable 3D Armrests
-      [-0.27, 0.27].forEach((ax) => {
+      [-0.30, 0.30].forEach((ax) => {
         const armPost = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.24, 0.05), frameMat);
         armPost.position.set(ax, 0.58, 0.08);
         chairGroup.add(armPost);
 
-        const armPad = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.03, 0.22), new THREE.MeshStandardMaterial({ color: 0x0a0c10, roughness: 0.5 }));
+        const armPad = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.03, 0.22), new THREE.MeshStandardMaterial({ color: 0x0a0c10, roughness: 0.5 }));
         armPad.position.set(ax, 0.71, 0.08);
         chairGroup.add(armPad);
       });
@@ -1927,7 +1927,7 @@ export default function App() {
       const deskObjects = createWorkstation(x, z, data);
 
       const humanRoot = new THREE.Group();
-      humanRoot.position.set(x, 0, z + 0.58);
+      humanRoot.position.set(x, 0, z + 0.68);
 
       // PBR Materials
       const skinMat = new THREE.MeshStandardMaterial({
@@ -2254,7 +2254,7 @@ export default function App() {
         currentRotationY: 0,
         walkTime: 0,
         waypoints: [],
-        deskPos: [x, 0, z + 0.58],
+        deskPos: [x, 0, z + 0.68],
       };
     };
 
@@ -2935,6 +2935,89 @@ export default function App() {
         const sinY = Math.sin(yaw);
         const cosY = Math.cos(yaw);
 
+        // Office Obstacle Collision System (AABB Colliders for Desks, Chairs, Walls, Meeting Table, Lounge, Bar)
+        const checkCollision = (cx, cz, radius = 0.35) => {
+          // Perimeter office walls (-14.8 to 15.5 in X, -13.0 to 13.0 in Z)
+          if (cx < -15.0 + radius || cx > 15.8 - radius || cz < -13.2 + radius || cz > 13.2 - radius) {
+            return true;
+          }
+
+          // Glass Partition Wall to Conference Room (x ~ 11.8, from z = -13.5 to -1.5, leaving door open at z = -1.5 to 1.5)
+          if (Math.abs(cx - 11.8) < 0.2 + radius && cz < -1.5 && cz > -13.5) {
+            return true;
+          }
+
+          // Conference Room Glass partition wall from z = 1.5 to 3.0 if any
+          if (Math.abs(cx - 11.8) < 0.2 + radius && cz > 1.5 && cz < 3.2) {
+            return true;
+          }
+
+          // Conference Table & Executive Chairs (x ~ 14.5, z ~ -6.5, table width 1.8, length 5.4 + chairs)
+          if (Math.abs(cx - 14.5) < 1.45 + radius && Math.abs(cz - (-6.5)) < 3.1 + radius) {
+            return true;
+          }
+
+          // Server Room Glass Cube & Racks (centered at x = -11.5, z = -11.8, size: x ± 2.2, z ± 2.3)
+          if (Math.abs(cx - (-11.5)) < 2.2 + radius && Math.abs(cz - (-11.8)) < 2.3 + radius) {
+            return true;
+          }
+
+          // Micro-Kitchen & Coffee Bar Counter (centered at x = -12.0, z = -7.5, size: x ± 2.5, z ± 1.0)
+          if (Math.abs(cx - (-12.0)) < 2.5 + radius && Math.abs(cz - (-7.5)) < 1.0 + radius) {
+            return true;
+          }
+
+          // Breakout Lounge Couch & Coffee Table (centered at x = 8.5, z = 7.5)
+          // Couch base: x = 8.5 ± 2.2, z = 7.5 ± 1.2
+          if (Math.abs(cx - 8.5) < 2.3 + radius && Math.abs(cz - 7.5) < 1.3 + radius) {
+            return true;
+          }
+          // L-Section Couch: x = (8.5 + 1.3) ± 0.9, z = (7.5 - 1.8) ± 1.2
+          if (Math.abs(cx - 9.8) < 0.9 + radius && Math.abs(cz - 5.7) < 1.2 + radius) {
+            return true;
+          }
+          // Lounge Marble Coffee Table: x = (8.5 - 0.8) = 7.7, z = (7.5 - 0.6) = 6.9, radius 0.95
+          if (Math.hypot(cx - 7.7, cz - 6.9) < 0.95 + radius) {
+            return true;
+          }
+
+          // 8 Agent Workstation Desks & Seated Chairs
+          for (const key of Object.keys(AGENTS)) {
+            const ag = AGENTS[key];
+            const [wx, , wz] = ag.pos;
+            // Workstation Desk Box: x = wx ± 1.15, z = wz ± 0.72
+            if (Math.abs(cx - wx) < 1.15 + radius && Math.abs(cz - wz) < 0.72 + radius) {
+              return true;
+            }
+            // Seated Agent & Herman Miller Chair: x = wx ± 0.45, z = (wz + 0.68) ± 0.45
+            if (Math.abs(cx - wx) < 0.45 + radius && Math.abs(cz - (wz + 0.68)) < 0.45 + radius) {
+              return true;
+            }
+          }
+
+          return false;
+        };
+
+        const tryMovePlayer = (dx, dz) => {
+          const pr = 0.32; // Player body radius
+          // Try moving both axes
+          if (!checkCollision(player.pos.x + dx, player.pos.z + dz, pr)) {
+            player.pos.x += dx;
+            player.pos.z += dz;
+            return;
+          }
+          // Slide along X if Z collides
+          if (!checkCollision(player.pos.x + dx, player.pos.z, pr)) {
+            player.pos.x += dx;
+            return;
+          }
+          // Slide along Z if X collides
+          if (!checkCollision(player.pos.x, player.pos.z + dz, pr)) {
+            player.pos.z += dz;
+            return;
+          }
+        };
+
         let inputFwd = 0;
         let inputStrafe = 0;
         if (keys.w || keys.up) inputFwd += 1;
@@ -2953,12 +3036,7 @@ export default function App() {
           const moveZ = ( -cosY * normFwd - sinY * normStrafe );
 
           const moveSpeed = keys.shift ? 8.2 : 4.8;
-          player.pos.x += moveX * moveSpeed * delta;
-          player.pos.z += moveZ * moveSpeed * delta;
-
-          // Perimeter Collision Bounds
-          player.pos.x = THREE.MathUtils.clamp(player.pos.x, -14.2, 14.2);
-          player.pos.z = THREE.MathUtils.clamp(player.pos.z, -12.6, 12.6);
+          tryMovePlayer(moveX * moveSpeed * delta, moveZ * moveSpeed * delta);
 
           // Rotate Avatar toward movement direction (Facing -Z when moveZ < 0)
           const targetAngle = Math.atan2(moveX, moveZ) + Math.PI;
@@ -2981,19 +3059,25 @@ export default function App() {
             player.isWalking = false;
           } else {
             const step = Math.min(tdist, 5.2 * delta);
-            player.pos.x += (tdx / tdist) * step;
-            player.pos.z += (tdz / tdist) * step;
+            const stepX = (tdx / tdist) * step;
+            const stepZ = (tdz / tdist) * step;
+            const oldX = player.pos.x;
+            const oldZ = player.pos.z;
+            tryMovePlayer(stepX, stepZ);
 
-            player.pos.x = THREE.MathUtils.clamp(player.pos.x, -14.2, 14.2);
-            player.pos.z = THREE.MathUtils.clamp(player.pos.z, -12.6, 12.6);
+            // If completely blocked by obstacle, cancel target destination
+            if (Math.abs(player.pos.x - oldX) < 0.001 && Math.abs(player.pos.z - oldZ) < 0.001) {
+              player.targetDest = null;
+              player.isWalking = false;
+            } else {
+              const targetAngle = Math.atan2(tdx, tdz) + Math.PI;
+              player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.22);
+              player.isWalking = true;
 
-            const targetAngle = Math.atan2(tdx, tdz) + Math.PI;
-            player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.22);
-            player.isWalking = true;
-
-            if (now - lastFootstepTimeRef.current > 380 && player.isGrounded) {
-              playFootstep();
-              lastFootstepTimeRef.current = now;
+              if (now - lastFootstepTimeRef.current > 380 && player.isGrounded) {
+                playFootstep();
+                lastFootstepTimeRef.current = now;
+              }
             }
           }
         } else {
