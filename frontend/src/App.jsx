@@ -2000,7 +2000,7 @@ export default function App() {
       const leftLeg = makeLeg(-1);
       const rightLeg = makeLeg(1);
 
-      // Default seated at desk
+      // Default seated at desk: Thighs extend forward (-Z), calves hang down (-Y)
       leftLeg.hipPivot.rotation.x = -Math.PI / 2;
       rightLeg.hipPivot.rotation.x = -Math.PI / 2;
       leftLeg.kneePivot.rotation.x = Math.PI / 2;
@@ -2770,23 +2770,23 @@ export default function App() {
               headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, headPitch, 0.08);
               headGroup.rotation.y = THREE.MathUtils.lerp(headGroup.rotation.y, headYaw, 0.08);
 
-              // Bahu menjangkau ke atas meja laptop
-              leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, -0.54 + lTyping * 0.4, 0.12);
+              // Bahu menjangkau ke depan ke atas meja laptop
+              leftShoulder.rotation.x = THREE.MathUtils.lerp(leftShoulder.rotation.x, 0.72 + lTyping * 0.4, 0.12);
               leftShoulder.rotation.z = THREE.MathUtils.lerp(leftShoulder.rotation.z, -0.16, 0.08);
-              rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, -0.54 + rTyping * 0.4, 0.12);
+              rightShoulder.rotation.x = THREE.MathUtils.lerp(rightShoulder.rotation.x, 0.72 + rTyping * 0.4, 0.12);
               rightShoulder.rotation.z = THREE.MathUtils.lerp(rightShoulder.rotation.z, 0.16, 0.08);
 
               // Siku menekuk tepat di ketinggian daun meja
-              leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, -0.92 + lTyping, 0.14);
-              rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, -0.92 + rTyping, 0.14);
+              leftElbow.rotation.x = THREE.MathUtils.lerp(leftElbow.rotation.x, 1.15 + lTyping, 0.14);
+              rightElbow.rotation.x = THREE.MathUtils.lerp(rightElbow.rotation.x, 1.15 + rTyping, 0.14);
 
               // Pergelangan tangan mengetik di tuts keyboard (Active Hands & Fingers!)
               if (leftWrist) {
-                leftWrist.rotation.x = THREE.MathUtils.lerp(leftWrist.rotation.x, 0.28 + lWristFlick, 0.18);
+                leftWrist.rotation.x = THREE.MathUtils.lerp(leftWrist.rotation.x, -0.28 + lWristFlick, 0.18);
                 leftWrist.rotation.z = THREE.MathUtils.lerp(leftWrist.rotation.z, -0.12 + lTyping * 0.5, 0.14);
               }
               if (rightWrist) {
-                rightWrist.rotation.x = THREE.MathUtils.lerp(rightWrist.rotation.x, 0.28 + rWristFlick, 0.18);
+                rightWrist.rotation.x = THREE.MathUtils.lerp(rightWrist.rotation.x, -0.28 + rWristFlick, 0.18);
                 rightWrist.rotation.z = THREE.MathUtils.lerp(rightWrist.rotation.z, 0.12 + rTyping * 0.5, 0.14);
               }
 
@@ -2811,13 +2811,13 @@ export default function App() {
                 headGroup.rotation.y = Math.sin(elapsed * 1.2 + id.charCodeAt(0)) * 0.08;
               }
 
-              // Posisi santai/idle di meja kerja: lengan ditarik ke depan bertumpu santai di armrest & meja
-              leftShoulder.rotation.set(-0.42, 0, -0.15);
-              rightShoulder.rotation.set(-0.42, 0, 0.15);
-              leftElbow.rotation.x = -0.95;
-              rightElbow.rotation.x = -0.95;
-              if (leftWrist) leftWrist.rotation.set(0.18, 0, -0.08);
-              if (rightWrist) rightWrist.rotation.set(0.18, 0, 0.08);
+              // Posisi santai/idle di meja kerja: kedua lengan menjulur ke depan di atas meja
+              leftShoulder.rotation.set(0.65, 0, -0.15);
+              rightShoulder.rotation.set(0.65, 0, 0.15);
+              leftElbow.rotation.x = 1.05;
+              rightElbow.rotation.x = 1.05;
+              if (leftWrist) leftWrist.rotation.set(-0.2, 0, -0.08);
+              if (rightWrist) rightWrist.rotation.set(-0.2, 0, 0.08);
 
               deskObjects.displayMat.emissiveIntensity = 0.45;
               deskObjects.lapLight.intensity = 0.45;
