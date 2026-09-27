@@ -2000,11 +2000,11 @@ export default function App() {
       const leftLeg = makeLeg(-1);
       const rightLeg = makeLeg(1);
 
-      // Default seated at desk: Thighs extend forward (-Z), calves hang down (-Y)
-      leftLeg.hipPivot.rotation.x = -Math.PI / 2;
-      rightLeg.hipPivot.rotation.x = -Math.PI / 2;
-      leftLeg.kneePivot.rotation.x = Math.PI / 2;
-      rightLeg.kneePivot.rotation.x = Math.PI / 2;
+      // Default seated at desk: Thighs extend forward toward desk (+Math.PI/2), calves drop down toward floor (-Math.PI/2)
+      leftLeg.hipPivot.rotation.x = Math.PI / 2;
+      rightLeg.hipPivot.rotation.x = Math.PI / 2;
+      leftLeg.kneePivot.rotation.x = -Math.PI / 2;
+      rightLeg.kneePivot.rotation.x = -Math.PI / 2;
 
       // ---- UPPER BODY PIVOT ----
       const torsoPivot = new THREE.Group();
@@ -2666,10 +2666,10 @@ export default function App() {
 
           if (agent.currentMode === "WORK") {
             coffeeCup.visible = false;
-            leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
-            rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
-            leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
-            rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+            leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
+            rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
+            leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, -Math.PI / 2, 0.1);
+            rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, -Math.PI / 2, 0.1);
 
             const { leftWrist, rightWrist } = agent;
             const pInfo = AGENTS[id];
@@ -2838,10 +2838,10 @@ export default function App() {
               rightElbow.rotation.x = -0.8;
               headGroup.rotation.y = Math.sin(elapsed * 1.5) * 0.25;
             } else {
-              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
-              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
-              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
-              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, -Math.PI / 2, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, -Math.PI / 2, 0.1);
 
               torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, 0.08, 0.05);
               torsoPivot.position.y = 0.52 + Math.sin(elapsed * 1.4 + id.charCodeAt(0)) * 0.01;
@@ -2873,10 +2873,10 @@ export default function App() {
               rightElbow.rotation.x = -1.1;
               leftShoulder.rotation.set(-0.1, 0, -0.1);
             } else {
-              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
-              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, -Math.PI / 2, 0.1);
-              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
-              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2, 0.1);
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, Math.PI / 2, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, -Math.PI / 2, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, -Math.PI / 2, 0.1);
 
               torsoPivot.rotation.x = THREE.MathUtils.lerp(torsoPivot.rotation.x, -0.14, 0.05);
               torsoPivot.position.y = 0.44 + Math.sin(elapsed * 1.2 + id.charCodeAt(0)) * 0.01;
@@ -2893,10 +2893,10 @@ export default function App() {
             coffeeCup.visible = true;
             const isStool = id === "risko" || id === "pingot";
             if (isStool) {
-              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, -Math.PI / 2.6, 0.1);
-              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, -Math.PI / 2.6, 0.1);
-              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, Math.PI / 2.6, 0.1);
-              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, Math.PI / 2.6, 0.1);
+              leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, Math.PI / 2.6, 0.1);
+              rightLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(rightLeg.hipPivot.rotation.x, Math.PI / 2.6, 0.1);
+              leftLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(leftLeg.kneePivot.rotation.x, -Math.PI / 2.6, 0.1);
+              rightLeg.kneePivot.rotation.x = THREE.MathUtils.lerp(rightLeg.kneePivot.rotation.x, -Math.PI / 2.6, 0.1);
               torsoPivot.position.y = 0.65;
             } else {
               leftLeg.hipPivot.rotation.x = THREE.MathUtils.lerp(leftLeg.hipPivot.rotation.x, 0, 0.1);
