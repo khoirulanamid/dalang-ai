@@ -2811,12 +2811,13 @@ export default function App() {
                 headGroup.rotation.y = Math.sin(elapsed * 1.2 + id.charCodeAt(0)) * 0.08;
               }
 
-              leftShoulder.rotation.set(-0.2, 0, -0.12);
-              rightShoulder.rotation.set(-0.2, 0, 0.12);
-              leftElbow.rotation.x = -0.5;
-              rightElbow.rotation.x = -0.5;
-              if (leftWrist) leftWrist.rotation.set(0, 0, 0);
-              if (rightWrist) rightWrist.rotation.set(0, 0, 0);
+              // Posisi santai/idle di meja kerja: lengan ditarik ke depan bertumpu santai di armrest & meja
+              leftShoulder.rotation.set(-0.42, 0, -0.15);
+              rightShoulder.rotation.set(-0.42, 0, 0.15);
+              leftElbow.rotation.x = -0.95;
+              rightElbow.rotation.x = -0.95;
+              if (leftWrist) leftWrist.rotation.set(0.18, 0, -0.08);
+              if (rightWrist) rightWrist.rotation.set(0.18, 0, 0.08);
 
               deskObjects.displayMat.emissiveIntensity = 0.45;
               deskObjects.lapLight.intensity = 0.45;
