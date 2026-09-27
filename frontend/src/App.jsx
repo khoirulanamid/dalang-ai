@@ -2947,9 +2947,9 @@ export default function App() {
           const normFwd = inputFwd / len;
           const normStrafe = inputStrafe / len;
 
-          // Camera-relative forward & strafe vectors
-          const moveX = (sinY * normFwd + cosY * normStrafe);
-          const moveZ = (cosY * normFwd - sinY * normStrafe);
+          // Camera-relative forward & strafe vectors (Forward is -cos(yaw) in Z, -sin(yaw) in X)
+          const moveX = ( -sinY * normFwd + cosY * normStrafe );
+          const moveZ = ( -cosY * normFwd - sinY * normStrafe );
 
           const moveSpeed = keys.shift ? 8.2 : 4.8;
           player.pos.x += moveX * moveSpeed * delta;
@@ -2959,8 +2959,8 @@ export default function App() {
           player.pos.x = THREE.MathUtils.clamp(player.pos.x, -14.2, 14.2);
           player.pos.z = THREE.MathUtils.clamp(player.pos.z, -12.6, 12.6);
 
-          // Rotate Avatar toward movement direction in TPS, or forward in FPS
-          const targetAngle = Math.atan2(moveX, moveZ);
+          // Rotate Avatar toward movement direction (Facing -Z when moveZ < 0)
+          const targetAngle = Math.atan2(moveX, moveZ) + Math.PI;
           player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.25);
           player.isWalking = true;
 
@@ -2986,7 +2986,7 @@ export default function App() {
             player.pos.x = THREE.MathUtils.clamp(player.pos.x, -14.2, 14.2);
             player.pos.z = THREE.MathUtils.clamp(player.pos.z, -12.6, 12.6);
 
-            const targetAngle = Math.atan2(tdx, tdz);
+            const targetAngle = Math.atan2(tdx, tdz) + Math.PI;
             player.root.rotation.y = THREE.MathUtils.lerp(player.root.rotation.y, targetAngle, 0.22);
             player.isWalking = true;
 
@@ -3046,8 +3046,8 @@ export default function App() {
           // FPS: Camera sits right at Bos Muda's eyes
           controls.enabled = false;
           camera.position.set(player.pos.x, player.pos.y + 1.62, player.pos.z);
-          camera.rotation.set(pitch, yaw + Math.PI, 0, "YXZ");
-          player.root.rotation.y = yaw;
+          camera.rotation.set(pitch, yaw, 0, "YXZ");
+          player.root.rotation.y = yaw + Math.PI;
           player.headGroup.visible = false;
           player.nameSprite.visible = false;
           player.haloRing.visible = false;
