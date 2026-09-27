@@ -803,8 +803,8 @@ export default function App() {
   const [isDispatching, setIsDispatching] = useState(false);
   const [selectedAgentDetail, setSelectedAgentDetail] = useState(null);
   // 🎮 GAME ENGINE STATES
-  const [gameView, setGameView] = useState("third"); // 'third' | 'first' | 'orbit'
-  const gameViewRef = useRef("third");
+  const [gameView, setGameView] = useState("orbit"); // default: 'orbit' bebas | 'third' | 'first'
+  const gameViewRef = useRef("orbit");
   const [isPointerLocked, setIsPointerLocked] = useState(false);
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const isSoundEnabledRef = useRef(true);
