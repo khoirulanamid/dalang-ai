@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle, Eye, Crown, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Volume2, VolumeX, Compass, Crosshair } from "lucide-react";
+import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle, Eye, Crown, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Volume2, VolumeX, Compass, Crosshair, GitBranch, Play, Pause, SkipForward, SkipBack, X } from "lucide-react";
 
 // 8 Para Wayang Roster & Detailed Office Profiles
 const AGENT_MINGLE_DIALOGUES = {
@@ -817,6 +817,47 @@ export default function App() {
   const lastFootstepTimeRef = useRef(0);
   const audioCtxRef = useRef(null);
   const [radarState, setRadarState] = useState({ player: { x: 0, z: 7.2, rot: 0 }, agents: {} });
+  // 🔀 EXECUTION TRACER (Algorithm & DAG Visualizer)
+  const [isTracerOpen, setIsTracerOpen] = useState(false);
+  const [traceData, setTraceData] = useState(null);
+  const [currentFrameIdx, setCurrentFrameIdx] = useState(0);
+  const [isPlayingTrace, setIsPlayingTrace] = useState(false);
+  const [selectedTraceNode, setSelectedTraceNode] = useState(null);
+
+  const fetchTracerData = async () => {
+    try {
+      const res = await fetch("/api/tracer/payload");
+      if (res.ok) {
+        const data = await res.json();
+        setTraceData(data);
+      }
+    } catch (e) {
+      console.debug("Tracer fetch:", e);
+    }
+  };
+
+  useEffect(() => {
+    fetchTracerData();
+  }, []);
+
+  useEffect(() => {
+    let timer = null;
+    if (isPlayingTrace && traceData && traceData.frames) {
+      timer = setInterval(() => {
+        setCurrentFrameIdx((prev) => {
+          if (prev >= traceData.frames.length - 1) {
+            setIsPlayingTrace(false);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 1400);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isPlayingTrace, traceData]);
+
   const keysPressedRef = useRef({
     w: false, a: false, s: false, d: false,
     up: false, down: false, left: false, right: false,
@@ -3676,6 +3717,35 @@ export default function App() {
           >
             {isSoundEnabled ? <Volume2 size={13} /> : <VolumeX size={13} />}
           </button>
+
+          <div style={{ width: 1, height: 14, backgroundColor: "rgba(255, 255, 255, 0.08)", margin: "0 2px" }} />
+
+          {/* 🔀 Execution Flow DAG Tracer Button */}
+          <button
+            onClick={() => {
+              setIsTracerOpen(true);
+              fetchTracerData();
+            }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 5,
+              padding: "4px 10px",
+              borderRadius: 6,
+              border: "1px solid rgba(139, 92, 246, 0.4)",
+              backgroundColor: "rgba(139, 92, 246, 0.12)",
+              color: "#c084fc",
+              fontSize: "11px",
+              fontWeight: "600",
+              cursor: "pointer",
+              outline: "none",
+              transition: "all 0.15s ease"
+            }}
+            title="Buka Visualisasi Alur Eksekusi Task DAG (Algorithm Visualizer)"
+          >
+            <GitBranch size={13} />
+            <span>DAG Tracer</span>
+          </button>
         </div>
 
         {/* Right: Telemetry Counts (JetBrains Mono) */}
@@ -4728,6 +4798,282 @@ export default function App() {
                 Tugaskan Sekarang
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* 🔀 MULTI-AGENT DAG EXECUTION FLOW TRACER MODAL (Algorithm Visualizer) */}
+      {isTracerOpen && (
+        <div
+          onClick={() => {
+            setIsTracerOpen(false);
+            setIsPlayingTrace(false);
+          }}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0, 0, 0, 0.78)",
+            backdropFilter: "blur(8px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 150,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: "#0d0e10",
+              border: "1px solid rgba(255, 255, 255, 0.12)",
+              borderRadius: 12,
+              padding: "20px 24px",
+              width: "min(960px, 94vw)",
+              maxHeight: "90vh",
+              display: "flex",
+              flexDirection: "column",
+              boxShadow: "0 25px 60px -10px rgba(0, 0, 0, 0.9)",
+              overflow: "hidden"
+            }}
+          >
+            {/* Modal Header */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255, 255, 255, 0.08)", paddingBottom: 14, marginBottom: 16 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: "rgba(168, 85, 247, 0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <GitBranch size={18} color="#c084fc" />
+                </div>
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <h3 style={{ margin: 0, fontSize: "16px", color: "#f7f8f8", fontWeight: "600", letterSpacing: "-0.01em" }}>
+                      Multi-Agent Execution Flow Tracer
+                    </h3>
+                    <span style={{ fontSize: "10px", fontFamily: "'JetBrains Mono', monospace", backgroundColor: "rgba(168, 85, 247, 0.18)", color: "#d8b4fe", padding: "2px 7px", borderRadius: 4, fontWeight: "600" }}>
+                      DAG ALGORITHM VISUALIZER
+                    </span>
+                  </div>
+                  <div style={{ fontSize: "12px", color: "#8a8f98", marginTop: 2 }}>
+                    Visualisasi dependensi tugas dan transisi status sub-agent langkah-demi-langkah
+                  </div>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  setIsTracerOpen(false);
+                  setIsPlayingTrace(false);
+                }}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  color: "#8a8f98",
+                  cursor: "pointer",
+                  padding: 6,
+                  borderRadius: 6,
+                  display: "flex",
+                  alignItems: "center"
+                }}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Playback Controls Bar */}
+            {traceData && traceData.frames && (
+              <div style={{ backgroundColor: "#141518", border: "1px solid rgba(255, 255, 255, 0.06)", borderRadius: 8, padding: "10px 14px", marginBottom: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <button
+                      onClick={() => setCurrentFrameIdx(0)}
+                      disabled={currentFrameIdx === 0}
+                      style={{ padding: "5px 8px", borderRadius: 5, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", color: "#cbd5e1", cursor: "pointer", display: "flex", alignItems: "center" }}
+                      title="Reset ke Awal"
+                    >
+                      <SkipBack size={13} />
+                    </button>
+                    <button
+                      onClick={() => setCurrentFrameIdx((prev) => Math.max(0, prev - 1))}
+                      disabled={currentFrameIdx === 0}
+                      style={{ padding: "5px 10px", borderRadius: 5, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", color: "#cbd5e1", cursor: "pointer", fontSize: "11px", fontWeight: "600" }}
+                    >
+                      ◀ Step
+                    </button>
+                    <button
+                      onClick={() => setIsPlayingTrace((prev) => !prev)}
+                      style={{
+                        padding: "5px 14px",
+                        borderRadius: 5,
+                        border: "none",
+                        background: isPlayingTrace ? "#ef4444" : "#8b5cf6",
+                        color: "#ffffff",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 6,
+                        fontSize: "11px",
+                        fontWeight: "600"
+                      }}
+                    >
+                      {isPlayingTrace ? <Pause size={13} /> : <Play size={13} />}
+                      <span>{isPlayingTrace ? "Jeda" : "Auto Play"}</span>
+                    </button>
+                    <button
+                      onClick={() => setCurrentFrameIdx((prev) => Math.min(traceData.frames.length - 1, prev + 1))}
+                      disabled={currentFrameIdx >= traceData.frames.length - 1}
+                      style={{ padding: "5px 10px", borderRadius: 5, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", color: "#cbd5e1", cursor: "pointer", fontSize: "11px", fontWeight: "600" }}
+                    >
+                      Step ▶
+                    </button>
+                    <button
+                      onClick={() => setCurrentFrameIdx(traceData.frames.length - 1)}
+                      disabled={currentFrameIdx >= traceData.frames.length - 1}
+                      style={{ padding: "5px 8px", borderRadius: 5, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", color: "#cbd5e1", cursor: "pointer", display: "flex", alignItems: "center" }}
+                      title="Lompat ke Akhir"
+                    >
+                      <SkipForward size={13} />
+                    </button>
+                  </div>
+
+                  {/* Frame & Action Badges */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: "11px" }}>
+                    <span style={{ color: "#94a3b8" }}>
+                      FRAME <strong style={{ color: "#f8fafc" }}>{currentFrameIdx + 1}</strong> / {traceData.frames.length}
+                    </span>
+                    {traceData.frames[currentFrameIdx] && (
+                      <span style={{
+                        padding: "2px 8px",
+                        borderRadius: 4,
+                        fontSize: "10px",
+                        fontWeight: "700",
+                        backgroundColor:
+                          traceData.frames[currentFrameIdx].action === "COMPLETE" ? "rgba(16, 185, 129, 0.2)" :
+                          traceData.frames[currentFrameIdx].action === "START" ? "rgba(245, 158, 11, 0.2)" : "rgba(139, 92, 246, 0.2)",
+                        color:
+                          traceData.frames[currentFrameIdx].action === "COMPLETE" ? "#34d399" :
+                          traceData.frames[currentFrameIdx].action === "START" ? "#fbbf24" : "#c084fc",
+                      }}>
+                        {traceData.frames[currentFrameIdx].action}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div style={{ width: "100%", height: 4, backgroundColor: "rgba(255,255,255,0.08)", borderRadius: 2, overflow: "hidden" }}>
+                  <div
+                    style={{
+                      height: "100%",
+                      width: `${((currentFrameIdx + 1) / traceData.frames.length) * 100}%`,
+                      backgroundColor: "#a855f7",
+                      transition: "width 0.2s ease"
+                    }}
+                  />
+                </div>
+
+                {/* Current step explanation */}
+                {traceData.frames[currentFrameIdx] && (
+                  <div style={{ fontSize: "12px", color: "#e2e8f0", display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "#a855f7" }}>⚡</span>
+                    <span>{traceData.frames[currentFrameIdx].description}</span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Interactive DAG Task Nodes Grid */}
+            <div style={{ flex: 1, overflowY: "auto", minHeight: 280, paddingRight: 4 }}>
+              {traceData && traceData.frames && traceData.frames[currentFrameIdx] && (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
+                  {traceData.nodes.map((node) => {
+                    const currentFrame = traceData.frames[currentFrameIdx];
+                    const nodeSnapshot = currentFrame.nodes_state[node.id] || node;
+                    const isActive = currentFrame.active_node_id === node.id;
+                    const isCompleted = nodeSnapshot.status === "completed";
+                    const isRunning = nodeSnapshot.status === "running";
+
+                    return (
+                      <div
+                        key={node.id}
+                        onClick={() => setSelectedTraceNode(nodeSnapshot)}
+                        style={{
+                          backgroundColor: isActive ? "rgba(168, 85, 247, 0.08)" : "#131417",
+                          border: isActive
+                            ? "2px solid #a855f7"
+                            : isCompleted
+                            ? "1px solid rgba(16, 185, 129, 0.4)"
+                            : "1px solid rgba(255, 255, 255, 0.07)",
+                          borderRadius: 8,
+                          padding: "12px 14px",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
+                          boxShadow: isActive ? "0 0 20px rgba(168, 85, 247, 0.3)" : "none",
+                        }}
+                      >
+                        {/* Node Header */}
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                          <span style={{ fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", color: "#a1a1aa", fontWeight: "600" }}>
+                            {node.id}
+                          </span>
+                          <span style={{
+                            fontSize: "10px",
+                            padding: "2px 6px",
+                            borderRadius: 4,
+                            fontWeight: "600",
+                            backgroundColor:
+                              isCompleted ? "rgba(16, 185, 129, 0.15)" :
+                              isRunning ? "rgba(245, 158, 11, 0.15)" : "rgba(255, 255, 255, 0.05)",
+                            color:
+                              isCompleted ? "#34d399" :
+                              isRunning ? "#fbbf24" : "#71717a",
+                          }}>
+                            {nodeSnapshot.status.toUpperCase()}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <div style={{ fontSize: "13px", fontWeight: "600", color: "#f8fafc", marginBottom: 8, lineHeight: 1.4 }}>
+                          {node.title}
+                        </div>
+
+                        {/* Agent & Artifacts footer */}
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "11px", color: "#94a3b8", borderTop: "1px solid rgba(255, 255, 255, 0.05)", paddingTop: 8 }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                            <span style={{ textTransform: "capitalize", fontWeight: "600", color: "#cbd5e1" }}>
+                              🎭 {node.agent}
+                            </span>
+                          </div>
+                          {node.artifacts && node.artifacts.length > 0 && (
+                            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#38bdf8", backgroundColor: "rgba(56, 189, 248, 0.1)", padding: "1px 5px", borderRadius: 3 }}>
+                              {node.artifacts[0]}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Selected Node Inspector Detail */}
+            {selectedTraceNode && (
+              <div style={{ marginTop: 14, padding: "10px 14px", backgroundColor: "#16171b", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, fontSize: "11px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <strong style={{ color: "#f8fafc" }}>{selectedTraceNode.id}: {selectedTraceNode.title}</strong>
+                  <div style={{ color: "#94a3b8", marginTop: 2 }}>
+                    Ditugaskan kepada: <strong style={{ color: "#c084fc", textTransform: "capitalize" }}>{selectedTraceNode.agent}</strong> •
+                    Dependensi: {selectedTraceNode.dependencies?.join(", ") || "Akar / Root Task"}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSelectedTraceNode(null)}
+                  style={{ background: "transparent", border: "none", color: "#64748b", cursor: "pointer", fontSize: "11px" }}
+                >
+                  Tutup Info ✕
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

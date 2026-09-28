@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from risko_orchestrator import AgentEvent, RiskoOrchestrator
 from wayang_router import auto_route_task
+from execution_tracer import build_default_sprint_trace, ExecutionTracer
 
 ROADMAP_PATH = Path(__file__).parent.parent / "ROADMAP.md"
 
@@ -105,6 +106,13 @@ async def startup():
 async def root():
     return {"service": "Dalang-AI Risko Backend", "status": "online"}
 
+
+default_tracer = build_default_sprint_trace()
+
+@app.get("/api/tracer/payload")
+async def get_tracer_payload():
+    """Return execution trace DAG frames for interactive visualizer."""
+    return JSONResponse(content=default_tracer.export_trace_payload())
 
 @app.get("/roadmap")
 async def get_roadmap():
