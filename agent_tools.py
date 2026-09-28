@@ -5,10 +5,12 @@ Sandboxed tool set that LLM sub-agents can call:
 All operations are scoped to the project workspace directory.
 """
 
+import json
 import os
 import re
 import subprocess
 from pathlib import Path
+from typing import Any
 
 
 class AgentToolbox:
@@ -95,6 +97,37 @@ class AgentToolbox:
         except Exception as e:
             return f"ERROR: {e}"
 
+    def spawn_cantrik(self, parent_agent: str, tasks: list[dict], worker_type: str = "batch_task") -> str:
+        """Spawn ephemeral assistant workers to process tasks concurrently within workspace."""
+        import asyncio
+        from cantrik_worker_pool import CantrikPool
+
+        pool = CantrikPool(workspace=str(self.workspace), max_concurrency=4)
+
+        async def worker_job(payload: dict) -> Any:
+            cmd = payload.get("cmd")
+            if cmd:
+                return self.run_command(cmd, timeout=payload.get("timeout", 30))
+            path = payload.get("path")
+            if path and payload.get("action") == "read":
+                return self.read_file(path)
+            return f"Processed task {payload.get('title', 'unnamed')}"
+
+        try:
+            # Check if event loop is already running
+            try:
+                loop = asyncio.get_running_loop()
+                # Run in executor or nested if loop exists
+                import concurrent.futures
+                with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
+                    res = ex.submit(lambda: asyncio.run(pool.execute_batch(parent_agent, tasks, worker_job))).result()
+            except RuntimeError:
+                res = asyncio.run(pool.execute_batch(parent_agent, tasks, worker_job))
+
+            return f"OK: Cantrik Pool finished. Success: {res.successful_tasks}/{res.total_tasks} in {round(res.duration_ms, 2)}ms. Results: {json.dumps(res.task_results)}"
+        except Exception as e:
+            return f"ERROR spawning Cantrik pool: {e}"
+
     def tool_descriptions(self) -> list[dict]:
         """OpenAI function-calling format tool specs."""
         return [
@@ -163,6 +196,33 @@ class AgentToolbox:
                             "path": {"type": "string", "default": "."},
                         },
                         "required": ["pattern"],
+                    },
+                },
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "spawn_cantrik",
+                    "description": "Spawn ephemeral assistant workers (Cantrik) to execute batch or parallel subtasks concurrently.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "parent_agent": {"type": "string", "description": "The supervising Wayang ID (e.g. kai, zaki, ren, nova)"},
+                            "tasks": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {"type": "string"},
+                                        "cmd": {"type": "string", "description": "Optional shell command to execute"},
+                                        "path": {"type": "string", "description": "Optional file path to inspect"},
+                                        "action": {"type": "string", "description": "read or exec"},
+                                    },
+                                },
+                                "description": "List of subtasks for Cantrik workers",
+                            },
+                        },
+                        "required": ["parent_agent", "tasks"],
                     },
                 },
             },

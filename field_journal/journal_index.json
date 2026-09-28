@@ -74,22 +74,6 @@
         "Menjalankan pytest dari root repository langsung tanpa menyetel PYTHONPATH atau CWD membuat FileNotFoundError pada file lokal workspace."
       ],
       "date": "2026-09-28"
-    },
-    {
-      "id": "JRN-20260928_123916",
-      "title": "Uji Coba Test Precedent",
-      "filename": "2026-09-28_kai_uji_coba_test_precedent_20260928_123916.md",
-      "agent_id": "kai",
-      "category": "test-category",
-      "tags": [
-        "unit-test",
-        "verification"
-      ],
-      "pitfalls": [
-        "Jebakan testing 1",
-        "Jebakan testing 2"
-      ],
-      "date": "2026-09-28"
     }
   ]
 }

@@ -220,6 +220,12 @@ class RealSubAgentRunner:
                 result = self.toolbox.run_command(args.get("cmd", ""), timeout=args.get("timeout", 60))
             elif name == "search_code":
                 result = self.toolbox.search_code(args.get("pattern", ""), args.get("path", "."))
+            elif name == "spawn_cantrik":
+                result = self.toolbox.spawn_cantrik(
+                    parent_agent=args.get("parent_agent", "dalang"),
+                    tasks=args.get("tasks", []),
+                    worker_type=args.get("worker_type", "batch_task"),
+                )
             else:
                 return f"ERROR: Unknown tool {name}"
 
