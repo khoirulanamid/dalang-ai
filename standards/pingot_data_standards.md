@@ -13,6 +13,17 @@
 - **Explicit Projection**: Selalu pisahkan model penyimpanan (`UserInDB`) dengan model eksposur API (`UserPublic`). Jangan gunakan auto-serialize tanpa whitelist fields.
 - **Salt & Hash Isolation**: Salt harus cryptographically random (minimum 16 bytes dari `os.urandom`) dan disimpan bersama hash dengan format standardized (e.g. `$algo$rounds$salt$hash`).
 
+## 3. Database Security & Misconfiguration Standard (from reverse-skill/database-security)
+- **Principle of Least Privilege (PoLP)**:
+  - Akun aplikasi DILARANG menggunakan hak akses superuser/DBA (`postgres`, `root`, `sa`).
+  - Dilarang memberikan wewenang berbahaya: `COPY PROGRAM`, `FILE_PRIV`, `xp_cmdshell`, atau `ALTER SYSTEM`.
+- **Zero Raw String Concatenation**:
+  - Seluruh query wajib menggunakan parameter binding atau ORM (SQLAlchemy / Tortoise / Prisma).
+  - Dilarang keras menggunakan Python f-string atau string concatenation (`+`) pada konstruksi query.
+- **Connection Isolation & Network Hardening**:
+  - Dilarang binding instance database ke `0.0.0.0` publik tanpa firewall dan IP whitelist.
+  - Connection URI wajib diambil dari environment variable, dilarang hardcoded plaintext password, dan wajib memaksakan enkripsi TLS (`sslmode=require`) untuk remote database.
+
 ## 4. Anti-AI-Slop Code Hygiene Standard (from antislop-code)
 - **No Decorative Banner Comments**: DILARANG membuat komentar hiasan berbasis karakter berulang (`# ====================`, `# --------------------`, `/* ******* */`).
 - **No Stating the Obvious**: DILARANG menulis komentar yang hanya mengulang nama variabel/fungsi (contoh: `# user email` di atas `email: str`, atau `# Initialize class` di atas `__init__`).

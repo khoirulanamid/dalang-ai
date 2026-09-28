@@ -67,3 +67,12 @@ Setiap temuan audit dari Kai wajib dibuatkan test case regresi oleh Ren:
 - Test harus bersifat self-contained dan deterministic (100% reproducible di CI).
 - Lampirkan ID temuan (misal: `# Ref: Kai-AUDIT-F001`) pada docstring test function.
 
+## 7. Headless Browser Automation & E2E DOM Discipline (from reverse-skill/browser-automation)
+- **DOM Structural Integrity**:
+  - Verifikasi bahwa build bundle memiliki root mounting point (`#root`), asset JS/CSS terikat, dan WebGL `<canvas>` elemen aktif.
+- **Client-Side Security & XSS Resistance**:
+  - Validasi bahwa data dinamis dari backend yang dirender ke DOM di-escape secara aman oleh React (dilarang penggunaan `dangerouslySetInnerHTML` tanpa sanitasi DOMPurify).
+- **Hermetic Headless Verification**:
+  - Gunakan Playwright / Chromium headless untuk memverifikasi load time, network error HTTP 4xx/5xx di console, dan visual layout tanpa memerlukan tampilan grafis desktop.
+
+

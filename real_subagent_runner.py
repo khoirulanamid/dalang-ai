@@ -19,6 +19,7 @@ from agent_tools import AgentToolbox
 HERMES_BASE_URL = os.getenv("HERMES_BASE_URL", "http://127.0.0.1:20127/v1")
 
 from field_journal import query_journal_learnings
+from llm_guard import LLMGuardrail
 
 def _load_standards(agent_id: str, task_context: str = "") -> str:
     """Load corresponding international standard document and dynamic field journal learnings."""
@@ -209,9 +210,16 @@ class RealSubAgentRunner:
 
     def _dispatch_tool(self, name: str, args: dict) -> str:
         MAX_OUTPUT = 4000  # truncate long outputs to avoid context overflow
+        # LLM Guardrail: Excessive Agency & Exfiltration Prevention (OWASP LLM06 / ASI02)
+        is_safe, guard_err = LLMGuardrail.validate_tool_call_safety(name, args)
+        if not is_safe:
+            return f"SECURITY BLOCKED: {guard_err}"
+
         try:
             if name == "read_file":
-                result = self.toolbox.read_file(args.get("path", ""))
+                raw_content = self.toolbox.read_file(args.get("path", ""))
+                # LLM Guardrail: Neutralize Indirect Prompt Injections in files
+                result = LLMGuardrail.sanitize_untrusted_content(raw_content, source_label=args.get("path", "file"))
             elif name == "write_file":
                 result = self.toolbox.write_file(args.get("path", ""), args.get("content", ""))
             elif name == "list_dir":

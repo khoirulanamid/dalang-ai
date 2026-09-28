@@ -87,3 +87,14 @@ Semua audit harus mematuhi alur ketat:
 - **Pinning & Fixity**: Pastikan setiap package dependency di-pin versi eksplisit dengan hash checksum (`pip-audit`, `npm audit`).
 - **Transitive Risk Mapping**: Periksa dependensi turunan yang memiliki N-day CVE yang diketahui publik.
 
+### D. LLM Application & Agentic AI Security (OWASP LLM Top 10 & ASI 2026)
+- **LLM01 / ASI01 — Prompt Injection Defense**:
+  - Validasi seluruh input konteks dari file eksternal/workspace menggunakan filter netralisasi (`LLMGuardrail`).
+  - Cegah *Indirect Prompt Injection* yang disisipkan penyerang ke dalam file teks/kode agar tidak mengubah instruksi orkestrator (Risko).
+- **LLM02 — Sensitive Information Disclosure**:
+  - Awasi output model LLM agar tidak membocorkan system prompt rahasia, environment variables, atau API keys (`sk-...`, `ghp_...`).
+- **LLM06 / ASI02 — Excessive Agency & Tool Abuse**:
+  - Batasi wewenang eksekusi tools: blokir pemanggilan shell exfiltration (`curl`, `wget`, `nc`, reverse shell) dari input model yang tidak terotorisasi.
+  - Terapkan *Human-in-the-Loop* (Persetujuan Bos Muda) untuk aksi destruktif atau mutasi permanen di luar workspace.
+
+
