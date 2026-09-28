@@ -44,6 +44,16 @@
 - [ ] Tidak ada fake numbers atau placeholder statistics
 - [ ] Layout tidak overflow horizontal di layar 375px
 
+## 6. Technical SEO & Core Web Vitals Standard (from seo-monster)
+- **Metadata Completeness**:
+  - Setiap halaman HTML wajib memiliki `<title>` (10-70 karakter deskriptif), `<meta name="description">` (50-160 karakter), dan `<meta name="viewport">` mobile-friendly.
+  - Wajib menyematkan `<link rel="canonical" href="...">` untuk mencegah penalti konten duplikat.
+- **Social Sharing & OpenGraph**:
+  - Wajib menyematkan OpenGraph tags (`og:title`, `og:description`, `og:image`, `og:type`) dan Twitter Card tags agar link preview tampil sempurna di Telegram, X, dan Slack.
+- **Resource Preload & Web Vitals Optimization**:
+  - Gunakan `<link rel="preload">` untuk critical font (Inter, JetBrains Mono) dan hero asset.
+  - Pertahankan CLS (Cumulative Layout Shift) < 0.1 dengan dimensi eksplisit pada gambar dan WebGL container.
+
 - **No Secrets in Client**: Jangan pernah embed JWT secret atau API keys di frontend bundle.
 - **Token Storage**: Gunakan `httpOnly` cookie untuk refresh token bila memungkinkan; jika di memory, simpan di closures/state, bukan `localStorage` tanpa enkripsi.
 - **Input Sanitization**: Escape semua user-generated content sebelum di-render ke DOM (cegah XSS).

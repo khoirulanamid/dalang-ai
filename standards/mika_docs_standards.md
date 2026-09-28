@@ -23,6 +23,15 @@ Semua dokumentasi harus dikategorikan ke salah satu dari 4 kuadran:
 - Schema harus pakai `$ref` untuk reusable components, bukan inline definitions berulang.
 - Selalu dokumentasikan error response body sama detailnya dengan success response.
 
+## 4. Technical SEO & AI Discoverability Standard (from seo-monster)
+- **AI Answer Engine Optimization (AEO / GEO)**:
+  - Format dokumentasi dengan struktur semantik (`H1`, `H2`, `H3`) yang jelas agar mudah di-parse oleh AI crawler (Perplexity, ChatGPT Search, Claude).
+  - Sertakan `definition block` ringkas di awal setiap dokumen arsitektur sebelum masuk ke detail teknis.
+- **Structured Data & JSON-LD**:
+  - Halaman dokumentasi web wajib menyematkan skema Schema.org `TechArticle` atau `SoftwareApplication` dalam format JSON-LD.
+- **Automated Sitemap & Indexing Signals**:
+  - Setiap perilisan dokumen arsitektur baru wajib menyertakan update rute URL pada sitemap.xml proyek.
+
 ## 5. Anti-AI-Slop Copywriting Directives (from antislop-copywriting)
 
 ### Dilarang Keras (AI Fluff Words):
