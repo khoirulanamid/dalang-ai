@@ -18,8 +18,10 @@ from agent_tools import AgentToolbox
 
 HERMES_BASE_URL = os.getenv("HERMES_BASE_URL", "http://127.0.0.1:20127/v1")
 
-def _load_standards(agent_id: str) -> str:
-    """Load corresponding international standard document for the agent."""
+from field_journal import query_journal_learnings
+
+def _load_standards(agent_id: str, task_context: str = "") -> str:
+    """Load corresponding international standard document and dynamic field journal learnings."""
     standards_dir = Path("/root/storage/projects/dalang-ai/standards")
     mapping = {
         "pingot": "pingot_data_standards.md",
@@ -30,10 +32,18 @@ def _load_standards(agent_id: str) -> str:
         "kai": "kai_security_standards.md",
         "ren": "ren_qa_standards.md",
     }
+    parts = []
     std_file = standards_dir / mapping.get(agent_id, "")
     if std_file.exists():
-        return f"\n\n## MANDATORY INTERNATIONAL ENGINEERING STANDARDS ({std_file.name}):\n" + std_file.read_text(encoding="utf-8")
-    return ""
+        parts.append(f"\n\n## MANDATORY INTERNATIONAL ENGINEERING STANDARDS ({std_file.name}):\n" + std_file.read_text(encoding="utf-8"))
+
+    # Dynamic Field Journal Pitfall Warning Injection
+    journal_context = f"{agent_id} {task_context}"
+    learnings = query_journal_learnings(journal_context, agent_id=agent_id, limit=2)
+    if learnings:
+        parts.append(learnings)
+
+    return "\n\n".join(parts)
 
 ROLE_PROMPTS = {
     "pingot": """You are Pingot, the Senior Data Architect agent in the Dalang-AI team.
@@ -234,7 +244,8 @@ class RealSubAgentRunner:
                 await on_event(action, detail)
 
         role_prompt = ROLE_PROMPTS.get(agent_id, ROLE_PROMPTS["zaki"])
-        role_prompt += _load_standards(agent_id)
+        task_context = f"{task.get('title', '')} {' '.join(task.get('artifacts', []))}"
+        role_prompt += _load_standards(agent_id, task_context)
 
         context = f"""## YOUR ASSIGNED TASK
 - Task ID: {task.get('id')}

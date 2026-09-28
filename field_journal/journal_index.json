@@ -1,0 +1,95 @@
+{
+  "entries": [
+    {
+      "id": "JRN-20260928_123511",
+      "title": "Rotasi Sendi Three.js Sumbu X Avatar Humanoid Duduk",
+      "filename": "2026-09-28_lulu_rotasi_sendi_three_js_sumbu_x_avatar_humanoid_duduk_20260928_123511.md",
+      "agent_id": "lulu",
+      "category": "3d-kinematics",
+      "tags": [
+        "threejs",
+        "kinematics",
+        "clipping",
+        "avatar",
+        "rotation"
+      ],
+      "pitfalls": [
+        "Menggunakan rotation.x negatif pada bahu membuat tangan mencuat ke belakang sandaran kursi.",
+        "Menggunakan rotation.x negatif pada pinggul membuat paha mencuat ke belakang kursi bukan ke kolong meja."
+      ],
+      "date": "2026-09-28"
+    },
+    {
+      "id": "JRN-20260928_123511",
+      "title": "Mitigasi JWT Algorithm Confusion dan Key Confusion",
+      "filename": "2026-09-28_kai_mitigasi_jwt_algorithm_confusion_dan_key_confusion_20260928_123511.md",
+      "agent_id": "kai",
+      "category": "security-audit",
+      "tags": [
+        "jwt",
+        "auth",
+        "token",
+        "algorithm-confusion",
+        "asvs"
+      ],
+      "pitfalls": [
+        "Tidak menyetel parameter algorithms secara eksplisit saat memanggil jwt.decode().",
+        "Menerima token tanpa validasi claim wajib (iss, aud, exp, jti)."
+      ],
+      "date": "2026-09-28"
+    },
+    {
+      "id": "JRN-20260928_123511",
+      "title": "Verifikasi Constant-Time pada Hashing dan Signature",
+      "filename": "2026-09-28_zaki_verifikasi_constant-time_pada_hashing_dan_signature_20260928_123511.md",
+      "agent_id": "zaki",
+      "category": "backend-defense",
+      "tags": [
+        "timing-attack",
+        "crypto",
+        "hmac",
+        "constant-time",
+        "hardening"
+      ],
+      "pitfalls": [
+        "Memakai perbandingan `a == b` untuk token atau API secret.",
+        "Waktu eksekusi yang berbeda membocorkan prefiks karakter kepada penyerang."
+      ],
+      "date": "2026-09-28"
+    },
+    {
+      "id": "JRN-20260928_123511",
+      "title": "Isolasi Path Workspace pada Eksekusi Pytest",
+      "filename": "2026-09-28_ren_isolasi_path_workspace_pada_eksekusi_pytest_20260928_123511.md",
+      "agent_id": "ren",
+      "category": "qa-automation",
+      "tags": [
+        "pytest",
+        "workspace",
+        "cwd",
+        "isolation",
+        "regression"
+      ],
+      "pitfalls": [
+        "Menjalankan pytest dari root repository langsung tanpa menyetel PYTHONPATH atau CWD membuat FileNotFoundError pada file lokal workspace."
+      ],
+      "date": "2026-09-28"
+    },
+    {
+      "id": "JRN-20260928_123916",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-09-28_kai_uji_coba_test_precedent_20260928_123916.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-09-28"
+    }
+  ]
+}
