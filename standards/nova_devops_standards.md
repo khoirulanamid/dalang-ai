@@ -35,3 +35,12 @@
 ## 4. 12-Factor Configuration
 - Storing config in the environment: Tidak boleh ada `.env` file di repository git. Gunakan `.env.example` sebagai kontrak terdokumentasi.
 - Port Binding: Aplikasi harus completely self-contained dan bind langsung ke port yang disediakan environment variable `$PORT`.
+
+## 5. Pre-Deployment Gate & GO/NO-GO Discipline (from deployment-checklist)
+- **Hard Blocker Zero Tolerance**:
+  - Setiap kegagalan pada checklist berkategori `[BLOCKER]` (Secrets bocor, Healthcheck absen, atau Test gagal) secara otomatis menghasilkan putusan **`NO-GO`**.
+  - Dilarang keras melakukan bypass atau deploy manual tanpa verifikasi pre-flight audit.
+- **Rollback Readiness**:
+  - Setiap release container/server wajib memiliki target rollback teruji (previous stable tag atau commit hash).
+- **Zero Raw Secrets in Deploy Target**:
+  - Pastikan tidak ada file `.env`, file sertifikat private `.pem`, atau API secret mentah yang terbawa ke dalam build image atau repo publik.
