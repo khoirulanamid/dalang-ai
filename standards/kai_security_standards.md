@@ -56,3 +56,34 @@ Setiap rilis harus memiliki regression tests untuk:
 - Token type confusion (access token dipakai sebagai refresh, vice versa)
 - Timing attacks (pastikan response time constant untuk invalid password)
 - Mass assignment (kirim field yang tidak seharusnya: `is_admin=true`)
+
+## 5. Reverse Engineering & Security Audit Routing Methodology (from reverse-skill)
+Reference: `zhaoxuya520/reverse-skill` AI Security Skill Routing Architecture
+
+### A. Scenario-Based Tool & Analysis Routing Matrix
+Saat mengaudit atau menganalisis artefak keamanan, ikuti alur metodologis terstruktur (jangan menebak):
+1. **APK / Android Mobile Audit**:
+   - *Static Analysis*: Decompile bytecode via `jadx` / `apktool` untuk mengaudit manifest, exported components (`activity`, `service`, `receiver`, `provider`), hardcoded keys/secrets, dan network security config.
+   - *Dynamic Instrumentation*: Evaluasi implementasi anti-tampering, integrity check, root detection, dan dynamic certificate pinning.
+2. **Frontend JS & Client Cryptography Audit**:
+   - *Deobfuscation*: Membedah parameter terenkripsi di client-side (AES, RSA, custom XOR, WebAssembly).
+   - *Tamper Resistance*: Pastikan token atau signature client tidak dapat dimanipulasi atau di-replay ke server backend.
+3. **Binary & ELF/SO Security Assessment**:
+   - *Disassembly & Decompilation*: Analisis pola memory safety, RPATH insecure linking, buffer boundaries, stack protection (`canary`), ASLR, dan PIE flags.
+   - *String & Symbol Audit*: Deteksi hardcoded credentials, sensitive debugging endpoints, dan unsafe C library calls.
+4. **API, GraphQL & Token Gating Audit**:
+   - *Token Integrity*: Uji JWT algorithm confusion (`none` alg, asymmetric-to-symmetric key confusion), lack of signature verification, token expiration enforcement.
+   - *Access Control*: Uji Broken Object Level Authorization (BOLA/IDOR), Broken Function Level Authorization (BFLA), dan mass assignment.
+
+### B. Evidence-Based Audit Lifecycle (Evidence → Finding → Remediation)
+Semua audit harus mematuhi alur ketat:
+- **Scope Gate**: Tentukan batasan target audit (URL, commit, binary, codebase path). Dilarang melakukan audit tanpa verifikasi scope.
+- **Evidence Collection**: Catat request/response raw, stack trace, atau baris kode rentan yang dapat direproduksi 100%.
+- **Finding Classification**: Klasifikasikan temuan dengan CVSS v3.1 score dan nomor CWE (Common Weakness Enumeration).
+- **Remediation Path**: Berikan instruksi perbaikan konkret dan actionable untuk developer (Zaki/Lulu/Nova).
+- **Zero Hallucination Policy**: Jangan pernah melaporkan kerentanan tanpa bukti konkret (reproducible PoC).
+
+### C. Software Supply Chain & Dependency Integrity (SBOM)
+- **Pinning & Fixity**: Pastikan setiap package dependency di-pin versi eksplisit dengan hash checksum (`pip-audit`, `npm audit`).
+- **Transitive Risk Mapping**: Periksa dependensi turunan yang memiliki N-day CVE yang diketahui publik.
+

@@ -24,7 +24,8 @@ WAYANG_ROSTER = {
         "keywords": [
             "backend", "api", "fastapi", "rest", "endpoint", "crud", "auth",
             "token", "jwt", "login", "register", "controller", "service",
-            "business logic", "route", "server", "middleware", "handler"
+            "business logic", "route", "server", "middleware", "handler",
+            "api hardening", "rate limit", "tamper", "replay attack", "signature verification"
         ],
         "weight": 1.0,
     },
@@ -66,7 +67,9 @@ WAYANG_ROSTER = {
         "keywords": [
             "security", "keamanan", "audit", "vulnerability", "pentest", "owasp",
             "asvs", "cvss", "bandit", "pip-audit", "sast", "injection", "xss",
-            "csrf", "hashing", "hardening", "rahasia", "enkripsi"
+            "csrf", "hashing", "hardening", "rahasia", "enkripsi",
+            "reverse", "deobfuscation", "binary", "apk", "decompilation", "malware",
+            "sbom", "supply chain", "token gate", "anti-tamper", "frida", "jadx"
         ],
         "weight": 1.0,
     },
@@ -76,7 +79,8 @@ WAYANG_ROSTER = {
         "keywords": [
             "test", "testing", "pengujian", "uji coba", "qa", "unit test",
             "integration test", "e2e", "pytest", "bva", "aaa pattern", "assertion",
-            "scenario", "mock", "verifikasi", "validasi"
+            "scenario", "mock", "verifikasi", "validasi",
+            "security test", "regression test", "evidence", "poc verification", "audit trail"
         ],
         "weight": 1.0,
     },

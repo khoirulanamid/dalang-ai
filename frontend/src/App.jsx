@@ -37,12 +37,12 @@ const AGENT_MINGLE_DIALOGUES = {
   },
   kai: {
     greeting: "Lapor Bos Muda! Keamanan sistem dalam kondisi siaga penuh.",
-    quote: "Audit keamanan sistem dan verifikasi celah OWASP berjalan ketat. Seluruh akses tools diisolasi aman di dalam workspace.",
-    tip: "Kai memindai vulnerability, sanitasi input, dan audit keamanan berlapis.",
+    quote: "Audit keamanan sistem, reverse engineering deobfuscation, dan routing celah OWASP berjalan ketat. Seluruh akses tools diisolasi aman di dalam workspace.",
+    tip: "Kai memindai vulnerability, reverse-engineering mobile/web, dan audit anti-tamper.",
   },
   ren: {
     greeting: "Halo Bos Muda! Semuanya berjalan sesuai standar kualitas tinggi.",
-    quote: "329 test suite otomatis kita (security, architecture, AAA, BVA, ASVS) semuanya lulus 100% tanpa error sama sekali!",
+    quote: "332 test suite otomatis kita (security, anti-tamper, architecture, AAA, BVA) semuanya lulus 100% tanpa error sama sekali!",
     tip: "Ren memastikan seluruh unit, integrasi, dan regression tests lulus sempurna.",
   },
 };
@@ -174,7 +174,7 @@ const AGENTS = {
     hairStyle: "sidepart",
     pos: [-7.2, 0, 0],
     screenColor: 0xf87171,
-    action: "Audit keamanan OWASP & token gate",
+    action: "Audit OWASP, reverse engineering & anti-tamper",
     hasGlasses: false,
     hasLanyard: true,
     personality: "Waspada, tajam, pemburu celah vulnerabilitas",

@@ -52,6 +52,27 @@ class TestAutoRouting:
         assert agent == "ren"
         assert score > 0
 
+    def test_route_reverse_engineering_to_kai(self):
+        """Keahlian baru dari reverse-skill harus di-route ke Kai."""
+        title = "Decompile APK dan analisis deobfuscation binary untuk audit anti-tamper dan sbom"
+        agent, score = auto_route_task(title)
+        assert agent == "kai"
+        assert score > 0
+
+    def test_route_api_hardening_to_zaki(self):
+        """Countermeasure pertahanan backend harus di-route ke Zaki."""
+        title = "Implementasi api hardening dengan rate limit dan signature verification di server route"
+        agent, score = auto_route_task(title)
+        assert agent == "zaki"
+        assert score > 0
+
+    def test_route_security_regression_to_ren(self):
+        """Verifikasi test security dan regression test harus di-route ke Ren."""
+        title = "Tulis security test dan regression test otomatis untuk poc verification"
+        agent, score = auto_route_task(title)
+        assert agent == "ren"
+        assert score > 0
+
     def test_explicit_agent_override(self):
         """Jika user sengaja menulis nama agent, pilihan user harus dihormati."""
         title = "Buat sesuatu yang umum"

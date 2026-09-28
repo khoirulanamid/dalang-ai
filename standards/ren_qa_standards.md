@@ -52,3 +52,18 @@ Setiap sistem autentikasi harus punya test case untuk:
 - **No Flaky Tests**: Test yang kadang pass kadang fail karena timing adalah bug prioritas tinggi. Gunakan `freezegun` untuk manipulasi waktu, jangan `time.sleep()`.
 - **Descriptive Naming**: `test_<target>_<scenario>_<expected_result>`  
   Contoh: `test_login_with_expired_token_returns_401`
+
+## 6. Security & Tamper Regression Verification (Evidence-Based Testing)
+Reference: Reverse-Skill Case Review & Verification Pattern
+
+### A. Translating Security Findings into Pytest Assertions
+Setiap temuan audit dari Kai wajib dibuatkan test case regresi oleh Ren:
+- **Tamper Tests**: Verifikasi bahwa manipulasi 1 byte saja pada token atau signature menghasilkan response `401 Unauthorized`.
+- **Replay Tests**: Verifikasi bahwa pengiriman ulang payload dengan timestamp kedaluwarsa atau nonce yang sudah dipakai ditolak dengan `400 Bad Request`.
+- **Algorithm Confusion Tests**: Verifikasi bahwa token yang di-forge dengan header `{"alg": "none"}` langsung ditolak oleh middleware.
+- **Side-Channel Timing Invariance**: Verifikasi bahwa waktu verifikasi untuk user yang tidak ada sama dengan user yang ada tetapi password salah.
+
+### B. Evidence Chain & Reproducibility
+- Test harus bersifat self-contained dan deterministic (100% reproducible di CI).
+- Lampirkan ID temuan (misal: `# Ref: Kai-AUDIT-F001`) pada docstring test function.
+

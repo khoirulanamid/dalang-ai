@@ -41,3 +41,17 @@ External (HTTP) → Adapter (FastAPI Routes) → Use Case (Service Layer) → Do
 - **Type Hints**: Semua function signature harus pakai type annotations.
 - **Docstring**: Public functions/classes harus punya docstring (Google style).
 - **Test Coverage**: Minimum 80% line coverage untuk kode production.
+
+## 7. Defensive API Hardening & Anti-Tamper Standards (Countermeasures to Reverse Engineering)
+Reference: Defensive API Security & Reverse-Skill Countermeasures
+
+### A. Replay Attack & Tamper Prevention
+- **Cryptographic Request Integrity**: Untuk transaksi bernilai tinggi, verifikasi signature payload (HMAC-SHA256) dengan nonce dan validitas timestamp (maksimal window 60 detik).
+- **Constant-Time Verification**: Semua perbandingan token, signature, dan hash password wajib menggunakan `hmac.compare_digest` untuk mencegah timing attack.
+- **Strict Algorithm Pinning**: JWT decoder wajib secara eksplisit mengunci `algorithms=["HS256"]` (atau RS256) untuk mencegah JWT algorithm confusion (`alg=none`).
+
+### B. Anti-Automation & Rate Limiting Architecture
+- **Multi-Tier Throttling**: Terapkan rate limit berbasis IP + User ID (contoh: 5 request/15 menit untuk auth, 60 request/menit untuk standard API).
+- **Input Sanitization & Whitelisting**: Seluruh data yang masuk wajib divalidasi dengan Pydantic V2 schema ketat (`extra="forbid"`), menolak field tak terdaftar (anti-mass assignment).
+- **Zero Trust on Client Data**: Jangan pernah mempercayai validasi di sisi client (frontend JS/mobile). Server selalu menjadi single source of truth.
+
