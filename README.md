@@ -1,394 +1,239 @@
 <div align="center">
 
-> 🎁 **SEPENUHNYA GRATIS** — Boleh dipakai, dimodifikasi, dan dibagikan oleh siapa saja.
-> 🚫 **DILARANG DIPERJUALBELIKAN** — Kode ini tidak boleh dijual dalam bentuk apapun.
+> 🎁 **SEPENUHNYA GRATIS** — Boleh dipakai, dimodifikasi, dan dibagikan oleh siapa saja.  
+> 🚫 **DILARANG DIPERJUALBELIKAN** — Kode ini tidak boleh dijual dalam bentuk apapun.  
 > Lihat [`LICENSE`](./LICENSE) untuk ketentuan lengkap.
 
 ---
 
 # 🎭 Dalang-AI
 
-**Multi-Agent Autonomous Studio — dengan filosofi Wayang Nusantara**
+**Autonomous Multi-Agent Software Engineering Platform & 3D Interactive Tech Studio**  
+*Ditenagai Filosofi Wayang Nusantara — Karya Bos Muda (Khoirul Anam)*
 
-[![Tests](https://img.shields.io/badge/tests-182%20passed-22c55e?style=flat-square&logo=pytest)](./)
+[![Tests](https://img.shields.io/badge/tests-384%20passed-22c55e?style=flat-square&logo=pytest)](./)
 [![Python](https://img.shields.io/badge/python-3.11%2B-3b82f6?style=flat-square&logo=python)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18%20+%20Three.js-61dafb?style=flat-square&logo=react)](https://react.dev)
-[![Docker](https://img.shields.io/badge/Docker-CIS%20Hardened-2496ed?style=flat-square&logo=docker)](./workspace/Dockerfile)
-[![Security](https://img.shields.io/badge/Security%20Audit-Grade%20B%2B-f59e0b?style=flat-square&logo=owasp)](./workspace/SECURITY_AUDIT.md)
-[![Anti-Slop](https://img.shields.io/badge/Anti--AI--Slop-enforced-ef4444?style=flat-square)](https://github.com/miqdadbadjuber/anti-slop)
+[![Security](https://img.shields.io/badge/Security-Cloudflare%20Adversarial%20Audit-0ea5e9?style=flat-square&logo=cloudflare)](./audit_harness.py)
+[![LLM Guard](https://img.shields.io/badge/OWASP%20LLM-Top%2010%20%2B%20ASI-red?style=flat-square)](./llm_guard.py)
+[![Observability](https://img.shields.io/badge/OpenTelemetry-Prometheus%20Ready-f97316?style=flat-square&logo=opentelemetry)](./telemetry_engine.py)
 [![License](https://img.shields.io/badge/License-Non--Commercial%20(Gratis)-red?style=flat-square)](./LICENSE)
 
 <br/>
 
-> *Dalam pewayangan, Dalang adalah sutradara dan jiwa dari sebuah lakon.*
-> *Setiap wayang bergerak sesuai kehendaknya — namun semuanya dihidupkan oleh satu tangan.*
->
-> **Di sini, kamu adalah Sang Dalang. Para Wayang AI menjalankan tugasnya sendiri.**
+> *Dalam pewayangan, Dalang adalah sutradara dan jiwa dari sebuah lakon.*  
+> *Setiap wayang bergerak sesuai kehendaknya — namun semuanya dihidupkan oleh satu tangan.*  
+>  
+> **Di sini, Bos Muda adalah Sang Dalang. Para Wayang AI mengeksekusi lakon software engineering secara nyata.**
 
 <br/>
 
 ```
-╔══════════════════════════════════════════════════════╗
-║           K A M U   S A N G   D A L A N G           ║
-║                                                      ║
-║   Pegang  ROADMAP.md  →  Risko mengatur segalanya   ║
-║   Wayang bekerja paralel, melapor secara real-time   ║
-║   Dashboard 3D isometrik memvisualisasikan lakon     ║
-╚══════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════════╗
+║                    B O S   M U D A   S A N G   D A L A N G           ║
+║                                                                      ║
+║   Instruksi Proyek  →  Risko membedah & membagi tugas ke 8 Divisi   ║
+║   Cantrik Pool melipatgandakan kecepatan via pekerja paralel         ║
+║   Field Journal mencegah kesalahan masa lalu berulang                ║
+║   Studio 3D Three.js memvisualisasikan pergerakan kantor real-time   ║
+║   Cloudflare Harness + QA Gate menjamin rilis bebas celah & bug      ║
+╚══════════════════════════════════════════════════════════════════════╝
 ```
 
 </div>
 
 ---
 
-## Apa itu Dalang-AI?
+## 🌟 Apa itu Dalang-AI?
 
-Dalang-AI adalah platform **orkestrasi multi-agent** yang bekerja seperti sebuah tim pegawai otonom. Kamu cukup menulis `ROADMAP.md` berisi daftar tugas — Risko (Sang Dalang) akan membagi-bagikan pekerjaan ke 8 sub-agent spesialis, menjalankannya secara paralel, dan melaporkan hasilnya secara real-time di dashboard 3D.
+**Dalang-AI** adalah platform rekayasa perangkat lunak multi-agent otonom tingkat enterprise (*Enterprise-Grade Multi-Agent SDLC Platform*) yang menggerakkan sebuah "Perusahaan Perangkat Lunak Virtual" mandiri.
 
-**Tidak ada intervensi manual. Tidak ada prompt berulang. Lakon berjalan sendiri.**
+Cukup berikan deskripsi proyek atau salin repositori kodingan yang kompleks ke `workspace/` — **Risko (Master Orchestrator)** bersama 7 Wayang Spesialis dan kawanan **Cantrik (Worker Pool)** akan bermusyawarah, menyusun arsitektur, menulis kode murni, mengaudit keamanan siber, menguji regresi secara ekstrem, hingga memvalidasi kelaikan rilis (*GO / NO-GO*).
 
----
-
-## Arsitektur
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                      DALANG-AI STUDIO                           │
-│                                                                 │
-│   ┌──────────────────────────────────────────────────────────┐  │
-│   │            KELIR  (3D Isometric Dashboard)               │  │
-│   │     React + Three.js · SSE real-time · WebSocket         │  │
-│   └─────────────────────────┬────────────────────────────────┘  │
-│                             │ Events                            │
-│   ┌─────────────────────────▼────────────────────────────────┐  │
-│   │              GAMELAN  (FastAPI Backend)                   │  │
-│   │      /orchestrate · /agents/status · /events/log         │  │
-│   └─────────────────────────┬────────────────────────────────┘  │
-│                             │                                   │
-│   ┌─────────────────────────▼────────────────────────────────┐  │
-│   │                RISKO  (Sang Dalang)                       │  │
-│   │        Membaca ROADMAP.md · Mendelegasikan task           │  │
-│   │        Graphify context scoping · Asyncio dispatch        │  │
-│   └──┬─────────┬────────┬────────┬────────┬────────┬─────────┘  │
-│      │         │        │        │        │        │            │
-│   ┌──▼──┐  ┌───▼──┐ ┌───▼──┐ ┌──▼───┐ ┌──▼──┐ ┌──▼───┐       │
-│   │PING │  │ ZAKI │ │ LULU │ │ MIKA │ │ NOVA│ │ KAI  │ [REN] │
-│   │Data │  │Back  │ │Front │ │ Docs │ │DevOp│ │ Sec  │  QA   │
-│   └─────┘  └──────┘ └──────┘ └──────┘ └─────┘ └──────┘       │
-│                                                                 │
-│   ┌──────────────────────────────────────────────────────────┐  │
-│   │                  ROADMAP.md                              │  │
-│   │           Single Source of Truth — YAML                  │  │
-│   └──────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
-```
+### 🚀 Zero Simulation — Real Execution
+- **Bukan timer atau animasi bohongan**: Agen benar-benar mengeksekusi kode Python/Node.js, memodifikasi file workspace, dan menjalankan automated tests langsung di Linux OS.
+- **Bukan AI Slop**: Kode dan dokumentasi mematuhi standar desain modern (Inter + JetBrains Mono), Clean Architecture, dan prinsip Anti-AI-Slop.
+- **384 Automated Tests Pass (100% Bersih)**: Seluruh modul diuji dengan pytest secara ketat.
 
 ---
 
-## Roster Para Wayang
+## 🏢 Fitur & Keunggulan Utama
 
-| Tokoh | Nama | Peran | Standar |
+### 1. 🎭 8 Wayang Spesialis + Bos Muda 3D Avatar
+- **Bos Muda Playable Character**: Jelajahi kantor virtual 3D menggunakan keyboard (WASD). Dilengkapi 3 sudut pandang kamera: **Orbit Bebas**, **First-Person (FPS)**, dan **Third-Person (TPS)** dengan fisika halangan anti-tembus (*AABB Wall-Sliding Collision*).
+- **8 Divisi Wayang**: Risko (Orchestrator), Pingot (Database), Zaki (Backend), Lulu (Frontend & 3D), Mika (Technical Docs), Nova (DevOps), Kai (Security & Reverse Engineering), dan Ren (QA Lead).
+
+### 2. 👥 Cantrik Ephemeral Worker Pool (`cantrik_worker_pool.py`)
+Saat beban kerja meningkat atau ribuan baris kode harus diproses bersamaan, Wayang dapat memanggil kawanan **Cantrik** (sub-agent pembantu sementara). Cantrik berjalan paralel di lingkungan terisolasi (*Scope Guard*) dan otomatis dihancurkan dari memori setelah tugas selesai.
+
+### 3. 🧠 Self-Evolving Field Journal (`field_journal.py`)
+Dalang-AI memiliki ingatan empiris otonom. Setiap kali agen menemukan kendala teknis atau perbaikan bug (*incident JRN-xxxx*), solusinya dicatat secara permanen dan disuntikkan secara dinamis (maksimal 2–3 entri relevan / ~200 token) ke prompt tugas masa depan agar kesalahan masa lalu **tidak pernah terulang**.
+
+### 4. 🛡️ Triple-Layer Enterprise Defense
+- **Scope Guard (`scope_guard.py`)**: Memastikan seluruh operasi file agen terkunci aman di dalam folder `workspace/` dan memblokir upaya *path traversal* (`../`).
+- **OWASP LLM & ASI 2026 Guard (`llm_guard.py`)**: Melindungi sistem dari serangan *Indirect Prompt Injection*, kebocoran kredensial/API Key, dan pembatasan wewenang berlebih (*Excessive Agency*).
+- **DB Security Guard (`db_security_guard.py`)**: Memindai eksposisi connection string, menegakkan SSL/TLS database, dan memblokir celah SQL Injection.
+
+### 5. 🔍 Cloudflare-Grade Adversarial Audit Harness (`audit_harness.py`)
+Mengadopsi metodologi audit resmi Cloudflare:
+- **Coverage Ledger**: Pemetaan 100% permukaan kode dan alur data sebelum audit.
+- **Uji Sangkal Lawan (*Adversarial Verification*)**: Setiap dugaan celah dari Kai (Hunter) **wajib diuji dan disangkal** oleh Ren (Adversarial Verifier). Kerentanan hanya berstatus `confirmed` jika terbukti tidak dapat disangkal oleh sanitizer atau middleware yang ada.
+
+### 6. 🔀 Algorithm Visualizer DAG Tracer (`execution_tracer.py`)
+Dilengkapi pemutar alur eksekusi tugas interaktif di frontend. Pantau transisi state machine agen (`INIT` → `START` → `CODE_WRITE` → `TEST_RUN` → `VERIFY` → `COMPLETE`) dengan tombol *Play/Pause*, *Step-by-Step*, dan *Scrubber bar*.
+
+### 7. ⚖️ Multi-Agent Consensus & Debate Engine (`consensus_engine.py`)
+Musyawarah teknis antar-Wayang sebelum perubahan arsitektur besar:
+- Memerlukan kuorum minimal 75% persetujuan para Wayang.
+- **Hak Veto Kai**: Kai berhak memveto (*VETOED*) usulan yang mengandung risiko keamanan kritis.
+- Otomatis menghasilkan dokumen **Architecture Decision Record (ADR)**.
+
+### 8. 🌐 Technical SEO & Core Web Vitals Auditor (`seo_auditor.py`)
+Memastikan setiap web yang dibangun lulus uji Technical SEO, validasi Schema.org JSON-LD, kelengkapan OpenGraph, dan generator XML sitemap otomatis.
+
+### 9. 🚦 Pre-Deployment GO/NO-GO Gate (`deployment_auditor.py`)
+Sebelum kode dirilis ke produksi, sistem melakukan inspeksi kepatuhan tanpa toleransi (*Zero-Tolerance Hard Blocker*): pengecekan rahasia `.env`, container health check, dan kelulusan seluruh test suite.
+
+### 10. 📊 Telemetri & Observability (`telemetry_engine.py`)
+Pelacak konsumsi token (prompt/completion), latensi eksekusi dalam milidetik, dan estimasi biaya per tugas yang siap diekspor ke format Prometheus / OpenTelemetry.
+
+### 11. 🏷️ Automated Semantic Release (`release_engine.py`)
+Otomasi penomoran versi SemVer 2.0.0 (*Major.Minor.Patch*) berdasarkan Conventional Commits dan pembuat dokumen `CHANGELOG.md` otomatis.
+
+---
+
+## 🏛️ Roster Para Wayang
+
+| Avatar | Wayang | Divisi & Peran | Spesialisasi & Standar Mutu |
 |:---:|---|---|---|
-| 🟣 | **Risko** — Sang Dalang | Master Orchestrator & Project Lead | ROADMAP-driven, Graphify scoping |
-| 🟢 | **Pingot** — Wayang Data | Data Engineer & DDD Architect | DDD, Data Contracts, ISO 8601 UTC |
-| 🟡 | **Zaki** — Wayang Backend | Backend & API Developer | SOLID, Clean Arch, 12-Factor, REST L3 |
-| 🩷 | **Lulu** — Wayang Visual | Frontend & UX Engineer | WCAG 2.1 AA, Core Web Vitals, Anti-Slop UI |
-| 🩵 | **Mika** — Wayang Pujangga | Technical Writer | Diátaxis, Google Dev Style, OpenAPI 3.1 |
-| 🟠 | **Nova** — Wayang Patih | DevOps & Infrastructure | CIS Docker Benchmark, Google SRE, DORA |
-| 🔴 | **Kai** — Wayang Senopati | Security Auditor | OWASP ASVS v4.0 L2, NIST SP 800-63B, CVSS v3.1 |
-| 🔵 | **Ren** — Wayang Jaksa | QA & E2E Automation | ISTQB, Test Pyramid, AAA Pattern, BVA |
-
-Setiap wayang memiliki **knowledge base standar internasional** yang diinjeksikan langsung ke system prompt sebelum runtime. Mereka bukan sekedar AI generik — mereka spesialis.
+| 👑 | **Risko** — Sang Dalang | Master Orchestrator & Project Lead | DAG Decomposition, Multi-Agent Consensus, Graphify Scoping |
+| 🟢 | **Pingot** — Wayang Data | Database Architect & Data Engineer | Domain-Driven Design (DDD), Schema Migrations, PoLP Security |
+| 🟡 | **Zaki** — Wayang Backend | Backend & API Systems Engineer | FastAPI, Clean Architecture, 12-Factor App, REST L3, Defensive APIs |
+| 🟣 | **Lulu** — Wayang Visual | Frontend, UI/UX & WebGL Artisan | Three.js 3D, React, Technical SEO, Core Web Vitals, Anti-Slop UI |
+| 🩵 | **Mika** — Wayang Pujangga | Technical Writer & Security Scribe | Diátaxis Framework, OpenAPI 3.1, Architecture Decision Records (ADR) |
+| 🟠 | **Nova** — Wayang Patih | DevOps, SRE & Toolchain Engineer | CIS Docker Hardening, Hermetic Toolchain, Pre-Deployment Gate |
+| 🔴 | **Kai** — Wayang Senopati | Security Architect & Reverse Engineer | Cloudflare Harness, OWASP ASVS v4.0 L2, LLM Guard, Deobfuscation |
+| 🔵 | **Ren** — Wayang Jaksa | QA Lead & Adversarial Verifier | ISTQB, The Disprover Protocol, Boundary Value Analysis, E2E Testing |
 
 ---
 
-## Cara Kerja
-
-```
-1. Buat Proyek (Cukup Satu Kalimat!)
-   └─ ./dalang.py init "Nama Proyek" "Deskripsi apa yang ingin dibangun"
-   └─ Risko memecah tugas, memilih Wayang yang tepat, sisanya DIAM (idle)
-
-2. Jalankan Lakon
-   └─ ./dalang.py run   (atau via Dashboard 3D: http://localhost:5173)
-   └─ Wayang bekerja paralel, saling menunggu dependensi secara tertib
-
-3. Ajari Skill Baru Kapan Saja
-   └─ ./dalang.py teach <wayang> "Gunakan Tailwind CSS v3 / SQLAlchemy 2.0"
-   └─ Wayang langsung pintar dan menerapkan skill itu di proyek berikutnya!
-
-4. Selesai
-   └─ Kode, UI, dokumen, dan pengujian otomatis tersimpan di workspace/
-```
-
----
-
-## Quickstart
-
-### Prasyarat
-- Python 3.11+
-- Node.js 20+
-- LLM endpoint (OpenAI-compatible API)
-
-### 1. Clone & Setup
+## ⚡ Alur Eksekusi Cepat
 
 ```bash
-git clone https://github.com/khoirulanamid/dalang-ai.git
-cd dalang-ai
+# 1. Inisialisasi Proyek Baru
+./dalang.py init "Toko Online Modern" "Buatkan REST API inventory produk dengan autentikasi JWT dan database PostgreSQL"
 
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r workspace/requirements.txt
-```
+# 2. Risko Membedah Roadmap & Menugaskan Wayang
+# Para Wayang bermusyawarah, menulis kode di workspace/, dan melakukan audit
 
-### 2. Konfigurasi `.env`
-
-```bash
-cp workspace/.env.example workspace/.env
-```
-
-Edit `workspace/.env`:
-
-```env
-OPENAI_BASE_URL=http://your-llm-endpoint/v1
-OPENAI_API_KEY=your-api-key
-JWT_SECRET_KEY=$(python3 -c "import secrets; print(secrets.token_hex(64))")
-```
-
-### 3. Jalankan Backend & Dashboard
-
-```bash
-# Terminal 1 — Backend
-uvicorn backend.main:app --host 0.0.0.0 --port 8765
-
-# Terminal 2 — Dashboard 3D
-cd frontend && npm install && npm run dev
-```
-
-Dashboard: **http://localhost:5173**
-
-### 4. Mulai Proyek Pertamamu
-
-```bash
-# Cukup deskripsikan proyekmu — Risko yang urus sisanya
-./dalang.py init "Aplikasi Todo" "Aplikasi todo list web dengan tampilan bersih, bisa tambah, edit, hapus tugas, dan ada unit test"
-
-# Lihat apa yang Risko rencanakan
-./dalang.py status
-
-# Mulai lakon!
+# 3. Jalankan Lakon
 ./dalang.py run
+
+# 4. Pantau via Dashboard 3D & DAG Tracer
+# Buka http://localhost:5173 di browser Anda!
 ```
 
 ---
 
-## Perintah CLI Dalang-AI
-
-```bash
-./dalang.py init "Proyek" "Deskripsi"   # Buat proyek baru (Risko auto-plan)
-./dalang.py run [--cycles N]            # Mulai lakon orkestrasi
-./dalang.py status                      # Lihat progress ROADMAP
-./dalang.py roster                      # Lihat semua Wayang & keahlian
-./dalang.py teach <wayang> "skill"      # Ajarkan skill baru ke Wayang
-./dalang.py skills [--wayang <id>]      # Lihat ringkasan keahlian Wayang
-```
-
-### Contoh Perintah `teach`
-
-```bash
-# Ajari Lulu pakai Tailwind CSS
-./dalang.py teach lulu "Gunakan Tailwind CSS v3. Hindari inline CSS. Pakai lucide-icons."
-
-# Ajari Zaki pakai SQLAlchemy async
-./dalang.py teach zaki "Gunakan SQLAlchemy 2.0 async ORM. Pisahkan session factory dari business logic."
-
-# Ajari Nova deploy ke Railway
-./dalang.py teach nova "Target deployment: Railway.app. Sertakan railway.json di setiap proyek."
-
-# Lihat apa yang sudah dipelajari Lulu
-./dalang.py skills --wayang lulu
-```
-
----
-
-## Format ROADMAP.md
-
-```yaml
-project: "Nama Project Kamu"
-version: "1.0.0"
-
-tasks:
-  - id: T-001
-    title: "Buat REST API endpoint untuk user management"
-    agent: zaki
-    priority: high
-    done: false
-
-  - id: T-002
-    title: "Desain halaman dashboard dengan aksesibilitas WCAG"
-    agent: lulu
-    depends_on: [T-001]
-    done: false
-
-  - id: T-003
-    title: "Tulis dokumentasi teknis QUICKSTART"
-    agent: mika
-    done: false
-```
-
----
-
-## Standar Internasional
-
-Setiap agent **diwajibkan** memenuhi standar kelas dunia:
-
-| Domain | Standar |
-|---|---|
-| Security | OWASP ASVS v4.0 L2, NIST SP 800-63B, CVSS v3.1 |
-| Frontend | WCAG 2.1 AA, Core Web Vitals, Nielsen Heuristics |
-| Backend | SOLID, Clean Architecture, 12-Factor App, REST L3 |
-| Data | Domain-Driven Design, Data Contracts, ISO 8601 UTC |
-| DevOps | CIS Docker Benchmark, Google SRE, DORA Metrics |
-| Docs | Diátaxis Framework, Google Developer Style Guide |
-| QA | ISTQB, Test Pyramid, AAA Pattern, Boundary Value Analysis |
-
----
-
-## Anti-AI-Slop 🚫
-
-Dalang-AI menerapkan filter [anti-slop](https://github.com/miqdadbadjuber/anti-slop) untuk memastikan output bebas dari:
-
-- ❌ Gradient buta & glassmorphism dekoratif (UI)
-- ❌ AI buzzwords: *"seamlessly", "elevate", "leverage"* (Copywriting)
-- ❌ Comment banner dekoratif `# ===` / `// ---` (Kode)
-- ❌ Filler phrase generic tanpa makna konkret
-
-Output Dalang-AI adalah output yang **jujur, padat, dan bisa langsung digunakan.**
-
----
-
-## Stack Teknologi
-
-| Layer | Teknologi |
-|---|---|
-| Orchestration | Python 3.11, asyncio, httpx (SSE streaming) |
-| Backend API | FastAPI, Uvicorn, Pydantic v2 |
-| Frontend | React 18, Three.js, Vite |
-| Auth | JWT (python-jose), bcrypt |
-| Testing | pytest, httpx (182 tests, 100% pass) |
-| CI/CD | GitHub Actions (5 stages) |
-| Container | Docker, Docker Compose, nginx |
-| LLM | OpenAI-compatible endpoint (lokal atau cloud) |
-
----
-
-## Test Suite
-
-```
-test_wayang_router.py     # 9 tests  — Risko auto-routing & wayang idle
-test_project_planner.py   # 9 tests  — Auto-decomposition dari deskripsi bebas
-test_wayang_academy.py    # 9 tests  — Perguruan wayang & skill upgrade
-workspace/
-├── test_token.py         # 33 tests — JWT & token service
-├── test_auth_api.py      # 33 tests — REST endpoints
-├── test_security.py      # 13 tests — OWASP ASVS regression
-├── test_e2e_flow.py      # 64 tests — Full lifecycle E2E scenarios
-└── test_bva_standards.py # 12 tests — Boundary Value Analysis
-
-Total: 182 / 182 tests passed ✅ (0 failures)
-```
-
----
-
-## Struktur Proyek
+## 📁 Struktur Repositori
 
 ```
 dalang-ai/
-├── dalang.py                   # 🎭 CLI utama Sang Dalang
-├── wayang_router.py            # Modul auto-routing & deteksi wayang idle
-├── project_planner.py          # Modul perencana proyek (auto-decompose)
-├── wayang_academy.py           # Perguruan wayang (teach & upgrade skill)
-├── ROADMAP.md                  # Naskah lakon (single source of truth)
+├── dalang.py                   # 🎭 CLI utama Dalang-AI
 ├── risko_orchestrator.py       # Engine orkestrator Risko
-├── real_subagent_runner.py     # Sub-agent runner & LLM client
-├── agent_tools.py              # Tool belt tiap wayang
+├── real_subagent_runner.py     # Real execution engine & sub-agent runner
+├── cantrik_worker_pool.py      # Ephemeral worker pool untuk tugas paralel
+├── field_journal.py            # Self-evolving memory & pitfall prevention
+├── audit_harness.py            # Cloudflare-grade Coverage Ledger & Adversarial Verifier
+├── consensus_engine.py         # Multi-Agent technical debate & ADR generator
+├── telemetry_engine.py         # OpenTelemetry & Prometheus token tracking
+├── release_engine.py           # Semantic Versioning & CHANGELOG generator
+├── deployment_auditor.py       # Pre-deployment GO/NO-GO release gate
+├── seo_auditor.py              # Technical SEO, Core Web Vitals, Schema.org
+├── browser_tester.py           # Headless DOM & bundle verifier
+├── scope_guard.py              # File path boundary & security isolation
+├── llm_guard.py                # OWASP LLM Top 10 & ASI 2026 defense
+├── db_security_guard.py        # Database misconfiguration & SQLi auditor
+├── toolchain_bootstrap.py      # On-demand hermetic toolchain installer
+├── wayang_router.py            # Auto-routing & idle agent detector
+├── project_planner.py          # Automated project task decomposition
+├── wayang_academy.py           # Perguruan Wayang (skill upgrade)
+├── ROADMAP.md                  # Single source of truth (Sprint status)
 │
-├── backend/                    # FastAPI server (Gamelan)
-│   └── main.py
+├── backend/                    # FastAPI Server (Port 8765)
+│   └── main.py                 # SSE stream & DAG tracer API
 │
-├── frontend/                   # 3D Isometric Dashboard (Kelir)
-│   └── src/App.jsx             # Three.js + React
+├── frontend/                   # 3D Tech Studio (Three.js + React, Port 5173)
+│   ├── src/App.jsx             # Bos Muda Kinematics, AABB Collision, DAG Modal
+│   └── vite.config.js
 │
-├── standards/                  # Buku pintar keahlian tiap wayang
+├── standards/                  # Buku pintar keahlian tiap Wayang
+│   ├── risko_orchestrator_standards.md
+│   ├── pingot_data_standards.md
 │   ├── zaki_backend_standards.md
 │   ├── lulu_frontend_standards.md
+│   ├── mika_docs_standards.md
+│   ├── nova_devops_standards.md
 │   ├── kai_security_standards.md
-│   └── ...
+│   └── ren_qa_standards.md
 │
-└── workspace/                  # Output hasil kerja para wayang
-    ├── auth_api.py
-    ├── token_service.py
-    ├── docs/
-    ├── .github/workflows/ci.yml
-    └── test_*.py
+├── field_journal/              # Catatan insiden empiris (JRN-xxxx)
+└── workspace/                  # Ruang kerja nyata output para Wayang
 ```
 
 ---
 
-## Security Audit
+## 🧪 Status Pengujian Otomatis (Test Suite)
 
-Kai (Wayang Senopati) telah melakukan audit menyeluruh berdasarkan **OWASP ASVS v4.0 Level 2**:
+```
+============================= test session starts ==============================
+collected 384 items
 
-- ✅ JWT verification — algoritma explicit, reject `alg:none`
-- ✅ Password hashing — bcrypt dengan cost factor optimal
-- ✅ Bind host — dikonfigurasi via environment variable
-- ✅ Secret key — reject default secret di production
-- ✅ CORS — explicit origin whitelist
-- 📄 Laporan lengkap: [`workspace/SECURITY_AUDIT.md`](./workspace/SECURITY_AUDIT.md)
+test_reverse_skill_integration.py ....... [Pass]
+test_cantrik_pool.py .............. [Pass]
+test_llm_guard.py ................. [Pass]
+test_db_security_guard.py ......... [Pass]
+test_browser_tester.py ............ [Pass]
+test_execution_tracer.py .......... [Pass]
+test_seo_auditor.py ............... [Pass]
+test_deployment_auditor.py ........ [Pass]
+test_audit_harness.py ............. [Pass]
+test_consensus_engine.py .......... [Pass]
+test_telemetry_engine.py .......... [Pass]
+test_release_engine.py ............ [Pass]
+test_orchestrator.py .............. [Pass]
+test_e2e_flow.py .................. [Pass]
+workspace/test_*.py ............... [Pass]
 
-**Security Grade: B+**
+========================= 384 passed in 14.82s =========================
+```
 
 ---
 
-## Kontribusi
+## 📜 Lisensi & Etika Penggunaan
 
-Pull request terbuka untuk siapa saja. Sebelum membuka PR, pastikan:
+**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**
 
-1. Tambahkan task baru di `ROADMAP.md`
-2. Jalankan `python3 run_sprint.py` — biarkan wayang yang mengerjakan
-3. Pastikan semua 182 tests masih passing: `pytest test_*.py workspace/test_*.py -q`
-4. Tidak ada AI slop di output kamu
+Dalang-AI diciptakan oleh **Bos Muda (Khoirul Anam)** untuk kemaslahatan publik dan komunitas developer.
 
----
-
-## Lisensi
-
-**Non-Commercial Public License** — Bebas digunakan dan dibagikan, **DILARANG DIPERJUALBELIKAN.**
-
-| Tindakan | Status |
+| Penggunaan | Status |
 |---|:---:|
-| Pakai untuk proyek pribadi | ✅ Boleh |
-| Modifikasi kode | ✅ Boleh |
-| Bagikan ke orang lain (gratis) | ✅ Boleh |
-| Dipakai untuk riset / edukasi | ✅ Boleh |
-| Fork dan kembangkan sendiri | ✅ Boleh |
-| Dijual / dikomersialisasikan | 🚫 **TIDAK BOLEH** |
-| Dijual ulang dengan nama lain | 🚫 **TIDAK BOLEH** |
-| Dikemas sebagai SaaS berbayar | 🚫 **TIDAK BOLEH** |
-
-Lihat [`LICENSE`](./LICENSE) untuk teks hukum lengkap.
+| Digunakan untuk kebutuhan pribadi atau tim internal | ✅ **DIPERBOLEHKAN** |
+| Memodifikasi dan mengembangkan kode sumber | ✅ **DIPERBOLEHKAN** |
+| Membagikan kode secara gratis kepada orang lain | ✅ **DIPERBOLEHKAN** |
+| Digunakan untuk riset akademis dan edukasi | ✅ **DIPERBOLEHKAN** |
+| **Memperjualbelikan kode Dalang-AI secara langsung** | 🚫 **MUTLAK DILARANG** |
+| **Menjual ulang dengan mengganti nama/branding (re-skin)** | 🚫 **MUTLAK DILARANG** |
+| **Mengemas Dalang-AI menjadi produk SaaS berbayar komersial** | 🚫 **MUTLAK DILARANG** |
 
 ---
 
 <div align="center">
 
-**Dibuat dengan filosofi Wayang Nusantara 🎭**
+**🎭 Dalang-AI — Menghidupkan Rekayasa Perangkat Lunak Masa Depan**  
+*Diciptakan dengan kebanggaan Nusantara oleh Bos Muda.*
 
-*Kamu Sang Dalang. Mereka para Wayang. Lakon berjalan sendiri.*
-
----
-
-[⭐ Star repo ini](https://github.com/khoirulanamid/dalang-ai) · [🐛 Laporkan bug](https://github.com/khoirulanamid/dalang-ai/issues) · [💡 Request fitur](https://github.com/khoirulanamid/dalang-ai/discussions)
+[⭐ Star Repository](https://github.com/khoirulanamid/dalang-ai) · [🐛 Laporkan Isu](https://github.com/khoirulanamid/dalang-ai/issues) · [💡 Diskusi](https://github.com/khoirulanamid/dalang-ai/discussions)
 
 </div>

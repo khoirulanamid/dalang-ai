@@ -161,3 +161,38 @@ agents:
   - *Assigned*: ren
   - *Dependencies*: T-703
   - *Status*: completed
+
+---
+
+## SPRINT 9: Reverse-Skill Engine & Self-Evolving Memory ✅
+> Goal: Mengadopsi arsitektur reverse-skill tingkat lanjut untuk memori empiris mandiri, toolchain hermetis, dan penjaga batas operasi.
+
+- [x] **T-901**: [Risko] Field Journal & Self-Evolving Memory Engine (`field_journal.py`) — Mencatat insiden teknis (JRN-xxxx) dan menginjeksi pitfall relevan ke sub-agent prompt.
+- [x] **T-902**: [Kai] Scope Guard Boundary Enforcer (`scope_guard.py`) — Mengisolasi akses file agen ke workspace dan memblokir traversal/escape.
+- [x] **T-903**: [Ren] Zero-Hallucination Evidence Tracker (`evidence_tracker.py`) — Rantai bukti verifikasi temuan keamanan berbasis CVSS v3.1.
+- [x] **T-904**: [Mika] Executive Security Reporter (`security_reporter.py`) — Generator laporan audit Diátaxis dengan status kesehatan sistem.
+- [x] **T-905**: [Nova] On-Demand Toolchain Bootstrapper (`toolchain_bootstrap.py`) — Audit ketersediaan binary tool developer secara hermetis.
+
+---
+
+## SPRINT 10: Cantrik Worker Pool & Advanced Guardrails ✅
+> Goal: Skalabilitas pekerja paralel sementara (*Cantrik*) dan pertahanan multi-vektor OWASP LLM serta database.
+
+- [x] **T-1001**: [Risko] Cantrik Ephemeral Worker Pool (`cantrik_worker_pool.py`) — Sub-agent asisten sementara untuk offloading tugas batch paralel.
+- [x] **T-1002**: [Kai] OWASP LLM Top 10 & ASI 2026 Guard (`llm_guard.py`) — Sanitasi prompt injection, masking rahasia kredensial, dan filter wewenang berlebih.
+- [x] **T-1003**: [Pingot] Database Security & Misconfiguration Guard (`db_security_guard.py`) — Audit connection string, penegakan TLS, dan pencegahan SQLi multiline.
+- [x] **T-1004**: [Ren] Headless DOM & Web Verifier (`browser_tester.py`) — Verifikasi struktur DOM dan deteksi celah XSS bundle frontend.
+
+---
+
+## SPRINT 11: Enterprise Production & Observability Suite ✅
+> Goal: Standar produksi Cloudflare, visualisasi alur eksekusi DAG, Technical SEO, konsensus teknis, dan telemetri.
+
+- [x] **T-1101**: [Risko & Lulu] Algorithm Visualizer Execution Flow DAG Tracer (`execution_tracer.py`) — Perekam transisi state machine agen dengan modal playback interaktif di 3D studio.
+- [x] **T-1102**: [Lulu & Mika] Technical SEO & Core Web Vitals Auditor (`seo_auditor.py`) — Validator Schema.org JSON-LD, OpenGraph audit, dan sitemap generator.
+- [x] **T-1103**: [Nova & Kai] Pre-Deployment GO/NO-GO Gate (`deployment_auditor.py`) — Inspeksi kesiapan rilis produksi berprinsip zero-tolerance blocker.
+- [x] **T-1104**: [Kai & Ren] Cloudflare Adversarial Audit Harness (`audit_harness.py`) — Coverage Ledger dan Protokol Uji Sangkal Lawan (The Disprover Protocol).
+- [x] **T-1105**: [Risko & Seluruh Wayang] Multi-Agent Consensus & Debate Engine (`consensus_engine.py`) — Musyawarah teknis, hak veto Kai, dan generator ADR otomatis.
+- [x] **T-1106**: [Nova] Telemetry & Token Observability Engine (`telemetry_engine.py`) — Pemantau token prompt/completion, latensi, biaya, dan Prometheus exporter.
+- [x] **T-1107**: [Nova & Mika] Semantic Release & Changelog Engine (`release_engine.py`) — Kalkulator SemVer 2.0.0 dan pembuat rilis CHANGELOG.md otomatis.
+
