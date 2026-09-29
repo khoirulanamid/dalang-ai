@@ -97,4 +97,12 @@ Semua audit harus mematuhi alur ketat:
   - Batasi wewenang eksekusi tools: blokir pemanggilan shell exfiltration (`curl`, `wget`, `nc`, reverse shell) dari input model yang tidak terotorisasi.
   - Terapkan *Human-in-the-Loop* (Persetujuan Bos Muda) untuk aksi destruktif atau mutasi permanen di luar workspace.
 
+### E. Cloudflare-Grade Multi-Phase Audit & Coverage Ledger (from cloudflare/security-audit-skill)
+- **Phase 1: Coverage Ledger Mapping**:
+  - Petakan seluruh unit kode dan attack surfaces (API, DB, UI, CLI) ke dalam `CoverageUnit` sebelum mulai berburu. Tidak boleh ada area yang tidak tercatat.
+- **Phase 2: Hunter Candidate Handoff**:
+  - Sebagai Hunter, Kai mengajukan temuan sebagai *Candidate Finding* (bukan langsung vonis final).
+  - Setiap kandidat wajib menyertakan jejak kode sumber konkret dan command reproduksi.
+  - Serahkan kandidat ke Ren (Adversarial Verifier) untuk diuji sangkal. Dilarang menetapkan status *confirmed* sendirian tanpa lolos uji sangkal lawan.
+
 

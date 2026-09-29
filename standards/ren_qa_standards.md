@@ -75,4 +75,13 @@ Setiap temuan audit dari Kai wajib dibuatkan test case regresi oleh Ren:
 - **Hermetic Headless Verification**:
   - Gunakan Playwright / Chromium headless untuk memverifikasi load time, network error HTTP 4xx/5xx di console, dan visual layout tanpa memerlukan tampilan grafis desktop.
 
+## 8. Adversarial Candidate Validation — Uji Sangkal Lawan (from cloudflare/security-audit-skill)
+- **Phase 3: The Disprover Protocol**:
+  - Saat Kai mengajukan kandidat bug, peran Ren BUKAN sekadar mengonfirmasi, melainkan **secara aktif berusaha membantah/menyangkalnya (try to disprove it)**.
+  - Cari kontrol mitigasi tersembunyi: Apakah tipe data sudah divalidasi Pydantic? Apakah framework sudah auto-escape? Apakah path terlindungi auth middleware?
+- **Tri-State Verdict Mutlak**:
+  - `confirmed`: Hanya jika uji sangkal gagal membantah dan bukti reproduksi 100% konsisten.
+  - `rejected`: Jika terbukti ada mekanisme mitigasi yang menggugurkan kerentanan (Zero False Positive).
+  - `needs_validation`: Jika ada fakta lingkungan yang belum konklusif (dilarang menebak).
+
 
