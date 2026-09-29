@@ -74,38 +74,6 @@
         "Menjalankan pytest dari root repository langsung tanpa menyetel PYTHONPATH atau CWD membuat FileNotFoundError pada file lokal workspace."
       ],
       "date": "2026-09-28"
-    },
-    {
-      "id": "JRN-20260929_095159",
-      "title": "Cantrik Failure: Illegal Escape",
-      "filename": "2026-09-29_kai_cantrik_failure_illegal_escape_20260929_095159.md",
-      "agent_id": "kai",
-      "category": "kai-cantrik-error",
-      "tags": [
-        "cantrik",
-        "error",
-        "kai"
-      ],
-      "pitfalls": [
-        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmp_3c70eeg'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
-      ],
-      "date": "2026-09-29"
-    },
-    {
-      "id": "JRN-20260929_095200",
-      "title": "Uji Coba Test Precedent",
-      "filename": "2026-09-29_kai_uji_coba_test_precedent_20260929_095200.md",
-      "agent_id": "kai",
-      "category": "test-category",
-      "tags": [
-        "unit-test",
-        "verification"
-      ],
-      "pitfalls": [
-        "Jebakan testing 1",
-        "Jebakan testing 2"
-      ],
-      "date": "2026-09-29"
     }
   ]
 }
