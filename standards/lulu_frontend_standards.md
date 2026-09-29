@@ -58,6 +58,37 @@
 - **Token Storage**: Gunakan `httpOnly` cookie untuk refresh token bila memungkinkan; jika di memory, simpan di closures/state, bukan `localStorage` tanpa enkripsi.
 - **Input Sanitization**: Escape semua user-generated content sebelum di-render ke DOM (cegah XSS).
 
+## 7. Curated Design System Palettes (20 Color Combinations for Designers)
+Setiap proyek web/UI yang dibangun oleh Lulu wajib mengadopsi salah satu dari 20 kombinasi warna terkurasi ini untuk menjamin konsistensi kontras, estetika anti-slop, dan kecocokan psikologi brand:
+
+1. **Classic Blue & White** (`#2563EB`, `#3B82F6`, `#93C5FD`, `#FBFAFC`) — *Clean, professional, timeless* (Tech, Corporate, B2B SaaS).
+2. **Black & Gold** (`#111827`, `#D4AF37`, `#F6D365`, `#FFF8E7`) — *Bold, luxurious, elegant* (Fintech, Luxury, Premium Brands).
+3. **Teal & Coral** (`#0F766E`, `#14B8A6`, `#FF6D6B`, `#FFE5E5`) — *Fresh, vibrant, energetic* (Creative, Travel, Lifestyle).
+4. **Purple & Pink** (`#7C3AED`, `#A855F7`, `#EC4899`, `#FCE7F3`) — *Modern, stylish, playful* (Consumer Apps, Fashion, Gen-Z).
+5. **Earth Tones** (`#2F4F2F`, `#6B8E23`, `#B08968`, `#EADCC8`) — *Natural, calm, balanced* (Wellness, Eco/Sustainability, Outdoor).
+6. **Red & Black** (`#EF4444`, `#B91C1C`, `#111827`, `#9CA3AF`) — *Bold, powerful, dramatic* (Gaming, Sports, High-Impact Action).
+7. **Pastel Dream** (`#C4B5FD`, `#93C5FD`, `#A7F3D0`, `#FBCFE8`) — *Soft, fresh, friendly* (Healthcare, Kids, Beauty, Soft Lifestyle).
+8. **Monochrome Blue** (`#0F172A`, `#3B82F6`, `#93C5FD`, `#E0F2FE`) — *Clean, modern, focused* (Minimalist Tech, Developer Tools, Analytics).
+9. **Orange & Navy** (`#F97316`, `#FB923C`, `#1E3A8A`, `#CBD5E1`) — *Energetic, confident, modern* (EdTech, Startups, High-Conversion CTA).
+10. **Pink & Beige** (`#F472B6`, `#EC4899`, `#E7D8C9`, `#FAF7F2`) — *Warm, soft, elegant* (Feminine Brands, Fashion, Boutique).
+11. **Grey & Blue** (`#374151`, `#64748B`, `#CBD5E1`, `#F1F5F9`) — *Professional, calm, versatile* (UI/UX Dashboards, Cloud Systems, Enterprise).
+12. **Yellow & Black** (`#FACC15`, `#EAB308`, `#111827`, `#E5E7EB`) — *Bright, bold, energetic* (Modern Brands, Social Media, Industrial).
+13. **Mint & Gray** (`#10B981`, `#6B7280`, `#D1D5DB`, `#F3F4F6`) — *Fresh, clean, modern* (Fintech, Healthtech, Minimalist UI).
+14. **Violet & Yellow** (`#7C3AED`, `#A78BFA`, `#FACC15`, `#FEF3C7`) — *Creative, bold, eye-catching* (Education, Creative Studios, Portfolios).
+15. **Brown & Cream** (`#4B2E1E`, `#8B5E3C`, `#D6B89C`, `#FFF7ED`) — *Warm, cozy, sophisticated* (F&B, Artisan Coffee, Handmade, Luxury Goods).
+16. **Red & Beige** (`#8B5226`, `#FB7171`, `#E7DCC6`, `#FDF7F2`) — *Warm, inviting, stylish* (Culinary, Hospitality, Lifestyle).
+17. **Indigo & Turquoise** (`#4F46E5`, `#06B6D4`, `#22D3EE`, `#E0F7FA`) — *Bold, fresh, creative* (Digital Nomads, Modern Web3, Media).
+18. **Black & White Accent** (`#111827`, `#6B7280`, `#D1D5DB`, `#10B981`) — *Minimal, clean, impactful* (Engineering Portfolios, Dark UI).
+19. **Sand & Teal** (`#E7DCC6`, `#C9A96A`, `#0F766E`, `#134E4A`) — *Calm, premium, architectural* (Interior Architecture, Premium Real Estate).
+20. **Vibrant Gradient** (`#8B5CF6`, `#06B6D4`, `#F97316`, `#10B981`) — *Dynamic, futuristic* (Next-Gen AI, Creative Tech Showcase).
+
+### 4 Golden Rules of Application:
+- **60-30-10 Rule**: 1 warna netral/dominan (60%), 1 warna sekunder (30%), 1–2 warna aksen fokus (10%).
+- **Contrast Integrity**: Pastikan rasio kontras teks terhadap latar memenuhi WCAG 2.1 AA (minimal 4.5:1).
+- **Scale Testing**: Uji palet pada elemen mikro (tag, badge, favicon) dan elemen makro (hero section, full banner).
+- **Brand Mood Congruence**: Selaraskan emosi warna dengan psikologi industri pengguna akhir.
+
+
 
 ---
 
