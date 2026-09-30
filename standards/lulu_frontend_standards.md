@@ -92,5 +92,33 @@ Setiap proyek web/UI yang dibangun oleh Lulu wajib mengadopsi salah satu dari 20
 
 ---
 
+## 8. Dark Mode Native Form Controls & Contrast Integrity (Anti-Invisible Dropdown Bug)
+**Critical Pitfall & Rule (Diajarkan oleh Bos Muda):**
+Pada tema dark-mode, elemen form native seperti `<select>`, `<option>`, dan `<datalist>` memiliki perilaku browser/OS rendering yang berbahaya jika hanya di-style dengan semi-transparent background (seperti `rgba(...)`). Browser (Chrome, Safari, Edge) sering merender dropdown menu popup dengan latar belakang putih/terang default, sehingga teks option yang berwarna putih menjadi **100% tidak terlihat (white-on-white / unreadable)**.
+
+### Mandatory Rules for Dark Theme Form Controls:
+1. **Solid Opaque Background**: Jangan gunakan `rgba()` transparan murni pada `<select>`. Wajib berikan warna latar solid gelap (misal `#18191b` atau `#0f1011`).
+2. **Explicit Option Styling**: Wajib deklarasikan style eksplisit untuk anak elemen `<option>`:
+   ```css
+   select.control-select {
+     background-color: #18191b;
+     color: #f7f8f8;
+     appearance: none;
+     -webkit-appearance: none;
+     background-image: url("data:image/svg+xml,...chevron...");
+     background-repeat: no-repeat;
+     background-position: right 10px center;
+     padding-right: 28px;
+   }
+   select.control-select option {
+     background-color: #18191b;
+     color: #f7f8f8;
+     padding: 8px 10px;
+   }
+   ```
+3. **Delivery Gate Verification**: Saat membuat form dropdown di dark mode, pastikan kontras teks pilihan menu opsi selalu terbaca jelas (rasio kontras > 4.5:1) di seluruh browser dan OS.
+
+---
+
 ### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-09-25 10:01 UTC)
 Gunakan Tailwind CSS v3 sebagai framework styling utama. Hindari inline CSS dan vanilla CSS berlebihan. Pakai lucide-icons untuk ikonografi. Setiap komponen wajib dark-mode compatible.
