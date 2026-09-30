@@ -84,6 +84,24 @@ WAYANG_ROSTER = {
         ],
         "weight": 1.0,
     },
+    "wiku": {
+        "name": "Wiku",
+        "title": "Wayang Pematung",
+        "keywords": [
+            "3d", "blender", "bpy", "mesh", "model", "modeling", "desain 3d",
+            "objek 3d", "sculpt", "geometry", "vertex", "edge", "face", "bmesh",
+            "glb", "gltf", "fbx", "stl", "export 3d", "import 3d",
+            "material", "shader", "texture", "uv", "render",
+            "primitif", "primitive", "cube", "sphere", "cylinder", "plane",
+            "modifier", "boolean", "subdivide", "extrude", "bevel",
+            "animasi 3d", "rigging", "armature", "keyframe",
+            "print 3d", "3d print", "manufaktur", "dimensi", "toleransi", "mm",
+            "product design", "industrial design", "mekanik", "mechanical",
+            "pematung", "pahatan", "wiku", "three.js viewer", "geometry gate",
+            "agent ok", "agent fail", "bpy script", "headless blender"
+        ],
+        "weight": 1.3,
+    },
 }
 
 

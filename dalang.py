@@ -195,7 +195,7 @@ def main():
 
     # dalang teach
     p_teach = sub.add_parser("teach", help="Ajarkan skill baru kepada seorang Wayang")
-    p_teach.add_argument("wayang", help="Nama wayang (pingot/zaki/lulu/mika/nova/kai/ren)")
+    p_teach.add_argument("wayang", help="Nama wayang (pingot/zaki/lulu/mika/nova/kai/ren/wiku)")
     p_teach.add_argument("skill", help="Skill atau instruksi baru yang ingin diajarkan")
 
     # dalang skills

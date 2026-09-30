@@ -93,7 +93,7 @@ class TestWayangIdlePartition:
         status = partition_active_and_idle_wayang(tasks)
 
         assert status["total_active"] == 3
-        assert status["total_idle"] == 4  # 7 wayang total - 3 aktif = 4 idle
+        assert status["total_idle"] == 5  # 8 wayang total (termasuk Wiku) - 3 aktif = 5 idle
         assert "lulu" in status["active"]
         assert "zaki" in status["active"]
         assert "ren" in status["active"]
@@ -101,3 +101,4 @@ class TestWayangIdlePartition:
         assert "mika" in status["idle"]
         assert "nova" in status["idle"]
         assert "kai" in status["idle"]
+        assert "wiku" in status["idle"]
