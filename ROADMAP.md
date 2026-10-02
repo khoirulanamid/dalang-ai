@@ -220,3 +220,32 @@ agents:
 - [x] **T-1206** Security hardening threads-affiliate — audit cookie storage path, validasi input affiliate link, tambah rate limiting guard, dan pastikan .gitignore sudah benar lindungi semua secret
   - *Dependencies*: T-1201
 
+---
+
+## SPRINT 13: Multi-Platform Social Affiliate Poster — Threads & Facebook ✅ (Formalisasi ke Dalang-AI)
+> Goal: Formalisasi modul Threads Poster & Facebook Poster yang sudah ada ke dalam ekosistem Dalang-AI secara resmi. Tim Dalang-AI melakukan review, hardening, test suite, dokumentasi, dan deposit ke Bagong Vault. Konten posting wajib jujur: gaya kurasi/humor, dilarang klaim personal "saya/aku sudah coba".
+
+- [x] **T-1301**: [zaki] Audit & review modul fb_poster/ yang sudah ada — pemetaan cookie flow, dismiss popup logic, submit via mouse coordinate, identifikasi edge case & potensi gagal (selector berubah, session expired, popup baru)
+  - *Assigned*: zaki
+  - *Dependencies*: none
+
+- [x] **T-1302**: [ren] Buat comprehensive test suite untuk fb_poster/ dan threads-affiliate posting flow — unit test cookie loading, popup dismiss logic, URL validation, content integrity (tidak ada klaim personal palsu); target ≥20 tests
+  - *Assigned*: ren
+  - *Dependencies*: T-1301
+
+- [x] **T-1303**: [mika] Tulis dokumentasi teknis fb_poster/ dan integrasi multi-platform — architecture overview, alur session cookie, cara menjalankan posting Threads & Facebook, panduan menambah platform baru
+  - *Assigned*: mika
+  - *Dependencies*: T-1301
+
+- [x] **T-1304**: [kai] Security hardening fb_poster/ — audit cookie path permissions (~/.fb_poster/ chmod 700, session.json chmod 600), pastikan credentials tidak ter-log di stdout, validasi konten sebelum submit (no PII leakage, no fake claims)
+  - *Assigned*: kai
+  - *Dependencies*: T-1301
+
+- [x] **T-1305**: [risko] Ajarkan seluruh tim Wayang standar Social Affiliate Automation via Wayang Academy — etika konten (jujur/no fake claims), keamanan cookie session, anti-spam rotation logic, dan pola posting multi-platform
+  - *Assigned*: risko
+  - *Dependencies*: T-1303
+
+- [x] **T-1306**: [bagong] Deposit semua artefak Sprint 13 ke Bagong Vault — fb_poster/, post_final.py, template hooks_gadget.json yang sudah diperbaiki, dokumentasi teknis, dan test suite
+  - *Assigned*: bagong
+  - *Dependencies*: T-1302, T-1303, T-1304, T-1305
+

@@ -32,11 +32,16 @@ def _load_standards(agent_id: str, task_context: str = "") -> str:
         "nova": "nova_devops_standards.md",
         "kai": "kai_security_standards.md",
         "ren": "ren_qa_standards.md",
+        "wiku": "wiku_3d_standards.md",
+        "kresna": "kresna_motion_standards.md",
+        "bagong": "bagong_vault_standards.md",
     }
     parts = []
-    std_file = standards_dir / mapping.get(agent_id, "")
-    if std_file.exists():
-        parts.append(f"\n\n## MANDATORY INTERNATIONAL ENGINEERING STANDARDS ({std_file.name}):\n" + std_file.read_text(encoding="utf-8"))
+    fname = mapping.get(agent_id, "")
+    if fname:
+        std_file = standards_dir / fname
+        if std_file.is_file():
+            parts.append(f"\n\n## MANDATORY INTERNATIONAL ENGINEERING STANDARDS ({std_file.name}):\n" + std_file.read_text(encoding="utf-8"))
 
     # Dynamic Field Journal Pitfall Warning Injection
     journal_context = f"{agent_id} {task_context}"

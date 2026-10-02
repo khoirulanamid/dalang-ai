@@ -7,4 +7,4 @@ orch = RiskoOrchestrator(
     workspace='/root/storage/projects/dalang-ai/workspace'
 )
 
-asyncio.run(orch.run_orchestration_cycle(max_cycles=5))
+asyncio.run(orch.run_orchestration_cycle(max_cycles=10))
