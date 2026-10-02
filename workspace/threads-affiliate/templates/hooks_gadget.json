@@ -1,56 +1,53 @@
 {
   "_meta": {
     "category": "gadget",
-    "language": "id-ID",
-    "tone": "casual-genz",
-    "audience": "Indonesian 16-30 yo",
-    "version": "1.0"
+    "note": "Gen-Z casual, lucu, relatable, storytelling — bukan hard-sell"
   },
   "hooks": {
     "edukasi": [
-      "Tau gak sih, {product} itu punya fitur yang kebanyakan orang gak tau ada? Padahal itu yang bikin beda dari kompetitor 📚",
-      "Banyak yang beli gadget mahal tapi gak maksimalin fiturnya. {product} ini justru simpel tapi semua fiturnya kepake 💡",
-      "Spesifikasi kertas bisa menipu. {product} ini yang gw test langsung — real-world performance-nya beda cerita 🔥"
-    ],
-    "validasi_mental": [
-      "Yang udah capek gadget-nya lemot padahal baru beli setahun, {product} ini jawabannya ✋",
-      "Lo gak sendirian kalau bingung milih gadget di tengah banjir pilihan. Gw juga pernah di posisi itu sebelum nemu {product} 💪",
-      "Gak apa-apa kalau lo bukan tech-savvy. {product} ini dirancang buat semua orang, bukan cuma yang ngerti spec 🫶"
+      "baru tau ternyata botol biasa bisa bikin kopi gw jadi anget cuma 30 menit. mana tau kan? makanya sekarang pake {product} biar ga zonk lagi 😭",
+      "dulu gw kira semua tumbler itu sama aja. ternyata ga. pelajaran hidup mahal dari {product} yang akhirnya gw beli 🫡",
+      "tips hidup: kalau minuman dingin lo udah gak dingin padahal baru sejam, itu botolnya masalah bukan es batunya. {product} solved this 🧊"
     ],
     "storytelling": [
-      "Gw udah ganti gadget 3 kali dalam 2 tahun. {product} yang pertama bikin gw gak pengen upgrade lagi 😤",
-      "Pertama unboxing {product}, gw skeptis. Seminggu kemudian gw rekomendasiin ke seluruh grup chat 🤝",
-      "Temen kantor nanya 'itu gadget apa?' tiap kali gw pake {product}. Sekarang dia juga udah order 🌱"
+      "jadi ceritanya gw ketinggalan tumbler di kantor, haus mati gaya, beli minum di alfamart. besoknya langsung order {product} biar ini ga keulang 💀",
+      "teman gw ketawa liat gw beli {product} katanya lebay. dia yang ntar minta minum air dingin gw jam 2 siang 😌",
+      "cerita pendek: gw → haus → botol lama bocor → baju basah → meeting penting → trauma → beli {product} → hidup tenang. tamat 🎬"
     ],
     "problem_solving": [
-      "Baterai habis di tengah hari padahal udah charge penuh? {product} ini battery life-nya beneran tahan seharian 😭",
-      "Gadget lemot pas lagi butuh-butuhnya? {product} ini prosessornya gak drama — smooth di semua kondisi 🛠️",
-      "Kamera blur dan noise di kondisi low-light? {product} ini hasil fotonya tetap tajam meski malem hari 💧"
+      "masalah terbesar gw tiap hari: air minum jadi anget pas lagi butuh dingin banget. solved sama {product} sejak sebulan lalu 🙌",
+      "siapa yang pernah buka tas terus isinya BASAH SEMUA gara-gara botol bocor? ya gw. makanya sekarang cuma percaya {product} 😤",
+      "kalau lo tipe yang suka minum kopi panas pas kerja tapi keburu adem duluan, {product} ini literally solusinya bos 🔥"
     ],
     "hook_pancingan": [
-      "Gadget yang gw pake tiap hari dan belum pernah bikin gw kecewa: {product} 👀",
-      "Spoiler: {product} ini punya fitur tersembunyi yang bikin produktivitas gw naik 40%. Gw jelasin di post berikut 🗣️",
-      "Hot take: {product} mid-range ini ngalahin flagship tahun lalu di kategori yang paling penting 🔥"
+      "gw udah coba banyak tumbler. baru {product} yang bikin gw bilang 'oke ini worth it' 👀",
+      "ada yang penasaran gw bawa botol apa kemana-mana? ini nih {product} — udah 6 bulan ga pernah ganti 🫶",
+      "kalau lo liat gw jalan-jalan bawa botol hitam 1 liter, itu pasti {product}. dan gw bakal jawab 'iya, recommended' sebelum lo nanya 😂"
+    ],
+    "validasi_mental": [
+      "yang udah capek beli botol murah terus bocor tiap 3 bulan, {product} ini jawabannya. gw udah kapok duluan buat kalian ✋",
+      "buat yang suka lupa minum karena males isi ulang terus — {product} 1 liter ini lumayan bikin lo males alasan 😅",
+      "yang sering dehidrasi padahal ada botol di meja, mungkin emang botolnya yang salah. cobain dulu {product} baru ngomong 🗿"
     ],
     "transformasi": [
-      "Before: gw sering ketinggalan momen karena kamera HP lemot. After: pake {product} dan setiap shot langsung captured ✨",
-      "Dulu workflow gw berantakan karena gadget gak support. {product} ini yang bikin gw bisa kerja dari mana aja 🔄",
-      "3 bulan lalu gw masih struggle sama gadget lama. Sekarang dengan {product}, produktivitas gw naik signifikan 📈"
+      "sebelum: gw beli air mineral tiap hari, duit abis, sampah numpuk. sesudah: pake {product}, hemat, ga bersalah sama bumi 🌱",
+      "dulu hidup gw penuh drama botol bocor. sekarang? tenang. {product} mengubah segalanya. lebay tapi beneran 😌",
+      "perubahan kecil yang bikin hidup gw lebih enak: ganti botol lama ke {product}. sounds simple tapi ya emang gitu 🤷"
     ],
     "social_proof": [
-      "{product} udah di-review jutaan user global dan masuk top 3 di kategorinya. Bukan hype, ini data 🌟",
-      "Tech reviewer yang gw follow pada sepakat: {product} ini best value di kelasnya tahun ini 🏆",
-      "Di forum gadget Indonesia, {product} selalu muncul di thread 'rekomendasi terbaik'. Gw akhirnya nyoba sendiri 📣"
+      "udah 6 bulan pake {product}, dan ini botol yang pertama kali gw ga nyesel belinya 🫡",
+      "bukan endorse ya, gw emang beneran rekomendasiin {product} ke semua orang yang nanya botol bagus harganya masuk akal",
+      "orang kantor gw udah pada tanya 'itu botol apa?' karena ngeliat gw bawa {product} tiap hari. nah itu jawaban terbaik 🙏"
     ],
     "urgency": [
-      "{product} stok-nya terbatas dan harga lagi di titik promo. Kemarin gw hampir kehabisan ⏰",
-      "Harga {product} naik bulan depan karena kurs. Kalau lo udah lama nimbang-nimbang, ini saat yang tepat ⚡",
-      "Flash deal {product} tinggal beberapa jam. Gw udah checkout duluan — lo kapan? 🔔"
+      "stok {product} yang gw liat kemarin tinggal dikit. kalau lo lagi butuh tumbler yang beneran kerja, jangan sampe nyesel nunda 🏃",
+      "gw hampir ga jadi beli {product} gara-gara ragu. ternyata itu keputusan paling bener tahun ini. jangan sampe lo juga telat 😅",
+      "kalau lo dari tadi scrolling dan kepikiran {product}, itu tandanya emang harus dibeli. gw udah ada di posisi itu, dan gw ga nyesel 🫶"
     ],
     "controversy": [
-      "Unpopular opinion: {product} mid-range ini lebih worth it dari flagship yang harganya 3x lipat. Gw buktiin 🤔",
-      "Gw capek liat orang flex gadget mahal tapi cuma dipake buat scroll TikTok. {product} ini lebih cocok buat yang beneran produktif 💬",
-      "Jujur: brand hype itu jualan nama, bukan teknologi. {product} ini yang beneran inovasi tanpa markup gila-gilaan 🌶️"
+      "hot take: beli tumbler mahal itu bukan boros, itu investasi. gw udah buktiin sama {product} dan kalkulator gw setuju 🧮",
+      "unpopular opinion: botol minum itu sama pentingnya sama charger. lo bakal susah tanpa keduanya. {product} jadi buktinya 🗿",
+      "orang bilang 'ah botol biasa juga oke'. iya oke — oke bocor, oke cepat anget, oke bikin baju basah. {product} beda kelas 😤"
     ]
   }
 }

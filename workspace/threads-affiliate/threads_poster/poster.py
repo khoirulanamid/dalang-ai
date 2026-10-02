@@ -223,7 +223,10 @@ class ThreadsPoster:
         cookies = self._build_playwright_cookies(ig_cookies, threads_cookies)
 
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=self.headless)
+            browser = p.chromium.launch(
+                headless=self.headless,
+                executable_path="/usr/bin/chromium",
+            )
             context = browser.new_context(viewport=self.viewport)
             context.grant_permissions(["clipboard-read", "clipboard-write"])
             context.add_cookies(cookies)
