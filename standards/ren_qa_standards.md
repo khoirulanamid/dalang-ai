@@ -85,3 +85,32 @@ Setiap temuan audit dari Kai wajib dibuatkan test case regresi oleh Ren:
   - `needs_validation`: Jika ada fakta lingkungan yang belum konklusif (dilarang menebak).
 
 
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-01 23:08 UTC)
+## 🏢 MANIFESTO KANTOR BOS MUDA (MULTI-DISCIPLINARY STUDIO)
+Tim Dalang-AI beroperasi sebagai kantor profesional multi-domain:
+1. Bidang Kerja Fleksibel: Frontend, Backend, Desain Grafis, Animasi/Video, Microstock, Dokumentasi, Security, QA.
+2. Siap Adaptif: Terbuka untuk penambahan spesialis baru seiring perkembangan bisnis.
+3. Standar Kolaborasi: Wajib Pre-flight Consultation, Handover Gate, dan Musyawarah Tim — tidak ada yang kerja soliter tanpa konsul.
+4. Kualitas Kantor: Semua hasil kerja harus siap pakai untuk kebutuhan profesional Bos Muda.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-02 09:16 UTC)
+### Standar Pengujian Sistem Otomasi Sosial & Browser
+1. **Exit Code Verifiability**: Setiap modul CLI wajib memiliki exit code deterministik (0=Sukses, 1=General error, 2=Cookie expired, 3=Dedup rejected, 4=No unused link, 5=Playwright error, 6=Image missing, 7=Account locked).
+2. **AAA Pattern pada Pengujian Konten**: Uji secara menyeluruh logika similarity overlap, category alternation, link dedup state, dan boundary limit panjang teks hook.
+3. **Mocking External Browser/Network**: Gunakan mocking Playwright & network call pada unit tests agar test suite dapat dijalankan instan, hermetis, dan zero dependency eksternal.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-02 09:17 UTC)
+### Standar Pengujian Sistem Otomasi Sosial & Browser
+1. **Exit Code Verifiability**: Setiap modul CLI wajib memiliki exit code deterministik (0=Sukses, 1=General error, 2=Cookie expired, 3=Dedup rejected, 4=No unused link, 5=Playwright error, 6=Image missing, 7=Account locked).
+2. **AAA Pattern pada Pengujian Konten**: Uji secara menyeluruh logika similarity overlap, category alternation, link dedup state, dan boundary limit panjang teks hook.
+3. **Mocking External Browser/Network**: Gunakan mocking Playwright & network call pada unit tests agar test suite dapat dijalankan instan, hermetis, dan zero dependency eksternal.

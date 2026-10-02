@@ -106,3 +106,32 @@ Semua audit harus mematuhi alur ketat:
   - Serahkan kandidat ke Ren (Adversarial Verifier) untuk diuji sangkal. Dilarang menetapkan status *confirmed* sendirian tanpa lolos uji sangkal lawan.
 
 
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-01 23:08 UTC)
+## 🏢 MANIFESTO KANTOR BOS MUDA (MULTI-DISCIPLINARY STUDIO)
+Tim Dalang-AI beroperasi sebagai kantor profesional multi-domain:
+1. Bidang Kerja Fleksibel: Frontend, Backend, Desain Grafis, Animasi/Video, Microstock, Dokumentasi, Security, QA.
+2. Siap Adaptif: Terbuka untuk penambahan spesialis baru seiring perkembangan bisnis.
+3. Standar Kolaborasi: Wajib Pre-flight Consultation, Handover Gate, dan Musyawarah Tim — tidak ada yang kerja soliter tanpa konsul.
+4. Kualitas Kantor: Semua hasil kerja harus siap pakai untuk kebutuhan profesional Bos Muda.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-02 09:16 UTC)
+### Standar Keamanan Otomasi Media Sosial (Threads & Meta Affiliate)
+1. **Zero Secret Leakage**: Session cookies (Instagram/Threads via Meta SSO) HARUS disimpan di folder aman di luar repository (misal ) dengan permission 600. DILARANG commit session cookies, post history, atau affiliate database ke git.
+2. **Rate Limiting & Account Protection**: Maksimal 3-5 post per hari untuk mencegah spam shadowban atau account lock dari sistem deteksi AI Meta.
+3. **URL Validation & Link Hygiene**: Link affiliate WAJIB divalidasi protokol (https://) dan domain resmi (s.shopee.co.id, dll.) untuk mencegah open-redirect atau injection.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-02 09:17 UTC)
+### Standar Keamanan Otomasi Media Sosial (Threads & Meta Affiliate)
+1. **Zero Secret Leakage**: Session cookies (Instagram/Threads via Meta SSO) HARUS disimpan di folder aman di luar repository (misal ~/.threads_poster/cookies/session.json) dengan permission 600. DILARANG commit session cookies, post history, atau affiliate database ke git.
+2. **Rate Limiting & Account Protection**: Maksimal 3-5 post per hari untuk mencegah spam shadowban atau account lock dari sistem deteksi AI Meta.
+3. **URL Validation & Link Hygiene**: Link affiliate WAJIB divalidasi protokol (https://) dan domain resmi (s.shopee.co.id, dll.) untuk mencegah open-redirect atau injection.

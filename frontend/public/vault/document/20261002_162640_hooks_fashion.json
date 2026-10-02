@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "category": "fashion",
+    "language": "id-ID",
+    "tone": "casual-genz",
+    "audience": "Indonesian 16-30 yo",
+    "version": "1.0"
+  },
+  "hooks": {
+    "edukasi": [
+      "Tau gak sih, {product} itu bisa di-mix sama hampir semua outfit? Versatility-nya underrated banget 👗",
+      "Banyak yang gak tau kalau {product} itu bisa bikin proporsi badan keliatan lebih proporsional. Bukan soal ukuran, tapi potongan 📚",
+      "Fashion gak harus mahal. {product} ini buktinya — kualitas bahan oke, harga gak bikin dompet nangis 💡"
+    ],
+    "validasi_mental": [
+      "Yang sering ngerasa 'gak ada baju padahal lemari penuh', coba deh {product} — satu item yang bisa jadi banyak look ✋",
+      "Lo gak sendirian kalau bingung mix-match outfit tiap pagi. {product} ini yang bikin gw lebih pede keluar rumah 💪",
+      "Gak apa-apa kalau lo belum nemu style lo sendiri. {product} ini yang bantu gw eksplor tanpa takut salah 🫶"
+    ],
+    "storytelling": [
+      "Dulu gw tipe yang beli baju banyak tapi gak ada yang dipake. Sejak nemu {product}, gw lebih selektif dan puas 😤",
+      "Pertama liat {product} di feed, gw skip. Seminggu kemudian gw balik lagi dan checkout. Best decision 🤝",
+      "Temen gw nanya 'lo beli di mana?' setiap kali gw pake {product}. Sekarang dia juga udah punya 🌱"
+    ],
+    "problem_solving": [
+      "Susah cari baju yang pas di badan? {product} ini potongannya flattering buat berbagai bentuk tubuh 😭",
+      "Baju cepet kusut dan luntur? {product} bahannya tahan lama, warnanya gak gampang pudar meski sering dicuci 🛠️",
+      "Gak tau mau pake apa ke acara semi-formal? {product} bisa di-dress up atau down sesuai kebutuhan 💧"
+    ],
+    "hook_pancingan": [
+      "Item fashion yang gw pake hampir tiap minggu dan selalu dapet compliment: {product} 👀",
+      "Spoiler: satu {product} bisa jadi 5 look berbeda. Gw buktiin sendiri 🗣️",
+      "Hot take: {product} ini lebih worth it dari brand hype yang harganya 3x lipat 🔥"
+    ],
+    "transformasi": [
+      "Before: outfit gw monoton dan gak ada karakter. After: nemu {product} dan sekarang gw punya signature look ✨",
+      "Dulu gw gak pede pake warna bold. {product} ini yang pertama bikin gw berani keluar comfort zone 🔄",
+      "3 bulan lalu gw masih beli baju asal-asalan. Sekarang gw lebih curated — dan {product} jadi anchor outfit gw 📈"
+    ],
+    "social_proof": [
+      "{product} udah di-review ribuan orang di Shopee dan rating-nya konsisten di atas 4.8. Bukan kebetulan 🌟",
+      "Influencer fashion lokal pada pake {product} bukan karena endorse — tapi emang bagus. Gw cek sendiri 🏆",
+      "Di komunitas fashion Indonesia, {product} sering muncul di thread 'hidden gem'. Sekarang gw tau kenapa 📣"
+    ],
+    "urgency": [
+      "{product} stok-nya sering abis dalam hitungan jam. Kalau lo udah lama ngintip, sekarang waktunya ⏰",
+      "Harga {product} lagi di titik terendah bulan ini. Besok bisa naik lagi — gw udah pernah kelewatan sekali ⚡",
+      "Flash sale {product} tinggal beberapa jam. Gw udah checkout, lo kapan? 🔔"
+    ],
+    "controversy": [
+      "Unpopular opinion: {product} lokal ini kualitasnya ngalahin brand import yang harganya 5x lebih mahal 🤔",
+      "Gw capek liat orang flex brand mahal tapi gak tau styling. {product} murah ini lebih stylish kalau tau cara pakainya 💬",
+      "Jujur: fast fashion itu masalah, tapi {product} ini dibuat lebih sustainable. Gw pilih ini daripada brand hype yang cuma modal nama 🌶️"
+    ]
+  }
+}

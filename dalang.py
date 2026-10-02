@@ -93,7 +93,7 @@ def cmd_roster():
     icons = {
         "risko": "🟣", "pingot": "🟢", "zaki": "🟡",
         "lulu": "🩷", "mika": "🩵", "nova": "🟠",
-        "kai": "🔴", "ren": "🔵",
+        "kai": "🔴", "ren": "🔵", "kresna": "🟣",
     }
     for agent_id, info in WAYANG_ROSTER.items():
         icon = icons.get(agent_id, "⚪")
@@ -142,7 +142,7 @@ def cmd_skills(agent_id: Optional[str] = None):
     summary = list_all_wayang_skills_summary()
     icons = {
         "pingot": "🟢", "zaki": "🟡", "lulu": "🩷",
-        "mika": "🩵", "nova": "🟠", "kai": "🔴", "ren": "🔵",
+        "mika": "🩵", "nova": "🟠", "kai": "🔴", "ren": "🔵", "kresna": "🟣",
     }
     print("\n📚 DALANG-AI — RINGKASAN KEAHLIAN PARA WAYANG\n")
     for s in summary:

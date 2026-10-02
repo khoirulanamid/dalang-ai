@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "category": "gadget",
+    "language": "id-ID",
+    "tone": "casual-genz",
+    "audience": "Indonesian 16-30 yo",
+    "version": "1.0"
+  },
+  "hooks": {
+    "edukasi": [
+      "Tau gak sih, {product} itu punya fitur yang kebanyakan orang gak tau ada? Padahal itu yang bikin beda dari kompetitor 📚",
+      "Banyak yang beli gadget mahal tapi gak maksimalin fiturnya. {product} ini justru simpel tapi semua fiturnya kepake 💡",
+      "Spesifikasi kertas bisa menipu. {product} ini yang gw test langsung — real-world performance-nya beda cerita 🔥"
+    ],
+    "validasi_mental": [
+      "Yang udah capek gadget-nya lemot padahal baru beli setahun, {product} ini jawabannya ✋",
+      "Lo gak sendirian kalau bingung milih gadget di tengah banjir pilihan. Gw juga pernah di posisi itu sebelum nemu {product} 💪",
+      "Gak apa-apa kalau lo bukan tech-savvy. {product} ini dirancang buat semua orang, bukan cuma yang ngerti spec 🫶"
+    ],
+    "storytelling": [
+      "Gw udah ganti gadget 3 kali dalam 2 tahun. {product} yang pertama bikin gw gak pengen upgrade lagi 😤",
+      "Pertama unboxing {product}, gw skeptis. Seminggu kemudian gw rekomendasiin ke seluruh grup chat 🤝",
+      "Temen kantor nanya 'itu gadget apa?' tiap kali gw pake {product}. Sekarang dia juga udah order 🌱"
+    ],
+    "problem_solving": [
+      "Baterai habis di tengah hari padahal udah charge penuh? {product} ini battery life-nya beneran tahan seharian 😭",
+      "Gadget lemot pas lagi butuh-butuhnya? {product} ini prosessornya gak drama — smooth di semua kondisi 🛠️",
+      "Kamera blur dan noise di kondisi low-light? {product} ini hasil fotonya tetap tajam meski malem hari 💧"
+    ],
+    "hook_pancingan": [
+      "Gadget yang gw pake tiap hari dan belum pernah bikin gw kecewa: {product} 👀",
+      "Spoiler: {product} ini punya fitur tersembunyi yang bikin produktivitas gw naik 40%. Gw jelasin di post berikut 🗣️",
+      "Hot take: {product} mid-range ini ngalahin flagship tahun lalu di kategori yang paling penting 🔥"
+    ],
+    "transformasi": [
+      "Before: gw sering ketinggalan momen karena kamera HP lemot. After: pake {product} dan setiap shot langsung captured ✨",
+      "Dulu workflow gw berantakan karena gadget gak support. {product} ini yang bikin gw bisa kerja dari mana aja 🔄",
+      "3 bulan lalu gw masih struggle sama gadget lama. Sekarang dengan {product}, produktivitas gw naik signifikan 📈"
+    ],
+    "social_proof": [
+      "{product} udah di-review jutaan user global dan masuk top 3 di kategorinya. Bukan hype, ini data 🌟",
+      "Tech reviewer yang gw follow pada sepakat: {product} ini best value di kelasnya tahun ini 🏆",
+      "Di forum gadget Indonesia, {product} selalu muncul di thread 'rekomendasi terbaik'. Gw akhirnya nyoba sendiri 📣"
+    ],
+    "urgency": [
+      "{product} stok-nya terbatas dan harga lagi di titik promo. Kemarin gw hampir kehabisan ⏰",
+      "Harga {product} naik bulan depan karena kurs. Kalau lo udah lama nimbang-nimbang, ini saat yang tepat ⚡",
+      "Flash deal {product} tinggal beberapa jam. Gw udah checkout duluan — lo kapan? 🔔"
+    ],
+    "controversy": [
+      "Unpopular opinion: {product} mid-range ini lebih worth it dari flagship yang harganya 3x lipat. Gw buktiin 🤔",
+      "Gw capek liat orang flex gadget mahal tapi cuma dipake buat scroll TikTok. {product} ini lebih cocok buat yang beneran produktif 💬",
+      "Jujur: brand hype itu jualan nama, bukan teknologi. {product} ini yang beneran inovasi tanpa markup gila-gilaan 🌶️"
+    ]
+  }
+}

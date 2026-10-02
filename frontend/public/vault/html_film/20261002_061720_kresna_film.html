@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dalang-AI: Dari Freelancer Menjadi Tim Solid</title>
+  <style>
+    :root {
+      --bg-dark: #0a0c10;
+      --panel-bg: rgba(16, 20, 28, 0.85);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --accent-danger: #ff3355;
+      --accent-warning: #ffaa00;
+      --accent-success: #00e699;
+      --accent-cyan: #00d2ff;
+      --text-main: #f0f4f8;
+      --text-muted: #94a3b8;
+      --focus-ring: #00e699;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      padding: 16px;
+    }
+
+    /* Screen Reader Only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .theater-wrapper {
+      width: 100%;
+      max-width: 1120px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 230, 153, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Header Bar */
+    .theater-header {
+      padding: 14px 20px;
+      background: rgba(10, 14, 20, 0.95);
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+    }
+
+    .brand-badge span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: var(--accent-success);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-success);
+    }
+
+    .beat-indicator {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Canvas Stage Container */
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #050608;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      image-rendering: auto;
+    }
+
+    /* Narration & Subtitle HUD */
+    .hud-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 28px 18px 28px;
+      background: linear-gradient(180deg, transparent 0%, rgba(5, 7, 10, 0.75) 25%, rgba(5, 7, 10, 0.96) 100%);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hud-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+      transition: color 0.3s ease;
+    }
+
+    .hud-narration {
+      font-size: 1.0rem;
+      line-height: 1.5;
+      color: #d1d5db;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+      max-width: 900px;
+    }
+
+    .hud-fact-pill {
+      align-self: flex-start;
+      margin-top: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0, 210, 255, 0.15);
+      color: #5ce1e6;
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      padding: 14px 20px;
+      background: rgba(10, 14, 20, 0.95);
+      border-top: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      outline: none;
+      touch-action: none;
+    }
+
+    .progress-track:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-success));
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgba(0, 230, 153, 0.5);
+      transition: width 0.1s linear;
+    }
+
+    .buttons-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .ctrl-btn:active {
+      transform: translateY(1px);
+    }
+
+    .ctrl-btn:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .ctrl-btn.active {
+      background: rgba(0, 230, 153, 0.15);
+      border-color: var(--accent-success);
+      color: var(--accent-success);
+    }
+
+    .keyboard-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .keyboard-hint kbd {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.75rem;
+      font-family: inherit;
+      color: #fff;
+    }
+
+    /* Modal Recap */
+    .recap-drawer {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 11, 16, 0.96);
+      z-index: 50;
+      overflow-y: auto;
+      padding: 32px 24px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .recap-drawer.visible {
+      display: block;
+    }
+
+    .recap-content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .recap-title {
+      font-size: 1.6rem;
+      color: var(--accent-success);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .fact-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .fact-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .fact-text {
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #e2e8f0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      .hud-title { font-size: 1.05rem; }
+      .hud-narration { font-size: 0.88rem; }
+      .keyboard-hint { display: none; }
+      .ctrl-btn { padding: 6px 10px; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="theater-wrapper" role="region" aria-label="Dalang-AI Motion Canvas Film">
+    <!-- Header -->
+    <header class="theater-header">
+      <div class="brand-badge">
+        <span></span>
+        Dalang-AI Studio • Kresna v2 Engine
+      </div>
+      <div id="beatBadge" class="beat-indicator" aria-live="polite">
+        Scene 1 / 6 • ALERT
+      </div>
+    </header>
+
+    <!-- Canvas Viewport -->
+    <div class="canvas-container">
+      <canvas id="stageCanvas" width="1280" height="720" aria-label="Visual Animasi Interaktif Dalang-AI"></canvas>
+      
+      <!-- Subtitle & HUD -->
+      <div class="hud-overlay" aria-live="polite">
+        <h1 id="hudTitle" class="hud-title">Beat 1: Dulu Dalang-AI adalah 9 freelancer...</h1>
+        <p id="hudNarration" class="hud-narration">Masalah utama: setiap wayang jalan sendiri, tidak konsul, dan outputnya saling tabrak.</p>
+        <span id="hudFact" class="hud-fact-pill">Kondisi Awal: Tanpa Konsultasi</span>
+      </div>
+
+      <!-- Recap Modal Drawer -->
+      <div id="recapModal" class="recap-drawer" role="dialog" aria-modal="true" aria-labelledby="recapHeading">
+        <div class="recap-content">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2 id="recapHeading" class="recap-title">Facts Ledger & Audit Studio</h2>
+            <button id="closeRecapBtn" class="ctrl-btn" aria-label="Tutup ringkasan">✕ Tutup</button>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Verifikasi metrik arsitektur tim Dalang-AI berdasarkan Ledger Konsensus Resmi.
+          </p>
+
+          <div class="facts-grid">
+            <div class="fact-card">
+              <span class="fact-icon">⚙️</span>
+              <div class="fact-text"><strong>Sebelumnya:</strong> Template generator statis (kresna_storify.py v1) — konten berubah, visual sama.</div>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">🚀</span>
+              <div class="fact-text"><strong>Sekarang:</strong> Kresna v2 menulis HTML Canvas dari nol menggunakan LLM via Hermes Gateway.</div>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">📋</span>
+              <div class="fact-text"><strong>Pre-flight Matrix:</strong> Kresna wajib konsul Lulu (UX) &amp; Mika (Naskah) sebelum render.</div>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">🛡️</span>
+              <div class="fact-text"><strong>Handover Gate:</strong> Reviewer memeriksa artefak sebelum task dinyatakan approved.</div>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">⚖️</span>
+              <div class="fact-text"><strong>Consensus ADR:</strong> Musyawarah formal 75% quorum dengan hak veto Kai (Security).</div>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">✅</span>
+              <div class="fact-text"><strong>Quality Test:</strong> 30/30 test suite lulus 100% tanpa kompromi.</div>
+            </div>
+          </div>
+
+          <div style="background: rgba(0, 230, 153, 0.08); border: 1px solid rgba(0,230,153,0.3); border-radius: 8px; padding: 14px; margin-top: 8px;">
+            <h3 style="color: var(--accent-success); font-size: 0.95rem; margin-bottom: 6px;">Sembilan Wayang Dalang-AI:</h3>
+            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
+              Risko (Lead) • Zaki (Backend) • Lulu (UX) • Pingot (Data) • Nova (DevOps) • Kai (Sec) • Ren (QA) • Mika (Docs) • Kresna (Motion).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline & Controls -->
+    <footer class="controls-bar">
+      <div 
+        id="timelineTrack" 
+        class="progress-track" 
+        role="slider" 
+        aria-label="Timeline Film" 
+        aria-valuemin="0" 
+        aria-valuemax="100" 
+        aria-valuenow="0" 
+        tabindex="0"
+      >
+        <div id="timelineFill" class="progress-fill"></div>
+      </div>
+
+      <div class="buttons-row">
+        <div class="btn-group">
+          <button id="prevBtn" class="ctrl-btn" aria-label="Scene Sebelumnya (Panah Kiri)">⏮ Prev</button>
+          <button id="playPauseBtn" class="ctrl-btn active" aria-label="Putar atau Jeda (Spasi)">⏸ Pause</button>
+          <button id="nextBtn" class="ctrl-btn" aria-label="Scene Berikutnya (Panah Kanan)">Next ⏭</button>
+          <button id="soundBtn" class="ctrl-btn" aria-label="Toggle Suara (M)">🔊 Audio ON</button>
+        </div>
+
+        <div class="btn-group">
+          <button id="recapBtn" class="ctrl-btn" aria-label="Buka Facts Ledger">📑 Facts Ledger</button>
+          <button id="restartBtn" class="ctrl-btn" aria-label="Ulangi dari Awal">🔄 Restart</button>
+        </div>
+
+        <div class="keyboard-hint" aria-hidden="true">
+          <span>Pintas Keyboard:</span>
+          <kbd>Spasi</kbd> Jeda
+          <kbd>←</kbd> <kbd>→</kbd> Scene
+          <kbd>M</kbd> Mute
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    /* ==========================================================================
+       DALANG-AI: KRESNA V2 CANVAS & AUDIO SYNTH ENGINE
+       Zero External Dependencies - Pure Procedural Motion & Audio API
+       ========================================================================== */
+
+    const BEATS = [
+      {
+        id: 1,
+        type: 'ALERT',
+        title: "Dulu Dalang-AI adalah 9 freelancer yang kerja sendiri-sendiri tanpa koordinasi.",
+        narration: "Masalah utama: setiap wayang jalan sendiri, tidak konsul, dan outputnya saling tabrak.",
+        factBadge: "Sebelumnya: kresna_storify.py v1 (Statis)",
+        moodColor: "#ff3355",
+        bgMode: "chaos-wires",
+        robotFace: "confused"
+      },
+      {
+        id: 2,
+        type: 'ALERT',
+        title: "Scene 3D monolitik 5.081 baris bikin GPU meleleh dan laptop overheat!",
+        narration: "Three.js tanpa pemisahan modul — semua beban di satu viewport kaku.",
+        factBadge: "Bottleneck: Monolitik 5.081 Baris",
+        moodColor: "#ff5533",
+        bgMode: "overheat",
+        robotFace: "panic"
+      },
+      {
+        id: 3,
+        type: 'NEUTRAL',
+        title: "TETAPI kemudian Bos Muda menyuruh kami rombak total menjadi TIM SOLID!",
+        narration: "Redesign menyeluruh: Bird Eye View 10 ruangan + Protokol Kolaborasi Multi-Agent.",
+        factBadge: "Arsitektur Baru: 10 Ruangan BEV",
+        moodColor: "#ffaa00",
+        bgMode: "blueprint",
+        robotFace: "curious"
+      },
+      {
+        id: 4,
+        type: 'HAPPY',
+        title: "Kini: Pre-flight briefing wajib, Handover review gate, dan Consensus ADR resmi!",
+        narration: "Kresna konsul Lulu sebelum desain, Zaki konsul Pingot sebelum database, Kai veto celah keamanan.",
+        factBadge: "Musyawarah 75% Quorum + Hak Veto Kai",
+        moodColor: "#00d2ff",
+        bgMode: "circuits",
+        robotFace: "proud"
+      },
+      {
+        id: 5,
+        type: 'HAPPY',
+        title: "Dan film ini? Tidak lagi dari template statis — Kresna menulis kode Canvas ini dari nol!",
+        narration: "LLM-generated Canvas 2D engine: karakter baru, background dinamis per beat, audio sintetis.",
+        factBadge: "Kresna v2 via Hermes Gateway",
+        moodColor: "#00e699",
+        bgMode: "generative-matrix",
+        robotFace: "confident"
+      },
+      {
+        id: 6,
+        type: 'HAPPY',
+        title: "9 Wayang. 10 Ruangan. 30 Test Hijau. Inilah Dalang-AI Studio yang sebenarnya!",
+        narration: "RECAP: Risko (Lead) • Zaki (Backend) • Lulu (UX) • Pingot (Data) • Nova (DevOps) • Kai (Sec) • Ren (QA) • Mika (Docs) • Kresna (Motion).",
+        factBadge: "Status: 30/30 Test Suite Lulus 100%",
+        moodColor: "#38ef7d",
+        bgMode: "celebration",
+        robotFace: "celebrate"
+      }
+    ];
+
+    const BEAT_DURATION = 8000; // 8 seconds per beat
+
+    // Canvas & Context Setup
+    const canvas = document.getElementById('stageCanvas');
+    const ctx = canvas.getContext('2d');
+    const hudTitle = document.getElementById('hudTitle');
+    const hudNarration = document.getElementById('hudNarration');
+    const hudFact = document.getElementById('hudFact');
+    const beatBadge = document.getElementById('beatBadge');
+    const timelineFill = document.getElementById('timelineFill');
+    const timelineTrack = document.getElementById('timelineTrack');
+
+    // Controls
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const soundBtn = document.getElementById('soundBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const recapBtn = document.getElementById('recapBtn');
+    const closeRecapBtn = document.getElementById('closeRecapBtn');
+    const recapModal = document.getElementById('recapModal');
+
+    // State Variables
+    let isPlaying = true;
+    let isAudioMuted = false;
+    let currentBeatIndex = 0;
+    let beatProgress = 0; // 0 to 1
+    let lastTimestamp = performance.now();
+    let globalTime = 0;
+
+    /* ==========================================================================
+       PROCEDURAL WEB AUDIO API SYNTHESIZER
+       Zero external files, real-time dynamic soundscapes and sound effects
+       ========================================================================== */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.masterGain = null;
+        this.ambientGain = null;
+        this.ambientOsc1 = null;
+        this.ambientOsc2 = null;
+        this.initialized = false;
+      }
+
+      init() {
+        if (this.initialized) return;
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+          this.masterGain = this.ctx.createGain();
+          this.masterGain.gain.setValueAtTime(0.18, this.ctx.currentTime);
+          this.masterGain.connect(this.ctx.destination);
+
+          // Ambient Background Drone
+          this.ambientGain = this.ctx.createGain();
+          this.ambientGain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+          this.ambientGain.connect(this.masterGain);
+
+          this.ambientOsc1 = this.ctx.createOscillator();
+          this.ambientOsc2 = this.ctx.createOscillator();
+
+          this.ambientOsc1.type = 'triangle';
+          this.ambientOsc2.type = 'sine';
+
+          this.ambientOsc1.frequency.setValueAtTime(110, this.ctx.currentTime); // A2
+          this.ambientOsc2.frequency.setValueAtTime(164.81, this.ctx.currentTime); // E3
+
+          this.ambientOsc1.start();
+          this.ambientOsc2.start();
+          this.ambientOsc1.connect(this.ambientGain);
+          this.ambientOsc2.connect(this.ambientGain);
+
+          this.initialized = true;
+        } catch (e) {
+          console.warn("AudioContext not supported or restricted", e);
+        }
+      }
+
+      setMoodTone(beatId) {
+        if (!this.initialized || isAudioMuted) return;
+        const now = this.ctx.currentTime;
+        // Adjust background drone harmony to match problem-fix progression
+        if (beatId === 1 || beatId === 2) {
+          // Tension / discordant tritone
+          this.ambientOsc1.frequency.setTargetAtTime(92.5, now, 0.4); // F#2
+          this.ambientOsc2.frequency.setTargetAtTime(130.81, now, 0.4); // C3
+        } else if (beatId === 3) {
+          // Neutral suspense
+          this.ambientOsc1.frequency.setTargetAtTime(110.0, now, 0.4); // A2
+          this.ambientOsc2.frequency.setTargetAtTime(146.83, now, 0.4); // D3
+        } else if (beatId >= 4) {
+          // Harmonious Major / Pentatonic (Resolution)
+          this.ambientOsc1.frequency.setTargetAtTime(130.81, now, 0.4); // C3
+          this.ambientOsc2.frequency.setTargetAtTime(196.00, now, 0.4); // G3
+        }
+      }
+
+      playBlip(freq = 440, type = 'sine', duration = 0.15) {
+        if (!this.initialized || isAudioMuted) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now);
+
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+
+        osc.start(now);
+        osc.stop(now + duration);
+      }
+
+      playBeatTransitionSound(beatId) {
+        if (!this.initialized || isAudioMuted) return;
+        this.setMoodTone(beatId);
+        
+        if (beatId === 1 || beatId === 2) {
+          // Warning Buzz
+          this.playBlip(220, 'sawtooth', 0.25);
+          setTimeout(() => this.playBlip(185, 'sawtooth', 0.3), 100);
+        } else if (beatId === 3) {
+          // Rising Transition Swoop
+          this.playBlip(330, 'triangle', 0.2);
+          setTimeout(() => this.playBlip(440, 'sine', 0.25), 120);
+        } else if (beatId >= 4 && beatId < 6) {
+          // Upbeat Chime
+          this.playBlip(523.25, 'sine', 0.18); // C5
+          setTimeout(() => this.playBlip(659.25, 'sine', 0.2), 100); // E5
+          setTimeout(() => this.playBlip(783.99, 'triangle', 0.25), 200); // G5
+        } else {
+          // Grand Fanfare Chords for Beat 6
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+            setTimeout(() => this.playBlip(freq, 'sine', 0.4), idx * 90);
+          });
+        }
+      }
+
+      toggleMute() {
+        isAudioMuted = !isAudioMuted;
+        if (this.masterGain && this.ctx) {
+          this.masterGain.gain.setValueAtTime(isAudioMuted ? 0 : 0.18, this.ctx.currentTime);
+        }
+        return isAudioMuted;
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    /* ==========================================================================
+       PARTICLE & GRAPHICS HELPER SYSTEMS
+       ========================================================================== */
+    const particles = [];
+    const MAX_PARTICLES = 65;
+
+    for (let i = 0; i < MAX_PARTICLES; i++) {
+      particles.push({
+        x: Math.random() * 1280,
+        y: Math.random() * 720,
+        size: Math.random() * 3 + 1,
+        speedX: (Math.random() - 0.5) * 1.5,
+        speedY: (Math.random() - 0.5) * 1.5,
+        color: '#ff3355',
+        life: Math.random()
+      });
+    }
+
+    function updateParticles(beatMode, t) {
+      particles.forEach(p => {
+        p.life += 0.01;
+        if (p.life > 1) {
+          p.life = 0;
+          p.x = Math.random() * 1280;
+          p.y = Math.random() * 720;
+        }
+
+        if (beatMode === 'chaos-wires' || beatMode === 'overheat') {
+          p.speedX = (Math.random() - 0.5) * 4;
+          p.speedY = -Math.random() * 3 - 0.5; // rising embers/smoke
+          p.color = Math.random() > 0.4 ? '#ff3355' : '#ff9900';
+        } else if (beatMode === 'blueprint') {
+          p.speedX = 0;
+          p.speedY = Math.sin(t * 2 + p.x) * 0.8;
+          p.color = '#38bdf8';
+        } else {
+          p.speedX = Math.cos(t + p.y * 0.02) * 1.8;
+          p.speedY = Math.sin(t + p.x * 0.02) * 1.8;
+          p.color = Math.random() > 0.3 ? '#00e699' : '#00d2ff';
+        }
+
+        p.x = (p.x + p.speedX + 1280) % 1280;
+        p.y = (p.y + p.speedY + 720) % 720;
+      });
+    }
+
+    /* ==========================================================================
+       RENDERERS FOR BEAT BACKGROUNDS
+       ========================================================================== */
+
+    // Beat 1: Chaotic tangled lines & disconnected freelancer nodes
+    function drawChaosBackground(t) {
+      // Dark fiery red gradient
+      const grad = ctx.createLinearGradient(0, 0, 1280, 720);
+      grad.addColorStop(0, '#1a0509');
+      grad.addColorStop(0.5, '#0d0710');
+      grad.addColorStop(1, '#050608');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // Tangled flickering wires
+      ctx.lineWidth = 2;
+      for (let i = 0; i < 9; i++) {
+        const startX = 100 + i * 130;
+        const startY = 120 + Math.sin(t * 3 + i) * 30;
+        const endX = 300 + ((i * 170) % 700) + Math.cos(t * 2 + i) * 40;
+        const endY = 480 + Math.sin(t * 2.5 + i) * 50;
+
+        ctx.strokeStyle = i % 2 === 0 ? 'rgba(255, 51, 85, 0.4)' : 'rgba(255, 120, 0, 0.25)';
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.bezierCurveTo(startX + 80, startY + 180, endX - 120, endY - 120, endX, endY);
+        ctx.stroke();
+
+        // Disconnected red node indicator
+        ctx.fillStyle = '#ff3355';
+        ctx.beginPath();
+        ctx.arc(startX, startY, 7 + Math.sin(t * 4 + i) * 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Warning cross symbol
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(startX - 3, startY - 3);
+        ctx.lineTo(startX + 3, startY + 3);
+        ctx.moveTo(startX + 3, startY - 3);
+        ctx.lineTo(startX - 3, startY + 3);
+        ctx.stroke();
+      }
+
+      // Warning text glitch
+      ctx.fillStyle = 'rgba(255, 51, 85, 0.12)';
+      ctx.font = 'bold 84px "Segoe UI", sans-serif';
+      ctx.fillText("NO COORDINATION", 260 + Math.sin(t * 10) * 4, 300);
+    }
+
+    // Beat 2: Melting 5.081 lines monolithic 3D core & thermal distortion
+    function drawOverheatBackground(t) {
+      const grad = ctx.createRadialGradient(640, 360, 40, 640, 360, 600);
+      grad.addColorStop(0, '#3a0808');
+      grad.addColorStop(0.6, '#180407');
+      grad.addColorStop(1, '#050608');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // Overheating Core / Giant GPU heat sink
+      const coreX = 640;
+      const coreY = 320;
+      const pulse = Math.sin(t * 8) * 12;
+
+      ctx.strokeStyle = 'rgba(255, 75, 40, 0.8)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(coreX - 160 - pulse/2, coreY - 110 - pulse/2, 320 + pulse, 220 + pulse);
+
+      // Heatwave fins
+      for (let x = coreX - 140; x < coreX + 150; x += 22) {
+        ctx.strokeStyle = 'rgba(255, 170, 0, 0.4)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x, coreY - 90);
+        ctx.lineTo(x + Math.sin(t * 5 + x) * 6, coreY + 90);
+        ctx.stroke();
+      }
+
+      // Floating code lines (5.081 baris)
+      ctx.fillStyle = 'rgba(255, 100, 100, 0.75)';
+      ctx.font = '15px monospace';
+      const lines = [
+        "FATAL: GPU VRAM Overflow > 98%",
+        "monolith_threejs_scene.js (5,081 lines) [THROTTLED]",
+        "Render loop lagging: 12 FPS - Thermal limit 99°C",
+        "ERROR: drawCall spike 1,420 / single viewport"
+      ];
+      lines.forEach((line, idx) => {
+        ctx.fillText(line, 160, 180 + idx * 30 + Math.sin(t * 3 + idx) * 4);
+      });
+    }
+
+    // Beat 3: Blueprints forming 10 isometric rooms
+    function drawBlueprintBackground(t) {
+      const grad = ctx.createLinearGradient(0, 0, 1280, 720);
+      grad.addColorStop(0, '#041527');
+      grad.addColorStop(1, '#020b14');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // Isometric Blueprint Grid
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+      ctx.lineWidth = 1;
+      const gridSize = 40;
+      for (let x = 0; x < 1280; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 720);
+        ctx.stroke();
+      }
+      for (let y = 0; y < 720; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(1280, y);
+        ctx.stroke();
+      }
+
+      // Drawing 10 Bird's Eye View room modules
+      const rooms = [
+        { name: "Command Lead", x: 260, y: 150, w: 120, h: 70 },
+        { name: "Backend Zaki", x: 410, y: 150, w: 120, h: 70 },
+        { name: "UX Design Lulu", x: 560, y: 150, w: 120, h: 70 },
+        { name: "Database Pingot", x: 260, y: 245, w: 120, h: 70 },
+        { name: "DevOps Nova", x: 410, y: 245, w: 120, h: 70 },
+        { name: "Security Kai", x: 560, y: 245, w: 120, h: 70 },
+        { name: "QA Suite Ren", x: 260, y: 340, w: 120, h: 70 },
+        { name: "Docs Mika", x: 410, y: 340, w: 120, h: 70 },
+        { name: "Motion Kresna", x: 560, y: 340, w: 120, h: 70 },
+        { name: "War Room BEV", x: 710, y: 150, w: 110, h: 260 }
+      ];
+
+      rooms.forEach((r, idx) => {
+        const animOffset = Math.sin(t * 3 + idx * 0.6) * 3;
+        ctx.strokeStyle = idx === 8 ? 'rgba(0, 230, 153, 0.9)' : 'rgba(56, 189, 248, 0.6)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(r.x, r.y + animOffset, r.w, r.h);
+
+        ctx.fillStyle = idx === 8 ? 'rgba(0, 230, 153, 0.15)' : 'rgba(56, 189, 248, 0.08)';
+        ctx.fillRect(r.x, r.y + animOffset, r.w, r.h);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px "Segoe UI", sans-serif';
+        ctx.fillText(r.name, r.x + 8, r.y + animOffset + 24);
+      });
+
+      // Dimension mark
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = 'bold 16px "Segoe UI", sans-serif';
+      ctx.fillText("ARCHITECTURAL BLUEPRINT: 10 ROOM HYBRID WORKSPACE", 260, 110);
+    }
+
+    // Beat 4: Pre-flight matrix, Handover review gate & Consensus ADR
+    function drawCircuitsBackground(t) {
+      const grad = ctx.createLinearGradient(0, 0, 1280, 720);
+      grad.addColorStop(0, '#041e24');
+      grad.addColorStop(0.5, '#071520');
+      grad.addColorStop(1, '#03080e');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // Collaboration Circuit Highway
+      const centerX = 500;
+      const centerY = 310;
+      const radius = 170;
+
+      // Outer Gate Ring
+      ctx.strokeStyle = 'rgba(0, 210, 255, 0.35)';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Spinning Data Nodes: Pre-flight, Handover Gate, Consensus ADR
+      const gates = [
+        { label: "1. Pre-Flight Matrix (Lulu & Mika)", angle: t * 0.8 },
+        { label: "2. Handover Gate (Peer Review)", angle: t * 0.8 + (Math.PI * 2 / 3) },
+        { label: "3. Consensus ADR (75% + Kai Veto)", angle: t * 0.8 + (Math.PI * 4 / 3) }
+      ];
+
+      gates.forEach((g) => {
+        const gx = centerX + Math.cos(g.angle) * radius;
+        const gy = centerY + Math.sin(g.angle) * radius;
+
+        ctx.fillStyle = '#00d2ff';
+        ctx.beginPath();
+        ctx.arc(gx, gy, 12, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#e2e8f0';
+        ctx.font = 'bold 13px "Segoe UI", sans-serif';
+        ctx.fillText(g.label, gx + 18, gy + 4);
+      });
+
+      // Core Shield Symbol (Consensus Engine)
+      ctx.fillStyle = 'rgba(0, 230, 153, 0.12)';
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 60, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#00e699';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#00e699';
+      ctx.font = 'bold 14px "Segoe UI", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText("75% QUORUM", centerX, centerY - 6);
+      ctx.fillText("APPROVED", centerX, centerY + 16);
+      ctx.textAlign = 'left';
+    }
+
+    // Beat 5: LLM generative art canvas, fresh code ribbons
+    function drawGenerativeMatrixBackground(t) {
+      const grad = ctx.createLinearGradient(0, 0, 1280, 720);
+      grad.addColorStop(0, '#031a14');
+      grad.addColorStop(0.5, '#05121b');
+      grad.addColorStop(1, '#050a0f');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // Generative procedural sine waves (Canvas from scratch)
+      for (let j = 0; j < 5; j++) {
+        ctx.beginPath();
+        ctx.lineWidth = 3 - j * 0.4;
+        ctx.strokeStyle = `rgba(${j * 40}, ${230 - j * 20}, ${180 + j * 15}, ${0.5 - j * 0.08})`;
+
+        for (let x = 0; x < 1280; x += 15) {
+          const y = 320 + Math.sin(x * 0.008 + t * 2 + j) * 80 + Math.cos(x * 0.015 - t) * 40;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      // Floating code statements: Kresna v2 writing canvas
+      ctx.fillStyle = 'rgba(0, 230, 153, 0.7)';
+      ctx.font = '14px monospace';
+      ctx.fillText("const kresna = new WayangSutradara({ engine: 'Hermes-Canvas-2D' });", 140, 130);
+      ctx.fillText("kresna.writeCanvasFromScratch({ zeroExternalCDN: true, uniqueMotion: true });", 140, 158);
+      ctx.fillText("status: COMPILING BESPOKE MOTION ARTIFACT ... DONE ✓", 140, 186);
+    }
+
+    // Beat 6: Celebration room, 30 green test badges, all 9 wayang icons
+    function drawCelebrationBackground(t) {
+      const grad = ctx.createRadialGradient(640, 360, 50, 640, 360, 700);
+      grad.addColorStop(0, '#06291e');
+      grad.addColorStop(0.5, '#07171d');
+      grad.addColorStop(1, '#05070a');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // Fireworks / Celebration bursts
+      for (let k = 0; k < 6; k++) {
+        const cx = 200 + k * 180;
+        const cy = 160 + (k % 2) * 90;
+        const burstRadius = 40 + Math.sin(t * 4 + k) * 20;
+
+        ctx.strokeStyle = `rgba(0, 230, 153, ${0.4 + Math.sin(t * 5 + k) * 0.3})`;
+        ctx.lineWidth = 1.5;
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 4) {
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(cx + Math.cos(a + t) * burstRadius, cy + Math.sin(a + t) * burstRadius);
+          ctx.stroke();
+        }
+      }
+
+      // 30/30 Test Green Badges Bar
+      ctx.fillStyle = 'rgba(0, 230, 153, 0.15)';
+      ctx.strokeStyle = '#00e699';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(240, 260, 520, 50, [10]);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#00e699';
+      ctx.font = 'bold 18px "Segoe UI", sans-serif';
+      ctx.fillText("TEST SUITE: 30 / 30 PASSING (100% GREEN)", 280, 292);
+
+      // 9 Wayang Avatars Badge Row
+      const wayangNames = ["Risko", "Zaki", "Lulu", "Pingot", "Nova", "Kai", "Ren", "Mika", "Kresna"];
+      wayangNames.forEach((name, i) => {
+        const wx = 180 + i * 85;
+        const wy = 360 + Math.sin(t * 3 + i) * 6;
+
+        ctx.fillStyle = i === 8 ? '#00e699' : '#38bdf8';
+        ctx.beginPath();
+        ctx.arc(wx, wy, 16, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#05070a';
+        ctx.font = 'bold 12px "Segoe UI", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(name.charAt(0), wx, wy + 4);
+
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '10px "Segoe UI", sans-serif';
+        ctx.fillText(name, wx, wy + 26);
+      });
+      ctx.textAlign = 'left';
+    }
+
+    /* ==========================================================================
+       UNIQUE ROBOT DESIGN: "KRESNA V2 - WAYANG SUTRADARA"
+       Art-Deco Mechanical Cyber Puppet with expressive holographic visor
+       ========================================================================== */
+    function drawKresnaRobot(x, y, scale, t, emotion, moodColor) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
+
+      // Floating bobbing motion
+      const bob = Math.sin(t * 4) * 8;
+      ctx.translate(0, bob);
+
+      // 1. Floating Shadow
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+      ctx.beginPath();
+      ctx.ellipse(0, 160 - bob, 70, 16, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 2. Cyber Makuta Crown (Art-Deco Wayang Style)
+      ctx.fillStyle = '#d4af37'; // Antique Gold
+      ctx.beginPath();
+      ctx.moveTo(-35, -75);
+      ctx.lineTo(0, -125);
+      ctx.lineTo(35, -75);
+      ctx.lineTo(20, -55);
+      ctx.lineTo(-20, -55);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#fef08a';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Crown central glowing gem
+      ctx.fillStyle = moodColor;
+      ctx.beginPath();
+      ctx.arc(0, -85, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowColor = moodColor;
+      ctx.shadowBlur = 12;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // 3. Ceramic Head Chassis
+      ctx.fillStyle = '#1e293b';
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.roundRect(-45, -55, 90, 75, [18]);
+      ctx.fill();
+      ctx.stroke();
+
+      // Golden ear wings (Wayang Sumping)
+      [-1, 1].forEach(side => {
+        ctx.fillStyle = '#eab308';
+        ctx.beginPath();
+        ctx.moveTo(side * 45, -35);
+        ctx.lineTo(side * 68, -25);
+        ctx.lineTo(side * 45, -10);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      });
+
+      // 4. Interactive LED Visor (Visor Displays Emotion)
+      ctx.fillStyle = '#05070a';
+      ctx.beginPath();
+      ctx.roundRect(-35, -42, 70, 36, [10]);
+      ctx.fill();
+
+      // Eyes on Visor depending on emotion
+      ctx.fillStyle = moodColor;
+      ctx.shadowColor = moodColor;
+      ctx.shadowBlur = 8;
+
+      if (emotion === 'confused') {
+        // Asymmetric questioning eyes
+        ctx.fillRect(-22, -32, 12, 10);
+        ctx.beginPath();
+        ctx.arc(16, -26, 6, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (emotion === 'panic') {
+        // Red flashing X X
+        ctx.strokeStyle = '#ff3355';
+        ctx.lineWidth = 3;
+        [-16, 16].forEach(ex => {
+          ctx.beginPath();
+          ctx.moveTo(ex - 6, -32); ctx.lineTo(ex + 6, -20);
+          ctx.moveTo(ex + 6, -32); ctx.lineTo(ex - 6, -20);
+          ctx.stroke();
+        });
+      } else if (emotion === 'curious') {
+        // Wide circle eyes
+        ctx.beginPath();
+        ctx.arc(-16, -26, 7, 0, Math.PI * 2);
+        ctx.arc(16, -26, 7, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (emotion === 'proud' || emotion === 'confident') {
+        // Confident curved eyes ^ ^
+        ctx.strokeStyle = moodColor;
+        ctx.lineWidth = 3.5;
+        [-16, 16].forEach(ex => {
+          ctx.beginPath();
+          ctx.arc(ex, -22, 8, Math.PI * 1.15, Math.PI * 1.85);
+          ctx.stroke();
+        });
+      } else if (emotion === 'celebrate') {
+        // Starry eyes
+        ctx.font = '16px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('★', -16, -20);
+        ctx.fillText('★', 16, -20);
+        ctx.textAlign = 'left';
+      }
+      ctx.shadowBlur = 0;
+
+      // 5. Neck Joint
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(-12, 20, 24, 14);
+
+      // 6. Articulated Torso (Chestplate)
+      ctx.fillStyle = '#1e293b';
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.roundRect(-40, 34, 80, 70, [12]);
+      ctx.fill();
+      ctx.stroke();
+
+      // Chestplate Power Core (Hermes Gateway Crystal)
+      ctx.fillStyle = moodColor;
+      ctx.shadowColor = moodColor;
+      ctx.shadowBlur = 15;
+      ctx.beginPath();
+      ctx.arc(0, 68, 14 + Math.sin(t * 5) * 2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // 7. Director Scarf / Floating Mantle
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(-35, 40);
+      ctx.quadraticCurveTo(-70, 70 + Math.sin(t * 3) * 12, -90, 110);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(35, 40);
+      ctx.quadraticCurveTo(70, 70 + Math.cos(t * 3) * 12, 90, 110);
+      ctx.stroke();
+
+      // 8. Animated Multi-jointed Floating Arms
+      const armWave = Math.sin(t * 4) * 0.25;
+
+      // Left Arm: Holding digital storyboard slate
+      ctx.save();
+      ctx.translate(-42, 45);
+      ctx.rotate(-0.3 + armWave);
+      ctx.fillStyle = '#334155';
+      ctx.fillRect(-6, 0, 12, 35);
+      ctx.translate(0, 35);
+      ctx.rotate(-0.4);
+      ctx.fillRect(-5, 0, 10, 30);
+
+      // Storyboard Slate
+      ctx.fillStyle = '#020617';
+      ctx.strokeStyle = moodColor;
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(-25, 25, 50, 32);
+      ctx.fillRect(-25, 25, 50, 32);
+      ctx.fillStyle = moodColor;
+      ctx.font = '8px monospace';
+      ctx.fillText("KRESNA v2", -20

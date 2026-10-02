@@ -55,3 +55,32 @@ Reference: Defensive API Security & Reverse-Skill Countermeasures
 - **Input Sanitization & Whitelisting**: Seluruh data yang masuk wajib divalidasi dengan Pydantic V2 schema ketat (`extra="forbid"`), menolak field tak terdaftar (anti-mass assignment).
 - **Zero Trust on Client Data**: Jangan pernah mempercayai validasi di sisi client (frontend JS/mobile). Server selalu menjadi single source of truth.
 
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-01 23:08 UTC)
+## 🏢 MANIFESTO KANTOR BOS MUDA (MULTI-DISCIPLINARY STUDIO)
+Tim Dalang-AI beroperasi sebagai kantor profesional multi-domain:
+1. Bidang Kerja Fleksibel: Frontend, Backend, Desain Grafis, Animasi/Video, Microstock, Dokumentasi, Security, QA.
+2. Siap Adaptif: Terbuka untuk penambahan spesialis baru seiring perkembangan bisnis.
+3. Standar Kolaborasi: Wajib Pre-flight Consultation, Handover Gate, dan Musyawarah Tim — tidak ada yang kerja soliter tanpa konsul.
+4. Kualitas Kantor: Semua hasil kerja harus siap pakai untuk kebutuhan profesional Bos Muda.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-02 09:16 UTC)
+### Standar Otomasi Konten & Dedup (Social Media Affiliate)
+1. **Multi-Category & Hook Rotation**: Terapkan rotasi kategori (tidak boleh kategori sama dalam 2 post beruntun) dan rotasi 9 gaya hook (edukasi, validasi mental, storytelling, problem solving, dll.).
+2. **Strict Dedup Logic**: Cek kesamaan kata/frasa (similarity check) terhadap postingan sebelumnya, tolak jika kemiripan >60%. Jamin link affiliate yang sudah terpakai berstatus USED dan tidak di-blast berulang kali.
+3. **Multi-Post Chain Architecture**: Struktur thread 2-3 post: Post 1 (Hook + Masalah), Post 2 (Review pengalaman nyata), Post 3 (Call to Action + Link Affiliate bersih). Gunakan clipboard paste untuk link alih-alih keyboard typing.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-02 09:17 UTC)
+### Standar Otomasi Konten & Dedup (Social Media Affiliate)
+1. **Multi-Category & Hook Rotation**: Terapkan rotasi kategori (tidak boleh kategori sama dalam 2 post beruntun) dan rotasi 9 gaya hook (edukasi, validasi mental, storytelling, problem solving, dll.).
+2. **Strict Dedup Logic**: Cek kesamaan kata/frasa (similarity check) terhadap postingan sebelumnya, tolak jika kemiripan >60%. Jamin link affiliate yang sudah terpakai berstatus USED dan tidak di-blast berulang kali.
+3. **Multi-Post Chain Architecture**: Struktur thread 2-3 post: Post 1 (Hook + Masalah), Post 2 (Review pengalaman nyata), Post 3 (Call to Action + Link Affiliate bersih). Gunakan clipboard paste untuk link alih-alih keyboard typing.

@@ -12,5 +12,36 @@ export default defineConfig({
     port: 5173,
     host: true,
     allowedHosts: true,
+    proxy: {
+      "/ws": {
+        target: "http://127.0.0.1:8765",
+        ws: true,
+        changeOrigin: true,
+      },
+      "/agents": {
+        target: "http://127.0.0.1:8765",
+        changeOrigin: true,
+      },
+      "/tasks": {
+        target: "http://127.0.0.1:8765",
+        changeOrigin: true,
+      },
+      "/vault": {
+        target: "http://127.0.0.1:8765",
+        changeOrigin: true,
+      },
+      "/orchestrate": {
+        target: "http://127.0.0.1:8765",
+        changeOrigin: true,
+      },
+      "/events": {
+        target: "http://127.0.0.1:8765",
+        changeOrigin: true,
+      },
+      "/api": {
+        target: "http://127.0.0.1:8765",
+        changeOrigin: true,
+      },
+    },
   },
 });

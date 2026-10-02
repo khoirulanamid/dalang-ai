@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from risko_orchestrator import AgentEvent, RiskoOrchestrator
 from wayang_router import auto_route_task
 from execution_tracer import build_default_sprint_trace, ExecutionTracer
+from gudang_vault import vault_manager, QARejectionError
 
 ROADMAP_PATH = Path(__file__).parent.parent / "ROADMAP.md"
 
@@ -146,6 +147,40 @@ async def agents_status():
             "tasks": [{"id": t["id"], "title": t["title"], "status": t["status"], "done": t["done"]} for t in tasks],
         })
     return result
+
+
+@app.get("/vault/items")
+async def list_vault_items(category: Optional[str] = None, agent: Optional[str] = None):
+    """Bagong Vault API: Melihat seluruh arsip artefak hasil kerja wayang."""
+    return {"items": vault_manager.list_items(category=category, agent=agent)}
+
+
+class DepositRequest(BaseModel):
+    source_path: str
+    category: str
+    producer_agent: str
+    title: str
+    description: str = ""
+    metadata: Optional[dict] = None
+
+
+@app.post("/vault/deposit")
+async def deposit_to_vault(req: DepositRequest):
+    """Bagong Vault API: Menitipkan file hasil kerja ke dalam gudang resmi."""
+    try:
+        item = vault_manager.deposit_artifact(
+            source_path=req.source_path,
+            category=req.category,
+            producer_agent=req.producer_agent,
+            title=req.title,
+            description=req.description,
+            metadata=req.metadata,
+        )
+        return {"status": "success", "item": asdict(item)}
+    except QARejectionError as qe:
+        return JSONResponse(status_code=422, content={"status": "qa_rejected", "message": str(qe)})
+    except Exception as e:
+        return JSONResponse(status_code=400, content={"status": "error", "message": str(e)})
 
 
 @app.post("/orchestrate/start")

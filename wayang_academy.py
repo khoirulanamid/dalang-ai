@@ -23,6 +23,9 @@ STANDARDS_MAP = {
     "nova": "nova_devops_standards.md",
     "kai": "kai_security_standards.md",
     "ren": "ren_qa_standards.md",
+    "kresna": "kresna_motion_standards.md",
+    "bagong": "bagong_vault_standards.md",
+    "wiku": "wiku_3d_standards.md",
 }
 
 

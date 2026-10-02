@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import StudioFloorPlan from "./StudioFloorPlan.jsx";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle, Eye, Crown, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Volume2, VolumeX, Compass, Crosshair, GitBranch, Play, Pause, SkipForward, SkipBack, X } from "lucide-react";
+import { Sparkles, Coffee, Users, Laptop, Send, PlusCircle, Eye, Crown, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Volume2, VolumeX, Compass, Crosshair, GitBranch, Play, Pause, SkipForward, SkipBack, X, Terminal, Activity, ChevronLeft, ChevronRight, Filter, ShieldCheck, Wrench, CheckCircle } from "lucide-react";
 
 // 8 Para Wayang Roster & Detailed Office Profiles
 const AGENT_MINGLE_DIALOGUES = {
@@ -199,6 +200,44 @@ const AGENTS = {
     personality: "Kritis, teliti, zero-tolerance bug",
     typingStyle: "rhythmic", // Mengetik dengan ritme audit tegas, sesekali mengangguk saat assertion pass
     speedFactor: 1.15,
+  },
+  kresna: {
+    name: "Kresna",
+    role: "Wayang Sutradara",
+    title: "Narrative & Motion Designer",
+    color: 0x581c87,
+    hex: "#a855f7",
+    accentColor: 0xc084fc,
+    skinColor: 0xfbcfe8,
+    hairColor: 0x3b0764,
+    hairStyle: "wavy",
+    pos: [7.2, 0, 4.5],
+    screenColor: 0xc084fc,
+    action: "Memproduksi animasi explainer Canvas 2D & naskah cerita",
+    hasGlasses: false,
+    hasLanyard: true,
+    personality: "Puitis, imajinatif, sutradara visual",
+    typingStyle: "creative",
+    speedFactor: 1.25,
+  },
+  bagong: {
+    name: "Bagong",
+    role: "Wayang Juru Simpan",
+    title: "Asset & Release Custodian",
+    color: 0x713f12,
+    hex: "#d97706",
+    accentColor: 0xfbbf24,
+    skinColor: 0xfef3c7,
+    hairColor: 0x451a03,
+    hairStyle: "bun",
+    pos: [-7.2, 0, 4.5],
+    screenColor: 0xfbbf24,
+    action: "Menampung, mengindeks & mendistribusikan semua artefak output",
+    hasGlasses: false,
+    hasLanyard: true,
+    personality: "Ramah, teliti, tidak pernah kehilangan file",
+    typingStyle: "organized",
+    speedFactor: 0.95,
   },
 };
 
@@ -776,6 +815,164 @@ function createWhiteboardTexture() {
   return new THREE.CanvasTexture(canvas);
 }
 
+// 🏢 Multi-Room 3D Architectural Builder (11 Ruangan Terpisah)
+function createRoomSignTexture(roomName, subtitle, colorHex) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 140;
+  const ctx = canvas.getContext("2d");
+
+  // Solid dark background
+  ctx.fillStyle = "#0c1017";
+  ctx.fillRect(0, 0, 512, 140);
+
+  // Border & Header glow bar
+  ctx.strokeStyle = colorHex;
+  ctx.lineWidth = 5;
+  ctx.strokeRect(5, 5, 502, 130);
+
+  ctx.fillStyle = colorHex;
+  ctx.fillRect(5, 5, 502, 10);
+
+  // Room Name
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 32px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText(roomName, 256, 68);
+
+  // Subtitle
+  ctx.fillStyle = colorHex;
+  ctx.font = "bold 16px monospace";
+  ctx.fillText(subtitle.toUpperCase(), 256, 108);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+function build3DRoomEnclosure(parentGroup, x, z, width, depth, name, subtitle, colorHex, accentColor) {
+  const room = new THREE.Group();
+  room.position.set(x, 0, z);
+
+  const halfW = width / 2;
+  const halfD = depth / 2;
+  const wallHeight = 2.4;
+  const glassThickness = 0.05;
+
+  // Glass Material with slight tint
+  const glassMat = new THREE.MeshPhysicalMaterial({
+    color: accentColor,
+    transmission: 0.85,
+    opacity: 0.35,
+    transparent: true,
+    roughness: 0.15,
+    metalness: 0.1,
+    ior: 1.45,
+  });
+
+  const frameMat = new THREE.MeshStandardMaterial({
+    color: 0x0f172a,
+    metalness: 0.85,
+    roughness: 0.2,
+  });
+
+  // 1. Room Floor Rug (warna khas tim)
+  const rugGeo = new THREE.PlaneGeometry(width - 0.2, depth - 0.2);
+  const rugMat = new THREE.MeshStandardMaterial({
+    color: 0x111622,
+    roughness: 0.9,
+    metalness: 0.05,
+  });
+  const rug = new THREE.Mesh(rugGeo, rugMat);
+  rug.rotation.x = -Math.PI / 2;
+  rug.position.y = 0.008;
+  rug.receiveShadow = true;
+  room.add(rug);
+
+  // LED Floor Border line
+  const borderGeo = new THREE.BoxGeometry(width, 0.02, 0.06);
+  const borderMat = new THREE.MeshStandardMaterial({
+    color: colorHex,
+    emissive: colorHex,
+    emissiveIntensity: 0.8,
+  });
+  const bFront = new THREE.Mesh(borderGeo, borderMat);
+  bFront.position.set(0, 0.015, halfD);
+  room.add(bFront);
+
+  // 2. Glass Partitions (Left, Right, Back walls)
+  // Left wall
+  const leftGlass = new THREE.Mesh(new THREE.BoxGeometry(glassThickness, wallHeight, depth), glassMat);
+  leftGlass.position.set(-halfW, wallHeight / 2, 0);
+  room.add(leftGlass);
+
+  // Right wall
+  const rightGlass = new THREE.Mesh(new THREE.BoxGeometry(glassThickness, wallHeight, depth), glassMat);
+  rightGlass.position.set(halfW, wallHeight / 2, 0);
+  room.add(rightGlass);
+
+  // Back wall
+  const backGlass = new THREE.Mesh(new THREE.BoxGeometry(width, wallHeight, glassThickness), glassMat);
+  backGlass.position.set(0, wallHeight / 2, -halfD);
+  room.add(backGlass);
+
+  // Front partial walls with doorway in the middle
+  const doorWidth = 1.6;
+  const sideW = (width - doorWidth) / 2;
+  if (sideW > 0.2) {
+    const fLeft = new THREE.Mesh(new THREE.BoxGeometry(sideW, wallHeight, glassThickness), glassMat);
+    fLeft.position.set(-halfW + sideW / 2, wallHeight / 2, halfD);
+    room.add(fLeft);
+
+    const fRight = new THREE.Mesh(new THREE.BoxGeometry(sideW, wallHeight, glassThickness), glassMat);
+    fRight.position.set(halfW - sideW / 2, wallHeight / 2, halfD);
+    room.add(fRight);
+  }
+
+  // 3. Structural Black Steel Frame Posts
+  [
+    [-halfW, -halfD], [halfW, -halfD],
+    [-halfW, halfD], [halfW, halfD],
+    [-doorWidth / 2, halfD], [doorWidth / 2, halfD]
+  ].forEach(([px, pz]) => {
+    const post = new THREE.Mesh(new THREE.BoxGeometry(0.08, wallHeight + 0.1, 0.08), frameMat);
+    post.position.set(px, (wallHeight + 0.1) / 2, pz);
+    room.add(post);
+  });
+
+  // Top Frame Ring
+  const topFront = new THREE.Mesh(new THREE.BoxGeometry(width, 0.08, 0.08), frameMat);
+  topFront.position.set(0, wallHeight, halfD);
+  room.add(topFront);
+
+  // 4. Glowing Hanging Room Signboard (di atas doorway)
+  const signTex = createRoomSignTexture(name, subtitle, colorHex);
+  const signGeo = new THREE.PlaneGeometry(1.5, 0.42);
+  const signMat = new THREE.MeshStandardMaterial({
+    map: signTex,
+    roughness: 0.2,
+    metalness: 0.1,
+    emissive: 0xffffff,
+    emissiveMap: signTex,
+    emissiveIntensity: 0.65,
+  });
+  const signMesh = new THREE.Mesh(signGeo, signMat);
+  signMesh.position.set(0, wallHeight + 0.1, halfD + 0.04);
+  room.add(signMesh);
+
+  // Backside of the sign (so visible from inside too)
+  const signBack = signMesh.clone();
+  signBack.rotation.y = Math.PI;
+  signBack.position.set(0, wallHeight + 0.1, halfD - 0.04);
+  room.add(signBack);
+
+  // 5. Subtle Ambient Ceiling Spot Downlight (sesuai warna tim)
+  const downLight = new THREE.PointLight(colorHex, 0.8, 4.5, 2);
+  downLight.position.set(0, wallHeight + 0.5, 0);
+  room.add(downLight);
+
+  parentGroup.add(room);
+  return room;
+}
+
 export default function App() {
   const [officeMode, setOfficeMode] = useState("WORK");
   useEffect(() => { window.__officeMode = officeMode; }, [officeMode]);
@@ -802,6 +999,9 @@ export default function App() {
   const [targetAgent, setTargetAgent] = useState("auto");
   const [isDispatching, setIsDispatching] = useState(false);
   const [selectedAgentDetail, setSelectedAgentDetail] = useState(null);
+  const [viewDimension, setViewDimension] = useState("3d"); // '3d' Three.js Cinematic | '2d' Bird's Eye Canvas
+  const [isLogExpanded, setIsLogExpanded] = useState(true);
+  const [logFilter, setLogFilter] = useState("ALL"); // 'ALL', 'TOOL', 'PREFLIGHT', 'DISPATCH'
   // 🎮 GAME ENGINE STATES
   const [gameView, setGameView] = useState("orbit"); // default: 'orbit' bebas | 'third' | 'first'
   const gameViewRef = useRef("orbit");
@@ -819,6 +1019,7 @@ export default function App() {
   const [radarState, setRadarState] = useState({ player: { x: 0, z: 7.2, rot: 0 }, agents: {} });
   // 🔀 EXECUTION TRACER (Algorithm & DAG Visualizer)
   const [isTracerOpen, setIsTracerOpen] = useState(false);
+  const [isScreeningOpen, setIsScreeningOpen] = useState(false);
   const [traceData, setTraceData] = useState(null);
   const [currentFrameIdx, setCurrentFrameIdx] = useState(0);
   const [isPlayingTrace, setIsPlayingTrace] = useState(false);
@@ -1688,6 +1889,27 @@ export default function App() {
     roomGroup.add(makePottedPlant(14.2, 11, 1.2, false));   // Lounge Plant
     roomGroup.add(makePottedPlant(-14.5, 11, 1.1, false));  // Entrance Plant
     roomGroup.add(makePottedPlant(11.8, -11.5, 1.25, true)); // Meeting Room Plant
+
+    // ==========================================
+    // 🏢 10. MULTI-ROOM 3D GLASS PARTITIONS & SIGNAGES
+    // Membagi aula besar menjadi 10 ruangan terpisah sesuai domain kantor Bos Muda!
+    // ==========================================
+    const ROOM_SPECS = [
+      { id: "command", name: "👑 Command Center", sub: "Risko • Dalang Orchestrator", x: 0, z: 0, w: 3.4, d: 3.4, hex: 0x4f46e5, accent: 0x818cf8 },
+      { id: "backend", name: "💻 Backend Workshop", sub: "Zaki • API & Server", x: 3.8, z: -2.5, w: 3.4, d: 3.4, hex: 0xf59e0b, accent: 0xfbbf24 },
+      { id: "data", name: "🗄️ Data Vault", sub: "Pingot • Data Architect", x: -3.8, z: -2.5, w: 3.4, d: 3.4, hex: 0x10b981, accent: 0x34d399 },
+      { id: "frontend", name: "🎨 Frontend Lab", sub: "Lulu • UI/UX & Design", x: -3.8, z: 3.0, w: 3.4, d: 3.4, hex: 0xec4899, accent: 0xf472b6 },
+      { id: "docs", name: "📝 Docs Studio", sub: "Mika • Technical Writer", x: 3.8, z: 3.0, w: 3.4, d: 3.4, hex: 0x8b5cf6, accent: 0xa78bfa },
+      { id: "devops", name: "🚀 DevOps Bay", sub: "Nova • CI/CD & Cloud", x: 0, z: -5.5, w: 3.4, d: 3.4, hex: 0x0284c7, accent: 0x38bdf8 },
+      { id: "security", name: "🛡️ Security Bunker", sub: "Kai • SecOps & Audit", x: -7.2, z: 0, w: 3.4, d: 3.4, hex: 0xef4444, accent: 0xf87171 },
+      { id: "qa", name: "🧪 QA Testing Lab", sub: "Ren • Test Automation", x: 7.2, z: 0, w: 3.4, d: 3.4, hex: 0x9333ea, accent: 0xc084fc },
+      { id: "screening", name: "🎬 Screening Studio", sub: "Kresna • Motion & Film", x: 7.2, z: 4.5, w: 3.4, d: 3.4, hex: 0xa855f7, accent: 0xe879f9 },
+      { id: "vault", name: "📦 Gudang Vault", sub: "Bagong • Asset Custodian", x: -7.2, z: 4.5, w: 3.4, d: 3.4, hex: 0xd97706, accent: 0xfbbf24 },
+    ];
+
+    ROOM_SPECS.forEach((r) => {
+      build3DRoomEnclosure(roomGroup, r.x, r.z, r.w, r.d, r.name, r.sub, r.hex, r.accent);
+    });
 
     scene.add(roomGroup);
 
@@ -3396,8 +3618,10 @@ export default function App() {
     let ws;
     const connectWS = () => {
       const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
-      const host = window.location.hostname || "localhost";
-      const wsUrl = `${proto}//${host}:8765/ws/events`;
+      // Gunakan window.location.host (didukung Vite proxy untuk /ws/events)
+      // Jika di direct localhost tanpa proxy, fallback tetap bisa connect
+      const isDirectLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      const wsUrl = `${proto}//${window.location.host}/ws/events`;
 
       ws = new WebSocket(wsUrl);
       ws.onopen = () => {
@@ -3454,8 +3678,7 @@ export default function App() {
 
     const fetchStatus = async () => {
       try {
-        const host = window.location.hostname || "localhost";
-        const res = await fetch(`http://${host}:8765/agents/status`);
+        const res = await fetch("/agents/status");
         if (!res.ok) return;
         const data = await res.json();
         const statusMap = {};
@@ -3497,10 +3720,9 @@ export default function App() {
     setIsDispatching(true);
 
     const agentChoice = customAgent || targetAgent;
-    const host = window.location.hostname || "localhost";
 
     try {
-      const res = await fetch(`http://${host}:8765/tasks/dispatch`, {
+      const res = await fetch("/tasks/dispatch", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -3746,6 +3968,44 @@ export default function App() {
             <GitBranch size={13} />
             <span>DAG Tracer</span>
           </button>
+
+          <div style={{ width: 1, height: 14, backgroundColor: "rgba(255, 255, 255, 0.08)", margin: "0 2px" }} />
+
+          {/* 🌐 2D / 3D Dimension Switcher */}
+          <div style={{ display: "flex", backgroundColor: "rgba(255, 255, 255, 0.05)", padding: 2, borderRadius: 6, border: "1px solid rgba(255, 255, 255, 0.08)" }}>
+            <button
+              onClick={() => setViewDimension("3d")}
+              style={{
+                padding: "3px 9px",
+                borderRadius: 4,
+                border: "none",
+                backgroundColor: viewDimension === "3d" ? "#6366f1" : "transparent",
+                color: viewDimension === "3d" ? "#ffffff" : "#94a3b8",
+                fontSize: "11px",
+                fontWeight: "700",
+                cursor: "pointer",
+                transition: "all 0.15s ease"
+              }}
+            >
+              🎮 3D Studio
+            </button>
+            <button
+              onClick={() => setViewDimension("2d")}
+              style={{
+                padding: "3px 9px",
+                borderRadius: 4,
+                border: "none",
+                backgroundColor: viewDimension === "2d" ? "#6366f1" : "transparent",
+                color: viewDimension === "2d" ? "#ffffff" : "#94a3b8",
+                fontSize: "11px",
+                fontWeight: "700",
+                cursor: "pointer",
+                transition: "all 0.15s ease"
+              }}
+            >
+              🗺️ 2D Denah
+            </button>
+          </div>
         </div>
 
         {/* Right: Telemetry Counts (JetBrains Mono) */}
@@ -3759,12 +4019,304 @@ export default function App() {
         </div>
       </header>
 
-      {/* 2. BODY SPLIT: 3D Viewport (Left) + Inspector Sidebar (Right) */}
+      {/* 2. BODY SPLIT: Left Terminal Log + 3D Viewport + Right Inspector */}
       <div style={{ display: "flex", flex: 1, minHeight: 0, position: "relative" }}>
         
-        {/* LEFT: 3D Studio Canvas */}
-        <div style={{ flex: 1, position: "relative", backgroundColor: "#08090a", overflow: "hidden" }}>
-          <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
+        {/* 💻 LEFT SIDEBAR: Live Studio Orchestration & Audit Log (Besar, Panjang & Cantik) */}
+        <aside
+          style={{
+            width: isLogExpanded ? 380 : 44,
+            transition: "width 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+            backgroundColor: "#07090e",
+            borderRight: "1px solid rgba(255, 255, 255, 0.08)",
+            display: "flex",
+            flexDirection: "column",
+            zIndex: 15,
+            overflow: "hidden",
+            boxShadow: "4px 0 24px rgba(0, 0, 0, 0.45)",
+          }}
+        >
+          {/* Header Panel Log */}
+          <div
+            style={{
+              padding: isLogExpanded ? "12px 14px" : "12px 8px",
+              borderBottom: "1px solid rgba(255, 255, 255, 0.07)",
+              backgroundColor: "rgba(11, 15, 24, 0.95)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 8,
+            }}
+          >
+            {isLogExpanded ? (
+              <>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
+                  <div
+                    style={{
+                      width: 26,
+                      height: 26,
+                      borderRadius: 6,
+                      backgroundColor: "rgba(99, 102, 241, 0.15)",
+                      border: "1px solid rgba(99, 102, 241, 0.35)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#818cf8",
+                    }}
+                  >
+                    <Terminal size={14} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#f8fafc", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.04em", display: "flex", alignItems: "center", gap: 6 }}>
+                      <span>STUDIO AUDIT LOG</span>
+                      <span
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: "50%",
+                          backgroundColor: connected ? "#10b981" : "#ef4444",
+                          boxShadow: connected ? "0 0 8px #10b981" : "none",
+                        }}
+                      />
+                    </div>
+                    <div style={{ fontSize: "10px", color: "#64748b", fontFamily: "monospace" }}>
+                      {events.length} AKTIVITAS TERTATAP
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                  <button
+                    onClick={() => setIsLogExpanded(false)}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.04)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      borderRadius: 4,
+                      padding: "4px 6px",
+                      color: "#94a3b8",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                    title="Ciutkan Panel Log"
+                  >
+                    <ChevronLeft size={13} />
+                  </button>
+                </div>
+              </>
+            ) : (
+              <button
+                onClick={() => setIsLogExpanded(true)}
+                style={{
+                  width: "100%",
+                  background: "transparent",
+                  border: "none",
+                  color: "#818cf8",
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "4px 0",
+                }}
+                title="Buka Panel Log"
+              >
+                <Terminal size={16} />
+                <span style={{ fontSize: "9px", color: "#94a3b8", fontFamily: "monospace" }}>{events.length}</span>
+                <ChevronRight size={14} style={{ color: "#64748b" }} />
+              </button>
+            )}
+          </div>
+
+          {/* Filter Pills (Hanya saat expanded) */}
+          {isLogExpanded && (
+            <div
+              style={{
+                display: "flex",
+                gap: 4,
+                padding: "8px 12px",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+                backgroundColor: "rgba(8, 11, 18, 0.6)",
+              }}
+            >
+              {[
+                { id: "ALL", label: "Semua" },
+                { id: "tool_called", label: "🛠️ Tools" },
+                { id: "preflight_consultation", label: "🤝 Konsul" },
+                { id: "task_dispatched", label: "🚀 Tugas" },
+              ].map((f) => (
+                <button
+                  key={f.id}
+                  onClick={() => setLogFilter(f.id)}
+                  style={{
+                    padding: "3px 8px",
+                    borderRadius: 4,
+                    border: logFilter === f.id ? "1px solid #6366f1" : "1px solid rgba(255, 255, 255, 0.06)",
+                    backgroundColor: logFilter === f.id ? "rgba(99, 102, 241, 0.2)" : "transparent",
+                    color: logFilter === f.id ? "#c7d2fe" : "#64748b",
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Log Stream Body */}
+          {isLogExpanded && (
+            <div
+              style={{
+                flex: 1,
+                overflowY: "auto",
+                padding: "10px 12px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+                fontFamily: "'JetBrains Mono', monospace",
+              }}
+            >
+              {events.length === 0 ? (
+                <div style={{ textAlign: "center", color: "#475569", margin: "auto 0", fontSize: "11px" }}>
+                  <Terminal size={24} style={{ margin: "0 auto 8px", opacity: 0.3 }} />
+                  Belum ada lakon yang tercatat.<br />Tugaskan Wayang untuk melihat aksi langsung!
+                </div>
+              ) : (
+                events
+                  .filter((ev) => logFilter === "ALL" || ev.event_type === logFilter)
+                  .map((ev, i) => {
+                    const agentId = ev.agent?.toLowerCase() || "dalang";
+                    const agentMeta = AGENTS[agentId] || { hex: "#818cf8", name: "Dalang" };
+                    const timeStr = new Date(ev.timestamp || Date.now()).toLocaleTimeString("id-ID", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    });
+
+                    // Icon & Tag per event_type
+                    let typeBadge = "EVENT";
+                    let badgeColor = "#64748b";
+                    if (ev.event_type === "task_dispatched") {
+                      typeBadge = "DISPATCH";
+                      badgeColor = "#38bdf8";
+                    } else if (ev.event_type === "tool_called" || ev.event_type === "agent_tool_called") {
+                      typeBadge = "TOOL";
+                      badgeColor = "#f59e0b";
+                    } else if (ev.event_type === "preflight_consultation") {
+                      typeBadge = "PREFLIGHT";
+                      badgeColor = "#ec4899";
+                    } else if (ev.event_type === "task_completed") {
+                      typeBadge = "SUCCESS";
+                      badgeColor = "#10b981";
+                    } else if (ev.event_type === "task_ready") {
+                      typeBadge = "READY";
+                      badgeColor = "#a855f7";
+                    }
+
+                    return (
+                      <div
+                        key={i}
+                        style={{
+                          backgroundColor: "rgba(15, 20, 31, 0.75)",
+                          border: "1px solid rgba(255, 255, 255, 0.05)",
+                          borderLeft: `3px solid ${agentMeta.hex || "#6366f1"}`,
+                          borderRadius: "0 6px 6px 0",
+                          padding: "8px 10px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 4,
+                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
+                        }}
+                      >
+                        {/* Meta header baris atas */}
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "10px" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                            <span
+                              style={{
+                                color: agentMeta.hex || "#818cf8",
+                                fontWeight: "700",
+                                textTransform: "uppercase",
+                              }}
+                            >
+                              [{agentMeta.name || ev.agent}]
+                            </span>
+                            <span
+                              style={{
+                                fontSize: "9px",
+                                padding: "1px 5px",
+                                borderRadius: 3,
+                                backgroundColor: `rgba(${parseInt(badgeColor.slice(1,3),16)}, ${parseInt(badgeColor.slice(3,5),16)}, ${parseInt(badgeColor.slice(5,7),16)}, 0.15)`,
+                                color: badgeColor,
+                                border: `1px solid ${badgeColor}40`,
+                                fontWeight: "600",
+                              }}
+                            >
+                              {typeBadge}
+                            </span>
+                          </div>
+                          <span style={{ color: "#475569" }}>{timeStr}</span>
+                        </div>
+
+                        {/* Message body baris bawah */}
+                        <div
+                          style={{
+                            fontSize: "11px",
+                            lineHeight: "1.45",
+                            color: "#cbd5e1",
+                            wordBreak: "break-word",
+                          }}
+                        >
+                          {ev.message}
+                        </div>
+
+                        {/* Optional sub-details */}
+                        {ev.task_id && (
+                          <div style={{ fontSize: "9px", color: "#64748b", display: "flex", gap: 8, marginTop: 2 }}>
+                            <span>ID: {ev.task_id}</span>
+                            {ev.metadata?.target_agent && (
+                              <span>TARGET: {ev.metadata.target_agent.toUpperCase()}</span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })
+              )}
+            </div>
+          )}
+        </aside>
+        
+        {/* CENTER VIEWPORT: 3D Three.js Studio or 2D Studio Floor Plan */}
+        <div style={{ flex: 1, position: "relative", backgroundColor: "#0a0c12", overflow: "hidden" }}>
+          
+          {/* 3D WebGL Canvas Container */}
+          <div
+            ref={mountRef}
+            style={{
+              width: "100%",
+              height: "100%",
+              display: viewDimension === "3d" ? "block" : "none",
+            }}
+          />
+
+          {/* 2D Bird's Eye Canvas Floor Plan */}
+          {viewDimension === "2d" && (
+            <StudioFloorPlan
+              agentStatuses={Object.fromEntries(
+                Object.entries(workingMap).map(([k, v]) => [k, v ? "working" : "idle"])
+              )}
+              onRoomClick={(room) => {
+                if (room.id === "screening") {
+                  setIsScreeningOpen(true);
+                } else if (room.agent) {
+                  setSelectedAgentDetail(AGENTS[room.agent]);
+                }
+              }}
+            />
+          )}
 
           {/* 🎯 GAMING HUD: Crosshair Reticle (Center Screen) */}
           <div style={{
@@ -4430,43 +4982,6 @@ export default function App() {
               );
             })}
           </div>
-
-          {/* Studio Audit Stream (Compact Terminal Log) */}
-          <div style={{
-            height: 180,
-            backgroundColor: "#050607",
-            borderTop: "1px solid rgba(255, 255, 255, 0.07)",
-            padding: "10px 14px",
-            display: "flex",
-            flexDirection: "column"
-          }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-              <span style={{ fontSize: "10px", fontFamily: "'JetBrains Mono', monospace", color: "#62666d", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                Audit Log Studio
-              </span>
-              <span style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: connected ? "#10b981" : "#ef4444" }} />
-            </div>
-
-            <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 4, fontFamily: "'JetBrains Mono', monospace", fontSize: "11px" }}>
-              {events.length === 0 ? (
-                <div style={{ color: "#45474c", margin: "auto 0", textAlign: "center" }}>
-                  Menunggu lakon tugas...
-                </div>
-              ) : (
-                events.slice(0, 20).map((ev, i) => (
-                  <div key={i} style={{ color: "#8a8f98", lineHeight: 1.4 }}>
-                    <span style={{ color: "#62666d", marginRight: 6 }}>
-                      {new Date(ev.timestamp || Date.now()).toLocaleTimeString()}
-                    </span>
-                    <span style={{ color: "#7170ff", marginRight: 6, fontWeight: "500" }}>
-                      [{ev.agent?.toUpperCase() || "DALANG"}]
-                    </span>
-                    <span style={{ color: "#d0d6e0" }}>{ev.message}</span>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
         </aside>
       </div>
 
@@ -5074,6 +5589,83 @@ export default function App() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* 🎬 4. MODAL SCREENING STUDIO (Bioskop Mini Kresna x Lulu UX) */}
+      {isScreeningOpen && (
+        <div
+          onClick={() => setIsScreeningOpen(false)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backdropFilter: "blur(8px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 120,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: "#0d0f17",
+              border: "1px solid rgba(168, 85, 247, 0.3)",
+              borderRadius: 12,
+              padding: "18px 22px",
+              width: "min(1020px, 95%)",
+              maxHeight: "92vh",
+              display: "flex",
+              flexDirection: "column",
+              boxShadow: "0 25px 60px -12px rgba(168, 85, 247, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.08)",
+            }}
+          >
+            {/* Header Modal */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, borderBottom: "1px solid rgba(255, 255, 255, 0.08)", paddingBottom: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontSize: "20px" }}>🎬</span>
+                <div>
+                  <h3 style={{ margin: 0, fontSize: "16px", color: "#f8fafc", fontWeight: "600", display: "flex", alignItems: "center", gap: 8 }}>
+                    Screening Studio — Bioskop Mini Kresna
+                    <span style={{ fontSize: "10px", padding: "2px 8px", borderRadius: 4, backgroundColor: "rgba(168, 85, 247, 0.18)", color: "#c084fc", border: "1px solid rgba(168, 85, 247, 0.3)" }}>
+                      KOLABORASI: KRESNA (STORY) × LULU (UX)
+                    </span>
+                  </h3>
+                  <div style={{ fontSize: "11px", color: "#94a3b8", marginTop: 2 }}>
+                    Film Explainer Canvas 2D interaktif • Suara prosedural Web Audio API • Nol ketergantungan luar
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsScreeningOpen(false)}
+                style={{
+                  background: "rgba(255, 255, 255, 0.06)",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  color: "#cbd5e1",
+                  borderRadius: 6,
+                  padding: "5px 12px",
+                  cursor: "pointer",
+                  fontSize: "12px",
+                  fontWeight: "600"
+                }}
+              >
+                ✕ Tutup Layar
+              </button>
+            </div>
+
+            {/* Embedded Iframe Player */}
+            <div style={{ flex: 1, minHeight: 520, borderRadius: 8, overflow: "hidden", border: "1px solid rgba(255, 255, 255, 0.1)", backgroundColor: "#000" }}>
+              <iframe
+                src="/kresna_film.html"
+                title="Kresna Explainer Film"
+                style={{ width: "100%", height: "100%", minHeight: 520, border: "none" }}
+              />
+            </div>
           </div>
         </div>
       )}

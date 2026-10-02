@@ -10,6 +10,7 @@ import yaml
 from roadmap_parser import get_next_tasks, parse_roadmap
 from real_subagent_runner import RealSubAgentRunner
 from wayang_router import auto_route_task, partition_active_and_idle_wayang, WAYANG_ROSTER
+from team_collaboration import TeamCollaborationManager
 
 # Setup logging
 logging.basicConfig(
@@ -41,6 +42,7 @@ class RiskoOrchestrator:
         self.workspace = workspace or str(Path(roadmap_path).parent / "workspace")
         self.model = model
         self.runner = RealSubAgentRunner(workspace=self.workspace, model=self.model)
+        self.collab_manager = TeamCollaborationManager()
 
     def emit_event(self, event_type: str, agent: str, message: str, task_id: Optional[str] = None, metadata: dict = None):
         """Emit an event to the local log and broadcast to external sinks (WebSocket/SSE)."""
@@ -122,6 +124,25 @@ class RiskoOrchestrator:
         """Execute real LLM-backed sub-agent with tools and isolated context."""
         subgraph = self.extract_agent_subgraph(agent_id, task)
 
+        # ── PRE-FLIGHT CONSULTATION (Konsultasi Awal Lintas Wayang) ──────────
+        brief = self.collab_manager.prepare_preflight_brief(
+            agent_id=agent_id,
+            task_title=task["title"],
+            task_desc=task.get("description", ""),
+        )
+        if brief.consulted_agents:
+            self.emit_event(
+                event_type="preflight_consultation",
+                agent=agent_id,
+                task_id=task["id"],
+                message=(
+                    f"[Konsultasi Awal] {agent_id.capitalize()} menerima briefing dari "
+                    f"{', '.join(b.capitalize() for b in brief.consulted_agents)}: "
+                    + " | ".join(brief.design_guidelines[:2])
+                ),
+                metadata={"consulted": brief.consulted_agents, "guidelines": brief.design_guidelines},
+            )
+
         self.emit_event(
             event_type="task_dispatched",
             agent=agent_id,
@@ -149,15 +170,46 @@ class RiskoOrchestrator:
             max_tool_iterations=20,
         )
 
+        # ── HANDOVER GATE (Peer Review Setelah Selesai) ──────────────────────
         if result.get("success"):
-            self.update_task_status(task["id"], new_status="completed", done=True, artifacts=task.get("artifacts"))
-            self.emit_event(
-                event_type="task_completed",
-                agent=agent_id,
+            artifacts = task.get("artifacts", [])
+            verdict = self.collab_manager.perform_handover_review(
                 task_id=task["id"],
-                message=f"Agent {agent_id} completed {task['id']} ({result.get('tool_calls', 0)} tool calls)",
-                metadata=result,
+                producer_agent=agent_id,
+                artifacts=artifacts,
+                artifact_content=result.get("content", ""),
             )
+            self.emit_event(
+                event_type="handover_review",
+                agent=verdict.reviewer_agent,
+                task_id=task["id"],
+                message=(
+                    f"[Handover Gate] {verdict.reviewer_agent.capitalize()} → "
+                    f"Status: {verdict.status} | {verdict.critique}"
+                    + (f" | Rekomendasi: {'; '.join(verdict.recommendations)}" if verdict.recommendations else "")
+                ),
+                metadata={"verdict": verdict.status, "recommendations": verdict.recommendations},
+            )
+
+            if verdict.status == "APPROVED":
+                self.update_task_status(task["id"], new_status="completed", done=True, artifacts=artifacts)
+                self.emit_event(
+                    event_type="task_completed",
+                    agent=agent_id,
+                    task_id=task["id"],
+                    message=f"Agent {agent_id} completed {task['id']} ({result.get('tool_calls', 0)} tool calls)",
+                    metadata=result,
+                )
+            else:
+                # Handover meminta revisi tapi tidak block — flag untuk iterasi berikut
+                self.update_task_status(task["id"], new_status="review_requested", done=False)
+                self.emit_event(
+                    event_type="task_needs_revision",
+                    agent=agent_id,
+                    task_id=task["id"],
+                    message=f"[Review Requested] {verdict.reviewer_agent.capitalize()} meminta revisi sebelum task dinyatakan selesai.",
+                    metadata=result,
+                )
         else:
             self.update_task_status(task["id"], new_status="failed", done=False)
             self.emit_event(

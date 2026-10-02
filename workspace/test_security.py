@@ -23,6 +23,7 @@ Covers:
 
 import ast
 import os
+from pathlib import Path
 import re
 import time
 from datetime import datetime, timedelta, timezone
@@ -109,7 +110,8 @@ def test_auth_api_bind_interface_audit():
     Validates that the finding is accurately tracked and confirms that
     for production deployments, binding to localhost or an environment variable is required.
     """
-    with open("auth_api.py", "r", encoding="utf-8") as f:
+    target = Path(__file__).parent / "auth_api.py"
+    with open(target, "r", encoding="utf-8") as f:
         source = f.read()
 
     # Parse AST to ensure valid python code
@@ -166,7 +168,8 @@ def test_timing_attack_resistance_constant_time_comparison():
     hashed = PasswordHasher.hash_password(raw_pass)
 
     # Verify source uses hmac.compare_digest
-    with open("auth_models.py", "r", encoding="utf-8") as f:
+    target_models = Path(__file__).parent / "auth_models.py"
+    with open(target_models, "r", encoding="utf-8") as f:
         models_source = f.read()
     assert "hmac.compare_digest" in models_source
 

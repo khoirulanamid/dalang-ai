@@ -1,0 +1,27 @@
+{
+  "build_id": "wiku_20261001_052604",
+  "agent": "wiku",
+  "version": "1.0.0",
+  "description": "Meja kerja minimalis industrial 1200x600mm",
+  "object_name": "Tabletop",
+  "objects_to_check": [
+    "Tabletop",
+    "Leg_1",
+    "Leg_2",
+    "Leg_3",
+    "Leg_4"
+  ],
+  "timestamp": "2026-10-01T05:26:04.152424",
+  "knowledge_base_hits": 0,
+  "output_mode": "opsi_a_local_render",
+  "files": {
+    "script": "/root/storage/projects/dalang-ai/wiku_outputs/wiku_20261001_052604.py",
+    "viewer": "/root/storage/projects/dalang-ai/wiku_outputs/wiku_20261001_052604_viewer.html",
+    "spec": "/root/storage/projects/dalang-ai/wiku_outputs/wiku_20261001_052604_spec.json"
+  },
+  "contract": {
+    "AGENT_OK": "Script selesai, GLB tersimpan di Desktop user.",
+    "AGENT_FAIL": "Ada error — pesan detail ada di Blender console."
+  },
+  "delivery_note": "Jalankan .py di Blender Scripting tab. Buka _viewer.html di browser untuk preview Three.js interaktif."
+}

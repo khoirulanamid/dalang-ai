@@ -74,6 +74,262 @@
         "Menjalankan pytest dari root repository langsung tanpa menyetel PYTHONPATH atau CWD membuat FileNotFoundError pada file lokal workspace."
       ],
       "date": "2026-09-28"
+    },
+    {
+      "id": "JRN-20260930_222310",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-09-30_kai_cantrik_failure_illegal_escape_20260930_222310.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmpfk311qxa'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-09-30"
+    },
+    {
+      "id": "JRN-20260930_222310",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-09-30_kai_uji_coba_test_precedent_20260930_222310.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-09-30"
+    },
+    {
+      "id": "JRN-20260930_222711",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-09-30_kai_cantrik_failure_illegal_escape_20260930_222711.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmp6gb2v3xp'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-09-30"
+    },
+    {
+      "id": "JRN-20260930_222711",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-09-30_kai_uji_coba_test_precedent_20260930_222711.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-09-30"
+    },
+    {
+      "id": "JRN-20260930_222800",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-09-30_kai_cantrik_failure_illegal_escape_20260930_222800.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmpvzbvjqou'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-09-30"
+    },
+    {
+      "id": "JRN-20260930_222800",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-09-30_kai_uji_coba_test_precedent_20260930_222800.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-09-30"
+    },
+    {
+      "id": "JRN-20261001_222344",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-01_kai_cantrik_failure_illegal_escape_20261001_222344.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmpfl1kt5w2'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-01"
+    },
+    {
+      "id": "JRN-20261001_222344",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-01_kai_uji_coba_test_precedent_20261001_222344.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-01"
+    },
+    {
+      "id": "JRN-20261001_222432",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-01_kai_cantrik_failure_illegal_escape_20261001_222432.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmpmrgyhtt5'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-01"
+    },
+    {
+      "id": "JRN-20261001_222432",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-01_kai_uji_coba_test_precedent_20261001_222432.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-01"
+    },
+    {
+      "id": "JRN-20261001_225000",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-01_kai_cantrik_failure_illegal_escape_20261001_225000.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmpdrs57ej3'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-01"
+    },
+    {
+      "id": "JRN-20261001_225000",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-01_kai_uji_coba_test_precedent_20261001_225000.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-01"
+    },
+    {
+      "id": "JRN-20261002_094009",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-02_kai_cantrik_failure_illegal_escape_20261002_094009.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmpk54br36q'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-02"
+    },
+    {
+      "id": "JRN-20261002_094010",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-02_kai_uji_coba_test_precedent_20261002_094010.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-02"
+    },
+    {
+      "id": "JRN-20261002_094335",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-02_kai_cantrik_failure_illegal_escape_20261002_094335.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmpnoe011b7'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-02"
+    },
+    {
+      "id": "JRN-20261002_094335",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-02_kai_uji_coba_test_precedent_20261002_094335.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-02"
     }
   ]
 }

@@ -196,3 +196,27 @@ agents:
 - [x] **T-1106**: [Nova] Telemetry & Token Observability Engine (`telemetry_engine.py`) — Pemantau token prompt/completion, latensi, biaya, dan Prometheus exporter.
 - [x] **T-1107**: [Nova & Mika] Semantic Release & Changelog Engine (`release_engine.py`) — Kalkulator SemVer 2.0.0 dan pembuat rilis CHANGELOG.md otomatis.
 
+
+---
+
+## SPRINT 12: Threads Affiliate Integration — Audit, Upgrade & Integrasi Penuh ✅
+> Goal: Tim Dalang-AI mengaudit, menganalisis, memperkuat, dan mengintegrasikan proyek threads-affiliate ke dalam ekosistem kantor Bos Muda. Brownfield codebase di workspace/threads-affiliate/.
+
+- [x] **T-1201** Audit arsitektur dan keamanan proyek threads-affiliate — pemetaan semua file, dependency, alur poster.py dan cookie_manager.py, deteksi potensi celah keamanan session cookie
+  - *Dependencies*: none
+
+- [x] **T-1202** Review kode content_generator.py dan dedup.py — analisis kualitas hook templates Indonesian, similarity detection algorithm, dan rotation logic; rekomendasikan perbaikan
+  - *Dependencies*: none
+
+- [x] **T-1203** Tulis dokumentasi teknis lengkap threads-affiliate untuk tim Dalang-AI — architecture overview, data flow diagram teks, integration guide, dan cara Dalang-AI bisa dispatch posting task
+  - *Dependencies*: T-1201
+
+- [x] **T-1204** Buat comprehensive test suite untuk threads-affiliate — unit tests content_generator, dedup logic, database operations, dan CLI exit codes; target ≥15 tests
+  - *Dependencies*: T-1201, T-1202
+
+- [x] **T-1205** Upgrade hook templates — tambah 3 kategori baru (fashion, gadget, food) dengan 9 hook styles per kategori masing-masing 3 varian, sesuai konvensi bahasa Indonesia gen-Z casual
+  - *Dependencies*: T-1202
+
+- [x] **T-1206** Security hardening threads-affiliate — audit cookie storage path, validasi input affiliate link, tambah rate limiting guard, dan pastikan .gitignore sudah benar lindungi semua secret
+  - *Dependencies*: T-1201
+

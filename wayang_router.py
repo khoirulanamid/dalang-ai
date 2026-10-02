@@ -102,6 +102,28 @@ WAYANG_ROSTER = {
         ],
         "weight": 1.3,
     },
+    "kresna": {
+        "name": "Kresna",
+        "title": "Wayang Sutradara",
+        "keywords": [
+            "story", "cerita", "skenario", "script", "naskah", "storify",
+            "explainer", "animasi", "film", "motion", "storyboard", "narasi",
+            "video", "canvas 2d", "hand-drawn", "karakter", "konten",
+            "and-but-therefore", "edukasi", "edukatif", "case study visual",
+            "visual storytelling", "prosedural audio", "soundtrack", "kresna"
+        ],
+        "weight": 1.4,
+    },
+    "bagong": {
+        "name": "Bagong",
+        "title": "Wayang Juru Simpan",
+        "keywords": [
+            "gudang", "vault", "arsip", "simpan", "tampung", "ambil", "download",
+            "koleksi", "distribusi", "kirim", "output", "artefak", "release",
+            "katalog", "aset", "asset", "penyimpanan", "bagong"
+        ],
+        "weight": 1.5,
+    },
 }
 
 

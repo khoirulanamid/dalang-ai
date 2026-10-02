@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "category": "food",
+    "language": "id-ID",
+    "tone": "casual-genz",
+    "audience": "Indonesian 16-30 yo",
+    "version": "1.0"
+  },
+  "hooks": {
+    "edukasi": [
+      "Tau gak sih, {product} itu rasanya mirip banget sama resto mahal tapi harganya sepertiga-nya? 🍽️",
+      "Banyak yang gak tau kalau {product} punya komposisi bahan yang lebih bersih dibanding cemilan sejenis di pasaran 📚",
+      "Kulineran gak harus bikin kantong jebol. {product} ini bukti kalau makanan enak gak harus mahal 💡"
+    ],
+    "validasi_mental": [
+      "Yang udah capek beli cemilan viral tapi rasanya zonk, coba deh {product} — ini beneran enak bukan cuma gimmick ✋",
+      "Lo gak sendirian kalau suka craving tengah malem dan bingung mau makan apa. {product} ini penyelamat gw 💪",
+      "Gak apa-apa kalau lo skeptis sama makanan viral. Gw juga gitu sampai coba {product} sendiri 🫶"
+    ],
+    "storytelling": [
+      "Awalnya gw kira {product} cuma viral di TikTok doang. Sekali coba, gw langsung restock buat sebulan 😤",
+      "Temen kosan gw nyobain {product} punya gw, besoknya dia langsung nitip beli sekardus 🤝",
+      "Dari dulu gw picky banget soal makanan. {product} ini salah satu dari sedikit yang lolos standar lidah gw 🌱"
+    ],
+    "problem_solving": [
+      "Lapar pas nugas atau lembur tapi males masak? {product} ini praktis dan langsung kenyang 😭",
+      "Cari cemilan yang gak bikin eneg setelah makan banyak? {product} ini rasanya balance dan nagih 🛠️",
+      "Bingung cari oleh-oleh atau gift makanan yang pasti disukai semua orang? {product} ini safe choice banget 💧"
+    ],
+    "hook_pancingan": [
+      "Cemilan yang selalu ada di meja kerja gw dan gak pernah bosen: {product} 👀",
+      "Spoiler: rasa {product} ini beda jauh sama ekspektasi lo, jauh lebih enak dari kelihatannya 🗣️",
+      "Hot take: {product} ini lebih recommended daripada jajanan viral lain yang antrenya berjam-jam 🔥"
+    ],
+    "transformasi": [
+      "Before: sering jajan sembarangan dan boros tiap hari. After: stok {product} di rumah dan pengeluaran jajan berkurang drastis ✨",
+      "Dulu gw gak suka jenis makanan ini sama sekali. {product} ini yang bikin mindset gw berubah 🔄",
+      "Dari yang tadinya coba-coba beli satu, sekarang {product} jadi comfort food wajib gw tiap minggu 📈"
+    ],
+    "social_proof": [
+      "{product} udah kejual puluhan ribu pieces di Shopee dan review bintang 5-nya membludak 🌟",
+      "Food vlogger lokal pada review jujur dan sepakat: {product} ini salah satu hidden gem kuliner tahun ini 🏆",
+      "Di komunitas pecinta kuliner, {product} selalu dapet approval rate tinggi. Bukan kaleng-kaleng 📣"
+    ],
+    "urgency": [
+      "{product} sering banget sold out karena batch produksinya terbatas. Mumpung ready stock, mending langsung amankan ⏰",
+      "Lagi ada diskon bundling untuk {product} hari ini aja. Besok balik ke harga normal ⚡",
+      "Flash sale {product} kuotanya sisa dikit. Gw udah amankan stok, lo jangan sampe nyesel 🔔"
+    ],
+    "controversy": [
+      "Unpopular opinion: jajanan lokal kayak {product} ini rasanya jauh lebih otentik dibanding makanan impor mahal 🤔",
+      "Gw capek sama resto fancy yang porsinya seuprit tapi harganya selangit. Mending {product} ini, puas dan enak 💬",
+      "Jujur: banyak makanan viral yang cuma menang packaging. Tapi {product} ini beneran menang di rasa 🌶️"
+    ]
+  }
+}

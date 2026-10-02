@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiku 3D Viewer — wiku_20261001_052604</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #08090a; --surface: #0f1011; --surface2: #18191b;
+    --border: #2a2b2d; --accent: #5e6ad2; --accent2: #7170ff;
+    --text: #f7f8f8; --muted: #8b8d97; --ok: #26c97b; --fail: #e5484d;
+    --font: 'Inter', system-ui, sans-serif;
+  }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); }
+  #app { display: flex; flex-direction: column; height: 100%; }
+  header {
+    padding: 14px 20px; border-bottom: 1px solid var(--border);
+    background: var(--surface); display: flex; align-items: center; gap: 12px;
+  }
+  .agent-badge {
+    background: var(--accent); color: #fff; font-size: 10px; font-weight: 700;
+    letter-spacing: .06em; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
+  }
+  header h1 { font-size: 14px; font-weight: 600; letter-spacing: -.011em; }
+  header span { font-size: 12px; color: var(--muted); margin-left: auto; }
+  #canvas-wrap { flex: 1; position: relative; overflow: hidden; }
+  canvas { display: block; width: 100% !important; height: 100% !important; }
+  #overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: var(--bg); flex-direction: column; gap: 16px; z-index: 10;
+  }
+  .drop-zone {
+    border: 2px dashed var(--border); border-radius: 12px; padding: 48px 64px;
+    text-align: center; cursor: pointer; transition: border-color .2s;
+  }
+  .drop-zone:hover { border-color: var(--accent); }
+  .drop-zone h2 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .drop-zone p { font-size: 13px; color: var(--muted); }
+  .btn {
+    background: var(--accent); color: #fff; border: none; border-radius: 6px;
+    padding: 10px 20px; font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: background .15s;
+  }
+  .btn:hover { background: var(--accent2); }
+  #info-bar {
+    padding: 10px 20px; border-top: 1px solid var(--border); background: var(--surface);
+    font-size: 12px; color: var(--muted); display: flex; gap: 20px; align-items: center;
+  }
+  .tag { background: var(--surface2); border-radius: 4px; padding: 2px 8px; color: var(--text); }
+  .ok { color: var(--ok); font-weight: 600; }
+  .hint { margin-left: auto; }
+  #file-input { display: none; }
+  #loading {
+    position: absolute; inset: 0; background: rgba(8,9,10,.85); display: none;
+    align-items: center; justify-content: center; color: var(--muted); font-size: 14px; z-index: 20;
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <span class="agent-badge">Wiku</span>
+    <h1>3D Viewer — Meja kerja minimalis industrial 1200x600mm</h1>
+    <span>wiku_20261001_052604</span>
+  </header>
+  <div id="canvas-wrap">
+    <div id="overlay">
+      <div class="drop-zone" id="drop-zone">
+        <h2>Drop file GLB di sini</h2>
+        <p>Atau klik tombol di bawah untuk memilih file hasil render Blender</p>
+      </div>
+      <button class="btn" onclick="document.getElementById('file-input').click()">
+        📂 Pilih File GLB
+      </button>
+      <input type="file" id="file-input" accept=".glb,.gltf">
+    </div>
+    <div id="loading">⏳ Memuat model…</div>
+  </div>
+  <div id="info-bar">
+    <span>Build: <span class="tag">wiku_20261001_052604</span></span>
+    <span>Objek: <span class="tag">Tabletop</span></span>
+    <span>Agent: <span class="tag ok">Wiku v1.0.0</span></span>
+    <span class="hint">Scroll = zoom · Drag = orbit · Shift+Drag = pan</span>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+
+const wrap = document.getElementById('canvas-wrap');
+const overlay = document.getElementById('overlay');
+const loading = document.getElementById('loading');
+
+// Scene
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x08090a);
+
+// Lighting
+const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambient);
+const key = new THREE.DirectionalLight(0xffffff, 1.2);
+key.position.set(5, 10, 7);
+key.castShadow = true;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0x4466ff, 0.3);
+fill.position.set(-5, 3, -5);
+scene.add(fill);
+const rim = new THREE.DirectionalLight(0xffffff, 0.5);
+rim.position.set(0, -5, -10);
+scene.add(rim);
+
+// Grid
+const grid = new THREE.GridHelper(10, 20, 0x2a2b2d, 0x1a1b1d);
+scene.add(grid);
+
+// Camera
+const camera = new THREE.PerspectiveCamera(45, wrap.clientWidth / wrap.clientHeight, 0.01, 1000);
+camera.position.set(3, 2.5, 4);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+renderer.shadowMap.enabled = true;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+wrap.appendChild(renderer.domElement);
+
+// Controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.target.set(0, 0.5, 0);
+controls.update();
+
+// Resize
+window.addEventListener('resize', () => {
+  camera.aspect = wrap.clientWidth / wrap.clientHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+});
+
+// Load GLB
+const loader = new GLTFLoader();
+let currentModel = null;
+
+function loadGLB(url) {
+  loading.style.display = 'flex';
+  loader.load(url, (gltf) => {
+    if (currentModel) scene.remove(currentModel);
+    currentModel = gltf.scene;
+    currentModel.traverse(c => {
+      if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; }
+    });
+    scene.add(currentModel);
+
+    // Auto-center + fit camera
+    const box = new THREE.Box3().setFromObject(currentModel);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    camera.position.set(center.x + maxDim * 1.5, center.y + maxDim, center.z + maxDim * 1.5);
+    controls.target.copy(center);
+    controls.update();
+
+    overlay.style.display = 'none';
+    loading.style.display = 'none';
+  }, undefined, (err) => {
+    loading.style.display = 'none';
+    alert('Gagal load GLB: ' + err.message);
+  });
+}
+
+// File input
+document.getElementById('file-input').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  loadGLB(url);
+});
+
+// Drag-drop
+const dropZone = document.getElementById('drop-zone');
+dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.style.borderColor = '#5e6ad2'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; });
+dropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file && (file.name.endsWith('.glb') || file.name.endsWith('.gltf'))) {
+    loadGLB(URL.createObjectURL(file));
+  }
+});
+
+// Animate
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>

@@ -56,3 +56,32 @@ Jangan pernah gunakan kata-kata ini di dokumentasi, README, atau UI copy:
 - Semua code block harus dicantumkan language specifier (```python, ```bash, ```json).
 - Test setiap `curl` / Python snippet sebelum ditulis ke dokumentasi. Snippet yang tidak berjalan adalah bug dokumentasi.
 - API documentation harus mencantumkan: parameter type, required/optional, default value, constraints (min/max length), dan example values.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-01 23:08 UTC)
+## 🏢 MANIFESTO KANTOR BOS MUDA (MULTI-DISCIPLINARY STUDIO)
+Tim Dalang-AI beroperasi sebagai kantor profesional multi-domain:
+1. Bidang Kerja Fleksibel: Frontend, Backend, Desain Grafis, Animasi/Video, Microstock, Dokumentasi, Security, QA.
+2. Siap Adaptif: Terbuka untuk penambahan spesialis baru seiring perkembangan bisnis.
+3. Standar Kolaborasi: Wajib Pre-flight Consultation, Handover Gate, dan Musyawarah Tim — tidak ada yang kerja soliter tanpa konsul.
+4. Kualitas Kantor: Semua hasil kerja harus siap pakai untuk kebutuhan profesional Bos Muda.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-02 09:16 UTC)
+### Standar Copywriting & Hook Bahasa Indonesia (Gen-Z Casual Register)
+1. **Gaya Bahasa**: Gunakan register santai Gen-Z Indonesia (kata ganti 'gw'/'gue' dan 'lo', BUKAN 'aku'/'kamu' yang kaku).
+2. **Hook Constraints**: Hook kalimat pertama harus <= 80 karakter agar terbaca penuh di mobile feed sebelum tombol 'more'. Maksimal 2 emoji di akhir kalimat.
+3. **Anti-Spam Tone**: DILARANG kata-kata hard-selling klise seperti 'diskon gila', 'promo termurah', 'beli sekarang juga' yang memicu filter spam Meta. Buat review terasa natural, problem-solving, dan berbasis pengalaman nyata.
+
+
+---
+
+### 🎓 Pelajaran Baru — Diajarkan oleh Bos Muda (2026-10-02 09:17 UTC)
+### Standar Copywriting & Hook Bahasa Indonesia (Gen-Z Casual Register)
+1. **Gaya Bahasa**: Gunakan register santai Gen-Z Indonesia (kata ganti 'gw'/'gue' dan 'lo', BUKAN 'aku'/'kamu' yang kaku).
+2. **Hook Constraints**: Hook kalimat pertama harus <= 80 karakter agar terbaca penuh di mobile feed sebelum tombol 'more'. Maksimal 2 emoji di akhir kalimat.
+3. **Anti-Spam Tone**: DILARANG kata-kata hard-selling klise seperti 'diskon gila', 'promo termurah', 'beli sekarang juga' yang memicu filter spam Meta. Buat review terasa natural, problem-solving, dan berbasis pengalaman nyata.

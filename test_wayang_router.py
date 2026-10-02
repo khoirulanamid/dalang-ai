@@ -93,7 +93,7 @@ class TestWayangIdlePartition:
         status = partition_active_and_idle_wayang(tasks)
 
         assert status["total_active"] == 3
-        assert status["total_idle"] == 5  # 8 wayang total (termasuk Wiku) - 3 aktif = 5 idle
+        assert status["total_idle"] == 7  # 10 wayang total (termasuk Wiku, Kresna & Bagong) - 3 aktif = 7 idle (termasuk Wiku & Kresna) - 3 aktif = 6 idle
         assert "lulu" in status["active"]
         assert "zaki" in status["active"]
         assert "ren" in status["active"]
@@ -102,3 +102,12 @@ class TestWayangIdlePartition:
         assert "nova" in status["idle"]
         assert "kai" in status["idle"]
         assert "wiku" in status["idle"]
+        assert "kresna" in status["idle"]
+        assert "bagong" in status["idle"]
+
+    def test_route_storytelling_task_to_kresna(self):
+        title = "Buatkan animasi explainer dan skenario cerita arsitektur"
+        desc = "Gunakan format And-But-Therefore dengan karakter Canvas 2D untuk presentasi klien"
+        agent, conf = auto_route_task(title, desc)
+        assert agent == "kresna"
+        assert conf > 0.0
