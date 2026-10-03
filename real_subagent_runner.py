@@ -315,6 +315,7 @@ class RealSubAgentRunner:
 - Pre-installed packages: fastapi, uvicorn, pytest, PyJWT, cryptography, bcrypt, passlib, pyyaml, httpx
 - Always use the venv paths above for `run_command`
 - Write code files with `write_file`, then test them with `run_command`
+- ACTION DEADLINE RULE: Do NOT spend more than 3 tool calls reading/exploring. By tool call 4, you MUST execute `write_file` or perform the required concrete write action. Repeating `cat`/`read_file`/`ls` in a loop will cause task failure.
 - Once tests pass, declare yourself done.
 """
 
@@ -395,10 +396,10 @@ class RealSubAgentRunner:
                         "content": str(result),
                     })
 
-            await log("agent_timeout", f"{agent_id.upper()} reached max iterations ({max_tool_iterations})")
+            await log("agent_timeout", f"{agent_id.upper()} reached max iterations ({max_tool_iterations}) without concluding")
             return {
-                "success": True,
-                "final_answer": "Reached iteration limit. Code artifacts written to workspace.",
+                "success": False,
+                "error": f"Agent reached max iterations ({max_tool_iterations}) without producing final answer or completing write actions",
                 "iterations": max_tool_iterations,
                 "tool_calls": tool_call_count,
             }

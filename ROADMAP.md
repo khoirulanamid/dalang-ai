@@ -479,15 +479,15 @@ agents:
 ## SPRINT 22: Sinkronisasi Identitas 12 Wayang Resmi di Direktori Kantor 🎭
 > Goal: Pingot menyelaraskan seluruh entitas di `workspace/wayang_directory.py` agar menggunakan 12 identitas Wayang resmi (Risko, Pingot, Zaki, Lulu, Mika, Nova, Kai, Ren, Wiku, Kresna, Bagong, Gathot) menggantikan nama placeholder lama. Ren QA memvalidasi test suite lulus 100%.
 
-- [ ] **T-2201**: [pingot] Selaraskan seluruh profil di `workspace/wayang_directory.py` agar menggunakan 12 wayang_id resmi (risko, pingot, zaki, lulu, mika, nova, kai, ren, wiku, kresna, bagong, gathot) lengkap dengan gelar dan domain keahlian yang akurat
+- [x] **T-2201**: [pingot] Selaraskan seluruh profil di `workspace/wayang_directory.py` agar menggunakan 12 wayang_id resmi (risko, pingot, zaki, lulu, mika, nova, kai, ren, wiku, kresna, bagong, gathot) lengkap dengan gelar dan domain keahlian yang akurat
   - *Assigned*: pingot
   - *Dependencies*: none
 
-- [ ] **T-2202**: [ren] Perbarui dan jalankan `workspace/test_wayang_directory.py` untuk memverifikasi 12 nama Wayang resmi terdaftar valid dan seluruh test suite lulus 100%
+- [x] **T-2202**: [ren] Perbarui dan jalankan `workspace/test_wayang_directory.py` untuk memverifikasi 12 nama Wayang resmi terdaftar valid dan seluruh test suite lulus 100%
   - *Assigned*: ren
   - *Dependencies*: T-2201
 
-- [ ] **T-2203**: [bagong] Sinkronkan direktori kantor yang sudah terkalibrasi ke root Dalang-AI dan arsipkan ke Bagong Vault
+- [x] **T-2203**: [bagong] Sinkronkan direktori kantor yang sudah terkalibrasi ke root Dalang-AI dan arsipkan ke Bagong Vault
   - *Assigned*: bagong
   - *Dependencies*: T-2202
 
