@@ -357,9 +357,30 @@ agents:
   - *Assigned*: kai
   - *Dependencies*: T-1704
 
-- [x] **T-1706**: [bagong] Arsipkan akta kelahiran dan spesifikasi Wayang Gathot ke Bagong Vault serta perbarui index sistem
+- [ ] **T-1706**: [bagong] Arsipkan akta kelahiran dan spesifikasi Wayang Gathot ke Bagong Vault serta perbarui index sistem
   - *Assigned*: bagong
   - *Dependencies*: T-1705
+
+---
+
+## SPRINT 18: Kampanye Celana Jeans Korea — Posting Bergambar Facebook 📱
+> Goal: Gathot menyusun naskah copywriting kurasi relatable (Cowok Praktis), Zaki mengeksekusi posting bergambar ke Facebook personal Rizqi Mubarak dengan foto produk celana jeans Korea yang sudah tersedia di workspace/product_images/. Ren QA Gate validasi naskah, Bagong arsipkan artefak.
+
+- [ ] **T-1801**: [gathot] Susun naskah copywriting Facebook untuk celana jeans Korea (sudut pandang Cowok Praktis — ga sesak duduk lama) beserta 3-5 hashtag relevan dan keyword sosial SEO
+  - *Assigned*: gathot
+  - *Dependencies*: none
+
+- [ ] **T-1802**: [ren] Quality Gate Review — validasi naskah bebas klaim palsu, natural, relatable humor, sesuai standar gathot_social_standards.md
+  - *Assigned*: ren
+  - *Dependencies*: T-1801
+
+- [ ] **T-1803**: [zaki] Eksekusi posting bergambar ke Facebook personal Rizqi Mubarak menggunakan foto celana_jeans_korea_1.jpg dari workspace/product_images/ beserta naskah T-1801
+  - *Assigned*: zaki
+  - *Dependencies*: T-1802
+
+- [ ] **T-1804**: [bagong] Deposit naskah dan bukti live posting ke Bagong Vault
+  - *Assigned*: bagong
+  - *Dependencies*: T-1803
 
 ---
 
