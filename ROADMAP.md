@@ -251,7 +251,7 @@ agents:
 
 ---
 
-## SPRINT 14: Threads Market Intelligence & Affiliate Trend Discovery 🚀
+## SPRINT 14: Threads Market Intelligence & Affiliate Trend Discovery ✅
 > Goal: Riset tren produk affiliate yang sedang ramai dibahas di Threads Indonesia. Tim Dalang-AI mengumpulkan data kata kunci, menganalisis kategori produk dengan engagement tinggi (Racun Shopee / Spill Link), memetakan harga konversi terbaik, dan menyimpan laporannya ke Bagong Vault.
 
 - [x] **T-1401**: [pingot] Crawl & ekstrak postingan tren Threads Indonesia terkait kata kunci affiliate ('racun shopee', 'spill shopee', 'link di bio', 'worth it', 'shopee haul') menggunakan session cookie yang aman
@@ -273,5 +273,30 @@ agents:
 - [x] **T-1405**: [bagong] Deposit laporan hasil riset tren pasar ke Bagong Vault kategori 'report'
   - *Assigned*: bagong
   - *Dependencies*: T-1404
+
+---
+
+## SPRINT 15: Campaign Otomasi Affiliate — OMG Oh My Glam Lip Cream Matte 🚀
+> Goal: Menjalankan kampanye konten affiliate multi-platform (Threads & Facebook) untuk produk 'Lip Cream Matte Oh My Glam (OMG)'. Copywriting wajib jujur, relatable/humor, kurasi objektif (spek matte, Vit E + Jojoba Oil, bumil/busui safe), dilarang klaim pemakaian personal. Divalidasi oleh Ren QA Gate dan dieksekusi oleh Zaki & Kai.
+
+- [x] **T-1501**: [mika] Susun 3 variasi copywriting draf postingan Threads & Facebook untuk Lip Cream Matte OMG (tema humor relatable wanita/cowok bingung shade, kurasi spek objektif tanpa klaim pribadi 'saya/aku sudah pakai')
+  - *Assigned*: mika
+  - *Dependencies*: none
+
+- [x] **T-1502**: [kai] Security audit & verifikasi affiliate URL Shopee (validasi HTTPS, domain resmi s.shopee.co.id, OWASP sanitization)
+  - *Assigned*: kai
+  - *Dependencies*: T-1501
+
+- [x] **T-1503**: [ren] Quality Gate Review — periksa copywriting agar 100% bebas klaim personal palsu, natural, lucu/menarik, dan format thread terbagi (Post 1: hook, Post 2: link)
+  - *Assigned*: ren
+  - *Dependencies*: T-1502
+
+- [x] **T-1504**: [zaki] Eksekusi deployment posting Threads (@rizki_mubarakid) & Facebook (Rizqi Mubarak) menggunakan modul poster Dalang-AI
+  - *Assigned*: zaki
+  - *Dependencies*: T-1503
+
+- [x] **T-1505**: [bagong] Simpan artefak teks konten dan bukti status live postingan ke Bagong Vault & database affiliate links
+  - *Assigned*: bagong
+  - *Dependencies*: T-1504
 
 

@@ -116,15 +116,11 @@ class FacebookPoster:
                     page.screenshot(path="/tmp/fb_debug/no_editor.png")
                     return {"success": False, "error": "Editor modal Facebook tidak ditemukan"}
 
-                # Ketik teks
+                # Ketik teks cepat via insert_text
                 editor.click()
                 time.sleep(0.5)
-                # Tulis teks via clipboard atau type bertahap
-                for line in text.split("\n"):
-                    if line:
-                        page.keyboard.type(line, delay=20)
-                    page.keyboard.press("Shift+Enter")
-                    time.sleep(0.2)
+                page.keyboard.insert_text(text)
+                time.sleep(2)
 
                 time.sleep(3)
                 page.screenshot(path="/tmp/fb_debug/fb_draft_ready.png")
