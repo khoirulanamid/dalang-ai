@@ -491,6 +491,27 @@ agents:
   - *Assigned*: bagong
   - *Dependencies*: T-2202
 
+---
+
+## SPRINT 23: Uji Kemandirian Kantor — Hapus Duplikat Threads & Post Facebook Bergambar 🚀
+> Goal: Menguji secara murni kemampuan Orchestrator Risko menggunakan Direktori Kantor untuk menunjuk Wayang yang paling tepat (tanpa diarahkan manual) dalam mengeksekusi 2 tugas: menghapus 1 duplikat status celana jeans di Threads, dan mempublikasikan status bergambar celana jeans ke Facebook personal.
+
+- [ ] **T-2301**: [auto] Buka browser Playwright ke akun Threads @rizki_mubarakid, buka menu titik tiga pada salah satu status celana jeans yang duplikat, lalu klik tombol Delete dan konfirmasi hapus sehingga di feed hanya tersisa 1 postingan celana jeans
+  - *Assigned*: auto
+  - *Dependencies*: none
+
+- [ ] **T-2302**: [auto] Buka browser Playwright ke Facebook personal Rizqi Mubarak, input naskah kurasi celana jeans dari docs/celana_jeans_campaign.json, lampirkan foto workspace/product_images/celana_jeans_korea_1.jpg, submit posting, dan simpan screenshot live di workspace/fb_jeans_live.png
+  - *Assigned*: auto
+  - *Dependencies*: T-2301
+
+- [ ] **T-2303**: [auto] Quality Gate & Visual Review: validasi fisik bahwa file workspace/fb_jeans_live.png benar-benar ada (>0 bytes) dan cek jumlah postingan di Threads berkurang 1
+  - *Assigned*: auto
+  - *Dependencies*: T-2302
+
+- [ ] **T-2304**: [auto] Arsipkan seluruh screenshot dan laporan hasil uji kemandirian kantor ke Bagong Vault
+  - *Assigned*: auto
+  - *Dependencies*: T-2303
+
 
 
 
