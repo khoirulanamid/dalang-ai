@@ -394,6 +394,70 @@
         "Jebakan testing 2"
       ],
       "date": "2026-10-02"
+    },
+    {
+      "id": "JRN-20261003_032549",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-03_kai_cantrik_failure_illegal_escape_20261003_032549.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmppnkqex73'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_032549",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-03_kai_uji_coba_test_precedent_20261003_032549.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_032702",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-03_kai_cantrik_failure_illegal_escape_20261003_032702.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmppygyog6q'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_032702",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-03_kai_uji_coba_test_precedent_20261003_032702.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-03"
     }
   ]
 }
