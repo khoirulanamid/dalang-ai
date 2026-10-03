@@ -666,6 +666,54 @@
         "Jebakan testing 2"
       ],
       "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_074349",
+      "title": "Cantrik Failure: Subtask 3",
+      "filename": "2026-10-03_bagong_cantrik_failure_subtask_3_20261003_074349.md",
+      "agent_id": "bagong",
+      "category": "bagong-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "bagong"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '/root/storage/projects/dalang-ai/vault/vault_index.json' berada di luar scope workspace '/root/storage/projects/dalang-ai/workspace'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_080947",
+      "title": "Cantrik Failure: Subtask 1",
+      "filename": "2026-10-03_zaki_cantrik_failure_subtask_1_20261003_080947.md",
+      "agent_id": "zaki",
+      "category": "zaki-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "zaki"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '/root/storage/projects/dalang-ai/vault/vault_index.json' berada di luar scope workspace '/root/storage/projects/dalang-ai/workspace'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_081024",
+      "title": "Cantrik Failure: Subtask 1",
+      "filename": "2026-10-03_zaki_cantrik_failure_subtask_1_20261003_081024.md",
+      "agent_id": "zaki",
+      "category": "zaki-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "zaki"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '/root/storage/projects/dalang-ai/release_engine.py' berada di luar scope workspace '/root/storage/projects/dalang-ai/workspace'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
     }
   ]
 }

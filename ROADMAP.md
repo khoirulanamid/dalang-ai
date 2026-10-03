@@ -357,7 +357,7 @@ agents:
   - *Assigned*: kai
   - *Dependencies*: T-1704
 
-- [ ] **T-1706**: [bagong] Arsipkan akta kelahiran dan spesifikasi Wayang Gathot ke Bagong Vault serta perbarui index sistem
+- [x] **T-1706**: [bagong] Arsipkan akta kelahiran dan spesifikasi Wayang Gathot ke Bagong Vault serta perbarui index sistem
   - *Assigned*: bagong
   - *Dependencies*: T-1705
 
@@ -366,21 +366,38 @@ agents:
 ## SPRINT 18: Kampanye Celana Jeans Korea — Posting Bergambar Facebook 📱
 > Goal: Gathot menyusun naskah copywriting kurasi relatable (Cowok Praktis), Zaki mengeksekusi posting bergambar ke Facebook personal Rizqi Mubarak dengan foto produk celana jeans Korea yang sudah tersedia di workspace/product_images/. Ren QA Gate validasi naskah, Bagong arsipkan artefak.
 
-- [ ] **T-1801**: [gathot] Susun naskah copywriting Facebook untuk celana jeans Korea (sudut pandang Cowok Praktis — ga sesak duduk lama) beserta 3-5 hashtag relevan dan keyword sosial SEO
+- [x] **T-1801**: [gathot] Susun naskah copywriting Facebook untuk celana jeans Korea (sudut pandang Cowok Praktis — ga sesak duduk lama) beserta 3-5 hashtag relevan dan keyword sosial SEO
   - *Assigned*: gathot
   - *Dependencies*: none
 
-- [ ] **T-1802**: [ren] Quality Gate Review — validasi naskah bebas klaim palsu, natural, relatable humor, sesuai standar gathot_social_standards.md
+- [x] **T-1802**: [ren] Quality Gate Review — validasi naskah bebas klaim palsu, natural, relatable humor, sesuai standar gathot_social_standards.md
   - *Assigned*: ren
   - *Dependencies*: T-1801
 
-- [ ] **T-1803**: [zaki] Eksekusi posting bergambar ke Facebook personal Rizqi Mubarak menggunakan foto celana_jeans_korea_1.jpg dari workspace/product_images/ beserta naskah T-1801
+- [x] **T-1803**: [zaki] Eksekusi posting bergambar ke Facebook personal Rizqi Mubarak menggunakan foto celana_jeans_korea_1.jpg dari workspace/product_images/ beserta naskah T-1801
   - *Assigned*: zaki
   - *Dependencies*: T-1802
 
-- [ ] **T-1804**: [bagong] Deposit naskah dan bukti live posting ke Bagong Vault
+- [x] **T-1804**: [bagong] Deposit naskah dan bukti live posting ke Bagong Vault
   - *Assigned*: bagong
   - *Dependencies*: T-1803
+
+---
+
+## SPRINT 19: Eksekusi Final Facebook Posting Celana Jeans & Vision QA 🚀
+> Goal: Orkestrator Risko menunjuk Wayang yang tepat untuk mengeksekusi script post_jeans_facebook.py yang sudah dibuat Zaki di Sprint 18, mengambil screenshot verifikasi feed live, memvalidasi tampilan postingan bergambar, dan mengarsipkan bukti sah ke Bagong Vault.
+
+- [x] **T-1901**: [auto] Jalankan script `workspace/post_jeans_facebook.py` sampai tuntas, tangkap bukti screenshot profil Facebook `workspace/fb_jeans_live.png`, dan pastikan status berstatus live
+  - *Assigned*: auto
+  - *Dependencies*: none
+
+- [x] **T-1902**: [auto] Quality Gate & Visual Verification — pastikan foto celana jeans dan naskah Cowok Praktis benar-benar tampil utuh di screenshot live tanpa error
+  - *Assigned*: auto
+  - *Dependencies*: T-1901
+
+- [x] **T-1903**: [auto] Deposit artefak screenshot dan log sukses ke Bagong Vault serta perbarui index release
+  - *Assigned*: auto
+  - *Dependencies*: T-1902
 
 ---
 
@@ -406,6 +423,56 @@ agents:
 - [x] **T-1715**: [bagong] Catat fix ini di Field Journal sebagai pitfall resmi dan deposit artefak ke Vault
   - *Assigned*: bagong
   - *Dependencies*: T-1714
+
+---
+
+## SPRINT 20: Pembersihan Duplikat Threads & Eksekusi Riil Facebook Celana Jeans 🚀
+> Goal: Orkestrator Risko menunjuk Wayang untuk menghapus 1 thread celana jeans yang duplikat di Threads (@rizki_mubarakid), lalu mengeksekusi posting naskah + foto celana jeans ke Facebook personal Rizqi Mubarak secara riil, memverifikasi screenshot feed live, dan mengarsipkan bukti ke Bagong Vault.
+
+- [x] **T-2001**: [auto] Buat dan jalankan modul otomatisasi Playwright untuk menghapus salah satu postingan celana jeans yang duplikat di Threads akun @rizki_mubarakid via tombol menu opsi (titik tiga) -> Delete
+  - *Assigned*: auto
+  - *Dependencies*: none
+
+- [x] **T-2002**: [auto] Jalankan script `workspace/post_jeans_facebook.py` via python subprocess sampai selesai, ambil bukti screenshot postingan Facebook live di `workspace/fb_jeans_verified.png`
+  - *Assigned*: auto
+  - *Dependencies*: T-2001
+
+- [x] **T-2003**: [auto] Quality Gate & Visual Review: verifikasi bahwa duplikat Threads sudah terhapus dan postingan Facebook celana jeans benar-benar tayang di linimasa
+  - *Assigned*: auto
+  - *Dependencies*: T-2002
+
+- [ ] **T-2004**: [auto] Deposit seluruh log eksekusi, screenshot live, dan perbarui catatan status ke Bagong Vault
+  - *Assigned*: auto
+  - *Dependencies*: T-2003
+
+---
+
+## SPRINT 21: Protokol Komunikasi & Direktori Pegawai Kantor Dalang-AI 🏢
+> Goal: Membangun sistem komunikasi kantor nyata antar-Wayang. Jika ada task yang tidak dipahami atau berstatus [auto], Wayang WAJIB bertanya kepada Risko (Orchestrator) atau merujuk Direktori Kantor (`wayang_directory.py`), bukan pura-pura selesai. Ren QA Gate diperketat dengan bukti fisik wajib (Physical Artifact Verification).
+
+- [ ] **T-2101**: [pingot] Bangun modul Direktori Kantor `wayang_directory.py` yang memuat profil keahlian, domain tugas, alat utama, dan kontak rujukan untuk seluruh 12 Wayang
+  - *Assigned*: pingot
+  - *Dependencies*: none
+
+- [ ] **T-2102**: [zaki] Implementasikan tool baru `ask_orchestrator(task_desc)` dan `consult_peer(peer_agent, question)` di `agent_tools.py` agar sesama Wayang bisa saling bertanya dan oper tugas
+  - *Assigned*: zaki
+  - *Dependencies*: T-2101
+
+- [ ] **T-2103**: [risko] Upgrade logika Risko di `risko_orchestrator.py` & `wayang_router.py`: jika tiket berlabel [auto] atau skor kecocokan rendah, lakukan broadcast evaluasi ke seluruh Wayang untuk penugasan ulang otomatis
+  - *Assigned*: risko
+  - *Dependencies*: T-2102
+
+- [ ] **T-2104**: [ren] Perketat gerbang inspeksi `ren_qa_standards.md` & `ren_quality_gate.py`: HARAM stempel APPROVED pada task eksekusi/posting jika artefak fisik (.png hasil screenshot atau file output > 0 bytes) tidak terverifikasi nyata di disk
+  - *Assigned*: ren
+  - *Dependencies*: T-2103
+
+- [ ] **T-2105**: [kai] Security audit jalur komunikasi antar-Wayang (mencegah loop tak terbatas, unauthorized agent privilege escalation, dan prompt injection lewat oper tugas)
+  - *Assigned*: kai
+  - *Dependencies*: T-2104
+
+- [ ] **T-2106**: [bagong] Arsipkan standar komunikasi kantor dan perbarui dokumentasi sistem ke Bagong Vault
+  - *Assigned*: bagong
+  - *Dependencies*: T-2105
 
 
 
