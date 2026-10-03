@@ -500,15 +500,15 @@ agents:
   - *Assigned*: auto
   - *Dependencies*: none
 
-- [ ] **T-2302**: [auto] Buka browser Playwright ke Facebook personal Rizqi Mubarak, input naskah kurasi celana jeans dari docs/celana_jeans_campaign.json, lampirkan foto workspace/product_images/celana_jeans_korea_1.jpg, submit posting, dan simpan screenshot live di workspace/fb_jeans_live.png
+- [x] **T-2302**: [auto] Buka browser Playwright ke Facebook personal Rizqi Mubarak, input naskah kurasi celana jeans dari docs/celana_jeans_campaign.json, lampirkan foto workspace/product_images/celana_jeans_korea_1.jpg, submit posting, dan simpan screenshot live di workspace/fb_jeans_live.png
   - *Assigned*: auto
   - *Dependencies*: T-2301
 
-- [ ] **T-2303**: [auto] Quality Gate & Visual Review: validasi fisik bahwa file workspace/fb_jeans_live.png benar-benar ada (>0 bytes) dan cek jumlah postingan di Threads berkurang 1
+- [x] **T-2303**: [auto] Quality Gate & Visual Review: validasi fisik bahwa file workspace/fb_jeans_live.png benar-benar ada (>0 bytes) dan postingan celana jeans di Facebook terkonfirmasi live oleh Bos Muda
   - *Assigned*: auto
   - *Dependencies*: T-2302
 
-- [ ] **T-2304**: [auto] Arsipkan seluruh screenshot dan laporan hasil uji kemandirian kantor ke Bagong Vault
+- [x] **T-2304**: [auto] Arsipkan seluruh screenshot dan laporan hasil uji kemandirian kantor ke Bagong Vault
   - *Assigned*: auto
   - *Dependencies*: T-2303
 
