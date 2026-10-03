@@ -315,7 +315,10 @@ class RealSubAgentRunner:
 - Pre-installed packages: fastapi, uvicorn, pytest, PyJWT, cryptography, bcrypt, passlib, pyyaml, httpx
 - Always use the venv paths above for `run_command`
 - Write code files with `write_file`, then test them with `run_command`
-- ACTION DEADLINE RULE: Do NOT spend more than 3 tool calls reading/exploring. By tool call 4, you MUST execute `write_file` or perform the required concrete write action. Repeating `cat`/`read_file`/`ls` in a loop will cause task failure.
+- Action Deadline: Maksimal 3 kali membaca/cek. Di langkah ke-4 WAJIB eksekusi nyata.
+- Productive Tools Standard: Sebelum menulis crawler Shopee dari nol, SELALU gunakan tool resmi siap pakai:
+  `python3 /root/storage/projects/dalang-ai/tools/shopee_media_extractor.py <url> --out <output_dir> --max 5`
+  Tool ini menghemat waktu 90% dan langsung menghasilkan gambar HD bersih tanpa trial-and-error.
 - Once tests pass, declare yourself done.
 """
 
@@ -389,11 +392,19 @@ class RealSubAgentRunner:
 
                     result = self._dispatch_tool(fn_name, args)
 
+                    # TRUNCATE TOOL OUTPUT TO PREVENT TOKEN BLOAT & LATENCY
+                    result_str = str(result)
+                    MAX_TOOL_CHARS = 1800
+                    if len(result_str) > MAX_TOOL_CHARS:
+                        head = result_str[:1200]
+                        tail = result_str[-500:]
+                        result_str = f"{head}\n\n[...OUTPUT DIPOTONG ({len(result_str)} karakter) UNTUK EFISIENSI LATENSI...]\n\n{tail}"
+
                     messages.append({
                         "role": "tool",
                         "tool_call_id": tc["id"],
                         "name": fn_name,
-                        "content": str(result),
+                        "content": result_str,
                     })
 
             await log("agent_timeout", f"{agent_id.upper()} reached max iterations ({max_tool_iterations}) without concluding")

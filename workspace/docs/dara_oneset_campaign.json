@@ -1,0 +1,52 @@
+{
+  "product_id": "dara-one-set-blouse-kulot-rayon",
+  "product_name": "Dara One Set Blouse Kulot Rayon",
+  "source_url": "https://s.shopee.co.id/3qNaOVRWrP",
+  "price": {
+    "currency": "IDR",
+    "amount": 124500,
+    "formatted": "Rp124.500"
+  },
+  "category": "Fashion Muslim / Setelan Wanita",
+  "specifications": {
+    "material": "Rayon Premium / Rayon Twill",
+    "item_type": "One Set (Blouse + Kulot)",
+    "blouse_details": {
+      "lingkar_dada": "110-120 cm",
+      "panjang_baju": "65-70 cm",
+      "tipe_lengan": "Lengan Panjang / Kancing Aktif"
+    },
+    "kulot_details": {
+      "lingkar_pinggang": "60-110 cm (Full Karet)",
+      "panjang_celana": "95-100 cm",
+      "lingkar_paha": "70 cm"
+    },
+    "features": [
+      "Bahan rayon adem, jatuh, dan nyaman dipakai sehari-hari",
+      "Desain stylish cocok untuk casual, hangout, maupun formal",
+      "Busui friendly (kancing depan)"
+    ]
+  },
+  "images": [
+    {
+      "file_name": "dara_oneset_1.jpg",
+      "path": "product_images/dara_oneset/dara_oneset_1.jpg",
+      "description": "Dara One Set Blouse Kulot Rayon - Full Body Look / Main Shot",
+      "resolution": "1080x1080"
+    },
+    {
+      "file_name": "dara_oneset_2.jpg",
+      "path": "product_images/dara_oneset/dara_oneset_2.jpg",
+      "description": "Dara One Set Blouse Kulot Rayon - Detail Blouse & Fabric Texture",
+      "resolution": "1080x1080"
+    },
+    {
+      "file_name": "dara_oneset_3.jpg",
+      "path": "product_images/dara_oneset/dara_oneset_3.jpg",
+      "description": "Dara One Set Blouse Kulot Rayon - Celana Kulot & Variant Colors",
+      "resolution": "1080x1080"
+    }
+  ],
+  "crawled_at": "2025-05-18T10:00:00Z",
+  "status": "active"
+}
