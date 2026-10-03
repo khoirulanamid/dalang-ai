@@ -276,7 +276,7 @@ agents:
 
 ---
 
-## SPRINT 15: Campaign Otomasi Affiliate — OMG Oh My Glam Lip Cream Matte 🚀
+## SPRINT 15: Campaign Otomasi Affiliate — OMG Oh My Glam Lip Cream Matte ✅
 > Goal: Menjalankan kampanye konten affiliate multi-platform (Threads & Facebook) untuk produk 'Lip Cream Matte Oh My Glam (OMG)'. Copywriting wajib jujur, relatable/humor, kurasi objektif (spek matte, Vit E + Jojoba Oil, bumil/busui safe), dilarang klaim pemakaian personal. Divalidasi oleh Ren QA Gate dan dieksekusi oleh Zaki & Kai.
 
 - [x] **T-1501**: [mika] Susun 3 variasi copywriting draf postingan Threads & Facebook untuk Lip Cream Matte OMG (tema humor relatable wanita/cowok bingung shade, kurasi spek objektif tanpa klaim pribadi 'saya/aku sudah pakai')
@@ -298,5 +298,39 @@ agents:
 - [x] **T-1505**: [bagong] Simpan artefak teks konten dan bukti status live postingan ke Bagong Vault & database affiliate links
   - *Assigned*: bagong
   - *Dependencies*: T-1504
+
+---
+
+## SPRINT 16: Visual Scraper & Media Pipeline — Celana Jeans Korea 🚀
+> Goal: Mengembangkan kemampuan ekstraksi gambar produk Shopee dari tautan affiliate secara otomatis (Playwright Chromium scraping) dan mengintegrasikannya ke pipeline posting bergambar Threads & Facebook Dalang-AI.
+
+- [ ] **T-1601**: [pingot] Ekstrak dan download gambar produk resolusi tinggi dari tautan Shopee Celana Jeans Korea (https://s.shopee.co.id/4LJqTkz7w7) menggunakan Playwright headless
+  - *Assigned*: pingot
+  - *Dependencies*: none
+
+- [ ] **T-1602**: [kresna] Validasi & preprocessing aset gambar (inspeksi visual, konversi format JPG/PNG, penyesuaian rasio feed 1:1 / 4:5 tanpa distorsi)
+  - *Assigned*: kresna
+  - *Dependencies*: T-1601
+
+- [ ] **T-1603**: [mika] Susun copywriting jujur & humor relatable gaya Korea/fit pinggang karet vs kancing tanpa klaim pemakaian palsu
+  - *Assigned*: mika
+  - *Dependencies*: T-1602
+
+- [ ] **T-1604**: [kai] Verifikasi keamanan file gambar (cek mime-type, ukuran file, no executable payload) & sanitasi link Shopee
+  - *Assigned*: kai
+  - *Dependencies*: T-1603
+
+- [ ] **T-1605**: [ren] Quality Gate Review — uji integritas gambar + teks konten kurasi
+  - *Assigned*: ren
+  - *Dependencies*: T-1604
+
+- [ ] **T-1606**: [zaki] Eksekusi posting bergambar (image attachment) ke Threads & Facebook
+  - *Assigned*: zaki
+  - *Dependencies*: T-1605
+
+- [ ] **T-1607**: [bagong] Deposit aset visual dan artefak postingan ke Bagong Vault
+  - *Assigned*: bagong
+  - *Dependencies*: T-1606
+
 
 
