@@ -304,33 +304,88 @@ agents:
 ## SPRINT 16: Visual Scraper & Media Pipeline — Celana Jeans Korea 🚀
 > Goal: Mengembangkan kemampuan ekstraksi gambar produk Shopee dari tautan affiliate secara otomatis (Playwright Chromium scraping) dan mengintegrasikannya ke pipeline posting bergambar Threads & Facebook Dalang-AI.
 
-- [ ] **T-1601**: [pingot] Ekstrak dan download gambar produk resolusi tinggi dari tautan Shopee Celana Jeans Korea (https://s.shopee.co.id/4LJqTkz7w7) menggunakan Playwright headless
+- [x] **T-1601**: [pingot] Ekstrak dan download gambar produk resolusi tinggi dari tautan Shopee Celana Jeans Korea (https://s.shopee.co.id/4LJqTkz7w7) menggunakan Playwright headless
   - *Assigned*: pingot
   - *Dependencies*: none
 
-- [ ] **T-1602**: [kresna] Validasi & preprocessing aset gambar (inspeksi visual, konversi format JPG/PNG, penyesuaian rasio feed 1:1 / 4:5 tanpa distorsi)
+- [x] **T-1602**: [kresna] Validasi & preprocessing aset gambar (inspeksi visual, konversi format JPG/PNG, penyesuaian rasio feed 1:1 / 4:5 tanpa distorsi)
   - *Assigned*: kresna
   - *Dependencies*: T-1601
 
-- [ ] **T-1603**: [mika] Susun copywriting jujur & humor relatable gaya Korea/fit pinggang karet vs kancing tanpa klaim pemakaian palsu
+- [x] **T-1603**: [mika] Susun copywriting jujur & humor relatable gaya Korea/fit pinggang karet vs kancing tanpa klaim pemakaian palsu
   - *Assigned*: mika
   - *Dependencies*: T-1602
 
-- [ ] **T-1604**: [kai] Verifikasi keamanan file gambar (cek mime-type, ukuran file, no executable payload) & sanitasi link Shopee
+- [x] **T-1604**: [kai] Verifikasi keamanan file gambar (cek mime-type, ukuran file, no executable payload) & sanitasi link Shopee
   - *Assigned*: kai
   - *Dependencies*: T-1603
 
-- [ ] **T-1605**: [ren] Quality Gate Review — uji integritas gambar + teks konten kurasi
+- [x] **T-1605**: [ren] Quality Gate Review — uji integritas gambar + teks konten kurasi
   - *Assigned*: ren
   - *Dependencies*: T-1604
 
-- [ ] **T-1606**: [zaki] Eksekusi posting bergambar (image attachment) ke Threads & Facebook
+- [x] **T-1606**: [zaki] Eksekusi posting bergambar (image attachment) ke Threads & Facebook
   - *Assigned*: zaki
   - *Dependencies*: T-1605
 
-- [ ] **T-1607**: [bagong] Deposit aset visual dan artefak postingan ke Bagong Vault
+- [x] **T-1607**: [bagong] Deposit aset visual dan artefak postingan ke Bagong Vault
   - *Assigned*: bagong
   - *Dependencies*: T-1606
+
+---
+
+## SPRINT 17: Kelahiran Wayang Gathot (Social Media & Growth Specialist) 🚀
+> Goal: Mengukir dan meresmikan Wayang ke-12 'Gathot' (Wayang Wira Warta) ke dalam arsitektur Dalang-AI: Engineering Standards, Roster Auto-Routing, Sub-Agent Runner, Test Suite, dan uji perdana penyusunan naskah viral, riset hashtag/keyword FYP, serta omnichannel publishing.
+
+- [x] **T-1701**: [mika] Susun standar rekayasa resmi `standards/gathot_social_standards.md` mencakup SOP copywriting viral, hook psychology, kurasi etis tanpa klaim palsu, riset keyword sosial SEO, dan manajemen posting
+  - *Assigned*: mika
+  - *Dependencies*: T-1715
+
+- [x] **T-1702**: [pingot] Registrasikan Gathot ke `wayang_router.py` (WAYANG_ROSTER, keywords pencocokan task social media/viral/threads/hashtag) dan pemetaan di `wayang_academy.py`
+  - *Assigned*: pingot
+  - *Dependencies*: T-1701
+
+- [x] **T-1703**: [zaki] Daftarkan profil sub-agent Gathot dan loading standards di `real_subagent_runner.py` serta ikon dan integrasi di `dalang.py`
+  - *Assigned*: zaki
+  - *Dependencies*: T-1702
+
+- [x] **T-1704**: [ren] Buat dan eksekusi test suite komprehensif `test_gathot_agent.py` untuk memvalidasi auto-routing, standards loading, dan integritas 12 Wayang
+  - *Assigned*: ren
+  - *Dependencies*: T-1703
+
+- [x] **T-1705**: [kai] Security audit & permission check untuk operasi media sosial dan sanitasi parameter postingan Gathot
+  - *Assigned*: kai
+  - *Dependencies*: T-1704
+
+- [x] **T-1706**: [bagong] Arsipkan akta kelahiran dan spesifikasi Wayang Gathot ke Bagong Vault serta perbarui index sistem
+  - *Assigned*: bagong
+  - *Dependencies*: T-1705
+
+---
+
+## SPRINT 17B: Hardening Resiliensi Wayang — LLM Stream Retry & Timeout Fix 🔧
+> Goal: Memperbaiki bug kritis `real_subagent_runner.py` yang menyebabkan Wayang langsung menyerah saat LLM stream error tanpa retry. Implementasi exponential backoff retry (3x), penyeragaman timeout, dan mekanisme task chunking agar Wayang tidak timeout saat mengerjakan dokumen panjang.
+
+- [x] **T-1711**: [zaki] Implementasi exponential backoff retry (3 percobaan, delay 5/10/20 detik) pada fungsi `stream_completion` di `real_subagent_runner.py` — saat ini error langsung return gagal tanpa retry
+  - *Assigned*: zaki
+  - *Dependencies*: none
+
+- [x] **T-1712**: [zaki] Seragamkan timeout: `httpx.AsyncClient(timeout=300.0)` dan `client.stream(timeout=300.0)` — saat ini inkonsisten 120s vs 180s menyebabkan race condition timeout
+  - *Assigned*: zaki
+  - *Dependencies*: T-1711
+
+- [x] **T-1713**: [kai] Tambahkan logging detail error (tipe exception, traceback ringkas, model yang dipakai) pada `agent_error` agar error mudah didiagnosis di sprint berikutnya
+  - *Assigned*: kai
+  - *Dependencies*: T-1712
+
+- [x] **T-1714**: [ren] Buat test suite `test_stream_resilience.py` — uji retry mechanism, timeout handling, dan task recovery
+  - *Assigned*: ren
+  - *Dependencies*: T-1713
+
+- [x] **T-1715**: [bagong] Catat fix ini di Field Journal sebagai pitfall resmi dan deposit artefak ke Vault
+  - *Assigned*: bagong
+  - *Dependencies*: T-1714
+
 
 
 

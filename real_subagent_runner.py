@@ -35,6 +35,7 @@ def _load_standards(agent_id: str, task_context: str = "") -> str:
         "wiku": "wiku_3d_standards.md",
         "kresna": "kresna_motion_standards.md",
         "bagong": "bagong_vault_standards.md",
+        "gathot": "gathot_social_standards.md",
     }
     parts = []
     fname = mapping.get(agent_id, "")
@@ -130,6 +131,14 @@ Rules:
 - When Bos Muda requests a file: search vault index, return the direct URL and file path.
 - Respond to requests: 'ambil', 'kirim', 'tampilkan', 'daftar output', 'hasil terbaru'.
 - Never delete any artifact without explicit authorization from Bos Muda.""",
+
+    "gathot": """You are Gathot, the Social Media & Growth Specialist agent in the Dalang-AI team.
+Task: Research trending keywords, craft viral copywriting/hooks, optimize social SEO, and publish content to social platforms (Threads, Facebook, Instagram).
+Rules:
+- Never fabricate personal usage claims ('aku/saya sudah pakai'). Use objective specs, aggregate consensus, and observational humor.
+- Focus on relatable humor, everyday dilemmas, and curiosity gap hooks.
+- Follow thread-splitting format: Post 1 for hook/relatable pain point, Post 2 for objective spec curation and affiliate link.
+- Always follow standards/gathot_social_standards.md for content guidelines.""",
 }
 
 
@@ -172,7 +181,7 @@ async def stream_completion(
             "Content-Type": "application/json",
         },
         json=payload,
-        timeout=120.0,
+        timeout=300.0,
     ) as response:
         if response.status_code != 200:
             body = await response.aread()
@@ -318,19 +327,31 @@ class RealSubAgentRunner:
 
         await log("agent_started", f"{agent_id.upper()} starting task [{task.get('id')}]")
 
-        async with httpx.AsyncClient(timeout=180.0) as client:
+        async with httpx.AsyncClient(timeout=300.0) as client:
             for iteration in range(max_tool_iterations):
-                try:
-                    res = await stream_completion(
-                        client=client,
-                        messages=messages,
-                        tools=tools,
-                        api_key=self.api_key,
-                        model=self.model,
-                    )
-                except Exception as e:
-                    await log("agent_error", f"LLM stream error: {e}")
-                    return {"success": False, "error": str(e), "iterations": iteration}
+                # Exponential backoff retry: 3 attempts, delay 5/10/20s
+                res = None
+                last_err = None
+                for attempt in range(3):
+                    try:
+                        res = await stream_completion(
+                            client=client,
+                            messages=messages,
+                            tools=tools,
+                            api_key=self.api_key,
+                            model=self.model,
+                        )
+                        break  # success, exit retry loop
+                    except Exception as e:
+                        last_err = e
+                        err_type = type(e).__name__
+                        await log("agent_error", f"LLM stream error [{err_type}] attempt {attempt+1}/3: {e} | model={self.model}")
+                        if attempt < 2:
+                            delay = 5 * (2 ** attempt)  # 5s, 10s, 20s
+                            await asyncio.sleep(delay)
+                if res is None:
+                    await log("agent_error", f"LLM stream failed after 3 retries: {last_err}")
+                    return {"success": False, "error": str(last_err), "iterations": iteration}
 
                 content = res.get("content") or ""
                 tool_calls = res.get("tool_calls")

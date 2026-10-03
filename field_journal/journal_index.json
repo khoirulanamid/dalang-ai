@@ -458,6 +458,214 @@
         "Jebakan testing 2"
       ],
       "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_053312",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-03_kai_cantrik_failure_illegal_escape_20261003_053312.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmpq520mo2w'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_053313",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-03_kai_uji_coba_test_precedent_20261003_053313.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_053433",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-03_kai_cantrik_failure_illegal_escape_20261003_053433.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmp9ol8lhyx'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_053433",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-03_kai_uji_coba_test_precedent_20261003_053433.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_061046",
+      "title": "Cantrik Failure: Subtask 1",
+      "filename": "2026-10-03_mika_cantrik_failure_subtask_1_20261003_061046.md",
+      "agent_id": "mika",
+      "category": "mika-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "mika"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '/root/storage/projects/dalang-ai/standards/kai_security_standards.md' berada di luar scope workspace '/root/storage/projects/dalang-ai/workspace'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_061046",
+      "title": "Cantrik Failure: Subtask 2",
+      "filename": "2026-10-03_mika_cantrik_failure_subtask_2_20261003_061046.md",
+      "agent_id": "mika",
+      "category": "mika-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "mika"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '/root/storage/projects/dalang-ai/standards/zaki_backend_standards.md' berada di luar scope workspace '/root/storage/projects/dalang-ai/workspace'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_061046",
+      "title": "Cantrik Failure: Subtask 3",
+      "filename": "2026-10-03_mika_cantrik_failure_subtask_3_20261003_061046.md",
+      "agent_id": "mika",
+      "category": "mika-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "mika"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '/root/storage/projects/dalang-ai/standards/ren_qa_standards.md' berada di luar scope workspace '/root/storage/projects/dalang-ai/workspace'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_071311",
+      "title": "Cantrik Failure: Subtask 1",
+      "filename": "2026-10-03_zaki_cantrik_failure_subtask_1_20261003_071311.md",
+      "agent_id": "zaki",
+      "category": "zaki-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "zaki"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../real_subagent_runner.py' berada di luar scope workspace '/root/storage/projects/dalang-ai/workspace'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_071311",
+      "title": "Cantrik Failure: Subtask 2",
+      "filename": "2026-10-03_zaki_cantrik_failure_subtask_2_20261003_071311.md",
+      "agent_id": "zaki",
+      "category": "zaki-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "zaki"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../dalang.py' berada di luar scope workspace '/root/storage/projects/dalang-ai/workspace'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_073239",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-03_kai_cantrik_failure_illegal_escape_20261003_073239.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmp9c697hjb'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_073239",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-03_kai_uji_coba_test_precedent_20261003_073239.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_073309",
+      "title": "Cantrik Failure: Illegal Escape",
+      "filename": "2026-10-03_kai_cantrik_failure_illegal_escape_20261003_073309.md",
+      "agent_id": "kai",
+      "category": "kai-cantrik-error",
+      "tags": [
+        "cantrik",
+        "error",
+        "kai"
+      ],
+      "pitfalls": [
+        "AKSES DITOLAK: Path '../../etc/shadow' berada di luar scope workspace '/tmp/tmp0o101bj9'. Sub-agent hanya boleh memodifikasi file di dalam workspace yang ditentukan."
+      ],
+      "date": "2026-10-03"
+    },
+    {
+      "id": "JRN-20261003_073309",
+      "title": "Uji Coba Test Precedent",
+      "filename": "2026-10-03_kai_uji_coba_test_precedent_20261003_073309.md",
+      "agent_id": "kai",
+      "category": "test-category",
+      "tags": [
+        "unit-test",
+        "verification"
+      ],
+      "pitfalls": [
+        "Jebakan testing 1",
+        "Jebakan testing 2"
+      ],
+      "date": "2026-10-03"
     }
   ]
 }

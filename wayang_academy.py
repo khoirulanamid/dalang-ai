@@ -26,6 +26,7 @@ STANDARDS_MAP = {
     "kresna": "kresna_motion_standards.md",
     "bagong": "bagong_vault_standards.md",
     "wiku": "wiku_3d_standards.md",
+    "gathot": "gathot_social_standards.md",
 }
 
 

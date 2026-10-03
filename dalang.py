@@ -94,6 +94,7 @@ def cmd_roster():
         "risko": "🟣", "pingot": "🟢", "zaki": "🟡",
         "lulu": "🩷", "mika": "🩵", "nova": "🟠",
         "kai": "🔴", "ren": "🔵", "kresna": "🟣",
+        "wiku": "🟤", "bagong": "🟤", "gathot": "🟧",
     }
     for agent_id, info in WAYANG_ROSTER.items():
         icon = icons.get(agent_id, "⚪")

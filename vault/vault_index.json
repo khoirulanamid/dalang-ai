@@ -1,5 +1,113 @@
 [
   {
+    "id": "VLT-40905",
+    "filename": "20261003_143309_valid_film.html",
+    "category": "html_film",
+    "producer_agent": "kresna",
+    "title": "Film Valid Lulus QA Ren",
+    "description": "",
+    "file_path": "/root/storage/projects/dalang-ai/vault/html_film/20261003_143309_valid_film.html",
+    "relative_url": "/vault/html_film/20261003_143309_valid_film.html",
+    "size_bytes": 211,
+    "created_at": "2026-10-03 14:33:09",
+    "metadata": {}
+  },
+  {
+    "id": "VLT-97234",
+    "filename": "20261003_143239_valid_film.html",
+    "category": "html_film",
+    "producer_agent": "kresna",
+    "title": "Film Valid Lulus QA Ren",
+    "description": "",
+    "file_path": "/root/storage/projects/dalang-ai/vault/html_film/20261003_143239_valid_film.html",
+    "relative_url": "/vault/html_film/20261003_143239_valid_film.html",
+    "size_bytes": 211,
+    "created_at": "2026-10-03 14:32:39",
+    "metadata": {}
+  },
+  {
+    "id": "VLT-29445",
+    "filename": "20261003_142309_gathot_social_standards.md",
+    "category": "document",
+    "producer_agent": "gathot",
+    "title": "Gathot Social Media Engineering Standards v1.0.0",
+    "description": "Dokumen standar engineering lengkap yang mengatur semua konten yang diproduksi, dijadwalkan, atau dipublikasikan oleh Gathot. Mencakup: Copywriting SOP Viral Content, Hook Psychology Framework, Ethical Curation (No False Claims), Social SEO & Keyword Research, Posting Management & Scheduling, Platform-Specific Rules, Quality Gate Checklist, dan Prohibited Patterns Reference. Compliance: Diátaxis · Google Dev Docs · Meta Guidelines.",
+    "file_path": "/root/storage/projects/dalang-ai/vault/document/20261003_142309_gathot_social_standards.md",
+    "relative_url": "/vault/document/20261003_142309_gathot_social_standards.md",
+    "size_bytes": 27364,
+    "created_at": "2026-10-03 14:23:09",
+    "metadata": {
+      "version": "1.0.0",
+      "last_updated": "2026-10-02",
+      "wayang_name": "Gathot",
+      "task_id": "T-1706",
+      "sprint": "Sprint-16",
+      "doc_type": "Engineering Standards",
+      "diataxis_class": "Reference + Explanation",
+      "compliance": [
+        "Diátaxis Framework",
+        "Google Developer Documentation Style Guide",
+        "Meta Content Guidelines",
+        "Anti-AI-Slop Directives",
+        "mika_docs_standards.md"
+      ],
+      "sections": 10,
+      "platforms_covered": [
+        "Threads",
+        "Facebook",
+        "Instagram",
+        "TikTok"
+      ]
+    }
+  },
+  {
+    "id": "VLT-52350",
+    "filename": "20261003_142309_gathot_akta_kelahiran.md",
+    "category": "document",
+    "producer_agent": "bagong",
+    "title": "Akta Kelahiran Wayang Gathot — DALANG-WAYANG-007",
+    "description": "Dokumen resmi identitas Wayang Gathot (Social Media Automation & Content Operations Agent). Berisi nomor akta, peran, tanggung jawab, relasi antar-Wayang, kapabilitas, dan deklarasi resmi. Diterbitkan oleh Bagong sebagai Juru Simpan Vault pada Sprint-16.",
+    "file_path": "/root/storage/projects/dalang-ai/vault/document/20261003_142309_gathot_akta_kelahiran.md",
+    "relative_url": "/vault/document/20261003_142309_gathot_akta_kelahiran.md",
+    "size_bytes": 3962,
+    "created_at": "2026-10-03 14:23:09",
+    "metadata": {
+      "nomor_akta": "DALANG-WAYANG-007",
+      "wayang_name": "Gathot",
+      "wayang_version": "v1.0.0",
+      "task_id": "T-1706",
+      "sprint": "Sprint-16",
+      "doc_type": "Akta Kelahiran",
+      "diataxis_class": "Reference"
+    }
+  },
+  {
+    "id": "VLT-55066",
+    "filename": "20261003_123433_valid_film.html",
+    "category": "html_film",
+    "producer_agent": "kresna",
+    "title": "Film Valid Lulus QA Ren",
+    "description": "",
+    "file_path": "/root/storage/projects/dalang-ai/vault/html_film/20261003_123433_valid_film.html",
+    "relative_url": "/vault/html_film/20261003_123433_valid_film.html",
+    "size_bytes": 211,
+    "created_at": "2026-10-03 12:34:33",
+    "metadata": {}
+  },
+  {
+    "id": "VLT-69481",
+    "filename": "20261003_123313_valid_film.html",
+    "category": "html_film",
+    "producer_agent": "kresna",
+    "title": "Film Valid Lulus QA Ren",
+    "description": "",
+    "file_path": "/root/storage/projects/dalang-ai/vault/html_film/20261003_123313_valid_film.html",
+    "relative_url": "/vault/html_film/20261003_123313_valid_film.html",
+    "size_bytes": 211,
+    "created_at": "2026-10-03 12:33:13",
+    "metadata": {}
+  },
+  {
     "id": "VLT-35090",
     "filename": "20261003_102702_valid_film.html",
     "category": "html_film",

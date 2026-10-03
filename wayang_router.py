@@ -124,6 +124,18 @@ WAYANG_ROSTER = {
         ],
         "weight": 1.5,
     },
+    "gathot": {
+        "name": "Gathot",
+        "title": "Wayang Wira Warta",
+        "keywords": [
+            "social media", "medsos", "threads", "facebook", "instagram",
+            "caption", "copywriting", "naskah", "konten", "viral", "trending",
+            "hashtag", "keyword", "fyp", "hook", "posting", "publish", "upload",
+            "affiliate", "afiliasi", "tren", "engagement", "growth", "campaign",
+            "post", "status", "feed", "story", "reel", "carousel", "gathot"
+        ],
+        "weight": 1.3,
+    },
 }
 
 
