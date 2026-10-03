@@ -550,7 +550,7 @@ agents:
 ## SPRINT 25: Autonomous Campaign — Dara Set Rayon Premium Jumbo LD 120 (Threads Only) 👗
 > Goal: Menguji kecepatan & efisiensi Dalang-AI mengotomasi produk fashion baru khusus ke kanal Threads: Ekstraksi Shopee oleh Pingot, Copywriting viral oleh Gathot, Publikasi foto HD ke Threads oleh Gathot, Audit fisik oleh Ren, dan Arsip oleh Bagong.
 
-- [ ] **T-2501**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/5AsyAcB5TV via Playwright, ekstrak detail produk Dara Set Rayon Premium Jumbo Ld 120 (harga Rp135.500), download minimal 2 foto produk HD ke workspace/product_images/dara_jumbo/, dan simpan metadata di docs/dara_jumbo_campaign.json
+- [x] **T-2501**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/5AsyAcB5TV via Playwright, ekstrak detail produk Dara Set Rayon Premium Jumbo Ld 120 (harga Rp135.500), download minimal 2 foto produk HD ke workspace/product_images/dara_jumbo/, dan simpan metadata di docs/dara_jumbo_campaign.json
   - *Assigned*: auto
   - *Dependencies*: none
 
