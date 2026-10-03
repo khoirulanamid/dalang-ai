@@ -512,6 +512,35 @@ agents:
   - *Assigned*: auto
   - *Dependencies*: T-2303
 
+---
+
+## SPRINT 24: Autonomous Product Campaign — Dara One Set Blouse & Kulot Rayon 👗
+> Goal: Menguji kemampuan 100% otonom Dalang-AI mengelola kampanye affiliate baru dari awal: ekstraksi media HD Shopee, perumusan naskah viral omnichannel oleh Gathot, uji kualitas Ren, dan publikasi ke Threads & Facebook.
+
+- [ ] **T-2401**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/3qNaOVRWrP via Playwright, ekstrak detail produk Dara One Set Blouse Kulot Rayon (harga Rp124.500), download minimal 2 foto produk HD ke workspace/product_images/dara_oneset/, dan simpan metadata di docs/dara_oneset_campaign.json
+  - *Assigned*: auto
+  - *Dependencies*: none
+
+- [ ] **T-2402**: [auto] Rumuskan strategi copywriting viral omnichannel: Susun 3 sudut pandang naskah kurasi (Homewear santai, Busui friendly, Sat-set OOTD) lengkap dengan hook pancingan emosional, spesifikasi bahan rayon, CTA belanja Shopee, dan hashtag relevan di docs/dara_oneset_campaign.json
+  - *Assigned*: auto
+  - *Dependencies*: T-2401
+
+- [ ] **T-2403**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting status naskah terpilih beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot live di workspace/threads_dara_live.png
+  - *Assigned*: auto
+  - *Dependencies*: T-2402
+
+- [ ] **T-2404**: [auto] Publikasikan status Facebook: Jalankan script automasi Playwright untuk memposting status naskah kurasi beserta lampiran foto produk HD ke Facebook personal Rizqi Mubarak dan simpan screenshot live di workspace/fb_dara_live.png
+  - *Assigned*: auto
+  - *Dependencies*: T-2403
+
+- [ ] **T-2405**: [auto] Quality Gate & Visual Review: Ren menguji keabsahan fisik artefak (screenshot live dan file media >0 bytes) serta memastikan tidak ada duplikasi posting
+  - *Assigned*: auto
+  - *Dependencies*: T-2404
+
+- [ ] **T-2406**: [auto] Bagong Vault Archival: Arsipkan seluruh dokumentasi kampanye, naskah, dan bukti tayang ke sistem Bagong Vault
+  - *Assigned*: auto
+  - *Dependencies*: T-2405
+
 
 
 
