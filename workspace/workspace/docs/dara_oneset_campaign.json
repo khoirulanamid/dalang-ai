@@ -1,0 +1,75 @@
+{
+  "product_id": "dara-one-set-blouse-kulot-rayon",
+  "product_name": "Dara One Set Blouse Kulot Rayon",
+  "source_url": "https://s.shopee.co.id/3qNaOVRWrP",
+  "final_url": "https://shopee.co.id/product/1667221136/43032631708?exp_group=rollout&gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QACpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMaBRvcqdZwgRklGTWoHoxFGhRfNAexxPkhN1n8rcCO5qFEud_-aY2hsGdfUnqCpX0P0Z7lpJy6IP6_Ew8qmNpcGhlcnRleHTEmAAAAAx8U4iqUO1SXNOoVqD-59U8QbRNDOq9gYcFAEArvE4rETf9ny29aLEMWOOwWAVdUsOYrAPX206VbBCtyLhwtdI49xF8IZnmLUCYAhafCck4ItwMVBLNTijERx3glQT_KaX-cJ3xehEIzZWbVX46kLLcx-y6oKni-2Xo8KKzCaC8YMqBrZJLJTMrT3dtZWcA4Vs2_ULM&lang=id&mmp_pid=an_11398100392&uls_trackid=56pm94g202j9&utm_campaign=id_1gvAESeFNMX&utm_content=----&utm_medium=affiliates&utm_source=an_11398100392&utm_term=fn92jv6baj4c",
+  "price": {
+    "currency": "IDR",
+    "amount": 124500,
+    "formatted": "Rp124.500"
+  },
+  "category": "Fashion Muslim / Setelan Wanita",
+  "specifications": {
+    "material": "Rayon Premium / Rayon Twill",
+    "item_type": "One Set (Blouse + Kulot)",
+    "blouse_details": {
+      "lingkar_dada": "110-120 cm",
+      "panjang_baju": "65-70 cm",
+      "tipe_lengan": "Lengan Panjang / Kancing Aktif"
+    },
+    "kulot_details": {
+      "lingkar_pinggang": "60-110 cm (Full Karet)",
+      "panjang_celana": "95-100 cm",
+      "lingkar_paha": "70 cm"
+    },
+    "features": [
+      "Bahan rayon adem, jatuh, dan nyaman dipakai sehari-hari",
+      "Desain stylish cocok untuk casual, hangout, maupun formal",
+      "Busui friendly (kancing depan)"
+    ]
+  },
+  "images": [
+    {
+      "file_name": "dara_oneset_1.jpg",
+      "path": "product_images/dara_oneset/dara_oneset_1.jpg",
+      "source_url": "https://down-id.img.susercontent.com/file/id-11134201-81ztc-ms45oenuu8eda1",
+      "size_kb": 267,
+      "resolution": "HD",
+      "description": "Dara One Set Blouse Kulot Rayon - Product Photo 1"
+    },
+    {
+      "file_name": "dara_oneset_2.jpg",
+      "path": "product_images/dara_oneset/dara_oneset_2.jpg",
+      "source_url": "https://down-id.img.susercontent.com/file/id-11134201-81ztc-ms45oenuu8eda1_tn",
+      "size_kb": 31,
+      "resolution": "HD",
+      "description": "Dara One Set Blouse Kulot Rayon - Product Photo 2"
+    },
+    {
+      "file_name": "dara_oneset_3.jpg",
+      "path": "product_images/dara_oneset/dara_oneset_3.jpg",
+      "source_url": "https://down-id.img.susercontent.com/file/id-11110107-6vfev-ms2u18oyn7k188_cover",
+      "size_kb": 46,
+      "resolution": "HD",
+      "description": "Dara One Set Blouse Kulot Rayon - Product Photo 3"
+    },
+    {
+      "file_name": "dara_oneset_4.jpg",
+      "path": "product_images/dara_oneset/dara_oneset_4.jpg",
+      "source_url": "https://down-id.img.susercontent.com/file/id-11134201-81zte-mrn4rz2jnn6047",
+      "size_kb": 239,
+      "resolution": "HD",
+      "description": "Dara One Set Blouse Kulot Rayon - Product Photo 4"
+    },
+    {
+      "file_name": "dara_oneset_5.jpg",
+      "path": "product_images/dara_oneset/dara_oneset_5.jpg",
+      "source_url": "https://down-id.img.susercontent.com/file/id-11134201-81ztc-mrn4rzat21ad19",
+      "size_kb": 340,
+      "resolution": "HD",
+      "description": "Dara One Set Blouse Kulot Rayon - Product Photo 5"
+    }
+  ],
+  "crawled_at": "2026-10-03T13:22:58Z",
+  "status": "active"
+}

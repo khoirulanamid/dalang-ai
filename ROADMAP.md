@@ -517,15 +517,15 @@ agents:
 ## SPRINT 24: Autonomous Product Campaign — Dara One Set Blouse & Kulot Rayon 👗
 > Goal: Menguji kemampuan 100% otonom Dalang-AI mengelola kampanye affiliate baru dari awal: ekstraksi media HD Shopee, perumusan naskah viral omnichannel oleh Gathot, uji kualitas Ren, dan publikasi ke Threads & Facebook.
 
-- [ ] **T-2401**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/3qNaOVRWrP via Playwright, ekstrak detail produk Dara One Set Blouse Kulot Rayon (harga Rp124.500), download minimal 2 foto produk HD ke workspace/product_images/dara_oneset/, dan simpan metadata di docs/dara_oneset_campaign.json
+- [x] **T-2401**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/3qNaOVRWrP via Playwright, ekstrak detail produk Dara One Set Blouse Kulot Rayon (harga Rp124.500), download minimal 2 foto produk HD ke workspace/product_images/dara_oneset/, dan simpan metadata di docs/dara_oneset_campaign.json
   - *Assigned*: auto
   - *Dependencies*: none
 
-- [ ] **T-2402**: [auto] Rumuskan strategi copywriting viral omnichannel: Susun 3 sudut pandang naskah kurasi (Homewear santai, Busui friendly, Sat-set OOTD) lengkap dengan hook pancingan emosional, spesifikasi bahan rayon, CTA belanja Shopee, dan hashtag relevan di docs/dara_oneset_campaign.json
+- [x] **T-2402**: [auto] Rumuskan strategi copywriting viral omnichannel: Susun 3 sudut pandang naskah kurasi (Homewear santai, Busui friendly, Sat-set OOTD) lengkap dengan hook pancingan emosional, spesifikasi bahan rayon, CTA belanja Shopee, dan hashtag relevan di docs/dara_oneset_campaign.json
   - *Assigned*: auto
   - *Dependencies*: T-2401
 
-- [ ] **T-2403**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting status naskah terpilih beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot live di workspace/threads_dara_live.png
+- [x] **T-2403**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting status naskah terpilih beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot live di workspace/threads_dara_live.png
   - *Assigned*: auto
   - *Dependencies*: T-2402
 
@@ -544,3 +544,28 @@ agents:
 
 
 
+
+---
+
+## SPRINT 25: Autonomous Campaign — Dara Set Rayon Premium Jumbo LD 120 (Threads Only) 👗
+> Goal: Menguji kecepatan & efisiensi Dalang-AI mengotomasi produk fashion baru khusus ke kanal Threads: Ekstraksi Shopee oleh Pingot, Copywriting viral oleh Gathot, Publikasi foto HD ke Threads oleh Gathot, Audit fisik oleh Ren, dan Arsip oleh Bagong.
+
+- [ ] **T-2501**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/5AsyAcB5TV via Playwright, ekstrak detail produk Dara Set Rayon Premium Jumbo Ld 120 (harga Rp135.500), download minimal 2 foto produk HD ke workspace/product_images/dara_jumbo/, dan simpan metadata di docs/dara_jumbo_campaign.json
+  - *Assigned*: auto
+  - *Dependencies*: none
+
+- [ ] **T-2502**: [auto] Rumuskan strategi copywriting Threads viral: Susun naskah kurasi santai & emosional untuk audiens cewek/ibu-ibu (spesialisasi ukuran jumbo LD 120 nyaman anti sempit, bahan rayon adem semriwing) lengkap dengan CTA belanja dan hashtag relevan di docs/dara_jumbo_campaign.json
+  - *Assigned*: auto
+  - *Dependencies*: T-2501
+
+- [ ] **T-2503**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting naskah kurasi beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot verifikasi live di workspace/threads_dara_jumbo_live.png
+  - *Assigned*: auto
+  - *Dependencies*: T-2502
+
+- [ ] **T-2504**: [auto] Quality Gate & Visual Review: Ren melakukan audit kualitas fisik artefak, memeriksa screenshot live tayang threads_dara_jumbo_live.png dan validasi file media fisik >0 bytes
+  - *Assigned*: auto
+  - *Dependencies*: T-2503
+
+- [ ] **T-2505**: [auto] Bagong Vault Archival: Arsipkan seluruh dokumentasi kampanye, naskah, dan bukti tayang ke sistem Bagong Vault
+  - *Assigned*: auto
+  - *Dependencies*: T-2504
