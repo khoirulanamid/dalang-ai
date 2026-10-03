@@ -554,7 +554,7 @@ agents:
   - *Assigned*: auto
   - *Dependencies*: none
 
-- [ ] **T-2502**: [auto] Rumuskan strategi copywriting Threads viral: Susun naskah kurasi santai & emosional untuk audiens cewek/ibu-ibu (spesialisasi ukuran jumbo LD 120 nyaman anti sempit, bahan rayon adem semriwing) lengkap dengan CTA belanja dan hashtag relevan di docs/dara_jumbo_campaign.json
+- [x] **T-2502**: [auto] Rumuskan strategi copywriting Threads viral: Susun naskah kurasi santai & emosional untuk audiens cewek/ibu-ibu (spesialisasi ukuran jumbo LD 120 nyaman anti sempit, bahan rayon adem semriwing) lengkap dengan CTA belanja dan hashtag relevan di docs/dara_jumbo_campaign.json
   - *Assigned*: auto
   - *Dependencies*: T-2501
 

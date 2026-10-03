@@ -1,0 +1,282 @@
+"""
+Script to formulate and validate Threads viral copywriting strategy for Dara Set Rayon Premium Jumbo LD 120.
+Saves to docs/dara_jumbo_campaign.json and workspace/docs/dara_jumbo_campaign.json.
+"""
+
+import json
+import re
+from datetime import datetime, timezone
+from pathlib import Path
+
+# Paths
+DOC_PATH = Path("docs/dara_jumbo_campaign.json")
+WORKSPACE_DOC_PATH = Path("workspace/docs/dara_jumbo_campaign.json")
+
+AFFILIATE_URL = "https://s.shopee.co.id/5AsyAcB5TV"
+
+# Copywriting Angles Definition
+ANGLES = [
+    {
+        "angle_id": "angle-01",
+        "angle_name": "Anti Sempit & Bebas Begah",
+        "angle_description": "Menyasar cewek dan ibu-ibu bertubuh curvy/plus size yang sering kecewa beli baju jumbo tapi ketiak sesak dan celana ngepres paha saat duduk.",
+        "emotional_hook": "Dilema klasik belanja baju jumbo: labelnya XXL tapi pas dipakai duduk jahitan ketiak ketarik dan paha begah. Dara Set hadir dengan proporsi LD 120 cm riil dan lingkar paha 75 cm.",
+        "posts": {
+            "threads": {
+                "post_1": {
+                    "type": "hook_relatable",
+                    "caption": "Pernah nggak sih beli baju labelnya 'jumbo', tapi pas dipakai duduk rasanya kancing mau meletus dan ketiak ketarik? 🥲\n\nDilema nyata cewek atau ibu-ibu curvy tuh bukan susah cari model, tapi nemu setelan yang beneran lega tanpa bikin kelihatan kayak karung.\n\nKuncinya ada di potongan proporsional.",
+                    "visual_note": "Foto produk full-body Dara Jumbo One Set warna netral / earth tone"
+                },
+                "post_2": {
+                    "type": "spec_curation_cta",
+                    "caption": "Nah, kurasi Dara Set Jumbo ini kasih solusi ukuran riil:\n\n- Lingkar dada (LD) riil 120 cm: leluasa di dada & ketiak, muat BB hingga 85+ kg\n- Kulot pinggang full karet (60-120 cm) + lingkar paha 75 cm: anti begah pas duduk\n- Bahan Rayon Premium Twill: serat rapat, adem semriwing, dan flowy\n- Kancing depan aktif: praktis busui friendly\n\nHarga Rp135.500 per set.\nLink belanja Shopee: https://s.shopee.co.id/5AsyAcB5TV\n\n#BajuJumboWanita #OneSetJumbo #RayonAdem #OOTDBigSize",
+                    "visual_note": "Foto detail jahitan, lingkar paha kulot, dan tekstur kain rayon twill"
+                }
+            },
+            "facebook": {
+                "type": "storytelling_curation",
+                "caption": "Salah satu keluhan paling sering dari teman-teman yang cari pakaian big size adalah 'ukuran tanggung'. Di deskripsi ditulis jumbo, tapi begitu sampai rumah, ketiak sempit dan celana langsung ngetat pas dipakai duduk bersila.\n\nBuat yang butuh setelan santai tapi tetap rapi, kurasi Dara Set Rayon Premium Jumbo LD 120 ini menarik buat diperhatikan:\n\n- Ukuran atasan: LD 120 cm dengan panjang 70 cm, potongan longgar yang jatuh rapi\n- Ukuran bawahan: Lingkar pinggang elastis 60-120 cm, lingkar paha leluasa 75 cm, panjang 95 cm\n- Material: Rayon Premium Twill berkilap natural, adem semriwing di kulit, tidak kaku\n- Fitur praktis: Kancing depan aktif (busui friendly) & ujung lengan karet (wudhu friendly)\n\nSatu set atasan + kulot dibanderol Rp135.500.\n\nLink pembelian resmi di Shopee sudah kami cantumkan di sini: https://s.shopee.co.id/5AsyAcB5TV\n\n#BajuJumboWanita #OneSetJumbo #FashionBigSize #SetelanRayon #OOTDIbuMuda",
+                "visual_note": "Kolase foto produk: angle depan, samping, dan detail kerah"
+            },
+            "instagram": {
+                "type": "carousel_caption",
+                "caption": "Definisi outfit nyaman anti drama begah buat seharian ✨\n\nBukan cuma longgar, tapi potongannya proporsional bikin siluet tetap anggun:\n- LD riil 120 cm (nyaman muat sampai BB 85+ kg)\n- Celana kulot lingkar paha 75 cm & pinggang karet fleksibel\n- Rayon Premium Twill dingin, menyerap keringat maksimal\n- Kancing aktif (busui friendly) & lengan elastis (wudhu friendly)\n\nHarga: Rp135.500 / set\nLink belanja tersedia di bio profil ya!\n\n#BajuJumboWanita #OneSetJumbo #RayonAdem #OOTDBigSize #FashionPlusSize",
+                "visual_note": "Carousel 3 slide: Slide 1 Foto model, Slide 2 Detail ukuran LD & paha, Slide 3 Detail kain & kancing"
+            }
+        },
+        "hashtags": {
+            "threads": [
+                "#BajuJumboWanita",
+                "#OneSetJumbo",
+                "#RayonAdem",
+                "#OOTDBigSize"
+            ],
+            "facebook": [
+                "#BajuJumboWanita",
+                "#OneSetJumbo",
+                "#FashionBigSize",
+                "#SetelanRayon",
+                "#OOTDIbuMuda"
+            ],
+            "instagram": [
+                "#BajuJumboWanita",
+                "#OneSetJumbo",
+                "#RayonAdem",
+                "#OOTDBigSize",
+                "#FashionPlusSize"
+            ]
+        },
+        "cta": {
+            "platform": "Shopee",
+            "short_url": AFFILIATE_URL,
+            "cta_text": "Cek dan order di Shopee"
+        }
+    },
+    {
+        "angle_id": "angle-02",
+        "angle_name": "Ibu-Ibu Sat-Set & Adem Semriwing",
+        "angle_description": "Menyasar ibu-ibu muda dan ibu rumah tangga yang butuh baju dingin semriwing untuk cuaca panas tropis, gampang buat menyusui, dan sat-set langsung rapi kalau mendadak ada urusan luar rumah.",
+        "emotional_hook": "Suhu siang hari lagi gerah-gerahnya, dasteran di rumah memang adem tapi begitu kurir datang atau mendadak harus jemput anak langsung repot ganti baju. Butuh one set sejuk semriwing yang siap diajak sat-set.",
+        "posts": {
+            "threads": {
+                "post_1": {
+                    "type": "hook_relatable",
+                    "caption": "Suhu siang bolong lagi panas-panasnya, harus momong anak, masak, plus mendadak disuruh keluar jemput paket atau ke warung? ☀️\n\nDilema ibu-ibu tuh mau tetap adem kayak dasteran, tapi sungkan kalau ketahuan tetangga.\n\nSolusinya baju yang semriwing dingin tapi tampilannya langsung rapi sat-set.",
+                    "visual_note": "Foto Dara Jumbo One Set nuansa casual santai di rumah"
+                },
+                "post_2": {
+                    "type": "spec_curation_cta",
+                    "caption": "Setelan yang ngerti rutinitas harian ibu-ibu:\n\n- Bahan Rayon Premium Twill: dingin semriwing, serat rapat & serap keringat\n- Kancing depan aktif: akses menyusui (busui friendly) super praktis\n- Blouse jumbo LD 120 cm + kulot saku kanan: bebas gerak tanpa sesak\n- Tinggal pasang jilbab langsung siap jalan\n\nHarga Rp135.500 per set.\nLink belanja Shopee: https://s.shopee.co.id/5AsyAcB5TV\n\n#OOTDIbuMuda #BajuBusuiFriendly #SetelanRayon #OutfitAdem",
+                    "visual_note": "Foto detail bukaan kancing depan dan kantong samping celana"
+                }
+            },
+            "facebook": {
+                "type": "storytelling_curation",
+                "caption": "Bagi para ibu, baju harian itu punya dua syarat mutlak: harus adem semriwing karena cuaca tropis kita yang luar biasa panas, dan harus praktis kalau anak mendadak rewel mau nenen.\n\nDara Set Rayon Premium Jumbo LD 120 ini salah satu pilihan setelan yang menjawab kebutuhan tersebut secara fungsional:\n\n- Kancing depan hidup: memudahkan akses menyusui kapan saja tanpa ribet\n- Serat Rayon Premium Viscose: adem alami, berpori sehingga sirkulasi udara lancar saat beraktivitas di rumah\n- Atasan jumbo LD 120 cm: potongan longgar menutup lekuk tubuh dengan sopan\n- Bawahan celana kulot santai dengan kantong fungsional untuk menyimpan ponsel atau uang kembalian\n\nHarga Rp135.500 untuk setelan lengkap atasan dan kulot.\n\nLink pemesanan resmi Shopee: https://s.shopee.co.id/5AsyAcB5TV\n\n#SetelanBusui #BajuIbuMuda #RayonAdem #FashionMuslimJumbo #OneSetHarian",
+                "visual_note": "Foto suasana santai di teras rumah mengenakan Dara Set Jumbo"
+            },
+            "instagram": {
+                "type": "carousel_caption",
+                "caption": "Sat-set dari rumah langsung rapi keluar tanpa drama ganti baju 🌿\n\nBuat moms yang cari one set adem semriwing & fungsional:\n- Bahan Rayon Premium adem, flowy, nggak gerah\n- Kancing depan aktif (busui friendly)\n- Lengan elastis wudhu friendly\n- LD 120 cm jumbo anti begah\n\nSatu set komplit Rp135.500.\nLink belanja resmi bisa diklik di bio!\n\n#SetelanBusui #OOTDIbuMuda #BajuAdem #OneSetRayonJumbo #BusuiFriendlyOutfit",
+                "visual_note": "Carousel 3 slide fokus pada kepraktisan busui, elastisitas wudhu lengan, dan flowy bahan"
+            }
+        },
+        "hashtags": {
+            "threads": [
+                "#OOTDIbuMuda",
+                "#BajuBusuiFriendly",
+                "#SetelanRayon",
+                "#OutfitAdem"
+            ],
+            "facebook": [
+                "#SetelanBusui",
+                "#BajuIbuMuda",
+                "#RayonAdem",
+                "#FashionMuslimJumbo",
+                "#OneSetHarian"
+            ],
+            "instagram": [
+                "#SetelanBusui",
+                "#OOTDIbuMuda",
+                "#BajuAdem",
+                "#OneSetRayonJumbo",
+                "#BusuiFriendlyOutfit"
+            ]
+        },
+        "cta": {
+            "platform": "Shopee",
+            "short_url": AFFILIATE_URL,
+            "cta_text": "Cek dan order di Shopee"
+        }
+    },
+    {
+        "angle_id": "angle-03",
+        "angle_name": "Outfit Nongkrong & WFH Modis Bebas Begah",
+        "angle_description": "Menyasar wanita dewasa, pekerja WFH, mahasiswi, atau ibu-ibu yang ingin outfit nongkrong di cafe atau arisan keluarga dengan gaya chic, elegan, dan nyaman tanpa rasa begah.",
+        "emotional_hook": "Nongkrong di cafe atau arisan keluarga sering jadi serba salah kalau pakai baju ketat: habis makan kenyang langsung sesak. Setelan rayon twill yang jatuh flowy memberi siluet ramping natural tanpa menekan perut.",
+        "posts": {
+            "threads": {
+                "post_1": {
+                    "type": "hook_relatable",
+                    "caption": "Kenyamanan sejati pas nongkrong di cafe itu bukan kursi empuk, tapi baju yang nggak bikin begah sehabis makan kenyang. ☕\n\nBanyak cewek paham rasanya harus nahan napas atau ngendorin kancing celana diam-diam di balik meja.\n\nPadahal potongan setelan yang flowy bisa bikin siluet jatuh anggun tanpa ngepres lekuk tubuh.",
+                    "visual_note": "Foto Dara Jumbo One Set angle estetik outdoor / cafe vibe"
+                },
+                "post_2": {
+                    "type": "spec_curation_cta",
+                    "caption": "Kurasi spek Dara Set Rayon Jumbo LD 120 buat outfit santai elegan:\n\n- Rayon premium berkarakter flowy: jatuh rapi tanpa jiplak lekuk tubuh\n- Celana kulot karet (paha 75 cm): bebas gerak & santai selonjoran\n- Blouse jumbo LD 120 cm berkerah chic: modis buat nongkrong atau arisan\n- Multifungsi: atasan & kulot gampang di-mix & match terpisah\n\nHarga Rp135.500 per set.\nLink Shopee: https://s.shopee.co.id/5AsyAcB5TV\n\n#CurvyOutfitIndo #OneSetRayonJumbo #FashionBigSize #OOTDJumbo",
+                    "visual_note": "Foto styling mix and match blouse dengan outer atau celana lain"
+                }
+            },
+            "facebook": {
+                "type": "storytelling_curation",
+                "caption": "Menemukan pakaian kasual yang pas untuk kumpul keluarga atau arisan seringkali membingungkan: ingin tampil rapi dan modis, namun kenyamanan gerak tetap jadi prioritas utama.\n\nDara Set Rayon Jumbo LD 120 dirancang dengan pendekatan seimbang antara estetika chic dan kenyamanan big size:\n\n- Siluet Anggun: Karakter kain rayon viscose diamond twill memiliki efek drape (jatuh) yang anggun saat melangkah, memberikan kesan ramping alami tanpa membungkus ketat tubuh\n- Proporsi Longgar: Lingkar dada 120 cm dan lingkar paha kulot 75 cm memberikan ruang gerak leluasa saat duduk atau beranjak\n- Fleksibilitas Mix-and-Match: Blouse kerah modern dapat dipadukan dengan celana jeans, sementara kulot rayon bisa dipasangkan dengan kaos basic atau tunik lain\n\nDengan banderol Rp135.500 untuk satu setelan utuh atasan dan bawahan.\n\nLink produk resmi di Shopee: https://s.shopee.co.id/5AsyAcB5TV\n\n#OOTDArisan #FashionWanitaJumbo #SetelanRayonPremium #OutfitNongkrong #OneSetKekinian",
+                "visual_note": "Foto model berpose berdiri memperlihatkan drape kain saat bergerak"
+            },
+            "instagram": {
+                "type": "carousel_caption",
+                "caption": "Tampil modis tanpa rasa begah pas nongkrong atau arisan ✨☕\n\nPerpaduan sempurna antara potongan longgar jumbo dan bahan flowy elegan:\n- Atasan blouse LD 120 cm kerah chic\n- Celana kulot santai paha 75 cm full karet\n- Rayon Premium jatuh anggun & sejuk semriwing\n- Gampang dipadupadankan terpisah\n\nHarga Rp135.500 / set.\nLink belanja tersedia di bio profil!\n\n#CurvyOutfitIndo #OneSetRayonJumbo #FashionBigSize #OOTDArisan #OutfitNongkrong",
+                "visual_note": "Carousel 3 slide: Slide 1 Pose cafe outfit, Slide 2 Detail kerah dan kancing, Slide 3 Detail celana kulot"
+            }
+        },
+        "hashtags": {
+            "threads": [
+                "#CurvyOutfitIndo",
+                "#OneSetRayonJumbo",
+                "#FashionBigSize",
+                "#OOTDJumbo"
+            ],
+            "facebook": [
+                "#OOTDArisan",
+                "#FashionWanitaJumbo",
+                "#SetelanRayonPremium",
+                "#OutfitNongkrong",
+                "#OneSetKekinian"
+            ],
+            "instagram": [
+                "#CurvyOutfitIndo",
+                "#OneSetRayonJumbo",
+                "#FashionBigSize",
+                "#OOTDArisan",
+                "#OutfitNongkrong"
+            ]
+        },
+        "cta": {
+            "platform": "Shopee",
+            "short_url": AFFILIATE_URL,
+            "cta_text": "Cek dan order di Shopee"
+        }
+    }
+]
+
+MATERIAL_SPEC_SUMMARY = {
+    "material": "Rayon Premium Twill / Rayon Viscose Diamond High Quality",
+    "key_properties": [
+        "Serat selulosa alami berpori tinggi — daya serap keringat maksimal dan adem semriwing di iklim tropis",
+        "Kerapatan serat twill yang halus dan jatuh (drape flowy) — tidak kaku dan tidak menerawang",
+        "Tekstur lembut non-iritasi — nyaman di kulit sensitif saat bergesekan di area paha dan ketiak",
+        "Permukaan dengan kilau natural elegan — cocok untuk daily santai maupun acara semi-formal",
+        "Perawatan mudah — cepat kering dan disarankan dicuci lembut tanpa pemutih keras"
+    ],
+    "positioning": "Pilihan ideal busana big size wanita di iklim tropis: memadukan kelegaan potongan LD 120 cm dengan karakter kain rayon twill yang jatuh anggun, menghilangkan rasa begah tanpa mengorbankan estetika feminin."
+}
+
+PLATFORM_STRATEGY = {
+    "threads": {
+        "primary_focus": "Diskusi santai seputar dilema berpakaian wanita curvy/plus size dan rutinitas ibu-ibu, punchline di kalimat pertama, tone relatable tanpa klaim pribadi palsu",
+        "format": "Thread bersambung 2 post: Post 1 hook relatable / everyday dilemma, Post 2 kurasi spesifikasi teknis riil + link Shopee",
+        "character_limit": 500,
+        "recommended_posting_hours_wib": ["08:00-09:30", "12:00-13:30", "19:00-21:00"]
+    },
+    "facebook": {
+        "primary_focus": "Komunitas ibu rumah tangga, grup arisan, dan pecinta busana muslim jumbo",
+        "format": "Post naratif hangat, edukasi spesifikasi ukuran riil LD 120 & lingkar paha, link di badan post",
+        "recommended_posting_hours_wib": ["10:00-11:30", "15:30-17:00", "20:00-21:30"]
+    },
+    "instagram": {
+        "primary_focus": "Visual showcase kelembutan dan drape rayon twill, micro-blogging carousel, punchy caption",
+        "format": "Carousel 3 slide + caption kurasi ringkas, CTA mengarahkan ke link bio",
+        "recommended_posting_hours_wib": ["11:30-13:00", "17:30-19:00", "20:30-22:00"]
+    }
+}
+
+
+def build_and_save():
+    # Read existing
+    with open(DOC_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # Standardize specs list for universal reader compatibility
+    specs_list = [
+        "Ukuran riil jumbo: Lingkar Dada (LD) 120 cm, Panjang Baju 68-72 cm (muat BB hingga 85+ kg)",
+        "Bahan Rayon Premium Twill / Rayon Viscose Diamond: sejuk dingin semriwing, serat rapat tidak menerawang, jatuh flowy",
+        "Celana kulot elastis: Lingkar Pinggang 60-120 cm full karet, Lingkar Paha leluasa 70-75 cm, Panjang Celana 92-96 cm",
+        "Fitur fungsional: Kancing depan aktif (busui friendly), lengan panjang elastis (wudhu friendly), dan saku samping kanan",
+        "One Set komplit (atasan blouse + celana kulot) serbaguna untuk daily, WFH, hingga acara santai/arisan"
+    ]
+
+    data["affiliate_url"] = AFFILIATE_URL
+    data["specs"] = specs_list
+
+    # Update campaign_strategy with enriched details
+    data["campaign_strategy"] = {
+        "target_audience": "Cewek & ibu-ibu (spesialisasi ukuran jumbo LD 120 nyaman anti sempit, bahan rayon adem semriwing)",
+        "key_selling_points": [
+            "Ukuran riil jumbo LD 120 cm & lingkar paha 75 cm muat sampai BB 85+ kg tanpa terasa begah atau sempit di ketiak",
+            "Bahan rayon premium twill dingin semriwing seharian di iklim tropis",
+            "Fitur praktis kancing depan busui friendly & lengan elastis wudhu friendly",
+            "Desain chic modern dan flowy, multifungsi bisa dipadukan terpisah",
+            "Harga sangat terjangkau hanya Rp135.500 per set lengkap atasan + celana kulot"
+        ],
+        "threads_viral_strategy": {
+            "core_narrative": "Mengangkat relatable pain point wanita curvy dan ibu-ibu saat mencari baju jumbo yang adem, nyaman, dan tidak begah saat beraktivitas",
+            "framework": "2-Post Thread Split (Post 1: Situational Hook / Dilemma -> Post 2: Curated Specs & Soft CTA)",
+            "compliance": "Sesuai standar Gathot: Tanpa klaim konsumsi pribadi palsu, tanpa emoji bullets, karakter Threads <= 500"
+        }
+    }
+
+    # Add structured campaign block
+    data["campaign"] = {
+        "campaign_id": "T-2502",
+        "campaign_name": "Dara Jumbo One Set LD 120 Viral Threads & Omnichannel Campaign",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "target_audience": "Cewek & ibu-ibu (spesialisasi ukuran jumbo LD 120 nyaman anti sempit, bahan rayon adem semriwing)",
+        "copywriting_angles": ANGLES,
+        "material_spec_summary": MATERIAL_SPEC_SUMMARY,
+        "platform_strategy": PLATFORM_STRATEGY
+    }
+
+    # Write to primary doc path
+    with open(DOC_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    print(f"Saved to {DOC_PATH}")
+
+    # Write to workspace doc path if parent dir exists
+    if WORKSPACE_DOC_PATH.parent.exists():
+        with open(WORKSPACE_DOC_PATH, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        print(f"Saved to {WORKSPACE_DOC_PATH}")
+
+
+if __name__ == "__main__":
+    build_and_save()
