@@ -1,5 +1,53 @@
 [
   {
+    "id": "VLT-69717",
+    "filename": "20261003_235259_threads_dara_jumbo_live.png",
+    "category": "campaign_affiliate",
+    "producer_agent": "bagong",
+    "title": "Threads Dara Jumbo LD 120 Live Screenshot",
+    "description": "Bukti visual postingan Dara Set Rayon Jumbo LD 120 live di Threads @rizki_mubarakid",
+    "file_path": "/root/storage/projects/dalang-ai/vault/campaign_affiliate/20261003_235259_threads_dara_jumbo_live.png",
+    "relative_url": "/vault/campaign_affiliate/20261003_235259_threads_dara_jumbo_live.png",
+    "size_bytes": 74619,
+    "created_at": "2026-10-03 23:52:59",
+    "metadata": {
+      "sprint": "SPRINT-25",
+      "price": 135500
+    }
+  },
+  {
+    "id": "VLT-20849",
+    "filename": "20261003_235248_threads_dara_jumbo_live.png",
+    "category": "campaign_affiliate",
+    "producer_agent": "bagong",
+    "title": "Threads Dara Jumbo LD 120 Live Screenshot",
+    "description": "Bukti visual postingan Dara Set Rayon Jumbo LD 120 live di Threads @rizki_mubarakid",
+    "file_path": "/root/storage/projects/dalang-ai/vault/campaign_affiliate/20261003_235248_threads_dara_jumbo_live.png",
+    "relative_url": "/vault/campaign_affiliate/20261003_235248_threads_dara_jumbo_live.png",
+    "size_bytes": 74619,
+    "created_at": "2026-10-03 23:52:48",
+    "metadata": {
+      "sprint": "SPRINT-25",
+      "price": 135500
+    }
+  },
+  {
+    "id": "VLT-09914",
+    "filename": "20261003_235237_threads_dara_jumbo_live.png",
+    "category": "campaign_affiliate",
+    "producer_agent": "bagong",
+    "title": "Threads Dara Jumbo LD 120 Live Screenshot",
+    "description": "Bukti visual postingan Dara Set Rayon Jumbo LD 120 live di Threads @rizki_mubarakid",
+    "file_path": "/root/storage/projects/dalang-ai/vault/campaign_affiliate/20261003_235237_threads_dara_jumbo_live.png",
+    "relative_url": "/vault/campaign_affiliate/20261003_235237_threads_dara_jumbo_live.png",
+    "size_bytes": 74619,
+    "created_at": "2026-10-03 23:52:37",
+    "metadata": {
+      "sprint": "SPRINT-25",
+      "price": 135500
+    }
+  },
+  {
     "id": "VLT-64228",
     "filename": "20261003_160029_valid_film.html",
     "category": "html_film",

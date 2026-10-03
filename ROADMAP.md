@@ -558,14 +558,14 @@ agents:
   - *Assigned*: auto
   - *Dependencies*: T-2501
 
-- [ ] **T-2503**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting naskah kurasi beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot verifikasi live di workspace/threads_dara_jumbo_live.png
+- [x] **T-2503**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting naskah kurasi beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot verifikasi live di workspace/threads_dara_jumbo_live.png
   - *Assigned*: auto
   - *Dependencies*: T-2502
 
-- [ ] **T-2504**: [auto] Quality Gate & Visual Review: Ren melakukan audit kualitas fisik artefak, memeriksa screenshot live tayang threads_dara_jumbo_live.png dan validasi file media fisik >0 bytes
+- [x] **T-2504**: [auto] Quality Gate & Visual Review: Ren melakukan audit kualitas fisik artefak, memeriksa screenshot live tayang threads_dara_jumbo_live.png dan validasi file media fisik >0 bytes
   - *Assigned*: auto
   - *Dependencies*: T-2503
 
-- [ ] **T-2505**: [auto] Bagong Vault Archival: Arsipkan seluruh dokumentasi kampanye, naskah, dan bukti tayang ke sistem Bagong Vault
+- [x] **T-2505**: [auto] Bagong Vault Archival: Arsipkan seluruh dokumentasi kampanye, naskah, dan bukti tayang ke sistem Bagong Vault
   - *Assigned*: auto
   - *Dependencies*: T-2504
