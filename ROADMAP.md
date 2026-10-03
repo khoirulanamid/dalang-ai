@@ -533,7 +533,7 @@ agents:
   - *Assigned*: auto
   - *Dependencies*: T-2403
 
-- [ ] **T-2405**: [auto] Quality Gate & Visual Review: Ren menguji keabsahan fisik artefak (screenshot live dan file media >0 bytes) serta memastikan tidak ada duplikasi posting
+- [ ] **T-2405**: [auto] Quality Gate & Visual Review: Ren melakukan audit kualitas fisik artefak, memeriksa screenshot live tayang dan validasi file media fisik >0 bytes
   - *Assigned*: auto
   - *Dependencies*: T-2404
 

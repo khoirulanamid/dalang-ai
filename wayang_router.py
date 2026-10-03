@@ -14,9 +14,11 @@ WAYANG_ROSTER = {
         "keywords": [
             "database", "schema", "sql", "migration", "data model", "domain model",
             "orm", "pydantic", "sqlite", "postgres", "mysql", "redis", "contract",
-            "iso 8601", "json schema", "entity", "value object", "repository", "tabel"
+            "iso 8601", "json schema", "entity", "value object", "repository", "tabel",
+            "crawl", "crawler", "crawling", "scrape", "scraping", "scraper", "ekstrak",
+            "ekstraksi", "metadata", "shopee", "shortlink", "download foto", "unduh media"
         ],
-        "weight": 1.0,
+        "weight": 1.2,
     },
     "zaki": {
         "name": "Zaki",
@@ -25,9 +27,10 @@ WAYANG_ROSTER = {
             "backend", "api", "fastapi", "rest", "endpoint", "crud", "auth",
             "token", "jwt", "login", "register", "controller", "service",
             "business logic", "route", "server", "middleware", "handler",
-            "api hardening", "rate limit", "tamper", "replay attack", "signature verification"
+            "api hardening", "rate limit", "tamper", "replay attack", "signature verification",
+            "playwright", "browser automation", "headless", "script automasi", "post automation"
         ],
-        "weight": 1.0,
+        "weight": 1.1,
     },
     "lulu": {
         "name": "Lulu",
@@ -79,10 +82,11 @@ WAYANG_ROSTER = {
         "keywords": [
             "test", "testing", "pengujian", "uji coba", "qa", "unit test",
             "integration test", "e2e", "pytest", "bva", "aaa pattern", "assertion",
-            "scenario", "mock", "verifikasi", "validasi",
+            "scenario", "mock", "verifikasi", "validasi", "quality gate", "review kualitas",
+            "audit fisik", "inspeksi fisik", "keabsahan", "ren",
             "security test", "regression test", "evidence", "poc verification", "audit trail"
         ],
-        "weight": 1.0,
+        "weight": 1.4,
     },
     "wiku": {
         "name": "Wiku",

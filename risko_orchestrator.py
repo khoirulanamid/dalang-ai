@@ -283,7 +283,7 @@ class RiskoOrchestrator:
             assigned_this_cycle = set()
             for task in next_tasks:
                 explicit = task.get("assigned") or task.get("agent")
-                if not explicit or explicit == "unassigned":
+                if not explicit or explicit.lower() in ("unassigned", "auto", "[auto]"):
                     assigned_agent, score = auto_route_task(task["title"], explicit_agent=None)
                     logger.info(f"[Risko Routing] Task {task['id']} '{task['title']}' auto-assigned to [{assigned_agent}] (score={score:.1f})")
                 else:
