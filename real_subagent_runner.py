@@ -316,9 +316,10 @@ class RealSubAgentRunner:
 - Always use the venv paths above for `run_command`
 - Write code files with `write_file`, then test them with `run_command`
 - Action Deadline: Maksimal 3 kali membaca/cek. Di langkah ke-4 WAJIB eksekusi nyata.
-- Productive Tools Standard: Sebelum menulis crawler Shopee dari nol, SELALU gunakan tool resmi siap pakai:
-  `python3 /root/storage/projects/dalang-ai/tools/shopee_media_extractor.py <url> --out <output_dir> --max 5`
-  Tool ini menghemat waktu 90% dan langsung menghasilkan gambar HD bersih tanpa trial-and-error.
+- PRINSIP PRODUKTIF & EFFICIENCY FIRST (MANDAT BOS MUDA):
+  * DILARANG mengulang-ulang proses trial & error yang sama secara manual.
+  * Jika sebuah pekerjaan melibatkan proses teknis berulang (seperti scraping, posting medsos, resize aset, konversi format), karyawannya WAJIB BERPIKIR MAJU: buat modul tools/reusable script mandiri terlebih dahulu, simpan di folder `tools/`, lalu jalankan tool tersebut.
+  * Hindari membuang-buang waktu dengan membaca file besar berkali-kali. Bekerjalah cerdas, cepat, modular, dan hasilkan output berkualitas tinggi.
 - Once tests pass, declare yourself done.
 """
 
