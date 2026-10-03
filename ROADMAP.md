@@ -249,3 +249,29 @@ agents:
   - *Assigned*: bagong
   - *Dependencies*: T-1302, T-1303, T-1304, T-1305
 
+---
+
+## SPRINT 14: Threads Market Intelligence & Affiliate Trend Discovery 🚀
+> Goal: Riset tren produk affiliate yang sedang ramai dibahas di Threads Indonesia. Tim Dalang-AI mengumpulkan data kata kunci, menganalisis kategori produk dengan engagement tinggi (Racun Shopee / Spill Link), memetakan harga konversi terbaik, dan menyimpan laporannya ke Bagong Vault.
+
+- [x] **T-1401**: [pingot] Crawl & ekstrak postingan tren Threads Indonesia terkait kata kunci affiliate ('racun shopee', 'spill shopee', 'link di bio', 'worth it', 'shopee haul') menggunakan session cookie yang aman
+  - *Assigned*: pingot
+  - *Dependencies*: none
+
+- [x] **T-1402**: [pingot] Analisis pola & klasterisasi produk trending — petakan kategori (fashion, skincare, home living/gadget mini), rentang harga manis (sweet spot Rp 20rb - Rp 150rb), dan volume engagement
+  - *Assigned*: pingot
+  - *Dependencies*: T-1401
+
+- [x] **T-1403**: [mika] Susun laporan riset pasar eksekutif 'Threads Affiliate Trend Report' — rekomendasi top 5 produk potensial konversi tinggi untuk Bos Muda
+  - *Assigned*: mika
+  - *Dependencies*: T-1402
+
+- [x] **T-1404**: [ren] Validasi data laporan tren — verifikasi bahwa rekomendasi produk tidak fiktif, realistis, etis, dan bebas klaim palsu
+  - *Assigned*: ren
+  - *Dependencies*: T-1403
+
+- [x] **T-1405**: [bagong] Deposit laporan hasil riset tren pasar ke Bagong Vault kategori 'report'
+  - *Assigned*: bagong
+  - *Dependencies*: T-1404
+
+
