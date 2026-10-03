@@ -441,7 +441,7 @@ agents:
   - *Assigned*: auto
   - *Dependencies*: T-2002
 
-- [ ] **T-2004**: [auto] Deposit seluruh log eksekusi, screenshot live, dan perbarui catatan status ke Bagong Vault
+- [x] **T-2004**: [auto] Deposit seluruh log eksekusi, screenshot live, dan perbarui catatan status ke Bagong Vault
   - *Assigned*: auto
   - *Dependencies*: T-2003
 
@@ -450,29 +450,46 @@ agents:
 ## SPRINT 21: Protokol Komunikasi & Direktori Pegawai Kantor Dalang-AI 🏢
 > Goal: Membangun sistem komunikasi kantor nyata antar-Wayang. Jika ada task yang tidak dipahami atau berstatus [auto], Wayang WAJIB bertanya kepada Risko (Orchestrator) atau merujuk Direktori Kantor (`wayang_directory.py`), bukan pura-pura selesai. Ren QA Gate diperketat dengan bukti fisik wajib (Physical Artifact Verification).
 
-- [ ] **T-2101**: [pingot] Bangun modul Direktori Kantor `wayang_directory.py` yang memuat profil keahlian, domain tugas, alat utama, dan kontak rujukan untuk seluruh 12 Wayang
+- [x] **T-2101**: [pingot] Bangun modul Direktori Kantor `wayang_directory.py` yang memuat profil keahlian, domain tugas, alat utama, dan kontak rujukan untuk seluruh 12 Wayang
   - *Assigned*: pingot
   - *Dependencies*: none
 
-- [ ] **T-2102**: [zaki] Implementasikan tool baru `ask_orchestrator(task_desc)` dan `consult_peer(peer_agent, question)` di `agent_tools.py` agar sesama Wayang bisa saling bertanya dan oper tugas
+- [x] **T-2102**: [zaki] Implementasikan tool baru `ask_orchestrator(task_desc)` dan `consult_peer(peer_agent, question)` di `agent_tools.py` agar sesama Wayang bisa saling bertanya dan oper tugas
   - *Assigned*: zaki
   - *Dependencies*: T-2101
 
-- [ ] **T-2103**: [risko] Upgrade logika Risko di `risko_orchestrator.py` & `wayang_router.py`: jika tiket berlabel [auto] atau skor kecocokan rendah, lakukan broadcast evaluasi ke seluruh Wayang untuk penugasan ulang otomatis
+- [x] **T-2103**: [risko] Upgrade logika Risko di `risko_orchestrator.py` & `wayang_router.py`: jika tiket berlabel [auto] atau skor kecocokan rendah, lakukan broadcast evaluasi ke seluruh Wayang untuk penugasan ulang otomatis
   - *Assigned*: risko
   - *Dependencies*: T-2102
 
-- [ ] **T-2104**: [ren] Perketat gerbang inspeksi `ren_qa_standards.md` & `ren_quality_gate.py`: HARAM stempel APPROVED pada task eksekusi/posting jika artefak fisik (.png hasil screenshot atau file output > 0 bytes) tidak terverifikasi nyata di disk
+- [x] **T-2104**: [ren] Perketat gerbang inspeksi `ren_qa_standards.md` & `ren_quality_gate.py`: HARAM stempel APPROVED pada task eksekusi/posting jika artefak fisik (.png hasil screenshot atau file output > 0 bytes) tidak terverifikasi nyata di disk
   - *Assigned*: ren
   - *Dependencies*: T-2103
 
-- [ ] **T-2105**: [kai] Security audit jalur komunikasi antar-Wayang (mencegah loop tak terbatas, unauthorized agent privilege escalation, dan prompt injection lewat oper tugas)
+- [x] **T-2105**: [kai] Security audit jalur komunikasi antar-Wayang (mencegah loop tak terbatas, unauthorized agent privilege escalation, dan prompt injection lewat oper tugas)
   - *Assigned*: kai
   - *Dependencies*: T-2104
 
-- [ ] **T-2106**: [bagong] Arsipkan standar komunikasi kantor dan perbarui dokumentasi sistem ke Bagong Vault
+- [x] **T-2106**: [bagong] Arsipkan standar komunikasi kantor dan perbarui dokumentasi sistem ke Bagong Vault
   - *Assigned*: bagong
   - *Dependencies*: T-2105
+
+---
+
+## SPRINT 22: Sinkronisasi Identitas 12 Wayang Resmi di Direktori Kantor 🎭
+> Goal: Pingot menyelaraskan seluruh entitas di `workspace/wayang_directory.py` agar menggunakan 12 identitas Wayang resmi (Risko, Pingot, Zaki, Lulu, Mika, Nova, Kai, Ren, Wiku, Kresna, Bagong, Gathot) menggantikan nama placeholder lama. Ren QA memvalidasi test suite lulus 100%.
+
+- [ ] **T-2201**: [pingot] Selaraskan seluruh profil di `workspace/wayang_directory.py` agar menggunakan 12 wayang_id resmi (risko, pingot, zaki, lulu, mika, nova, kai, ren, wiku, kresna, bagong, gathot) lengkap dengan gelar dan domain keahlian yang akurat
+  - *Assigned*: pingot
+  - *Dependencies*: none
+
+- [ ] **T-2202**: [ren] Perbarui dan jalankan `workspace/test_wayang_directory.py` untuk memverifikasi 12 nama Wayang resmi terdaftar valid dan seluruh test suite lulus 100%
+  - *Assigned*: ren
+  - *Dependencies*: T-2201
+
+- [ ] **T-2203**: [bagong] Sinkronkan direktori kantor yang sudah terkalibrasi ke root Dalang-AI dan arsipkan ke Bagong Vault
+  - *Assigned*: bagong
+  - *Dependencies*: T-2202
 
 
 
