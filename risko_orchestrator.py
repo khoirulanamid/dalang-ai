@@ -167,7 +167,7 @@ class RiskoOrchestrator:
             task=task,
             subgraph=subgraph,
             on_event=agent_event_sink,
-            max_tool_iterations=20,
+            max_tool_iterations=30,
         )
 
         # ── HANDOVER GATE (Peer Review Setelah Selesai) ──────────────────────
