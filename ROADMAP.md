@@ -646,7 +646,7 @@ agents:
   - *Assigned*: auto
   - *Dependencies*: none
 
-- [ ] **T-2902**: [auto] Rumuskan strategi copywriting Threads viral: Susun naskah kurasi santai & emosional untuk target audiens relevan, lengkap dengan CTA link belanja Shopee (https://s.shopee.co.id/8AWbWHUOPx) dan hashtag terarah di docs/sprint29_campaign.json
+- [x] **T-2902**: [auto] Rumuskan strategi copywriting Threads viral: Susun naskah kurasi santai & emosional untuk target audiens relevan, lengkap dengan CTA link belanja Shopee (https://s.shopee.co.id/8AWbWHUOPx) dan hashtag terarah di docs/sprint29_campaign.json
   - *Assigned*: auto
   - *Dependencies*: T-2901
 
