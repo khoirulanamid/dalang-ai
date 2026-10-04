@@ -1,0 +1,79 @@
+{
+  "product_id": "shopee",
+  "product_name": "Shopee",
+  "source_url": "https://s.shopee.co.id/20vxzX4Fx0",
+  "final_url": "https://shopee.co.id/opaanlp/844179498/40065182230?__mobile__=1&exp_group=rollout&gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QACpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMaBRvcqdZwgRklGTWoHoxFGhRfNAexxPkhN1n8rcCO5qFEud_-aY2hsGdfUnqCpX0P0Z7lpJy6IP6_Ew8qmNpcGhlcnRleHTElgAAAAyO1laNakRhjl6p6D_ieFOoAWD8rnjNHy0obj3eY_gbeykOBE7KiAQtOf_TreKauWNWgZGKVwxc0QfVojhV_vAjfe0CaktrsJ4SBM1EIBVu81OEIA1Kj4M6t0QdPA1mTFwkKy4XyMDuUD2Lcc9H6c1MjZJ1Wosuq3e9J94RTr-cZfDnqzGrok4MplEwFWze_UbKlw&lang=id&mmp_pid=an_11398100392&uls_trackid=56pur16e02k0&utm_campaign=id_5a0rllnKbsX&utm_content=----&utm_medium=affiliates&utm_source=an_11398100392&utm_term=fnf9cz4st17v",
+  "price": {
+    "currency": "IDR",
+    "amount": 1000000.0,
+    "formatted": "Rp1.000.000"
+  },
+  "category": "Fashion Muslim / Atasan Wanita",
+  "specifications": {
+    "url": "https://shopee.co.id",
+    "potentialAction": null
+  },
+  "description": "",
+  "crawled_at": "2026-10-04T14:20:31.266005+00:00",
+  "media": {
+    "target_directory": "workspace/product_images/sprint28",
+    "image_files": [
+      "sprint28_product_1.jpg",
+      "sprint28_product_2.jpg",
+      "sprint28_product_3.jpg",
+      "sprint28_product_4.jpg",
+      "sprint28_product_5.jpg",
+      "sprint28_product_6.jpg"
+    ],
+    "image_details": [
+      {
+        "file_name": "sprint28_product_1.jpg",
+        "primary_path": "workspace/product_images/sprint28/sprint28_product_1.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-81ztj-ms6dt5tbb75xa8",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 793345
+      },
+      {
+        "file_name": "sprint28_product_2.jpg",
+        "primary_path": "workspace/product_images/sprint28/sprint28_product_2.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-81ztn-ms97j18d6wp14e",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 783925
+      },
+      {
+        "file_name": "sprint28_product_3.jpg",
+        "primary_path": "workspace/product_images/sprint28/sprint28_product_3.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-81ztj-mqftcjta8e8e92",
+        "width": 632,
+        "height": 632,
+        "size_bytes": 220990
+      },
+      {
+        "file_name": "sprint28_product_4.jpg",
+        "primary_path": "workspace/product_images/sprint28/sprint28_product_4.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-81ztq-ms6dt5tbclqda7",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 893548
+      },
+      {
+        "file_name": "sprint28_product_5.jpg",
+        "primary_path": "workspace/product_images/sprint28/sprint28_product_5.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-81ztq-meqoov6piyh273",
+        "width": 571,
+        "height": 571,
+        "size_bytes": 182450
+      },
+      {
+        "file_name": "sprint28_product_6.jpg",
+        "primary_path": "workspace/product_images/sprint28/sprint28_product_6.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-81ztf-meqoov6phjwm33",
+        "width": 763,
+        "height": 763,
+        "size_bytes": 365597
+      }
+    ]
+  }
+}
