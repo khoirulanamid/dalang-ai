@@ -596,7 +596,7 @@ agents:
 ## SPRINT 27: Autonomous Campaign — Produk Shopee 2BFO1kXcTq (Threads Only) 🛍️
 > Goal: Orkestrasi otonom 100% Dalang-AI untuk produk baru Shopee (https://s.shopee.co.id/2BFO1kXcTq): Ekstraksi detail & foto HD oleh Pingot, Copywriting viral oleh Gathot, Publikasi naskah + foto HD ke Threads @rizki_mubarakid oleh Gathot, Audit fisik bukti live oleh Ren, dan Arsip ke Bagong Vault.
 
-- [ ] **T-2701**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/2BFO1kXcTq via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint27/, dan simpan metadata di docs/sprint27_campaign.json
+- [x] **T-2701**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/2BFO1kXcTq via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint27/, dan simpan metadata di docs/sprint27_campaign.json
   - *Assigned*: auto
   - *Dependencies*: none
 
