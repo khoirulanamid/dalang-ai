@@ -615,3 +615,26 @@ agents:
 - [x] **T-2705**: [auto] Bagong Vault Archival: Arsipkan seluruh dokumentasi kampanye, naskah, dan bukti tayang ke sistem Bagong Vault
   - *Assigned*: auto
   - *Dependencies*: T-2704
+
+## SPRINT 28: Autonomous Campaign — Produk Shopee 20vxzX4Fx0 (Threads Only) 🛍️
+> Goal: Orkestrasi otonom 100% Dalang-AI untuk produk baru Shopee (https://s.shopee.co.id/20vxzX4Fx0): Ekstraksi detail & foto HD oleh Pingot, Copywriting viral oleh Gathot, Publikasi naskah + foto HD ke Threads @rizki_mubarakid oleh Gathot, Audit fisik bukti live oleh Ren, dan Arsip ke Bagong Vault.
+
+- [ ] **T-2801**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/20vxzX4Fx0 via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint28/, dan simpan metadata di docs/sprint28_campaign.json
+  - *Assigned*: auto
+  - *Dependencies*: none
+
+- [ ] **T-2802**: [auto] Rumuskan strategi copywriting Threads viral: Susun naskah kurasi santai & emosional untuk target audiens relevan, lengkap dengan CTA link belanja Shopee (https://s.shopee.co.id/20vxzX4Fx0) dan hashtag terarah di docs/sprint28_campaign.json
+  - *Assigned*: auto
+  - *Dependencies*: T-2801
+
+- [ ] **T-2803**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting naskah kurasi beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot verifikasi live di workspace/threads_sprint28_live.png
+  - *Assigned*: auto
+  - *Dependencies*: T-2802
+
+- [ ] **T-2804**: [auto] Quality Gate & Visual Review: Ren melakukan audit kualitas fisik artefak, memeriksa screenshot live tayang threads_sprint28_live.png dan validasi file media fisik >0 bytes
+  - *Assigned*: auto
+  - *Dependencies*: T-2803
+
+- [ ] **T-2805**: [auto] Bagong Vault Archival: Arsipkan seluruh dokumentasi kampanye, naskah, dan bukti tayang ke sistem Bagong Vault
+  - *Assigned*: auto
+  - *Dependencies*: T-2804
