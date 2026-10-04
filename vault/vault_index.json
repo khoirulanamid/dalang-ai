@@ -1,5 +1,62 @@
 [
   {
+    "id": "VLT-37063",
+    "filename": "20261005_020125_sprint29_campaign.json",
+    "category": "campaign_doc",
+    "producer_agent": "bagong",
+    "title": "Sprint 29 Homedoki Campaign Documentation",
+    "description": "Dokumentasi dan naskah copywriting Sprint 29 Homedoki Rak Wastafel",
+    "file_path": "/root/storage/projects/dalang-ai/vault/campaign_doc/20261005_020125_sprint29_campaign.json",
+    "relative_url": "/vault/campaign_doc/20261005_020125_sprint29_campaign.json",
+    "size_bytes": 24058,
+    "created_at": "2026-10-05 02:01:25",
+    "metadata": {
+      "product": "Homedoki Rak Wastafel Cuci Piring Berpintu",
+      "sprint": "sprint-29",
+      "type": "campaign_doc"
+    }
+  },
+  {
+    "id": "VLT-07914",
+    "filename": "20261005_020125_threads_sprint29_live.png",
+    "category": "live_proof",
+    "producer_agent": "bagong",
+    "title": "Threads Live Proof Sprint 29 Homedoki Rak Wastafel",
+    "description": "Bukti visual nyata postingan Homedoki Rak Wastafel di Threads @rizki_mubarakid",
+    "file_path": "/root/storage/projects/dalang-ai/vault/live_proof/20261005_020125_threads_sprint29_live.png",
+    "relative_url": "/vault/live_proof/20261005_020125_threads_sprint29_live.png",
+    "size_bytes": 280437,
+    "created_at": "2026-10-05 02:01:25",
+    "metadata": {
+      "product": "Homedoki Rak Wastafel Cuci Piring Berpintu",
+      "url": "https://s.shopee.co.id/8AWbWHUOPx",
+      "platform": "Threads",
+      "account": "@rizki_mubarakid",
+      "sprint": "sprint-29",
+      "status": "verified_live"
+    }
+  },
+  {
+    "id": "VLT-73661",
+    "filename": "20261005_020112_threads_sprint29_live.png",
+    "category": "live_proof",
+    "producer_agent": "bagong",
+    "title": "Threads Live Proof Sprint 29 Homedoki Rak Wastafel",
+    "description": "Bukti visual nyata postingan Homedoki Rak Wastafel di Threads @rizki_mubarakid",
+    "file_path": "/root/storage/projects/dalang-ai/vault/live_proof/20261005_020112_threads_sprint29_live.png",
+    "relative_url": "/vault/live_proof/20261005_020112_threads_sprint29_live.png",
+    "size_bytes": 280437,
+    "created_at": "2026-10-05 02:01:12",
+    "metadata": {
+      "product": "Homedoki Rak Wastafel Cuci Piring Berpintu",
+      "url": "https://s.shopee.co.id/8AWbWHUOPx",
+      "platform": "Threads",
+      "account": "@rizki_mubarakid",
+      "sprint": "sprint-29",
+      "status": "verified_live"
+    }
+  },
+  {
     "id": "VLT-28495",
     "filename": "20261004_232530_threads_sprint28_live.png",
     "category": "campaign_affiliate",
