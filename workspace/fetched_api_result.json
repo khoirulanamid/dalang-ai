@@ -1,0 +1,3473 @@
+{
+  "https://shopee.co.id/api/v4/item/get?itemid=24040756220&shopid=277711630": {
+    "0": 3,
+    "1": "7395e521395-f069-4b49-b65b-9c0be5021167",
+    "2": false,
+    "3": 90309999,
+    "4": 2,
+    "5": false,
+    "9": true,
+    "error": 90309999
+  },
+  "https://shopee.co.id/api/v4/pdp/get_pc?item_id=24040756220&shop_id=277711630": {
+    "bff_meta": null,
+    "error": null,
+    "error_msg": null,
+    "data": {
+      "item": {
+        "item_id": 24040756220,
+        "shop_id": 277711630,
+        "item_status": "normal",
+        "status": 1,
+        "item_type": 0,
+        "reference_item_id": "",
+        "title": "Homedoki Rak Piring Wastafel Dapur Stainless Steel Multi-fungsi Dengan Penutup Rak Piring Tertutup",
+        "image": "id-11134207-7rbkb-m8mvwy4fi3gi21",
+        "label_ids": [
+          1000895,
+          1001176,
+          1002164,
+          1668726,
+          1718087960,
+          1428713,
+          844931064601283,
+          822059908662278,
+          1119699,
+          1015914,
+          700190087,
+          1400285055,
+          2018618,
+          1918643,
+          1049116,
+          1049117,
+          298893311,
+          825465608497696,
+          2213652,
+          299103323,
+          2008656,
+          700810080,
+          2283908,
+          1049135,
+          700005506,
+          1718093079,
+          998356064,
+          2383576,
+          1400895042,
+          1049143,
+          1049142
+        ],
+        "is_adult": false,
+        "is_preview": false,
+        "flag": 131072,
+        "is_service_by_shopee": false,
+        "condition": 1,
+        "cat_id": 100636,
+        "has_low_fulfillment_rate": false,
+        "is_live_streaming_price": null,
+        "currency": "IDR",
+        "brand": "Homedoki Life Deserves Better",
+        "brand_id": 1342970,
+        "show_discount": 0,
+        "ctime": 1737596693,
+        "item_rating": {
+          "rating_star": 4.811848143512724
+        },
+        "cb_option": 0,
+        "has_model_with_available_shopee_stock": false,
+        "shop_location": "KOTA SURABAYA",
+        "attributes": [
+          {
+            "name": "Perakitan",
+            "value": "Perlu Dirakit",
+            "id": 100730,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 3823,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Masa Garansi",
+            "value": "Tidak Garansi",
+            "id": 100121,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 5577,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Jenis Garansi",
+            "value": "Tidak Garansi",
+            "id": 100370,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 5576,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Produk Custom",
+            "value": "Tidak",
+            "id": 101219,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 7222,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Mystery Box",
+            "value": "Ya",
+            "id": 101291,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 11439,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Asal Produk",
+            "value": "Indonesia",
+            "id": 100037,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 0,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Bahan",
+            "value": "stainless steel",
+            "id": 100134,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 0,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Dimensi (P x L x T)",
+            "value": "65/75/85/95/105cm*28cm*96cm",
+            "id": 100942,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 0,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Jumlah Produk Dalam Kemasan",
+            "value": "1",
+            "id": 100999,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 0,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          }
+        ],
+        "rich_text_description": {
+          "paragraph_list": [
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-7ra3f-m5c9e7585f8860",
+              "ratio": 1.91,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-7ra3w-m5c9e7o3dtq85e",
+              "ratio": 1,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-7ra2t-m5c9e7arxavs77",
+              "ratio": 0.821,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-7ra1z-m5c9e7v13nxa4a",
+              "ratio": 0.821,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-7ra15-m5c9e84qpgbide",
+              "ratio": 0.94,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-7ra0y-m5c9e8cifg5z28",
+              "ratio": 0.821,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-7ra2p-m5c9e8nbznrra7",
+              "ratio": 0.821,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-7ra13-m5c9e8w7l7xn5b",
+              "ratio": 0.84,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-8258u-mfxf7rjoioend2",
+              "ratio": 1.002,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-825a2-mfxf7s176aywab",
+              "ratio": 0.83,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-8258m-mfxf7sn7pu6h54",
+              "ratio": 0.862,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "sg-11134202-8257u-mfxf7tio2l8vd2",
+              "ratio": 0.862,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            }
+          ],
+          "source_language": null
+        },
+        "invoice_option": null,
+        "is_category_failed": null,
+        "is_prescription_item": false,
+        "preview_info": null,
+        "show_prescription_feed": false,
+        "is_alcohol_product": false,
+        "is_infant_milk_formula_product": false,
+        "is_unavailable": false,
+        "is_partial_fulfilled": false,
+        "is_presale": false,
+        "is_presale_deposit_item": null,
+        "is_presale_deposit_made": null,
+        "description": "",
+        "categories": [
+          {
+            "catid": 100636,
+            "display_name": "Perlengkapan Rumah",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 100717,
+            "display_name": "Perlengkapan Dapur",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 101224,
+            "display_name": "Rak Dapur",
+            "no_sub": true,
+            "is_default_subcat": false
+          }
+        ],
+        "fe_categories": [
+          {
+            "catid": 11043778,
+            "display_name": "Perlengkapan Rumah",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 11043895,
+            "display_name": "Peralatan Dapur",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 11043900,
+            "display_name": "Rak Dapur",
+            "no_sub": true,
+            "is_default_subcat": false
+          }
+        ],
+        "item_has_video": true,
+        "presale_dday_start_time": null,
+        "is_lowest_price_at_shopee": null,
+        "display_description_disclosure_rsku_redirection": null,
+        "display_similar_sold": null,
+        "title_type": 1,
+        "authorized_brand_name": null,
+        "is_sexual": false,
+        "models": [
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-65*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 28900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                5
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 80000000000,
+            "model_id": 218170824301,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-95*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 36900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                12
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 110000000000,
+            "model_id": 198170833803,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-105*28*97-2L",
+            "promotion_id": 917995187126272,
+            "price": 58900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                21
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 120000000000,
+            "model_id": 139506109264,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-125*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 42900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                15
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 150000000000,
+            "model_id": 198170833806,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-85*28*97-2L",
+            "promotion_id": 917995187126272,
+            "price": 52900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                19
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 100000000000,
+            "model_id": 139506109262,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-95*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 36900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                11
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 110000000000,
+            "model_id": 198170833802,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": false,
+            "is_grayout": true,
+            "has_stock": false
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-75cm-2L",
+            "promotion_id": 917995187126272,
+            "price": 49900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                1
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 105000000000,
+            "model_id": 129332401009,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-85*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 34900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                9
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 100000000000,
+            "model_id": 198170833800,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-75*28*97-2L",
+            "promotion_id": 917995187126272,
+            "price": 49900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                18
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 80000000000,
+            "model_id": 139506109261,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-85*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 34900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                10
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 100000000000,
+            "model_id": 198170833801,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": true,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-75*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 30900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                8
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 95000000000,
+            "model_id": 198170833799,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-85cm-2L",
+            "promotion_id": 917995187126272,
+            "price": 52900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                2
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 110000000000,
+            "model_id": 129332401010,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": false,
+            "is_grayout": true,
+            "has_stock": false
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-95*28*97-2L",
+            "promotion_id": 917995187126272,
+            "price": 55900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                20
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 100000000000,
+            "model_id": 139506109263,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-65*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 28900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                6
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 80000000000,
+            "model_id": 218170824302,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-105cm-2L",
+            "promotion_id": 917995187126272,
+            "price": 58900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                4
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 120000000000,
+            "model_id": 129332401012,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-95cm-2L",
+            "promotion_id": 917995187126272,
+            "price": 55900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                3
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 115000000000,
+            "model_id": 129332401011,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-65*28*97-2L",
+            "promotion_id": 917995187126272,
+            "price": 46900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                17
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 80000000000,
+            "model_id": 139506109260,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-65cm-2L",
+            "promotion_id": 917995187126272,
+            "price": 46900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                0
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 100000000000,
+            "model_id": 129332401008,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": false,
+            "is_grayout": true,
+            "has_stock": false
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-125*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 42900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                16
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 150000000000,
+            "model_id": 198170833807,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Putih-105*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 38900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                14
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 130000000000,
+            "model_id": 198170833805,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": false,
+            "is_grayout": true,
+            "has_stock": false
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-105*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 38900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                13
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 130000000000,
+            "model_id": 198170833804,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": false,
+            "is_grayout": true,
+            "has_stock": false
+          },
+          {
+            "item_id": 24040756220,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Hitam-75*31*79.5",
+            "promotion_id": 917995187126272,
+            "price": 30900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 301
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": false,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                7
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 95000000000,
+            "model_id": 198170833798,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          }
+        ],
+        "tier_variations": [
+          {
+            "name": "TYPE",
+            "options": [
+              "Hitam-65cm-2L",
+              "Hitam-75cm-2L",
+              "Hitam-85cm-2L",
+              "Hitam-95cm-2L",
+              "Hitam-105cm-2L",
+              "Hitam-65*31*79.5",
+              "Putih-65*31*79.5",
+              "Hitam-75*31*79.5",
+              "Putih-75*31*79.5",
+              "Hitam-85*31*79.5",
+              "Putih-85*31*79.5",
+              "Hitam-95*31*79.5",
+              "Putih-95*31*79.5",
+              "Hitam-105*31*79.5",
+              "Putih-105*31*79.5",
+              "Hitam-125*31*79.5",
+              "Putih-125*31*79.5",
+              "Putih-65*28*97-2L",
+              "Putih-75*28*97-2L",
+              "Putih-85*28*97-2L",
+              "Putih-95*28*97-2L",
+              "Putih-105*28*97-2L"
+            ],
+            "images": [
+              "id-11134207-81ztp-megn5dcqql8jee",
+              "id-11134207-81ztq-megn5dcqrzsz2e",
+              "id-11134207-81ztk-megn5dcqtedffb",
+              "id-11134207-81zto-megn5dcqusxv75",
+              "id-11134207-81ztj-megn5dcqw7ib3a",
+              "sg-11134201-7ra31-m5c9e3vux6feae",
+              "sg-11134201-7ra1k-m5c9e482fba6af",
+              "sg-11134201-7ra3j-m5c9e4hi2vfb46",
+              "sg-11134201-7ra19-m5c9e4qxnpog04",
+              "sg-11134201-7ra27-m5c9e50x91mc32",
+              "sg-11134201-7ra0x-m5c9e5b6u25434",
+              "sg-11134201-7ra2i-m5c9e5l6feby10",
+              "sg-11134201-7ra35-m5c9e5ts2uvy9b",
+              "sg-11134201-7ra2k-m5c9e641nsl0dc",
+              "sg-11134201-7ra1v-m5c9e6hd4azb65",
+              "sg-11134201-7ra23-m5c9e6pesj1wf1",
+              "sg-11134201-7ra1b-m5c9e6yafjas98",
+              "id-11134207-822wg-mphorf3k87ij11",
+              "id-11134207-822wr-mphorf3k9m2z9d",
+              "id-11134207-822wn-mphorf3kb0nf16",
+              "id-11134207-822wp-mphorf3kcf7v98",
+              "id-11134207-822wm-mphorf3kdtsb8f"
+            ],
+            "properties": null,
+            "type": 0,
+            "summed_stocks": null,
+            "display_indicators": [
+              2,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "name_tr": null,
+            "options_tr": null,
+            "selling_points": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "selling_points_tr": null
+          }
+        ],
+        "size_chart": null,
+        "size_chart_info": null,
+        "welcome_package_type": null,
+        "is_free_gift": false,
+        "deep_discount": null,
+        "is_low_price_eligible": null,
+        "bundle_deal_info": null,
+        "add_on_deal_info": null,
+        "shipping_icon_type": 0,
+        "badge_icon_type": 0,
+        "spl_info": null,
+        "estimated_days": 2,
+        "is_pre_order": false,
+        "is_free_shipping": false,
+        "overall_purchase_limit": null,
+        "min_purchase_limit": 0,
+        "is_hide_stock": false,
+        "stock": null,
+        "normal_stock": null,
+        "current_promotion_reserved_stock": null,
+        "can_use_wholesale": false,
+        "wholesale_tier_list": [],
+        "price": 28900000000,
+        "raw_discount": 0,
+        "hidden_price_display": null,
+        "price_min": 28900000000,
+        "price_max": 58900000000,
+        "price_before_discount": 80000000000,
+        "price_min_before_discount": 80000000000,
+        "price_max_before_discount": 150000000000,
+        "other_stock": null,
+        "discount_stock": null,
+        "current_promotion_has_reserve_stock": false,
+        "complaint_policy": null,
+        "show_recycling_info": null,
+        "should_show_amp_tag": true,
+        "all_models_has_pre_order": false,
+        "is_item_inherited": false,
+        "max_quantity": null,
+        "drug_details": null,
+        "selected_real_models": null,
+        "size_tier_variation_idx": null,
+        "is_fashion_item": false,
+        "social_proof_label": null,
+        "title_tr": null,
+        "description_tr": null,
+        "rich_text_description_tr": null,
+        "stock_display": null,
+        "max_quantity_display": "TERSEDIA",
+        "disclaimer": null
+      },
+      "account": {
+        "user_id": null,
+        "is_new_user": null,
+        "default_address": {
+          "state": "DKI JAKARTA",
+          "city": "KOTA JAKARTA PUSAT",
+          "district": "MENTENG",
+          "town": "",
+          "zip_code": "",
+          "address": null,
+          "region": null,
+          "longitude": null,
+          "latitude": null,
+          "vn_data_version": ""
+        },
+        "adult_consent": null,
+        "birth_timestamp": null
+      },
+      "product_images": {
+        "video": null,
+        "images": [
+          "id-11134207-7rbkb-m8mvwy4fi3gi21",
+          "id-11134207-7rbk8-m8mvwy4en6yq7a",
+          "id-11134207-7rbke-m8mvwy4ole0o0f",
+          "id-11134207-7rbk7-m8mvwy4els7f3c",
+          "id-11134207-7rbk5-m8mvwy4fxjpe9d",
+          "id-11134207-7rbkb-m8mvwy4f2n7mb8"
+        ],
+        "first_tier_variations": [
+          {
+            "name": "Hitam-65cm-2L",
+            "image": "id-11134207-81ztp-megn5dcqql8jee",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-81ztp-megn5dcqql8jee"
+          },
+          {
+            "name": "Hitam-75cm-2L",
+            "image": "id-11134207-81ztq-megn5dcqrzsz2e",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-81ztq-megn5dcqrzsz2e"
+          },
+          {
+            "name": "Hitam-85cm-2L",
+            "image": "id-11134207-81ztk-megn5dcqtedffb",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-81ztk-megn5dcqtedffb"
+          },
+          {
+            "name": "Hitam-95cm-2L",
+            "image": "id-11134207-81zto-megn5dcqusxv75",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-81zto-megn5dcqusxv75"
+          },
+          {
+            "name": "Hitam-105cm-2L",
+            "image": "id-11134207-81ztj-megn5dcqw7ib3a",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-81ztj-megn5dcqw7ib3a"
+          },
+          {
+            "name": "Hitam-65*31*79.5",
+            "image": "sg-11134201-7ra31-m5c9e3vux6feae",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra31-m5c9e3vux6feae"
+          },
+          {
+            "name": "Putih-65*31*79.5",
+            "image": "sg-11134201-7ra1k-m5c9e482fba6af",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra1k-m5c9e482fba6af"
+          },
+          {
+            "name": "Hitam-75*31*79.5",
+            "image": "sg-11134201-7ra3j-m5c9e4hi2vfb46",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra3j-m5c9e4hi2vfb46"
+          },
+          {
+            "name": "Putih-75*31*79.5",
+            "image": "sg-11134201-7ra19-m5c9e4qxnpog04",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra19-m5c9e4qxnpog04"
+          },
+          {
+            "name": "Hitam-85*31*79.5",
+            "image": "sg-11134201-7ra27-m5c9e50x91mc32",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra27-m5c9e50x91mc32"
+          },
+          {
+            "name": "Putih-85*31*79.5",
+            "image": "sg-11134201-7ra0x-m5c9e5b6u25434",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra0x-m5c9e5b6u25434"
+          },
+          {
+            "name": "Hitam-95*31*79.5",
+            "image": "sg-11134201-7ra2i-m5c9e5l6feby10",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra2i-m5c9e5l6feby10"
+          },
+          {
+            "name": "Putih-95*31*79.5",
+            "image": "sg-11134201-7ra35-m5c9e5ts2uvy9b",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra35-m5c9e5ts2uvy9b"
+          },
+          {
+            "name": "Hitam-105*31*79.5",
+            "image": "sg-11134201-7ra2k-m5c9e641nsl0dc",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra2k-m5c9e641nsl0dc"
+          },
+          {
+            "name": "Putih-105*31*79.5",
+            "image": "sg-11134201-7ra1v-m5c9e6hd4azb65",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra1v-m5c9e6hd4azb65"
+          },
+          {
+            "name": "Hitam-125*31*79.5",
+            "image": "sg-11134201-7ra23-m5c9e6pesj1wf1",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra23-m5c9e6pesj1wf1"
+          },
+          {
+            "name": "Putih-125*31*79.5",
+            "image": "sg-11134201-7ra1b-m5c9e6yafjas98",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "sg-11134201-7ra1b-m5c9e6yafjas98"
+          },
+          {
+            "name": "Putih-65*28*97-2L",
+            "image": "id-11134207-822wg-mphorf3k87ij11",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-822wg-mphorf3k87ij11"
+          },
+          {
+            "name": "Putih-75*28*97-2L",
+            "image": "id-11134207-822wr-mphorf3k9m2z9d",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-822wr-mphorf3k9m2z9d"
+          },
+          {
+            "name": "Putih-85*28*97-2L",
+            "image": "id-11134207-822wn-mphorf3kb0nf16",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-822wn-mphorf3kb0nf16"
+          },
+          {
+            "name": "Putih-95*28*97-2L",
+            "image": "id-11134207-822wp-mphorf3kcf7v98",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-822wp-mphorf3kcf7v98"
+          },
+          {
+            "name": "Putih-105*28*97-2L",
+            "image": "id-11134207-822wm-mphorf3kdtsb8f",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-822wm-mphorf3kdtsb8f"
+          }
+        ],
+        "sorted_variation_image_index_list": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          12,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          0,
+          2,
+          11,
+          13,
+          14
+        ],
+        "overlay": null,
+        "makeup_preview": null,
+        "abnormal_status": "",
+        "promotion_images": [],
+        "long_images": null,
+        "shopee_video_info_list": [],
+        "shopee_video_rcmd_info": null,
+        "shopee_video_req_id": null,
+        "skincam": null,
+        "pdp_top_info_list": null,
+        "has_long_image": false,
+        "show_find_similar": null,
+        "try_it_on": null,
+        "show_find_similar_for_selection": false,
+        "beautycam": null,
+        "unavailable_item_recommendation": null,
+        "models": [
+          {
+            "tier_index": [
+              5
+            ],
+            "gallery_image": "sg-11134201-7ra31-m5c9e3vux6feae"
+          },
+          {
+            "tier_index": [
+              12
+            ],
+            "gallery_image": "sg-11134201-7ra35-m5c9e5ts2uvy9b"
+          },
+          {
+            "tier_index": [
+              21
+            ],
+            "gallery_image": "id-11134207-822wm-mphorf3kdtsb8f"
+          },
+          {
+            "tier_index": [
+              15
+            ],
+            "gallery_image": "sg-11134201-7ra23-m5c9e6pesj1wf1"
+          },
+          {
+            "tier_index": [
+              19
+            ],
+            "gallery_image": "id-11134207-822wn-mphorf3kb0nf16"
+          },
+          {
+            "tier_index": [
+              11
+            ],
+            "gallery_image": "sg-11134201-7ra2i-m5c9e5l6feby10"
+          },
+          {
+            "tier_index": [
+              1
+            ],
+            "gallery_image": "id-11134207-81ztq-megn5dcqrzsz2e"
+          },
+          {
+            "tier_index": [
+              9
+            ],
+            "gallery_image": "sg-11134201-7ra27-m5c9e50x91mc32"
+          },
+          {
+            "tier_index": [
+              18
+            ],
+            "gallery_image": "id-11134207-822wr-mphorf3k9m2z9d"
+          },
+          {
+            "tier_index": [
+              10
+            ],
+            "gallery_image": "sg-11134201-7ra0x-m5c9e5b6u25434"
+          },
+          {
+            "tier_index": [
+              8
+            ],
+            "gallery_image": "sg-11134201-7ra19-m5c9e4qxnpog04"
+          },
+          {
+            "tier_index": [
+              2
+            ],
+            "gallery_image": "id-11134207-81ztk-megn5dcqtedffb"
+          },
+          {
+            "tier_index": [
+              20
+            ],
+            "gallery_image": "id-11134207-822wp-mphorf3kcf7v98"
+          },
+          {
+            "tier_index": [
+              6
+            ],
+            "gallery_image": "sg-11134201-7ra1k-m5c9e482fba6af"
+          },
+          {
+            "tier_index": [
+              4
+            ],
+            "gallery_image": "id-11134207-81ztj-megn5dcqw7ib3a"
+          },
+          {
+            "tier_index": [
+              3
+            ],
+            "gallery_image": "id-11134207-81zto-megn5dcqusxv75"
+          },
+          {
+            "tier_index": [
+              17
+            ],
+            "gallery_image": "id-11134207-822wg-mphorf3k87ij11"
+          },
+          {
+            "tier_index": [
+              0
+            ],
+            "gallery_image": "id-11134207-81ztp-megn5dcqql8jee"
+          },
+          {
+            "tier_index": [
+              16
+            ],
+            "gallery_image": "sg-11134201-7ra1b-m5c9e6yafjas98"
+          },
+          {
+            "tier_index": [
+              14
+            ],
+            "gallery_image": "sg-11134201-7ra1v-m5c9e6hd4azb65"
+          },
+          {
+            "tier_index": [
+              13
+            ],
+            "gallery_image": "sg-11134201-7ra2k-m5c9e641nsl0dc"
+          },
+          {
+            "tier_index": [
+              7
+            ],
+            "gallery_image": "sg-11134201-7ra3j-m5c9e4hi2vfb46"
+          }
+        ],
+        "gallery_contents": [
+          {
+            "image": {
+              "url": "id-11134207-7rbkb-m8mvwy4fi3gi21",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7rbk8-m8mvwy4en6yq7a",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7rbke-m8mvwy4ole0o0f",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7rbk7-m8mvwy4els7f3c",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7rbk5-m8mvwy4fxjpe9d",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7rbkb-m8mvwy4f2n7mb8",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          }
+        ]
+      },
+      "product_price": {
+        "discount": 64,
+        "installment_info": null,
+        "spl_installment_info": null,
+        "pack_size": "",
+        "hide_price": false,
+        "price": {
+          "single_value": 28700000000,
+          "range_min": -1,
+          "range_max": -1,
+          "price_mask": null
+        },
+        "price_before_discount": {
+          "single_value": 80000000000,
+          "range_min": -1,
+          "range_max": -1,
+          "price_mask": null
+        },
+        "presale_price": null,
+        "lowest_past_price": null,
+        "labels": null,
+        "hide_discount": true,
+        "discount_text": "-71%",
+        "show_final_price_indicator": true,
+        "final_price_vouchers": [
+          {
+            "promotion_id": 1470682865090560,
+            "voucher_code": "HOMEQDQWF",
+            "is_auto_claimed_just_now": false,
+            "groups": null,
+            "voucher_type": 1
+          }
+        ],
+        "has_final_price": true,
+        "final_price_info": {
+          "model_id": 218170824301,
+          "hint_text": "Dengan Voucher",
+          "show_final_price_indicator": true,
+          "final_price_vouchers": {
+            "platform_voucher": null,
+            "shop_voucher": {
+              "promotion_id": 1470682865090560,
+              "voucher_code": "HOMEQDQWF",
+              "is_auto_claimed_just_now": false,
+              "groups": null,
+              "voucher_discount_type": 0,
+              "voucher_discount": 200000000
+            },
+            "ads_voucher": null
+          },
+          "payment_channel_discount": null,
+          "final_price_icon_type": 1
+        },
+        "price_subtext": null,
+        "price_model": {
+          "price_single_model_id": 218170824301,
+          "price_min_model_id": null,
+          "price_max_model_id": null
+        },
+        "price_promotion": {
+          "price_single_promotion_id": 917995187126272,
+          "price_single_promotion_type": 301,
+          "price_min_promotion_id": null,
+          "price_min_promotion_type": null,
+          "price_max_promotion_id": null,
+          "price_max_promotion_type": null
+        },
+        "instalment_cta_action": null,
+        "spl_installment_banner": null,
+        "show_non_logged_in_price_indicator": false
+      },
+      "flash_sale": null,
+      "flash_sale_preview": null,
+      "deep_discount": null,
+      "exclusive_price": null,
+      "exclusive_price_cta": null,
+      "product_meta": {
+        "show_lowest_price_guarantee": null,
+        "show_original_guarantee": null,
+        "show_best_price_guarantee": false,
+        "show_official_shop_label_in_title": true,
+        "show_shopee_verified_label": false,
+        "show_lowest_installment_guarantee": null,
+        "hide_sharing_button": false,
+        "hide_sold_count": false,
+        "show_description_translation_button": null
+      },
+      "product_review": {
+        "rating_star": 4.811848143512724,
+        "rating_count": [
+          4794,
+          44,
+          25,
+          112,
+          427,
+          4186
+        ],
+        "total_rating_count": 4794,
+        "historical_sold": null,
+        "global_sold": null,
+        "liked": false,
+        "liked_count": 14317,
+        "cmt_count": 4794,
+        "should_move_ratings_above": null,
+        "review_rcmd_exp_group": null,
+        "display_global_sold": false,
+        "hide_rating": false,
+        "hide_buyer_gallery": false,
+        "hide_reviews": false,
+        "hide_other_product_reviews_in_shop": false,
+        "sold_count_disclosure": {
+          "type": 1
+        },
+        "historical_sold_display": null,
+        "global_sold_display": null,
+        "sold_count_display": null
+      },
+      "promotion_info": {
+        "spl": null,
+        "spl_lite": null,
+        "installment": null,
+        "wholesale": null,
+        "insurance": null,
+        "item_installment_eligibility": {
+          "is_cc_installment_payment_eligible": false,
+          "is_non_cc_installment_payment_eligible": false
+        },
+        "installment_simulation_entry": null
+      },
+      "age_gate": {
+        "kyc": null,
+        "adult_consent": null
+      },
+      "shipping_meta": null,
+      "product_shipping": {
+        "free_shipping": {
+          "min_spend": null,
+          "has_fss": true
+        },
+        "shipping_fee_info": {
+          "ship_from_location": "KOTA SURABAYA",
+          "price": {
+            "single_value": 0,
+            "range_min": -1,
+            "range_max": -1,
+            "price_mask": null
+          },
+          "shipping_icon_type": 0,
+          "warning": null
+        },
+        "show_shipping_to": true,
+        "ungrouped_channel_infos": [
+          {
+            "channel_id": 8005,
+            "name": "Hemat Kargo",
+            "price": {
+              "single_value": 0,
+              "range_min": -1,
+              "range_max": -1,
+              "price_mask": null
+            },
+            "price_before_discount": {
+              "single_value": 2500000000,
+              "range_min": -1,
+              "range_max": -1,
+              "price_mask": null
+            },
+            "channel_delivery_info": {
+              "has_edt": true,
+              "display_mode": "edt_by_date",
+              "estimated_delivery_date_from": 1791358960,
+              "estimated_delivery_date_to": 1791452591,
+              "estimated_delivery_time_min": 2,
+              "estimated_delivery_time_max": 3,
+              "delay_message": null,
+              "is_fastest_edt_channel": true,
+              "sla_message": "",
+              "show_edt": true,
+              "edt_text": "Garansi tiba 7 - 8 Oktober",
+              "formatted_edt_text": [
+                {
+                  "template": "{pdp_guaranteed_get_by_date_range}",
+                  "format": null,
+                  "attributes": [
+                    {
+                      "type": 1,
+                      "key": "pdp_guaranteed_get_by_date_range",
+                      "value": {
+                        "value_str": "Garansi tiba 7 - 8 Okt",
+                        "value_int": null
+                      },
+                      "format": [
+                        2
+                      ],
+                      "text_color": null,
+                      "text_hex_color": "#26aa99",
+                      "url": null
+                    }
+                  ],
+                  "text_color": null,
+                  "text_hex_color": null
+                }
+              ],
+              "formatted_pre_order_text": null,
+              "formatted_fbs_description_text": null,
+              "show_edt_as_header": false
+            },
+            "channel_promotion_infos": [],
+            "warning": null,
+            "shipping_icon_type": null,
+            "lowest_bpsf_promotion_rule": null,
+            "service_type_info": "regular",
+            "is_integrated_channel": true,
+            "late_delivery_compensation": {
+              "type": 1,
+              "amount": 1000000000,
+              "is_guaranteed_edt": true,
+              "compensation_amount": null,
+              "text": null,
+              "max_coins_cap": null,
+              "coin_cap": 0
+            },
+            "is_sst_included": false,
+            "display_text": {
+              "late_delivery_compensation": null,
+              "direct_delivery": null,
+              "fulfilled_by_shopee": null,
+              "spx_instant_delivery": null
+            },
+            "rule_type": 0,
+            "is_xdd_channel": false,
+            "show_shopee_plus_icon": false,
+            "xdd_value": null,
+            "hide_shipping_fee": null,
+            "edt_tracking_info": "{\"edt_min\":2,\"edt_max\":3,\"edt_min_hours\":63,\"edt_max_hours\":89,\"edt_min_minutes\":3739,\"edt_max_minutes\":5300,\"edt_display_identifier\":327817,\"buyer_address_hash\":\"K2C6ypZ\",\"is_cache_edt\":false}",
+            "subscription_icon": 0,
+            "sdv_available": false
+          }
+        ],
+        "grouped_channel_infos_by_service_type": [],
+        "also_available_channel_name": null,
+        "pre_selected_shipping_channel": {
+          "channel_id": 8005,
+          "name": "Hemat Kargo",
+          "price": {
+            "single_value": 0,
+            "range_min": -1,
+            "range_max": -1,
+            "price_mask": ""
+          },
+          "price_before_discount": {
+            "single_value": 2500000000,
+            "range_min": -1,
+            "range_max": -1,
+            "price_mask": null
+          },
+          "channel_delivery_info": {
+            "has_edt": true,
+            "display_mode": "edt_by_date",
+            "estimated_delivery_date_from": 1791358960,
+            "estimated_delivery_date_to": 1791452591,
+            "estimated_delivery_time_min": 2,
+            "estimated_delivery_time_max": 3,
+            "delay_message": "",
+            "is_fastest_edt_channel": true,
+            "sla_message": "",
+            "show_edt": true,
+            "edt_text": "Garansi tiba 7 - 8 Oktober",
+            "formatted_edt_text": [
+              {
+                "template": "{pdp_guaranteed_get_by_date_range}",
+                "format": [],
+                "attributes": [
+                  {
+                    "type": 1,
+                    "key": "pdp_guaranteed_get_by_date_range",
+                    "value": {
+                      "value_str": "Garansi tiba 7 - 8 Okt",
+                      "value_int": null
+                    },
+                    "format": [
+                      2
+                    ],
+                    "text_color": null,
+                    "text_hex_color": "#26aa99",
+                    "url": null
+                  }
+                ],
+                "text_color": null,
+                "text_hex_color": null
+              }
+            ],
+            "formatted_pre_order_text": null,
+            "formatted_fbs_description_text": null,
+            "show_edt_as_header": false
+          },
+          "channel_promotion_infos": [],
+          "warning": {
+            "type": "",
+            "warning_msg": ""
+          },
+          "shipping_icon_type": null,
+          "lowest_bpsf_promotion_rule": null,
+          "service_type_info": "regular",
+          "is_integrated_channel": true,
+          "late_delivery_compensation": {
+            "type": 1,
+            "amount": 1000000000,
+            "is_guaranteed_edt": true,
+            "compensation_amount": {
+              "value": 1000000000
+            },
+            "text": "",
+            "max_coins_cap": null,
+            "coin_cap": 0
+          },
+          "is_sst_included": false,
+          "display_text": {
+            "late_delivery_compensation": {
+              "text": "Dapatkan Voucher s/d {compensation_amount} jika pesanan terlambat.",
+              "gdt_max": null,
+              "compensation_amount": {
+                "value": 1000000000
+              },
+              "max_coins_cap": null,
+              "coins_amount": null,
+              "coin_interval_in_minutes": null
+            },
+            "direct_delivery": null,
+            "fulfilled_by_shopee": null,
+            "spx_instant_delivery": null
+          },
+          "rule_type": 0,
+          "is_xdd_channel": false,
+          "show_shopee_plus_icon": false,
+          "xdd_value": 0,
+          "hide_shipping_fee": null,
+          "edt_tracking_info": "{\"edt_min\":2,\"edt_max\":3,\"edt_min_hours\":63,\"edt_max_hours\":89,\"edt_min_minutes\":3739,\"edt_max_minutes\":5300,\"edt_display_identifier\":327685,\"buyer_address_hash\":\"K2C6ypZ\",\"is_cache_edt\":false}",
+          "subscription_icon": 0,
+          "sdv_available": false
+        },
+        "show_grouped_channel_first": false,
+        "is_item_with_price_range": true,
+        "also_available_channel_icon_type": null,
+        "pre_order_text": "",
+        "selected_late_delivery_compensation_for_drawer": {
+          "type": null,
+          "amount": null,
+          "is_guaranteed_edt": null,
+          "compensation_amount": {
+            "value": 1000000000
+          },
+          "text": "Dapatkan Voucher s/d {compensation_amount} jika pesanan terlambat.",
+          "max_coins_cap": null,
+          "coin_cap": null
+        },
+        "shipping_info_text": {
+          "text_template": null,
+          "shipping_fee": null,
+          "edt_from": null,
+          "edt_to": null,
+          "show_shipping_fee_suffix": false,
+          "formatted_text": {
+            "edt": {
+              "template": "{pdp_guaranteed_get_by_date_range}",
+              "format": null,
+              "attributes": [
+                {
+                  "type": 1,
+                  "key": "pdp_guaranteed_get_by_date_range",
+                  "value": {
+                    "value_str": "Garansi tiba 7 - 8 Okt",
+                    "value_int": null
+                  },
+                  "format": [
+                    6
+                  ],
+                  "text_color": null,
+                  "text_hex_color": "#000000de",
+                  "url": null
+                }
+              ],
+              "text_color": null,
+              "text_hex_color": null
+            },
+            "shipping_fee": null,
+            "late_delivery_compensation": {
+              "template": "Dapatkan Voucher s/d {compensation_amount} jika pesanan terlambat.",
+              "format": null,
+              "attributes": [
+                {
+                  "type": 2,
+                  "key": "compensation_amount",
+                  "value": {
+                    "value_str": null,
+                    "value_int": 1000000000
+                  },
+                  "format": null,
+                  "text_color": null,
+                  "text_hex_color": null,
+                  "url": null
+                }
+              ],
+              "text_color": null,
+              "text_hex_color": null
+            },
+            "fbs_description": null,
+            "display_edt_text_first_line": true,
+            "should_wrap_edt_text_by_attribute": false,
+            "scheduled_delivery_description": null
+          },
+          "highlight_free_shipping": false
+        },
+        "formatted_pre_order_text": null,
+        "has_free_return": null,
+        "model_id": 129332401009,
+        "delivery_address": {
+          "state": "DKI JAKARTA",
+          "city": "KOTA JAKARTA PUSAT",
+          "district": "MENTENG",
+          "town": null,
+          "zip_code": null,
+          "address": null,
+          "region": null,
+          "longitude": 106.8392111,
+          "latitude": -6.1937297,
+          "vn_data_version": null
+        },
+        "disable_shipping_drawer": null
+      },
+      "shop_vouchers": [
+        {
+          "promotionid": 1470682865090560,
+          "voucher_code": "HOMEQDQWF",
+          "signature": "57ccb26267ed508f16fb4157e5ae1c441089ee5f56e454888129b9588a3ad197",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 10000000000,
+          "used_price": 200000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 16,
+          "start_time": 1784778780,
+          "end_time": 1792861140,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 200000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "icon_text": "Homedoki Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 277711630,
+          "shop_name": "Homedoki Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-A0C17A02902822280000001105414110",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 200000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "error_code": 0,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1470683193950208,
+          "voucher_code": "HOME66666",
+          "signature": "c0f7bb098158db1bf4bd3b24d6e41425160a689ccd306a583720124729bfe1ca",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 10000000000,
+          "used_price": 100000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 10,
+          "start_time": 1784778840,
+          "end_time": 1792861140,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 100000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "icon_text": "Homedoki Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 277711630,
+          "shop_name": "Homedoki Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-23F13B46902822280000001105414110",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 100000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "error_code": 0,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1479546537918464,
+          "voucher_code": "HOME999T",
+          "signature": "8b4673795e2b89f6c1b806b8a06905e58eca66cf28449ea98e94c444ff77a934",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 30000000000,
+          "used_price": 300000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 68,
+          "start_time": 1785835440,
+          "end_time": 1793897940,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 300000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "icon_text": "Homedoki Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 277711630,
+          "shop_name": "Homedoki Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-F213DB2690A822280000001110014405",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 300000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1511352774705156,
+          "voucher_code": "HOMEGBHNJ",
+          "signature": "4c1356303b0e54f444533fb6651e635c676c1c73433973326c32e2f14a3f1f31",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 50000000000,
+          "used_price": 500000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 10,
+          "start_time": 1789626540,
+          "end_time": 1797699540,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 500000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "icon_text": "Homedoki Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 277711630,
+          "shop_name": "Homedoki Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-A7F91212B22222380000001111544101",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 500000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1511352607719424,
+          "voucher_code": "HOMEFVGBH",
+          "signature": "a7052e6634548fb1f679e816eff6c9489d59e29ac05e4c32ea1c3ea2ef90272e",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 80000000000,
+          "used_price": 1000000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 10,
+          "start_time": 1789626480,
+          "end_time": 1797699540,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 1000000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "icon_text": "Homedoki Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 277711630,
+          "shop_name": "Homedoki Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-2D2D1302B22222280000001111544101",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 1000000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 5,
+          "remaining_usage_limit": 5,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1511352432214016,
+          "voucher_code": "HOMEEFRVG",
+          "signature": "15f4aeb9c1b6e3fd23cc9c30f06b3247ab4439a59b0d5f7ebfd2d11f888f2fe5",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 100000000000,
+          "used_price": 1200000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 10,
+          "start_time": 1789626480,
+          "end_time": 1797699540,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 1200000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "icon_text": "Homedoki Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 277711630,
+          "shop_name": "Homedoki Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-84C85346B22222280000001111544101",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 1200000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 5,
+          "remaining_usage_limit": 5,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        }
+      ],
+      "free_return": null,
+      "coin_info": {
+        "spend_cash_unit": 100000,
+        "coin_earn_items": [
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          }
+        ],
+        "coin_earn_label": null
+      },
+      "product_attributes": {
+        "attrs": [
+          {
+            "name": "Merek",
+            "value": "Homedoki Life Deserves Better",
+            "id": null,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": "/search?brands=1342970",
+            "brand_id": 1342970,
+            "full_url": "https://shopee.co.id/search?brands=1342970",
+            "type": 1,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Perakitan",
+            "value": "Perlu Dirakit",
+            "id": 100730,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Masa Garansi",
+            "value": "Tidak Garansi",
+            "id": 100121,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Jenis Garansi",
+            "value": "Tidak Garansi",
+            "id": 100370,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Produk Custom",
+            "value": "Tidak",
+            "id": 101219,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Mystery Box",
+            "value": "Ya",
+            "id": 101291,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Asal Produk",
+            "value": "Indonesia",
+            "id": 100037,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Bahan",
+            "value": "stainless steel",
+            "id": 100134,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Dimensi (P x L x T)",
+            "value": "65/75/85/95/105cm*28cm*96cm",
+            "id": 100942,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Jumlah Produk Dalam Kemasan",
+            "value": "1",
+            "id": 100999,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Dikirim Dari",
+            "value": "KOTA SURABAYA",
+            "id": null,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 6,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          }
+        ],
+        "categories": [
+          {
+            "catid": 11043778,
+            "display_name": "Perlengkapan Rumah",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 11043895,
+            "display_name": "Peralatan Dapur",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 11043900,
+            "display_name": "Rak Dapur",
+            "no_sub": true,
+            "is_default_subcat": false
+          }
+        ],
+        "related_items": [],
+        "upfront_attrs": null,
+        "fresh_featured_attrs": null
+      },
+      "shop_detailed": {
+        "shopid": 277711630,
+        "userid": 277716877,
+        "last_active_time": 1791134428,
+        "vacation": false,
+        "place": null,
+        "account": {
+          "portrait": "8bfec3b262bb06cb5a1509f59c308e7e",
+          "username": "homedoki.id",
+          "status": 1
+        },
+        "is_shopee_verified": false,
+        "is_preferred_plus_seller": false,
+        "is_official_shop": true,
+        "shop_location": null,
+        "item_count": 342,
+        "rating_star": 4.797706,
+        "response_rate": 100,
+        "session_info": null,
+        "name": "Homedoki Official Shop",
+        "ctime": 1592981481,
+        "response_time": 235,
+        "follower_count": 664293,
+        "show_official_shop_label": true,
+        "rating_bad": 4064,
+        "rating_good": 420148,
+        "rating_normal": 13144,
+        "session_infos": null,
+        "status": 1,
+        "is_individual_seller": null,
+        "is_mart": false,
+        "favorite_shop_info": null,
+        "is_3pf": false,
+        "sold_total": null,
+        "is_shopee_choice": false,
+        "is_high_end": false,
+        "banner": {
+          "shopee_choice": null
+        },
+        "authorized_brand": null,
+        "is_scs": false,
+        "shop_location_tr": null,
+        "sold_total_display": null,
+        "is_outlet": false,
+        "display_fbs_logo": false,
+        "is_chatroom_online": null,
+        "outlet_shop": null,
+        "vacation_status": null,
+        "display_shopee_choice_tick": false,
+        "is_smeter_shop": false,
+        "is_pharmacy": false,
+        "is_instant_mart": false,
+        "fbs_display_type": 0
+      },
+      "age_gate_control": null,
+      "abnormal_popup": null,
+      "return_on_spot": null,
+      "display_sections": {
+        "add_on_deal": null,
+        "bundle_deal": null,
+        "exclusive_price_label": null,
+        "free_return": null,
+        "coin": null,
+        "wholesale": null
+      },
+      "ineligible_ep": null,
+      "tax_disclaimer": null,
+      "alcohol_disclaimer": null,
+      "design_control": {
+        "use_new_revamp_first_screen": null,
+        "display_on_time_delivery_guarantee": true,
+        "disable_price_with_variation": false,
+        "display_direct_delivery": false,
+        "use_new_featured_video_revamp": null,
+        "first_screen_revamp_abtest_group": null,
+        "display_choice_customised_section": false,
+        "is_support_fbs_enabled": false,
+        "top_section_featured_video_ab_test_group": null,
+        "enable_ksp_config": null,
+        "disable_main_page_select_variation": null,
+        "support_shop_review_preview": null,
+        "pdp_revamp_phase1_improvement_ui_review_down": null,
+        "display_fashion_attributes": null,
+        "display_fashion_review_section": null,
+        "display_fashion_first_screen": null,
+        "enable_fashion_review_improvements": null,
+        "display_fbs_floating_counter": null,
+        "display_shipping_drawer_new_free_shipping_text": false,
+        "display_shipping_drawer_new_free_shipping_ui": false,
+        "shift_featured_videos_above_review_ratings_section": null,
+        "enable_fashion_featured_videos_improvements": null,
+        "hide_shipping_channel_promotion_text": false,
+        "expand_size_guide_section_by_default": null,
+        "hide_ftss_tpfs_section": null,
+        "merge_attributes_and_description": null,
+        "hide_review_view_all": null
+      },
+      "shopee_free_return": null,
+      "detail_level": 0,
+      "removed_fields": null,
+      "size_guide": null,
+      "designer_info": null,
+      "shipping_info": null,
+      "vehicle_compatibility_info": null,
+      "nea": null,
+      "button_group": {
+        "buy_with_voucher": {
+          "price": 28700000000
+        },
+        "ineligible_user_platform_exclusive_sku": null
+      },
+      "installment_drawer": {
+        "priority": [
+          0,
+          1
+        ],
+        "spl": null,
+        "bank": {
+          "channels": null
+        },
+        "credit_card": null
+      },
+      "ongoing_banner": null,
+      "teaser_banner": null,
+      "price_breakdown": {
+        "price": {
+          "single_value": 28700000000,
+          "range_min": -1,
+          "range_max": -1,
+          "price_mask": null
+        },
+        "price_before_discount": {
+          "single_value": 80000000000,
+          "range_min": -1,
+          "range_max": -1,
+          "price_mask": null
+        },
+        "discount_breakdown": [
+          {
+            "type": 0,
+            "price_source": "Diskon Produk",
+            "discount_amount": 51100000000,
+            "exclusive_price": null,
+            "shop_voucher": null,
+            "platform_voucher": null,
+            "ads_voucher": null,
+            "breakdown_text": null,
+            "icon_type": null
+          },
+          {
+            "type": 2,
+            "price_source": "Diskon Voucher Toko",
+            "discount_amount": 200000000,
+            "exclusive_price": null,
+            "shop_voucher": {
+              "min_spend": 10000000000,
+              "discount_type": 0,
+              "discount_value": 200000000,
+              "discount_percentage": null
+            },
+            "platform_voucher": null,
+            "ads_voucher": null,
+            "breakdown_text": {
+              "template": "Belanja {min_spend}, diskon {discount_value}",
+              "format": null,
+              "attributes": [
+                {
+                  "type": 2,
+                  "key": "min_spend",
+                  "value": {
+                    "value_str": null,
+                    "value_int": 10000000000
+                  },
+                  "format": null,
+                  "text_color": null,
+                  "text_hex_color": null,
+                  "url": null
+                },
+                {
+                  "type": 2,
+                  "key": "discount_value",
+                  "value": {
+                    "value_str": null,
+                    "value_int": 200000000
+                  },
+                  "format": null,
+                  "text_color": null,
+                  "text_hex_color": null,
+                  "url": null
+                }
+              ],
+              "text_color": null,
+              "text_hex_color": null
+            },
+            "icon_type": null
+          }
+        ]
+      },
+      "membership_exclusive": null,
+      "membership_exclusive_teaser": null,
+      "service_entrance": {
+        "services": [
+          {
+            "text": "15 Hari Pengembalian",
+            "type": null,
+            "id": 30
+          },
+          {
+            "text": "100% Original",
+            "type": null,
+            "id": 23
+          },
+          {
+            "text": "Proteksi Furnitur",
+            "type": null,
+            "id": 25
+          }
+        ]
+      },
+      "service_drawer": {
+        "services": [
+          {
+            "title": "15 Hari Pengembalian",
+            "description": "Untuk memastikan kepuasanmu, Shopee Mall memberikan periode pengembalian yang lebih panjang (15 hari setelah barang diterima).",
+            "type": null,
+            "free_return": null,
+            "insurance": null,
+            "id": 30,
+            "redirection_url": "https://shopee.co.id/m/bebas-pengembalian",
+            "icon": "id-11134258-7rasd-m3bt5w8dhhjxdf",
+            "insurance_drawer": null,
+            "product_type": 0
+          },
+          {
+            "title": "100% Original",
+            "description": "Produk ini dijamin 100% asli dan akan dikirimkan secara langsung. Jika produk yang diterima tidak asli, kamu dapat mengajukan Pengembalian Dana.",
+            "type": null,
+            "free_return": null,
+            "insurance": null,
+            "id": 23,
+            "redirection_url": "https://shopee.co.id/m/shopee-garansi-ori",
+            "icon": "id-11134258-7ras8-m3bt6aa6vxsk65",
+            "insurance_drawer": null,
+            "product_type": 0
+          },
+          {
+            "title": "Proteksi Furnitur",
+            "description": "Melindungi barangmu dari kerampokan, kerusakan yang tidak disengaja, dan kerusakan saat perakitan hingga 2 tahun",
+            "type": null,
+            "free_return": null,
+            "insurance": null,
+            "id": 25,
+            "redirection_url": "https://insurance.shopee.co.id/ec/ec-pdp.html?from=pdp&locale=ID&product_id=1690597860413811810",
+            "icon": "id-11134258-7rasa-m3bt6nx0z2dw71",
+            "insurance_drawer": {},
+            "product_type": 0
+          }
+        ]
+      },
+      "trade_in": null,
+      "product_description": {
+        "paragraph_list": [
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-7ra3f-m5c9e7585f8860",
+            "ratio": 1.91,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-7ra3w-m5c9e7o3dtq85e",
+            "ratio": 1,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-7ra2t-m5c9e7arxavs77",
+            "ratio": 0.821,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-7ra1z-m5c9e7v13nxa4a",
+            "ratio": 0.821,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-7ra15-m5c9e84qpgbide",
+            "ratio": 0.94,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-7ra0y-m5c9e8cifg5z28",
+            "ratio": 0.821,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-7ra2p-m5c9e8nbznrra7",
+            "ratio": 0.821,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-7ra13-m5c9e8w7l7xn5b",
+            "ratio": 0.84,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-8258u-mfxf7rjoioend2",
+            "ratio": 1.002,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-825a2-mfxf7s176aywab",
+            "ratio": 0.83,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-8258m-mfxf7sn7pu6h54",
+            "ratio": 0.862,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "sg-11134202-8257u-mfxf7tio2l8vd2",
+            "ratio": 0.862,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          }
+        ],
+        "source_language": ""
+      },
+      "selected_tiers": null,
+      "size_info": null,
+      "size_recommendation": null,
+      "translation_status": 0,
+      "product_description_tr": null,
+      "default_warnings": null,
+      "bcrs_disclaimer": null,
+      "top_banner": null,
+      "bottom_banner": null
+    }
+  }
+}

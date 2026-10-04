@@ -1,0 +1,68 @@
+[
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https://shopee.co.id",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "/search?keyword={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "name": "Shopee",
+    "sameAs": [
+      "https://www.facebook.com/ShopeeID",
+      "https://www.instagram.com/Shopee_ID",
+      "https://www.youtube.com/channel/UCwljrkoI5jsfvAKgW3zNC7Q",
+      "https://x.com/shopeeid",
+      "https://www.tiktok.com/@shopee_id",
+      "https://play.google.com/store/apps/details?id=com.shopee.id",
+      "https://itunes.apple.com/ID/app/id959841443"
+    ]
+  },
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://shopee.co.id/",
+          "name": "Shopee"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://shopee.co.id/Perlengkapan-Rumah-cat.11043778",
+          "name": "Perlengkapan Rumah"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://shopee.co.id/Peralatan-Dapur-cat.11043778.11043895",
+          "name": "Peralatan Dapur"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://shopee.co.id/Rak-Dapur-cat.11043778.11043895.11043900",
+          "name": "Rak Dapur"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@id": "https://shopee.co.id/Homedoki-Rak-Piring-Wastafel-Dapur-Stainless-Steel-Multi-fungsi-Dengan-Penutup-Rak-Piring-Tertutup-i.277711630.24040756220",
+          "name": "Homedoki Rak Piring Wastafel Dapur Stainless Steel Multi-fungsi Dengan Penutup Rak Piring Tertutup"
+        }
+      }
+    ]
+  }
+]

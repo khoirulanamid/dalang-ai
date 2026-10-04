@@ -1,0 +1,12 @@
+{
+  "https://shopee.co.id/api/v4/pdp/get_pc?item_id=24040756220&shop_id=277711630&tz_offset_in_minutes=420&detail_level=0&incoming_pdp_page_source=0&incoming_pdp_page_scenario=0": {
+    "5": false,
+    "2": false,
+    "4": 2,
+    "0": 3,
+    "3": 90309999,
+    "error": 90309999,
+    "1": "3196efadbe5-2e65-420e-8d61-3faa813aa604",
+    "9": true
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https://shopee.co.id",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "/search?keyword={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "name": "Shopee",
+    "sameAs": [
+      "https://www.facebook.com/ShopeeID",
+      "https://www.instagram.com/Shopee_ID",
+      "https://www.youtube.com/channel/UCwljrkoI5jsfvAKgW3zNC7Q",
+      "https://x.com/shopeeid",
+      "https://www.tiktok.com/@shopee_id",
+      "https://play.google.com/store/apps/details?id=com.shopee.id",
+      "https://itunes.apple.com/ID/app/id959841443"
+    ]
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "https://shopee.co.id/api/v4/account/subaccount": "{'data': 'OK'}",
+  "https://shopee.co.id/api/v4/web/subcart": "{'data': 'OK'}",
+  "https://shopee.co.id/api/v4/account/basic/get_payment_info": "{'data': None, 'error': 19, 'error_msg': 'Failed to authenticate'}",
+  "https://shopee.co.id/api/v4/pdp/get_pc?item_id=24040756220&shop_id=277711630&tz_offset_in_minutes=420&detail_level=0&incoming_pdp_page_source=0&incoming_pdp_page_scenario=0": "{'5': False, '2': False, '4': 2, '0': 3, '3': 90309999, 'error': 90309999, '1': '72efa3cbd-cc33-4e4c-9d58-fc3cc9868f04', '9': True}"
+}
