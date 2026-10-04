@@ -1,0 +1,98 @@
+{
+  "product_id": "one-set-4in1-simple-vest-cherish-inner-cutbray-bella-square-setelan-wanita-kekinian-siap-pakai-as4v",
+  "product_name": "One Set 4in1 Simple Vest Cherish Inner Cutbray Bella Square Setelan Wanita Kekinian Siap Pakai AS4V",
+  "source_url": "https://s.shopee.co.id/6L4wk65TN6",
+  "final_url": "https://shopee.co.id/opaanlp/190856783/24896153485?__mobile__=1&exp_group=rollout&gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QACpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMaBRvcqdZwgRklGTWoHoxFGhRfNAexxPkhN1n8rcCO5qFEud_-aY2hsGdfUnqCpX0P0Z7lpJy6IP6_Ew8qmNpcGhlcnRleHTElgAAAAySyojUY66sHvAmrS2H-HZz7xk7vUGPG0fUek1Az6JZy8r7MRuk8mv4wLPInTmwqxcT8r0wkCCfG4XXht4OQiI1yAPGQPAMaP2AEHxGhd3bh9s1KAR79vpUw3ZYm7Mfb1FoJD5Q71yLfnrTqtZGWm0v39QkBx356C0ueXpoUBQ-kfbJwDLe9sLzD2WyLV0oBsVOKg&lang=id&mmp_pid=an_11398100392&uls_trackid=56pt1lqq02lo&utm_campaign=id_1wgy1NTy20H&utm_content=----&utm_medium=affiliates&utm_source=an_11398100392&utm_term=fndy865of9uq",
+  "price": {
+    "currency": "IDR",
+    "amount": 1000000.0,
+    "formatted": "Rp1.000.000"
+  },
+  "category": "Fashion Muslim / Pakaian Wanita",
+  "specifications": {
+    "origin": "Indonesia",
+    "material": "Rayon Premium / Crinkle Airflow",
+    "style": "Casual Chic / Modest Fashion"
+  },
+  "description": "",
+  "crawled_at": "2026-10-04T09:05:42.232587+00:00",
+  "media": {
+    "target_directory": "workspace/product_images/sprint26",
+    "image_files": [
+      "sprint26_product_1.jpg",
+      "sprint26_product_2.jpg",
+      "sprint26_product_3.jpg",
+      "sprint26_product_4.jpg",
+      "sprint26_product_5.jpg",
+      "sprint26_product_6.jpg",
+      "sprint26_product_7.jpg",
+      "sprint26_product_8.jpg"
+    ],
+    "image_details": [
+      {
+        "file_name": "sprint26_product_1.jpg",
+        "primary_path": "workspace/product_images/sprint26/sprint26_product_1.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-822wj-mnb7tl0ie7lx1b",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 94997
+      },
+      {
+        "file_name": "sprint26_product_2.jpg",
+        "primary_path": "workspace/product_images/sprint26/sprint26_product_2.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-822wq-mnb7tl10t7ns80",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 92364
+      },
+      {
+        "file_name": "sprint26_product_3.jpg",
+        "primary_path": "workspace/product_images/sprint26/sprint26_product_3.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-822wk-mnb7tl00sphf7a",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 74518
+      },
+      {
+        "file_name": "sprint26_product_4.jpg",
+        "primary_path": "workspace/product_images/sprint26/sprint26_product_4.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-822wt-mnb7tl0si0ow11",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 78047
+      },
+      {
+        "file_name": "sprint26_product_5.jpg",
+        "primary_path": "workspace/product_images/sprint26/sprint26_product_5.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-7ra0q-mcpujdxp6haw7d",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 75702
+      },
+      {
+        "file_name": "sprint26_product_6.jpg",
+        "primary_path": "workspace/product_images/sprint26/sprint26_product_6.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-7ra0i-mcpujdxp7vvc29",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 70531
+      },
+      {
+        "file_name": "sprint26_product_7.jpg",
+        "primary_path": "workspace/product_images/sprint26/sprint26_product_7.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-7ra0m-mcpujdxownbse2",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 70826
+      },
+      {
+        "file_name": "sprint26_product_8.jpg",
+        "primary_path": "workspace/product_images/sprint26/sprint26_product_8.jpg",
+        "source_url": "https://down-id.img.susercontent.com/file/id-11134207-7ra0m-mcpvl2tv6ejbae",
+        "width": 1024,
+        "height": 1024,
+        "size_bytes": 63778
+      }
+    ]
+  }
+}

@@ -573,7 +573,7 @@ agents:
 ## SPRINT 26: Autonomous Campaign — Produk Shopee 6L4wk65TN6 (Threads Only) 🛍️
 > Goal: Orkestrasi otonom 100% Dalang-AI untuk produk baru Shopee (https://s.shopee.co.id/6L4wk65TN6): Ekstraksi detail & foto HD oleh Pingot, Copywriting viral oleh Gathot, Publikasi naskah + foto HD ke Threads @rizki_mubarakid oleh Gathot, Audit fisik bukti live oleh Ren, dan Arsip ke Bagong Vault.
 
-- [ ] **T-2601**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/6L4wk65TN6 via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint26/, dan simpan metadata di docs/sprint26_campaign.json
+- [x] **T-2601**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/6L4wk65TN6 via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint26/, dan simpan metadata di docs/sprint26_campaign.json
   - *Assigned*: auto
   - *Dependencies*: none
 

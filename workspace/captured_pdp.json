@@ -1,0 +1,12 @@
+{
+  "https://shopee.co.id/api/v4/pdp/get_pc?item_id=24896153485&shop_id=190856783&tz_offset_in_minutes=420&detail_level=0&incoming_pdp_page_source=0&incoming_pdp_page_scenario=0": {
+    "5": false,
+    "2": false,
+    "4": 2,
+    "0": 3,
+    "3": 90309999,
+    "error": 90309999,
+    "1": "6971bb67a79-9400-4c7d-b2b7-bdd1dff6cc66",
+    "9": true
+  }
+}
