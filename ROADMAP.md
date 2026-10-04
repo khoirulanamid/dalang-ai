@@ -581,14 +581,14 @@ agents:
   - *Assigned*: auto
   - *Dependencies*: T-2601
 
-- [ ] **T-2603**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting naskah kurasi beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot verifikasi live di workspace/threads_sprint26_live.png
+- [x] **T-2603**: [auto] Publikasikan status Threads: Jalankan script automasi Playwright untuk memposting naskah kurasi beserta lampiran foto produk HD ke akun Threads @rizki_mubarakid dan simpan screenshot verifikasi live di workspace/threads_sprint26_live.png
   - *Assigned*: auto
   - *Dependencies*: T-2602
 
-- [ ] **T-2604**: [auto] Quality Gate & Visual Review: Ren melakukan audit kualitas fisik artefak, memeriksa screenshot live tayang threads_sprint26_live.png dan validasi file media fisik >0 bytes
+- [x] **T-2604**: [auto] Quality Gate & Visual Review: Ren melakukan audit kualitas fisik artefak, memeriksa screenshot live tayang threads_sprint26_live.png dan validasi file media fisik >0 bytes
   - *Assigned*: auto
   - *Dependencies*: T-2603
 
-- [ ] **T-2605**: [auto] Bagong Vault Archival: Arsipkan seluruh dokumentasi kampanye, naskah, dan bukti tayang ke sistem Bagong Vault
+- [x] **T-2605**: [auto] Bagong Vault Archival: Arsipkan seluruh dokumentasi kampanye, naskah, dan bukti tayang ke sistem Bagong Vault
   - *Assigned*: auto
   - *Dependencies*: T-2604
