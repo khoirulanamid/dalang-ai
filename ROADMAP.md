@@ -688,7 +688,7 @@ agents:
 ## SPRINT 31: Autonomous Campaign — Produk Shopee gQbH58w3m (Threads Only) 🛍️
 > Goal: Orkestrasi otonom 100% Dalang-AI untuk produk baru Shopee (https://s.shopee.co.id/gQbH58w3m): Ekstraksi detail & foto HD oleh Pingot, Copywriting viral oleh Gathot, Publikasi naskah + foto HD ke Threads @rizki_mubarakid oleh Gathot, Audit fisik bukti live oleh Ren, dan Arsip ke Bagong Vault.
 
-- [ ] **T-3101**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/gQbH58w3m via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint31/, dan simpan metadata di docs/sprint31_campaign.json
+- [x] **T-3101**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/gQbH58w3m via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint31/, dan simpan metadata di docs/sprint31_campaign.json
   - *Assigned*: auto
   - *Dependencies*: none
 

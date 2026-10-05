@@ -1,242 +1,288 @@
-import os
-import sys
-import json
-import time
-import httpx
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
+import json
+import os
 from pathlib import Path
-from dataclasses import dataclass, field, asdict
-from typing import List, Dict, Any, Optional
-from playwright.sync_api import sync_playwright
+import re
+import sys
+from typing import Any, Dict, List, Optional
+import httpx
+from playwright.sync_api import sync_playwright, Response
 
 @dataclass(frozen=True)
-class Money:
-    amount: float
-    currency: str = "IDR"
+class PriceRange:
+    currency: str
+    original_min: float
+    original_max: float
+    current_min: float
+    current_max: float
 
     def __post_init__(self):
-        if self.amount < 0:
-            raise ValueError("Amount cannot be negative")
-        if not self.currency or len(self.currency) != 3:
-            raise ValueError("Currency must be a 3-letter ISO code")
+        if self.current_min < 0 or self.current_max < 0:
+            raise ValueError("Price values must be non-negative")
+        if self.current_min > self.current_max:
+            raise ValueError("Minimum price cannot exceed maximum price")
 
 @dataclass(frozen=True)
 class ProductSpecification:
     name: str
     value: str
 
-    def __post_init__(self):
-        if not self.name.strip():
-            raise ValueError("Specification name cannot be empty")
-
 @dataclass(frozen=True)
 class ProductMedia:
+    image_id: str
     url: str
-    local_path: str
-    is_cover: bool = False
-    media_type: str = "image"
+    local_path: Optional[str] = None
 
 @dataclass
-class ProductCampaignMetadata:
+class ProductDetails:
     item_id: str
     shop_id: str
     title: str
+    price: PriceRange
     description: str
-    price: Money
-    original_price: Optional[Money]
-    discount_percentage: Optional[int]
-    stock: int
-    sold_count: Optional[str]
-    rating_star: Optional[float]
-    shop_name: Optional[str]
-    shop_location: Optional[str]
     specifications: List[ProductSpecification]
-    media_assets: List[ProductMedia]
-    source_url: str
+    media_items: List[ProductMedia]
     canonical_url: str
+    source_url: str
     extracted_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_projection(self) -> Dict[str, Any]:
         return {
             "item_id": self.item_id,
             "shop_id": self.shop_id,
             "title": self.title,
-            "description": self.description,
+            "canonical_url": self.canonical_url,
+            "source_url": self.source_url,
             "price": {
-                "amount": self.price.amount,
                 "currency": self.price.currency,
-                "formatted": f"{self.price.currency} {int(self.price.amount):,}"
+                "original_min": self.price.original_min,
+                "original_max": self.price.original_max,
+                "current_min": self.price.current_min,
+                "current_max": self.price.current_max,
+                "display_price": f"{self.price.currency} {int(self.price.current_min):,}".replace(",", "."),
             },
-            "original_price": {
-                "amount": self.original_price.amount,
-                "currency": self.original_price.currency,
-                "formatted": f"{self.original_price.currency} {int(self.original_price.amount):,}"
-            } if self.original_price else None,
-            "discount_percentage": self.discount_percentage,
-            "stock": self.stock,
-            "sold_count": self.sold_count,
-            "rating_star": self.rating_star,
-            "shop": {
-                "name": self.shop_name,
-                "location": self.shop_location
-            },
-            "specifications": [{"name": s.name, "value": s.value} for s in self.specifications],
-            "media_assets": [
+            "description": self.description,
+            "specifications": [
+                {"name": s.name, "value": s.value} for s in self.specifications
+            ],
+            "media": [
                 {
+                    "image_id": m.image_id,
                     "url": m.url,
                     "local_path": m.local_path,
-                    "is_cover": m.is_cover,
-                    "media_type": m.media_type
-                } for m in self.media_assets
-            ],
-            "source_url": self.source_url,
-            "canonical_url": self.canonical_url,
-            "extracted_at": self.extracted_at
-        }
-
-
-def download_media_file(url: str, output_path: Path) -> bool:
-    try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-            "Referer": "https://shopee.co.id/"
-        }
-        with httpx.Client(timeout=30.0, follow_redirects=True, headers=headers) as client:
-            resp = client.get(url)
-            if resp.status_code == 200 and len(resp.content) > 1000:
-                output_path.parent.mkdir(parents=True, exist_ok=True)
-                output_path.write_bytes(resp.content)
-                return True
-    except Exception as e:
-        print(f"Failed to download {url}: {e}", file=sys.stderr)
-    return False
-
-
-def crawl_shopee_product(short_url: str, output_images_dir: Path, output_metadata_path: Path):
-    captured_responses = []
-
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=True,
-            args=[
-                "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-blink-features=AutomationControlled"
-            ]
-        )
-        context = browser.new_context(
-            viewport={"width": 1440, "height": 900},
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-        )
-        page = context.new_page()
-
-        def handle_response(response):
-            if any(endpoint in response.url for endpoint in ["/api/v4/item/get", "/api/v2/item/get", "/api/v4/pdp/get_pc", "api/v4/item/get_all"]):
-                try:
-                    data = response.json()
-                    captured_responses.append({"url": response.url, "data": data})
-                except Exception:
-                    pass
-
-        page.on("response", handle_response)
-
-        print(f"Navigating to shortlink: {short_url}")
-        page.goto(short_url, wait_until="domcontentloaded", timeout=60000)
-        
-        # Wait for redirect and dynamic rendering
-        page.wait_for_timeout(7000)
-        
-        final_url = page.url
-        print(f"Final resolved URL: {final_url}")
-        
-        # Scroll down gradually to trigger lazy-loaded specifications and images
-        for scroll_y in [500, 1000, 1500, 2000, 1000, 0]:
-            page.evaluate(f"window.scrollTo(0, {scroll_y})")
-            page.wait_for_timeout(1000)
-
-        # Extract DOM data if API not fully captured
-        dom_title = ""
-        dom_price = ""
-        dom_specs = []
-        dom_images = []
-        dom_description = ""
-
-        try:
-            # Title
-            title_elem = page.query_selector("div.attM6q, span._44qnta, h1, div.WBVL_7")
-            if title_elem:
-                dom_title = title_elem.inner_text().strip()
-        except Exception:
-            pass
-
-        # Try to inspect page HTML or preloaded scripts
-        page_html = page.content()
-        Path("shopee_page_dump.html").write_text(page_html, encoding="utf-8")
-
-        # Let's see if we captured API response
-        api_data = None
-        for item in captured_responses:
-            d = item["data"].get("data") or item["data"]
-            if isinstance(d, dict) and ("name" in d or "item" in d or "item_id" in d):
-                api_data = d
-                break
-
-        print(f"Captured responses count: {len(captured_responses)}")
-        if captured_responses:
-            for i, r in enumerate(captured_responses):
-                Path(f"api_response_{i}.json").write_text(json.dumps(r["data"], indent=2), encoding="utf-8")
-
-        # Evaluate client-side data
-        client_eval = page.evaluate("""() => {
-            let res = {
-                title: document.title,
-                images: [],
-                specs: [],
-                price: null,
-                sold: null,
-                rating: null,
-                desc: null
-            };
-            
-            // Try extracting images from carousel or product gallery
-            const imgEls = document.querySelectorAll('img');
-            imgEls.forEach(img => {
-                let src = img.src || img.getAttribute('src') || '';
-                if (src.includes('susercontent.com') && !src.includes('profile') && !src.includes('avatar')) {
-                    res.images.push(src);
                 }
-            });
-            
-            // Try extracting title
-            const h1 = document.querySelector('h1, span._44qnta, div.attM6q, div.WBVL_7');
-            if (h1) res.title = h1.innerText;
+                for m in self.media_items
+            ],
+            "extracted_at": self.extracted_at,
+        }
 
-            // Try extracting price
-            const priceEl = document.querySelector('div.pqTWkA, div.G27Shz, div._3n5z6N');
-            if (priceEl) res.price = priceEl.innerText;
+class ShopeeCrawler:
+    def __init__(self, output_dir: Path, metadata_paths: List[Path]):
+        self.output_dir = output_dir
+        self.metadata_paths = metadata_paths
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        for p in self.metadata_paths:
+            p.parent.mkdir(parents=True, exist_ok=True)
+        self.api_payloads: List[Dict[str, Any]] = []
 
-            // Try specs
-            const specRows = document.querySelectorAll('div.page-product__item-wrapper, div.a11y-specs, div.k77Vo2, div.SK_i_K');
-            specRows.forEach(row => {
-                res.specs.push(row.innerText);
-            });
+    def _handle_response(self, response: Response):
+        url = response.url
+        if any(keyword in url for keyword in ["/api/v4/item/get", "/api/v2/item/get", "/api/v4/pdp/get_item"]):
+            try:
+                data = response.json()
+                if data:
+                    self.api_payloads.append(data)
+            except Exception:
+                pass
 
-            return res;
-        }""")
+    def crawl_product(self, short_url: str) -> ProductDetails:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(
+                headless=True,
+                args=[
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox",
+                    "--disable-blink-features=AutomationControlled",
+                ],
+            )
+            context = browser.new_context(
+                user_agent=(
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/123.0.0.0 Safari/537.36"
+                ),
+                viewport={"width": 1920, "height": 1080},
+                locale="id-ID",
+            )
+            page = context.new_page()
+            page.on("response", self._handle_response)
 
-        browser.close()
+            page.goto(short_url, wait_until="networkidle", timeout=60000)
+            page.wait_for_timeout(5000)
 
-    return final_url, captured_responses, client_eval
+            final_url = page.url
 
-if __name__ == "__main__":
-    url = "https://s.shopee.co.id/6L4wk65TN6"
-    img_dir = Path("workspace/product_images/sprint26")
-    meta_path = Path("docs/sprint26_campaign.json")
-    
-    final_url, captured, client_eval = crawl_shopee_product(url, img_dir, meta_path)
-    print("Evaluation done. Result summary:")
-    print("Resolved URL:", final_url)
-    print("Captured API count:", len(captured))
-    print("Client eval title:", client_eval.get("title"))
-    print("Client eval images found:", len(client_eval.get("images", [])))
+            # Extract from captured API or page DOM
+            product = self._parse_from_api_or_dom(page, short_url, final_url)
+            browser.close()
+            return product
+
+    def _parse_from_api_or_dom(self, page, short_url: str, final_url: str) -> ProductDetails:
+        item_data = None
+        for payload in self.api_payloads:
+            if "data" in payload and isinstance(payload["data"], dict):
+                d = payload["data"]
+                if "item" in d:
+                    item_data = d["item"]
+                    break
+                elif "name" in d and ("price" in d or "price_min" in d):
+                    item_data = d
+                    break
+
+        title = ""
+        description = ""
+        item_id = ""
+        shop_id = ""
+        price_min = 0.0
+        price_max = 0.0
+        orig_min = 0.0
+        orig_max = 0.0
+        specs: List[ProductSpecification] = []
+        images: List[str] = []
+
+        if item_data:
+            title = item_data.get("name", "")
+            description = item_data.get("description", "")
+            item_id = str(item_data.get("itemid", ""))
+            shop_id = str(item_data.get("shopid", ""))
+
+            # Shopee API prices are usually scaled by 100000
+            scale = 100000.0 if item_data.get("price", 0) > 10000000 else 1.0
+            price_min = float(item_data.get("price_min", item_data.get("price", 0))) / scale
+            price_max = float(item_data.get("price_max", item_data.get("price", 0))) / scale
+            orig_min = float(item_data.get("price_min_before_discount", item_data.get("price_before_discount", price_min))) / scale
+            orig_max = float(item_data.get("price_max_before_discount", item_data.get("price_before_discount", price_max))) / scale
+
+            for attr in item_data.get("attributes", []):
+                attr_name = attr.get("name", "")
+                attr_val = attr.get("value", "")
+                if attr_name and attr_val:
+                    specs.append(ProductSpecification(name=str(attr_name), value=str(attr_val)))
+
+            images = item_data.get("images", [])
+
+        if not title:
+            # Fallback DOM evaluation
+            title = page.title()
+            # Clean page title
+            title = re.sub(r"\s*\|\s*Shopee Indonesia.*$", "", title).strip()
+
+        if not description:
+            try:
+                desc_el = page.locator(".f8dp7t, .product-detail__description, .page-product__description").first
+                if desc_el.count() > 0:
+                    description = desc_el.text_content().strip()
+            except Exception:
+                pass
+
+        if not specs:
+            try:
+                spec_rows = page.locator(".G27akf, .item-attribute, .e8lZp3").all()
+                for row in spec_rows:
+                    text = row.text_content().strip()
+                    parts = text.split("\n")
+                    if len(parts) >= 2:
+                        specs.append(ProductSpecification(name=parts[0].strip(), value=parts[1].strip()))
+            except Exception:
+                pass
+
+        if not images:
+            try:
+                img_els = page.locator("img").all()
+                for img in img_els:
+                    src = img.get_attribute("src") or ""
+                    if "down-id.img.susercontent.com" in src or "cf.shopee.co.id/file" in src:
+                        # Extract hash
+                        match = re.search(r"/file/([a-zA-Z0-9_-]+)", src)
+                        if match and match.group(1) not in images:
+                            images.append(match.group(1))
+            except Exception:
+                pass
+
+        # Parse ID from final URL if missing
+        if not item_id or not shop_id:
+            id_match = re.search(r"-i\.(\d+)\.(\d+)", final_url)
+            if id_match:
+                shop_id = shop_id or id_match.group(1)
+                item_id = item_id or id_match.group(2)
+
+        price = PriceRange(
+            currency="IDR",
+            original_min=orig_min if orig_min > 0 else price_min,
+            original_max=orig_max if orig_max > 0 else price_max,
+            current_min=price_min,
+            current_max=price_max,
+        )
+
+        media_items = []
+        for img_id in images:
+            # HD image URL template
+            hd_url = f"https://down-id.img.susercontent.com/file/{img_id}"
+            media_items.append(ProductMedia(image_id=img_id, url=hd_url))
+
+        return ProductDetails(
+            item_id=item_id,
+            shop_id=shop_id,
+            title=title,
+            price=price,
+            description=description,
+            specifications=specs,
+            media_items=media_items,
+            canonical_url=final_url,
+            source_url=short_url,
+        )
+
+    def download_media(self, product: ProductDetails) -> ProductDetails:
+        updated_media = []
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/123.0.0.0 Safari/537.36"
+            ),
+            "Referer": "https://shopee.co.id/",
+        }
+
+        with httpx.Client(headers=headers, timeout=30.0, follow_redirects=True) as client:
+            for idx, media in enumerate(product.media_items):
+                file_ext = "jpg"
+                filename = f"product_{idx + 1:02d}_{media.image_id[:10]}.{file_ext}"
+                target_path = self.output_dir / filename
+
+                try:
+                    res = client.get(media.url)
+                    if res.status_code == 200:
+                        target_path.write_bytes(res.content)
+                        updated_media.append(
+                            ProductMedia(
+                                image_id=media.image_id,
+                                url=media.url,
+                                local_path=str(target_path),
+                            )
+                        )
+                    else:
+                        updated_media.append(media)
+                except Exception as err:
+                    print(f"Error downloading {media.url}: {err}", file=sys.stderr)
+                    updated_media.append(media)
+
+        product.media_items = updated_media
+        return product
+
+    def save_metadata(self, product: ProductDetails):
+        projection = product.to_projection()
+        payload_str = json.dumps(projection, indent=2, ensure_ascii=False)
+        for p in self.metadata_paths:
+            p.write_text(payload_str, encoding="utf-8")
+        print(f"Metadata saved successfully across {len(self.metadata_paths)} targets.")

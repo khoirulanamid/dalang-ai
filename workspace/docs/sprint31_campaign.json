@@ -1,0 +1,52 @@
+{
+  "campaign_id": "sprint31",
+  "task_id": "T-3101",
+  "source_shortlink": "https://s.shopee.co.id/gQbH58w3m",
+  "final_url": "https://shopee.co.id/product/159394078/22042472852?affiliate_seller_voucher_token=3Yrr9Jdp5h7T6QQg6erMnZuU5FATa5B4ruT6CAB3LrfRZ&exp_group=rollout&gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QACpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMaBRvcqdZwgRklGTWoHoxFGhRfNAexxPkhN1n8rcCO5qFEud_-aY2hsGdfUnqCpX0P0Z7lpJy6IP6_Ew8qmNpcGhlcnRleHTElgAAAAwYaoILeNG-0nkou59KpyA_Uj_Fd2qNQCqc_sMJIynyLiMwED4Q_glUtIZLsE_irnLiTQvXxSBHic5k65fplRG_XdCi40trjfe4eDKGTDGMNWVDtmEfl_CyRrOT9jrMnsK1_KrOxme9roTSk7UO-J72gWHBg3CU7FHflbVtXC3fi6UhvYwwRv_G5-QbC2xdxg0YLw&lang=id&mmp_pid=an_11398100392&uls_trackid=56q3bh0u00k7&utm_campaign=id_7IDvLKLtsQ5&utm_content=----&utm_medium=affiliates&utm_source=an_11398100392&utm_term=fniijzu2hkf9",
+  "crawled_at": "2026-10-05T03:27:37.475762+00:00",
+  "product_name": "INBEX IB-2R 170CM Tripod Kamera Hp Bluetooth Remote Aluminum Tripot Holder Konten Tongsis Video Tripod",
+  "price": {
+    "currency": "IDR",
+    "amount": 0.0,
+    "formatted": ""
+  },
+  "price_formatted": "",
+  "currency": "IDR",
+  "description": "",
+  "specifications": {},
+  "category": [],
+  "images": [
+    "sprint31_product_01.jpg",
+    "sprint31_product_02.jpg",
+    "sprint31_product_03.jpg",
+    "sprint31_product_04.jpg"
+  ],
+  "image_details": [
+    {
+      "filename": "sprint31_product_01.jpg",
+      "relative_path": "product_images/sprint31/sprint31_product_01.jpg",
+      "size_bytes": 117456,
+      "source_url": "https://down-id.img.susercontent.com/file/id-11134208-7r98u-lxew4fty2ykt7b@resize_w875_nl.webp"
+    },
+    {
+      "filename": "sprint31_product_02.jpg",
+      "relative_path": "product_images/sprint31/sprint31_product_02.jpg",
+      "size_bytes": 38140,
+      "source_url": "https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/1c8bdaaf45e1fd48.png"
+    },
+    {
+      "filename": "sprint31_product_03.jpg",
+      "relative_path": "product_images/sprint31/sprint31_product_03.jpg",
+      "size_bytes": 94954,
+      "source_url": "https://down-id.img.susercontent.com/file/id-11134208-7r98w-lxj4ku5mbdbid2@resize_w875_nl.webp"
+    },
+    {
+      "filename": "sprint31_product_04.jpg",
+      "relative_path": "product_images/sprint31/sprint31_product_04.jpg",
+      "size_bytes": 213181,
+      "source_url": "https://down-id.img.susercontent.com/file/id-11134207-81zth-mtwbe0wo5j4353"
+    }
+  ],
+  "status": "crawled",
+  "metadata_version": "1.0.0"
+}
