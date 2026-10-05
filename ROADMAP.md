@@ -665,7 +665,7 @@ agents:
 ## SPRINT 30: Autonomous Campaign — Produk Shopee 80DBs5lgX2 (Threads Only) 🛍️
 > Goal: Orkestrasi otonom 100% Dalang-AI untuk produk baru Shopee (https://s.shopee.co.id/80DBs5lgX2): Ekstraksi detail & foto HD oleh Pingot, Copywriting viral oleh Gathot, Publikasi naskah + foto HD ke Threads @rizki_mubarakid oleh Gathot, Audit fisik bukti live oleh Ren, dan Arsip ke Bagong Vault.
 
-- [ ] **T-3001**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/80DBs5lgX2 via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint30/, dan simpan metadata di docs/sprint30_campaign.json
+- [x] **T-3001**: [auto] Ekstraksi media & spesifikasi: Crawl shortlink Shopee https://s.shopee.co.id/80DBs5lgX2 via Playwright, ekstrak detail produk, harga, dan spesifikasi, download foto-foto produk HD ke workspace/product_images/sprint30/, dan simpan metadata di docs/sprint30_campaign.json
   - *Assigned*: auto
   - *Dependencies*: none
 

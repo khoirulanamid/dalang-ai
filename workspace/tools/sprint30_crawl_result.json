@@ -1,0 +1,93 @@
+{
+  "pdp_api": {
+    "5": false,
+    "2": false,
+    "4": 2,
+    "0": 3,
+    "3": 90309999,
+    "error": 90309999,
+    "1": "357c440a387-e073-4fd2-b695-21d2caa0cd5e",
+    "9": true
+  },
+  "item_api": null,
+  "all_apis": [
+    {
+      "url": "https://shopee.co.id/api/v4/pdp/get_pc?item_id=14014103617&shop_id=159394078&tz_offset_in_minutes=420&detail_level=0&incoming_pdp_page_source=0&incoming_pdp_page_scenario=0",
+      "data": {
+        "5": false,
+        "2": false,
+        "4": 2,
+        "0": 3,
+        "3": 90309999,
+        "error": 90309999,
+        "1": "357c440a387-e073-4fd2-b695-21d2caa0cd5e",
+        "9": true
+      }
+    }
+  ],
+  "ld_json": [
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https://shopee.co.id",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "/search?keyword={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "name": "Shopee",
+      "sameAs": [
+        "https://www.facebook.com/ShopeeID",
+        "https://www.instagram.com/Shopee_ID",
+        "https://www.youtube.com/channel/UCwljrkoI5jsfvAKgW3zNC7Q",
+        "https://x.com/shopeeid",
+        "https://www.tiktok.com/@shopee_id",
+        "https://play.google.com/store/apps/details?id=com.shopee.id",
+        "https://itunes.apple.com/ID/app/id959841443"
+      ]
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://shopee.co.id/",
+            "name": "Shopee"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://shopee.co.id/Fotografi-cat.11044588",
+            "name": "Fotografi"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://shopee.co.id/Tripod-Monopod-Aksesoris-cat.11044588.11044616",
+            "name": "Tripod, Monopod, & Aksesoris"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@id": "https://shopee.co.id/INBEX-TF-3366-133CM-Tripod-Remote-Tripot-handphone-Photography-Kamera-cellphone-133CM-Tripod-Camera-vlog-i.159394078.14014103617",
+            "name": "INBEX TF-3366 133CM Tripod Remote Tripot handphone Photography Kamera cellphone 133CM Tripod Camera vlog"
+          }
+        }
+      ]
+    }
+  ],
+  "title": "Jual INBEX TF-3366 133CM Tripod Remote Tripot handphone Photography Kamera cellphone 133CM Tripod Camera vlog | Shopee Indonesia",
+  "url": "https://shopee.co.id/product/159394078/14014103617?affiliate_seller_voucher_token=3Yrr9Jdp5ZLLnwCPsgrdQ3pV4dXVmBWK1XRinJvPtiSwh&exp_group=rollout&gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QACpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMaBRvcqdZwgRklGTWoHoxFGhRfNAexxPkhN1n8rcCO5qFEud_-aY2hsGdfUnqCpX0P0Z7lpJy6IP6_Ew8qmNpcGhlcnRleHTElgAAAAzdkb9M4XNJQb7P47fVSeAGPyj3dxoPCSPhZEwT1sqDEbo6HxDCR9GtZQtvttf40iy27Hmr_nw1ZynR45Ff7IumztT2usAkEEDU3H3inayEmcXBvpW2C5Ca1GEMxC_Dm-Gj8cYQA53Y8LNoVtBLIoRRiHxYrPfoN19xPFavxJ_XBnxUw3yEwFMTZkEUoyEsTJ_y-w&lang=id&mmp_pid=an_11398100392&uls_trackid=56q2khbi01jd&utm_campaign=id_3Xd027lasZV&utm_content=----&utm_medium=affiliates&utm_source=an_11398100392&utm_term=fnhzvfarugdu",
+  "images": [
+    "https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/1c8bdaaf45e1fd48.png"
+  ]
+}

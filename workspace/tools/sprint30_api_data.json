@@ -1,0 +1,3450 @@
+{
+  "item_get": {
+    "0": 3,
+    "1": "9355969167c-85ec-40b5-ba54-8a0a667ff2c5",
+    "2": false,
+    "3": 90309999,
+    "4": 2,
+    "5": false,
+    "9": true,
+    "error": 90309999
+  },
+  "pdp_get": {
+    "bff_meta": null,
+    "error": null,
+    "error_msg": null,
+    "data": {
+      "item": {
+        "item_id": 14014103617,
+        "shop_id": 159394078,
+        "item_status": "normal",
+        "status": 1,
+        "item_type": 0,
+        "reference_item_id": "",
+        "title": "INBEX TF-3366 133CM Tripod Remote Tripot handphone Photography Kamera cellphone 133CM Tripod Camera vlog",
+        "image": "id-11134207-81ztm-mtwbe0wo6xojbb",
+        "label_ids": [
+          1000109,
+          1000167,
+          1000357,
+          1000368,
+          1000394,
+          1000389,
+          1000392,
+          1000381,
+          1000450,
+          1000436,
+          1000498,
+          1000501,
+          1000509,
+          1000526,
+          1000528,
+          1000529,
+          1000544,
+          1000549,
+          1000653,
+          1000314,
+          1002164,
+          1011692,
+          1016119,
+          700195015,
+          700195016,
+          1001022,
+          1011751,
+          1015914,
+          1113619,
+          700190006,
+          700185018,
+          700195025,
+          700190087,
+          1049112,
+          700005512,
+          822059908662278,
+          1400285055,
+          1400025081,
+          1668726,
+          825465608497696,
+          825465608499232,
+          1000031,
+          1718087960,
+          1428713,
+          1119699,
+          1213641,
+          1718093079,
+          1918643,
+          1012763,
+          1993609,
+          1988623,
+          1718162994,
+          2018618,
+          1993653,
+          298893311,
+          844931086908638,
+          2153644,
+          298463379,
+          700830032,
+          2213652,
+          1400095022,
+          299138386,
+          1718428091,
+          1400860152,
+          1049116,
+          1049117,
+          1718413083,
+          700810080,
+          2008656,
+          834230400556567,
+          998356064,
+          2383576,
+          701025014,
+          998301322,
+          1718088045
+        ],
+        "is_adult": false,
+        "is_preview": false,
+        "flag": 65536,
+        "is_service_by_shopee": false,
+        "condition": 1,
+        "cat_id": 100635,
+        "has_low_fulfillment_rate": false,
+        "is_live_streaming_price": null,
+        "currency": "IDR",
+        "brand": "Inbex",
+        "brand_id": 1028692,
+        "show_discount": 0,
+        "ctime": 1638929626,
+        "item_rating": {
+          "rating_star": 4.890845310264968
+        },
+        "cb_option": 0,
+        "has_model_with_available_shopee_stock": false,
+        "shop_location": "KAB. BEKASI",
+        "attributes": [
+          {
+            "name": "Masa Garansi",
+            "value": "1 Bulan",
+            "id": 100121,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 776,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Jenis Garansi",
+            "value": "Garansi Supplier",
+            "id": 100370,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 2437,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Bahan",
+            "value": "Lainnya",
+            "id": 100134,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 1257,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Produk Custom",
+            "value": "Tidak",
+            "id": 101219,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 7222,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Build-in Battery",
+            "value": "Ya",
+            "id": 100526,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 2950,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Kondisi",
+            "value": "Baru",
+            "id": 100413,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 2497,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "SIRIM Certified",
+            "value": "Yes",
+            "id": 101198,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 7057,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Kapasitas Berat",
+            "value": "0.7kg",
+            "id": 100571,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 0,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Dimensi (P x L x T)",
+            "value": "50*10*10",
+            "id": 100942,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 0,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "No.Sertifikat (POSTEL)",
+            "value": "87156/SDPPI/2022",
+            "id": 101255,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": 0,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Asal Produk",
+            "value": "-",
+            "id": 100037,
+            "is_timestamp": false,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": null,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          }
+        ],
+        "rich_text_description": {
+          "paragraph_list": [
+            {
+              "type": 0,
+              "text": "Selamat datang di Toko Resmi INBEX",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "1. Semua Barang READY STOCK di Cikarang & Surabaya",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "2.PENGIRIMAN CEPAT dalam 24 JAM",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "3.Dropshipper/Agen/Reseller dipersilakan ",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "4.KEPUASAN DIJAMIN 100% -Jika Anda tidak puas dengan item di toko kami dengan alasan apapun, silahkan hubungi kami, kami akan segera memberi solusi dalam waktu 12 jam",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "5. Ikuti toko kami untuk mendapatkan lebih banyak kejutan!",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "Postel Certificate",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 10001,
+              "text": null,
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": 1
+            },
+            {
+              "type": 0,
+              "text": "NOMOR : 87156/SDPPI/2022",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "PLG ID : 10100",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "id-11134208-7qul6-lilc49hboru55b",
+              "ratio": 0.769,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "id-11134208-7qula-lilc49hbq6elf9",
+              "ratio": 0.769,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "id-11134208-7qul7-lilc49hbrkz1b7",
+              "ratio": 0.769,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "id-11134208-7qul6-lilc49hbszjh05",
+              "ratio": 0.769,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "id-11134208-7qul0-litu37n22kcbdb",
+              "ratio": 0.769,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 1,
+              "text": null,
+              "img_id": "id-11134208-7qul2-lisfii4xz7dt89",
+              "ratio": 0.769,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "Fitur:",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "- Built-in, dengan engsel bola, menampilkan setiap sudut pengambilan gambar, stabil dan efisien.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "- jepitan instant mudah disambungkan ke kamera atau camcorder.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "- kuncidi setiap kaki tripod.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "- engsel baja, dapat mengatur kepala bola selama pemotretan.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "- desain bulat, lebih nyaman digunakan.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "- alas karet non-slip.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "- Kantong jinjing portabel membuatnya mudah dibawa dan disimpan.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "- Pilihan terbaik untuk kamera Canon Nikon Sony SLR di perjalanan Anda.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 10001,
+              "text": null,
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": 1
+            },
+            {
+              "type": 0,
+              "text": "3366 Tripod Spesifikasi:",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "Nama Produk: Tripod Kamera bisa untuk Telepon",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "Tinggi Maksimal: 133cm",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "Tinggi Min: 50cm",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "Panjang Dilipat: 50cm",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "Ketebalan: Max.18mm",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "Beban Maksimum: 3.0kg / 6.6Lbs",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 10001,
+              "text": null,
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": 2
+            },
+            {
+              "type": 0,
+              "text": "3366(135CM) Isi paket:",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "1 * 3366 Tripod Kamera",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "1 * Carry Bag",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "1 * Holder",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "1 * Bluetooth Remote",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 10001,
+              "text": null,
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": 2
+            },
+            {
+              "type": 0,
+              "text": "--FAQ--",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "1. Apakah barang ini asli?",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "--Ya, semua barang kami adalah 100% original.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "2.Apakah produk ini tersedia?",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "--Ya, ini ready stock, silakan dipesan.Semua orderan yang masuk sebelum jam 4 sore akan diproses di hari yang sama, jika order di atas jam 4 sore akan kami proses keesokan harinya",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "3. Berapa lama waktu pengiriman?",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "--Waktu pengiriman maksimal 2x24 jam setelah pesanan diterima, estimasi pengiriman 1-5 hari tergantung pada lokasi alamat pengiriman.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "4. Apakah ada layanan garansi?",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "--Ya, Shopee INBEX Resmi memberikan garansi 7 hari untuk penukaran dengan unit baru. Untuk kerusakan teknis, Kakak dapat menghubungi kami dalam jangka waktu 1 bulan.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "5.Apakah pesanan yang sudah dibayarkan bisa dibatalkan?",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "-- Paket yang sudah terbit resi otomatis tidak bisa dibatalkan lagi dengan alasan apapun. Hanya bisa dibatalkan jika belum terbit resi. Mohon teliti terlebih dahulu sebelum check out",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "6.Bagaimana cara klaim garansi?",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "-- Untuk segala bentuk komplain barang kurang, rusak atau kendala apapun mohon untuk chat admin terlebih dahulu dengan menyertakan VIDEO UNBOXING & Foto label pengiriman.",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 10001,
+              "text": null,
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": 1
+            },
+            {
+              "type": 0,
+              "text": "SERTIFIKAT CERTIFICATE",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 10001,
+              "text": null,
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": 1
+            },
+            {
+              "type": 0,
+              "text": "NOMOR : 87156/SDPPI/2022",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 0,
+              "text": "PLG ID : 10100",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            },
+            {
+              "type": 10001,
+              "text": null,
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": 2
+            },
+            {
+              "type": 0,
+              "text": "#tripod hp dan kamera #tripod # living stream #gopro camera #inbex #phoneholder #uholder",
+              "img_id": null,
+              "ratio": null,
+              "description_type": 1,
+              "empty_paragraph_count": null
+            }
+          ],
+          "source_language": null
+        },
+        "invoice_option": null,
+        "is_category_failed": null,
+        "is_prescription_item": false,
+        "preview_info": null,
+        "show_prescription_feed": false,
+        "is_alcohol_product": false,
+        "is_infant_milk_formula_product": false,
+        "is_unavailable": false,
+        "is_partial_fulfilled": false,
+        "is_presale": false,
+        "is_presale_deposit_item": null,
+        "is_presale_deposit_made": null,
+        "description": "Selamat datang di Toko Resmi INBEX\n1. Semua Barang READY STOCK di Cikarang & Surabaya\n2.PENGIRIMAN CEPAT dalam 24 JAM\n3.Dropshipper/Agen/Reseller dipersilakan \n4.KEPUASAN DIJAMIN 100% -Jika Anda tidak puas dengan item di toko kami dengan alasan apapun, silahkan hubungi kami, kami akan segera memberi solusi dalam waktu 12 jam\n5. Ikuti toko kami untuk mendapatkan lebih banyak kejutan!\nPostel Certificate\n\nNOMOR : 87156/SDPPI/2022\nPLG ID : 10100\n\n\nFitur:\n- Built-in, dengan engsel bola, menampilkan setiap sudut pengambilan gambar, stabil dan efisien.\n- jepitan instant mudah disambungkan ke kamera atau camcorder.\n- kuncidi setiap kaki tripod.\n- engsel baja, dapat mengatur kepala bola selama pemotretan.\n- desain bulat, lebih nyaman digunakan.\n- alas karet non-slip.\n- Kantong jinjing portabel membuatnya mudah dibawa dan disimpan.\n- Pilihan terbaik untuk kamera Canon Nikon Sony SLR di perjalanan Anda.\n\n3366 Tripod Spesifikasi:\nNama Produk: Tripod Kamera bisa untuk Telepon\nTinggi Maksimal: 133cm\nTinggi Min: 50cm\nPanjang Dilipat: 50cm\nKetebalan: Max.18mm\nBeban Maksimum: 3.0kg / 6.6Lbs\n\n\n3366(135CM) Isi paket:\n1 * 3366 Tripod Kamera\n1 * Carry Bag\n1 * Holder\n1 * Bluetooth Remote\n\n\n--FAQ--\n1. Apakah barang ini asli?\n--Ya, semua barang kami adalah 100% original.\n2.Apakah produk ini tersedia?\n--Ya, ini ready stock, silakan dipesan.Semua orderan yang masuk sebelum jam 4 sore akan diproses di hari yang sama, jika order di atas jam 4 sore akan kami proses keesokan harinya\n3. Berapa lama waktu pengiriman?\n--Waktu pengiriman maksimal 2x24 jam setelah pesanan diterima, estimasi pengiriman 1-5 hari tergantung pada lokasi alamat pengiriman.\n4. Apakah ada layanan garansi?\n--Ya, Shopee INBEX Resmi memberikan garansi 7 hari untuk penukaran dengan unit baru. Untuk kerusakan teknis, Kakak dapat menghubungi kami dalam jangka waktu 1 bulan.\n5.Apakah pesanan yang sudah dibayarkan bisa dibatalkan?\n-- Paket yang sudah terbit resi otomatis tidak bisa dibatalkan lagi dengan alasan apapun. Hanya bisa dibatalkan jika belum terbit resi. Mohon teliti terlebih dahulu sebelum check out\n6.Bagaimana cara klaim garansi?\n-- Untuk segala bentuk komplain barang kurang, rusak atau kendala apapun mohon untuk chat admin terlebih dahulu dengan menyertakan VIDEO UNBOXING & Foto label pengiriman.\n\nSERTIFIKAT CERTIFICATE\n\nNOMOR : 87156/SDPPI/2022\nPLG ID : 10100\n\n\n#tripod hp dan kamera #tripod # living stream #gopro camera #inbex #phoneholder #uholder",
+        "categories": [
+          {
+            "catid": 100635,
+            "display_name": "Kamera & Drone",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 100703,
+            "display_name": "Aksesoris Kamera",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 101119,
+            "display_name": "Tripod, Monopod, & Aksesoris",
+            "no_sub": true,
+            "is_default_subcat": false
+          }
+        ],
+        "fe_categories": [
+          {
+            "catid": 11044588,
+            "display_name": "Fotografi",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 11044616,
+            "display_name": "Tripod, Monopod, & Aksesoris",
+            "no_sub": true,
+            "is_default_subcat": false
+          }
+        ],
+        "item_has_video": true,
+        "presale_dday_start_time": null,
+        "is_lowest_price_at_shopee": null,
+        "display_description_disclosure_rsku_redirection": null,
+        "display_similar_sold": null,
+        "title_type": 1,
+        "authorized_brand_name": null,
+        "is_sexual": false,
+        "models": [
+          {
+            "item_id": 14014103617,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "3366Tripod+ Ringligh",
+            "promotion_id": 510893289111768,
+            "price": 24800000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 312
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": true,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                2
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 50000000000,
+            "model_id": 242444294490,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 14014103617,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "Tripod1.7M Ringligh",
+            "promotion_id": 510893289111768,
+            "price": 25900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 312
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": true,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                5
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 50000000000,
+            "model_id": 242444294492,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": true,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 14014103617,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "210CM-Dasar Stand PH",
+            "promotion_id": 510893289111768,
+            "price": 10900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 312
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": true,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                4
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 89900000000,
+            "model_id": 245489128648,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 14014103617,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "IB2R(170cm)+Remote",
+            "promotion_id": 510893289111768,
+            "price": 19500000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 312
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": true,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                3
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 89900000000,
+            "model_id": 245489128649,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": true,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 14014103617,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "3366 Tripod 1.3M",
+            "promotion_id": 510893289111768,
+            "price": 17900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 312
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": true,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                1
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 50000000000,
+            "model_id": 350904984231,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": true,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          },
+          {
+            "item_id": 14014103617,
+            "status": 1,
+            "current_promotion_reserved_stock": null,
+            "name": "3366 Tripod +Remote",
+            "promotion_id": 510893289111768,
+            "price": 18900000000,
+            "price_stocks": [
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 312
+              },
+              {
+                "allocated_stock": null,
+                "stock_breakdown_by_location": null,
+                "promotion_type": 0
+              }
+            ],
+            "current_promotion_has_reserve_stock": true,
+            "normal_stock": null,
+            "extinfo": {
+              "tier_index": [
+                0
+              ],
+              "is_pre_order": false,
+              "estimated_days": 2,
+              "sku_image": ""
+            },
+            "price_before_discount": 89900000000,
+            "model_id": 122823234681,
+            "stock": null,
+            "has_gimmick_tag": false,
+            "key_measurement": null,
+            "sold": null,
+            "is_lowest_price_at_shopee": false,
+            "name_tr": null,
+            "is_clickable": true,
+            "is_grayout": false,
+            "has_stock": true
+          }
+        ],
+        "tier_variations": [
+          {
+            "name": "size",
+            "options": [
+              "3366 Tripod +Remote",
+              "3366 Tripod 1.3M",
+              "3366Tripod+ Ringligh",
+              "IB2R(170cm)+Remote",
+              "210CM-Dasar Stand PH",
+              "Tripod1.7M Ringligh"
+            ],
+            "images": [
+              "id-11134207-7r98o-lvbghkngdner12",
+              "id-11134207-822wt-mo3qepuwdipt3b",
+              "id-11134207-7rasa-m4tovjldd9mub5",
+              "id-11134207-7r98u-lvwjfcgshrxo42",
+              "id-11134207-81ztm-ms99syt0r3sx8e",
+              "id-11134207-7rasf-m4u6w3rvuy3ae3"
+            ],
+            "properties": null,
+            "type": 0,
+            "summed_stocks": null,
+            "display_indicators": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "name_tr": null,
+            "options_tr": null,
+            "selling_points": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "selling_points_tr": null
+          }
+        ],
+        "size_chart": null,
+        "size_chart_info": null,
+        "welcome_package_type": null,
+        "is_free_gift": false,
+        "deep_discount": null,
+        "is_low_price_eligible": null,
+        "bundle_deal_info": null,
+        "add_on_deal_info": null,
+        "shipping_icon_type": 0,
+        "badge_icon_type": 0,
+        "spl_info": null,
+        "estimated_days": 2,
+        "is_pre_order": false,
+        "is_free_shipping": false,
+        "overall_purchase_limit": null,
+        "min_purchase_limit": 1,
+        "is_hide_stock": false,
+        "stock": null,
+        "normal_stock": null,
+        "current_promotion_reserved_stock": null,
+        "can_use_wholesale": false,
+        "wholesale_tier_list": [],
+        "price": 10900000000,
+        "raw_discount": 0,
+        "hidden_price_display": null,
+        "price_min": 10900000000,
+        "price_max": 25900000000,
+        "price_before_discount": 50000000000,
+        "price_min_before_discount": 50000000000,
+        "price_max_before_discount": 89900000000,
+        "other_stock": null,
+        "discount_stock": null,
+        "current_promotion_has_reserve_stock": true,
+        "complaint_policy": null,
+        "show_recycling_info": null,
+        "should_show_amp_tag": true,
+        "all_models_has_pre_order": false,
+        "is_item_inherited": false,
+        "max_quantity": null,
+        "drug_details": null,
+        "selected_real_models": null,
+        "size_tier_variation_idx": null,
+        "is_fashion_item": false,
+        "social_proof_label": null,
+        "title_tr": null,
+        "description_tr": null,
+        "rich_text_description_tr": null,
+        "stock_display": null,
+        "max_quantity_display": "TERSEDIA",
+        "disclaimer": null
+      },
+      "account": {
+        "user_id": null,
+        "is_new_user": null,
+        "default_address": {
+          "state": "DKI JAKARTA",
+          "city": "KOTA JAKARTA PUSAT",
+          "district": "MENTENG",
+          "town": "",
+          "zip_code": "",
+          "address": null,
+          "region": null,
+          "longitude": null,
+          "latitude": null,
+          "vn_data_version": ""
+        },
+        "adult_consent": null,
+        "birth_timestamp": null
+      },
+      "product_images": {
+        "video": {
+          "video_id": "ec4adbbbbf15a83a6ffa37ce566abd30",
+          "thumb_url": "20926bba8e75e17d8b7dbb8fd1ca3552",
+          "duration": 56,
+          "version": 2,
+          "vid": "sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103",
+          "formats": [
+            {
+              "format": 1600671,
+              "defn": "V540P",
+              "profile": "MP4",
+              "path": "api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16006711773769384.mp4",
+              "url": "https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16006711773769384.mp4",
+              "width": 960,
+              "height": 540
+            },
+            {
+              "format": 1600325,
+              "defn": "V720P",
+              "profile": "MP4",
+              "path": "api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003251773769384.mp4",
+              "url": "https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003251773769384.mp4",
+              "width": 1280,
+              "height": 720
+            },
+            {
+              "format": 1600558,
+              "defn": "V1080P",
+              "profile": "MP4",
+              "path": "api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005581773769384.mp4",
+              "url": "https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005581773769384.mp4",
+              "width": 1920,
+              "height": 1080
+            }
+          ],
+          "default_format": {
+            "format": 1600323,
+            "defn": "V540P",
+            "profile": "MP4",
+            "path": "",
+            "url": "https://mms.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.default.mp4",
+            "width": 960,
+            "height": 540
+          },
+          "mms_data": "{\"vid\":\"sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103\",\"biz\":107,\"duration\":56034,\"create_time\":1642650743,\"update_time\":1730357989,\"serviceID\":1,\"cover\":\"https://down-tx-id.vod.susercontent.com/c3/98934353/105/AnoyHj8AWPB01vkhVgEMAEc.jpg\",\"cover_list\":[],\"formats\":[{\"format\":1600671,\"defn\":\"V540P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16006711773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16006711773769384.mp4\",\"width\":960,\"height\":540,\"bitrate\":164946,\"abitrate\":32121,\"size\":1418521,\"fps\":25,\"duration\":56080,\"update_time\":1773769398,\"codec\":\"H264\"},{\"format\":1600325,\"defn\":\"V720P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003251773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003251773769384.mp4\",\"width\":1280,\"height\":720,\"bitrate\":418061,\"abitrate\":48164,\"size\":3323489,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769422,\"codec\":\"H264\"},{\"format\":1600558,\"defn\":\"V1080P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005581773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005581773769384.mp4\",\"width\":1920,\"height\":1080,\"bitrate\":1215481,\"abitrate\":64219,\"size\":9024389,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769470,\"codec\":\"H264\"}],\"default_format\":{\"format\":1600323,\"defn\":\"V540P\",\"profile\":\"MP4\",\"path\":\"\",\"url\":\"https://mms.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.default.mp4\",\"width\":960,\"height\":540,\"bitrate\":241109,\"abitrate\":32177,\"size\":1963826,\"fps\":25,\"duration\":56080,\"update_time\":1772895972,\"codec\":\"H264\"},\"extend_formats\":{\"H265\":[{\"format\":1600315,\"defn\":\"V360P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003151773769363.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003151773769363.mp4\",\"width\":640,\"height\":360,\"bitrate\":135713,\"abitrate\":32121,\"size\":1217310,\"fps\":25,\"duration\":56080,\"update_time\":1773769384,\"codec\":\"H265\"},{\"format\":1600316,\"defn\":\"V540P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003161773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003161773769384.mp4\",\"width\":960,\"height\":540,\"bitrate\":192677,\"abitrate\":32121,\"size\":1616631,\"fps\":25,\"duration\":56080,\"update_time\":1773769411,\"codec\":\"H265\"},{\"format\":1600317,\"defn\":\"V720P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003171773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003171773769384.mp4\",\"width\":1280,\"height\":720,\"bitrate\":259908,\"abitrate\":48164,\"size\":2219127,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769431,\"codec\":\"H265\"},{\"format\":1600318,\"defn\":\"V720P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003181773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003181773769384.mp4\",\"width\":1280,\"height\":720,\"bitrate\":201676,\"abitrate\":48164,\"size\":1811027,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769419,\"codec\":\"H265\"},{\"format\":1600562,\"defn\":\"V1080P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005621773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005621773769384.mp4\",\"width\":1920,\"height\":1080,\"bitrate\":453407,\"abitrate\":64219,\"size\":3687610,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769470,\"codec\":\"H265\"}]},\"ab_test\":\"\"}",
+          "item_cover": null
+        },
+        "images": [
+          "id-11134207-81ztm-mtwbe0wo6xojbb",
+          "id-11134207-8224w-mimowvjupczmf3",
+          "id-11134207-7r990-llk9r147edddf9",
+          "id-11134207-7r98v-lshw9ma2810n6f",
+          "id-11134207-7r98w-lshw9ma29fl356",
+          "id-11134207-7r98u-lshw9ma26mg796",
+          "id-11134207-7r990-lshw9ma23tbb73",
+          "id-11134207-7r98u-loqbnthtd3dmfa",
+          "id-11134207-7r98o-lya7rd0d4ld4d3"
+        ],
+        "first_tier_variations": [
+          {
+            "name": "3366 Tripod +Remote",
+            "image": "id-11134207-7r98o-lvbghkngdner12",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-7r98o-lvbghkngdner12"
+          },
+          {
+            "name": "3366 Tripod 1.3M",
+            "image": "id-11134207-822wt-mo3qepuwdipt3b",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-822wt-mo3qepuwdipt3b"
+          },
+          {
+            "name": "3366Tripod+ Ringligh",
+            "image": "id-11134207-7rasa-m4tovjldd9mub5",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-7rasa-m4tovjldd9mub5"
+          },
+          {
+            "name": "IB2R(170cm)+Remote",
+            "image": "id-11134207-7r98u-lvwjfcgshrxo42",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-7r98u-lvwjfcgshrxo42"
+          },
+          {
+            "name": "210CM-Dasar Stand PH",
+            "image": "id-11134207-81ztm-ms99syt0r3sx8e",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-81ztm-ms99syt0r3sx8e"
+          },
+          {
+            "name": "Tripod1.7M Ringligh",
+            "image": "id-11134207-7rasf-m4u6w3rvuy3ae3",
+            "summed_stock": null,
+            "display_indicator": 0,
+            "show_find_similar": null,
+            "name_tr": null,
+            "selling_point": "",
+            "selling_point_tr": null,
+            "gallery_image": "id-11134207-7rasf-m4u6w3rvuy3ae3"
+          }
+        ],
+        "sorted_variation_image_index_list": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "overlay": null,
+        "makeup_preview": null,
+        "abnormal_status": "",
+        "promotion_images": [],
+        "long_images": null,
+        "shopee_video_info_list": [],
+        "shopee_video_rcmd_info": null,
+        "shopee_video_req_id": null,
+        "skincam": null,
+        "pdp_top_info_list": null,
+        "has_long_image": false,
+        "show_find_similar": null,
+        "try_it_on": null,
+        "show_find_similar_for_selection": false,
+        "beautycam": null,
+        "unavailable_item_recommendation": null,
+        "models": [
+          {
+            "tier_index": [
+              2
+            ],
+            "gallery_image": "id-11134207-7rasa-m4tovjldd9mub5"
+          },
+          {
+            "tier_index": [
+              5
+            ],
+            "gallery_image": "id-11134207-7rasf-m4u6w3rvuy3ae3"
+          },
+          {
+            "tier_index": [
+              4
+            ],
+            "gallery_image": "id-11134207-81ztm-ms99syt0r3sx8e"
+          },
+          {
+            "tier_index": [
+              3
+            ],
+            "gallery_image": "id-11134207-7r98u-lvwjfcgshrxo42"
+          },
+          {
+            "tier_index": [
+              1
+            ],
+            "gallery_image": "id-11134207-822wt-mo3qepuwdipt3b"
+          },
+          {
+            "tier_index": [
+              0
+            ],
+            "gallery_image": "id-11134207-7r98o-lvbghkngdner12"
+          }
+        ],
+        "gallery_contents": [
+          {
+            "image": null,
+            "video": {
+              "video_id": "ec4adbbbbf15a83a6ffa37ce566abd30",
+              "thumb_url": "20926bba8e75e17d8b7dbb8fd1ca3552",
+              "duration": 56,
+              "version": 2,
+              "vid": "sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103",
+              "formats": [
+                {
+                  "format": 1600671,
+                  "defn": "V540P",
+                  "profile": "MP4",
+                  "path": "api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16006711773769384.mp4",
+                  "url": "https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16006711773769384.mp4",
+                  "width": 960,
+                  "height": 540
+                },
+                {
+                  "format": 1600325,
+                  "defn": "V720P",
+                  "profile": "MP4",
+                  "path": "api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003251773769384.mp4",
+                  "url": "https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003251773769384.mp4",
+                  "width": 1280,
+                  "height": 720
+                },
+                {
+                  "format": 1600558,
+                  "defn": "V1080P",
+                  "profile": "MP4",
+                  "path": "api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005581773769384.mp4",
+                  "url": "https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005581773769384.mp4",
+                  "width": 1920,
+                  "height": 1080
+                }
+              ],
+              "default_format": {
+                "format": 1600323,
+                "defn": "V540P",
+                "profile": "MP4",
+                "path": "",
+                "url": "https://mms.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.default.mp4",
+                "width": 960,
+                "height": 540
+              },
+              "mms_data": "{\"vid\":\"sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103\",\"biz\":107,\"duration\":56034,\"create_time\":1642650743,\"update_time\":1730357989,\"serviceID\":1,\"cover\":\"https://down-tx-id.vod.susercontent.com/c3/98934353/105/AnoyHj8AWPB01vkhVgEMAEc.jpg\",\"cover_list\":[],\"formats\":[{\"format\":1600671,\"defn\":\"V540P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16006711773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16006711773769384.mp4\",\"width\":960,\"height\":540,\"bitrate\":164946,\"abitrate\":32121,\"size\":1418521,\"fps\":25,\"duration\":56080,\"update_time\":1773769398,\"codec\":\"H264\"},{\"format\":1600325,\"defn\":\"V720P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003251773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003251773769384.mp4\",\"width\":1280,\"height\":720,\"bitrate\":418061,\"abitrate\":48164,\"size\":3323489,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769422,\"codec\":\"H264\"},{\"format\":1600558,\"defn\":\"V1080P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005581773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005581773769384.mp4\",\"width\":1920,\"height\":1080,\"bitrate\":1215481,\"abitrate\":64219,\"size\":9024389,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769470,\"codec\":\"H264\"}],\"default_format\":{\"format\":1600323,\"defn\":\"V540P\",\"profile\":\"MP4\",\"path\":\"\",\"url\":\"https://mms.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.default.mp4\",\"width\":960,\"height\":540,\"bitrate\":241109,\"abitrate\":32177,\"size\":1963826,\"fps\":25,\"duration\":56080,\"update_time\":1772895972,\"codec\":\"H264\"},\"extend_formats\":{\"H265\":[{\"format\":1600315,\"defn\":\"V360P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003151773769363.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003151773769363.mp4\",\"width\":640,\"height\":360,\"bitrate\":135713,\"abitrate\":32121,\"size\":1217310,\"fps\":25,\"duration\":56080,\"update_time\":1773769384,\"codec\":\"H265\"},{\"format\":1600316,\"defn\":\"V540P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003161773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003161773769384.mp4\",\"width\":960,\"height\":540,\"bitrate\":192677,\"abitrate\":32121,\"size\":1616631,\"fps\":25,\"duration\":56080,\"update_time\":1773769411,\"codec\":\"H265\"},{\"format\":1600317,\"defn\":\"V720P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003171773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003171773769384.mp4\",\"width\":1280,\"height\":720,\"bitrate\":259908,\"abitrate\":48164,\"size\":2219127,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769431,\"codec\":\"H265\"},{\"format\":1600318,\"defn\":\"V720P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003181773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16003181773769384.mp4\",\"width\":1280,\"height\":720,\"bitrate\":201676,\"abitrate\":48164,\"size\":1811027,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769419,\"codec\":\"H265\"},{\"format\":1600562,\"defn\":\"V1080P\",\"profile\":\"MP4\",\"path\":\"api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005621773769384.mp4\",\"url\":\"https://down-tx-id.vod.susercontent.com/api/v4/11110105/mms/sg_5225ccc1-7f6a-40d3-ba73-9e956981af2e_000103.16005621773769384.mp4\",\"width\":1920,\"height\":1080,\"bitrate\":453407,\"abitrate\":64219,\"size\":3687610,\"fps\":30.00036,\"duration\":56066,\"update_time\":1773769470,\"codec\":\"H265\"}]},\"ab_test\":\"\"}",
+              "item_cover": null
+            }
+          },
+          {
+            "image": {
+              "url": "id-11134207-81ztm-mtwbe0wo6xojbb",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-8224w-mimowvjupczmf3",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7r990-llk9r147edddf9",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7r98v-lshw9ma2810n6f",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7r98w-lshw9ma29fl356",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7r98u-lshw9ma26mg796",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7r990-lshw9ma23tbb73",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7r98u-loqbnthtd3dmfa",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          },
+          {
+            "image": {
+              "url": "id-11134207-7r98o-lya7rd0d4ld4d3",
+              "promotion_image_type": null,
+              "label_content": null,
+              "cmt_id": null
+            },
+            "video": null
+          }
+        ]
+      },
+      "product_price": {
+        "discount": 88,
+        "installment_info": null,
+        "spl_installment_info": null,
+        "pack_size": "",
+        "hide_price": false,
+        "price": {
+          "single_value": 10900000000,
+          "range_min": -1,
+          "range_max": -1,
+          "price_mask": null
+        },
+        "price_before_discount": {
+          "single_value": 89900000000,
+          "range_min": -1,
+          "range_max": -1,
+          "price_mask": null
+        },
+        "presale_price": null,
+        "lowest_past_price": null,
+        "labels": null,
+        "hide_discount": false,
+        "discount_text": "-88%",
+        "show_final_price_indicator": null,
+        "final_price_vouchers": null,
+        "has_final_price": true,
+        "final_price_info": null,
+        "price_subtext": null,
+        "price_model": {
+          "price_single_model_id": 245489128648,
+          "price_min_model_id": null,
+          "price_max_model_id": null
+        },
+        "price_promotion": {
+          "price_single_promotion_id": 510893289111768,
+          "price_single_promotion_type": 312,
+          "price_min_promotion_id": null,
+          "price_min_promotion_type": null,
+          "price_max_promotion_id": null,
+          "price_max_promotion_type": null
+        },
+        "instalment_cta_action": null,
+        "spl_installment_banner": null,
+        "show_non_logged_in_price_indicator": false
+      },
+      "flash_sale": null,
+      "flash_sale_preview": null,
+      "deep_discount": null,
+      "exclusive_price": null,
+      "exclusive_price_cta": null,
+      "product_meta": {
+        "show_lowest_price_guarantee": null,
+        "show_original_guarantee": null,
+        "show_best_price_guarantee": false,
+        "show_official_shop_label_in_title": true,
+        "show_shopee_verified_label": false,
+        "show_lowest_installment_guarantee": null,
+        "hide_sharing_button": false,
+        "hide_sold_count": false,
+        "show_description_translation_button": null
+      },
+      "product_review": {
+        "rating_star": 4.890845310264968,
+        "rating_count": [
+          29362,
+          110,
+          67,
+          256,
+          2052,
+          26877
+        ],
+        "total_rating_count": 29362,
+        "historical_sold": null,
+        "global_sold": null,
+        "liked": false,
+        "liked_count": 46272,
+        "cmt_count": 29022,
+        "should_move_ratings_above": null,
+        "review_rcmd_exp_group": null,
+        "display_global_sold": false,
+        "hide_rating": false,
+        "hide_buyer_gallery": false,
+        "hide_reviews": false,
+        "hide_other_product_reviews_in_shop": false,
+        "sold_count_disclosure": null,
+        "historical_sold_display": null,
+        "global_sold_display": null,
+        "sold_count_display": null
+      },
+      "promotion_info": {
+        "spl": null,
+        "spl_lite": null,
+        "installment": null,
+        "wholesale": null,
+        "insurance": null,
+        "item_installment_eligibility": {
+          "is_cc_installment_payment_eligible": false,
+          "is_non_cc_installment_payment_eligible": false
+        },
+        "installment_simulation_entry": null
+      },
+      "age_gate": {
+        "kyc": null,
+        "adult_consent": null
+      },
+      "shipping_meta": {
+        "show_fufilled_by_shopee": null,
+        "show_cod": null,
+        "show_mart": false,
+        "show_next_day_delivery": false
+      },
+      "product_shipping": {
+        "free_shipping": {
+          "min_spend": null,
+          "has_fss": true
+        },
+        "shipping_fee_info": {
+          "ship_from_location": "KAB. BEKASI",
+          "price": {
+            "single_value": 0,
+            "range_min": -1,
+            "range_max": -1,
+            "price_mask": null
+          },
+          "shipping_icon_type": 0,
+          "warning": null
+        },
+        "show_shipping_to": true,
+        "ungrouped_channel_infos": [
+          {
+            "channel_id": 8003,
+            "name": "Reguler",
+            "price": {
+              "single_value": 0,
+              "range_min": -1,
+              "range_max": -1,
+              "price_mask": null
+            },
+            "price_before_discount": {
+              "single_value": 650000000,
+              "range_min": -1,
+              "range_max": -1,
+              "price_mask": null
+            },
+            "channel_delivery_info": {
+              "has_edt": true,
+              "display_mode": "edt_by_date",
+              "estimated_delivery_date_from": 1791271575,
+              "estimated_delivery_date_to": 1791344384,
+              "estimated_delivery_time_min": 1,
+              "estimated_delivery_time_max": 2,
+              "delay_message": null,
+              "is_fastest_edt_channel": true,
+              "sla_message": "",
+              "show_edt": true,
+              "edt_text": "Garansi tiba 6 - 7 Oktober",
+              "formatted_edt_text": [
+                {
+                  "template": "{label_guaranteed_get_by+}{label_edt_date_range}",
+                  "format": null,
+                  "attributes": [
+                    {
+                      "type": 1,
+                      "key": "label_guaranteed_get_by+",
+                      "value": {
+                        "value_str": "Garansi tiba ",
+                        "value_int": null
+                      },
+                      "format": null,
+                      "text_color": null,
+                      "text_hex_color": "#000000de",
+                      "url": null
+                    },
+                    {
+                      "type": 1,
+                      "key": "label_edt_date_range",
+                      "value": {
+                        "value_str": "6 - 7 Okt",
+                        "value_int": null
+                      },
+                      "format": [
+                        3
+                      ],
+                      "text_color": null,
+                      "text_hex_color": "#ffffff",
+                      "url": null
+                    }
+                  ],
+                  "text_color": null,
+                  "text_hex_color": null
+                }
+              ],
+              "formatted_pre_order_text": null,
+              "formatted_fbs_description_text": null,
+              "show_edt_as_header": false
+            },
+            "channel_promotion_infos": [],
+            "warning": null,
+            "shipping_icon_type": null,
+            "lowest_bpsf_promotion_rule": null,
+            "service_type_info": "regular",
+            "is_integrated_channel": true,
+            "late_delivery_compensation": {
+              "type": 1,
+              "amount": 1000000000,
+              "is_guaranteed_edt": true,
+              "compensation_amount": null,
+              "text": null,
+              "max_coins_cap": null,
+              "coin_cap": 0
+            },
+            "is_sst_included": false,
+            "display_text": {
+              "late_delivery_compensation": null,
+              "direct_delivery": null,
+              "fulfilled_by_shopee": null,
+              "spx_instant_delivery": null
+            },
+            "rule_type": 0,
+            "is_xdd_channel": false,
+            "show_shopee_plus_icon": false,
+            "xdd_value": null,
+            "hide_shipping_fee": null,
+            "edt_tracking_info": "{\"edt_min\":1,\"edt_max\":2,\"edt_min_hours\":30,\"edt_max_hours\":51,\"edt_min_minutes\":1799,\"edt_max_minutes\":3012,\"edt_display_identifier\":327945,\"buyer_address_hash\":\"K2C6ypZ\",\"is_cache_edt\":false}",
+            "subscription_icon": 0,
+            "sdv_available": false
+          },
+          {
+            "channel_id": 8005,
+            "name": "Hemat Kargo",
+            "price": {
+              "single_value": 0,
+              "range_min": -1,
+              "range_max": -1,
+              "price_mask": null
+            },
+            "price_before_discount": {
+              "single_value": 350000000,
+              "range_min": -1,
+              "range_max": -1,
+              "price_mask": null
+            },
+            "channel_delivery_info": {
+              "has_edt": true,
+              "display_mode": "edt_by_date",
+              "estimated_delivery_date_from": 1791276102,
+              "estimated_delivery_date_to": 1791373207,
+              "estimated_delivery_time_min": 1,
+              "estimated_delivery_time_max": 2,
+              "delay_message": null,
+              "is_fastest_edt_channel": false,
+              "sla_message": "",
+              "show_edt": true,
+              "edt_text": "Garansi tiba 6 - 7 Oktober",
+              "formatted_edt_text": [
+                {
+                  "template": "{label_guaranteed_get_by++label_edt_date_range}",
+                  "format": null,
+                  "attributes": [
+                    {
+                      "type": 1,
+                      "key": "label_guaranteed_get_by++label_edt_date_range",
+                      "value": {
+                        "value_str": "Garansi tiba 6 - 7 Okt",
+                        "value_int": null
+                      },
+                      "format": null,
+                      "text_color": null,
+                      "text_hex_color": "#000000de",
+                      "url": null
+                    }
+                  ],
+                  "text_color": null,
+                  "text_hex_color": null
+                }
+              ],
+              "formatted_pre_order_text": null,
+              "formatted_fbs_description_text": null,
+              "show_edt_as_header": false
+            },
+            "channel_promotion_infos": [],
+            "warning": null,
+            "shipping_icon_type": null,
+            "lowest_bpsf_promotion_rule": null,
+            "service_type_info": "regular",
+            "is_integrated_channel": true,
+            "late_delivery_compensation": {
+              "type": 1,
+              "amount": 1000000000,
+              "is_guaranteed_edt": true,
+              "compensation_amount": null,
+              "text": null,
+              "max_coins_cap": null,
+              "coin_cap": 0
+            },
+            "is_sst_included": false,
+            "display_text": {
+              "late_delivery_compensation": null,
+              "direct_delivery": null,
+              "fulfilled_by_shopee": null,
+              "spx_instant_delivery": null
+            },
+            "rule_type": 0,
+            "is_xdd_channel": false,
+            "show_shopee_plus_icon": false,
+            "xdd_value": null,
+            "hide_shipping_fee": null,
+            "edt_tracking_info": "{\"edt_min\":1,\"edt_max\":2,\"edt_min_hours\":32,\"edt_max_hours\":59,\"edt_min_minutes\":1874,\"edt_max_minutes\":3493,\"edt_display_identifier\":327689,\"buyer_address_hash\":\"K2C6ypZ\",\"is_cache_edt\":false}",
+            "subscription_icon": 0,
+            "sdv_available": false
+          }
+        ],
+        "grouped_channel_infos_by_service_type": [],
+        "also_available_channel_name": "",
+        "pre_selected_shipping_channel": {
+          "channel_id": 8003,
+          "name": "Reguler",
+          "price": {
+            "single_value": 0,
+            "range_min": -1,
+            "range_max": -1,
+            "price_mask": ""
+          },
+          "price_before_discount": {
+            "single_value": 650000000,
+            "range_min": -1,
+            "range_max": -1,
+            "price_mask": null
+          },
+          "channel_delivery_info": {
+            "has_edt": true,
+            "display_mode": "edt_by_date",
+            "estimated_delivery_date_from": 1791271575,
+            "estimated_delivery_date_to": 1791344384,
+            "estimated_delivery_time_min": 1,
+            "estimated_delivery_time_max": 2,
+            "delay_message": "",
+            "is_fastest_edt_channel": true,
+            "sla_message": "",
+            "show_edt": true,
+            "edt_text": "Garansi tiba 6 - 7 Oktober",
+            "formatted_edt_text": [
+              {
+                "template": "{label_guaranteed_get_by+}{label_edt_date_range}",
+                "format": [],
+                "attributes": [
+                  {
+                    "type": 1,
+                    "key": "label_guaranteed_get_by+",
+                    "value": {
+                      "value_str": "Garansi tiba ",
+                      "value_int": null
+                    },
+                    "format": [],
+                    "text_color": null,
+                    "text_hex_color": "#000000de",
+                    "url": null
+                  },
+                  {
+                    "type": 1,
+                    "key": "label_edt_date_range",
+                    "value": {
+                      "value_str": "6 - 7 Okt",
+                      "value_int": null
+                    },
+                    "format": [
+                      3
+                    ],
+                    "text_color": null,
+                    "text_hex_color": "#ffffff",
+                    "url": null
+                  }
+                ],
+                "text_color": null,
+                "text_hex_color": null
+              }
+            ],
+            "formatted_pre_order_text": null,
+            "formatted_fbs_description_text": null,
+            "show_edt_as_header": false
+          },
+          "channel_promotion_infos": [],
+          "warning": {
+            "type": "",
+            "warning_msg": ""
+          },
+          "shipping_icon_type": null,
+          "lowest_bpsf_promotion_rule": null,
+          "service_type_info": "regular",
+          "is_integrated_channel": true,
+          "late_delivery_compensation": {
+            "type": 1,
+            "amount": 1000000000,
+            "is_guaranteed_edt": true,
+            "compensation_amount": {
+              "value": 1000000000
+            },
+            "text": "",
+            "max_coins_cap": null,
+            "coin_cap": 0
+          },
+          "is_sst_included": false,
+          "display_text": {
+            "late_delivery_compensation": {
+              "text": "Dapatkan Voucher s/d {compensation_amount} jika pesanan terlambat.",
+              "gdt_max": null,
+              "compensation_amount": {
+                "value": 1000000000
+              },
+              "max_coins_cap": null,
+              "coins_amount": null,
+              "coin_interval_in_minutes": null
+            },
+            "direct_delivery": null,
+            "fulfilled_by_shopee": null,
+            "spx_instant_delivery": null
+          },
+          "rule_type": 0,
+          "is_xdd_channel": false,
+          "show_shopee_plus_icon": false,
+          "xdd_value": 0,
+          "hide_shipping_fee": null,
+          "edt_tracking_info": "{\"edt_min\":1,\"edt_max\":2,\"edt_min_hours\":30,\"edt_max_hours\":51,\"edt_min_minutes\":1799,\"edt_max_minutes\":3012,\"edt_display_identifier\":327685,\"buyer_address_hash\":\"K2C6ypZ\",\"is_cache_edt\":false}",
+          "subscription_icon": 0,
+          "sdv_available": false
+        },
+        "show_grouped_channel_first": false,
+        "is_item_with_price_range": true,
+        "also_available_channel_icon_type": null,
+        "pre_order_text": "",
+        "selected_late_delivery_compensation_for_drawer": {
+          "type": null,
+          "amount": null,
+          "is_guaranteed_edt": null,
+          "compensation_amount": {
+            "value": 1000000000
+          },
+          "text": "Dapatkan Voucher s/d {compensation_amount} jika pesanan terlambat.",
+          "max_coins_cap": null,
+          "coin_cap": null
+        },
+        "shipping_info_text": {
+          "text_template": null,
+          "shipping_fee": null,
+          "edt_from": null,
+          "edt_to": null,
+          "show_shipping_fee_suffix": false,
+          "formatted_text": {
+            "edt": {
+              "template": "{label_guaranteed_get_by++label_edt_date_range}",
+              "format": null,
+              "attributes": [
+                {
+                  "type": 1,
+                  "key": "label_guaranteed_get_by++label_edt_date_range",
+                  "value": {
+                    "value_str": "Garansi tiba 6 - 7 Okt",
+                    "value_int": null
+                  },
+                  "format": [
+                    6
+                  ],
+                  "text_color": null,
+                  "text_hex_color": "#000000de",
+                  "url": null
+                }
+              ],
+              "text_color": null,
+              "text_hex_color": null
+            },
+            "shipping_fee": null,
+            "late_delivery_compensation": {
+              "template": "Dapatkan Voucher s/d {compensation_amount} jika pesanan terlambat.",
+              "format": null,
+              "attributes": [
+                {
+                  "type": 2,
+                  "key": "compensation_amount",
+                  "value": {
+                    "value_str": null,
+                    "value_int": 1000000000
+                  },
+                  "format": null,
+                  "text_color": null,
+                  "text_hex_color": null,
+                  "url": null
+                }
+              ],
+              "text_color": null,
+              "text_hex_color": null
+            },
+            "fbs_description": null,
+            "display_edt_text_first_line": true,
+            "should_wrap_edt_text_by_attribute": false,
+            "scheduled_delivery_description": null
+          },
+          "highlight_free_shipping": false
+        },
+        "formatted_pre_order_text": null,
+        "has_free_return": null,
+        "model_id": 122823234681,
+        "delivery_address": {
+          "state": "DKI JAKARTA",
+          "city": "KOTA JAKARTA PUSAT",
+          "district": "MENTENG",
+          "town": null,
+          "zip_code": null,
+          "address": null,
+          "region": null,
+          "longitude": 106.8392111,
+          "latitude": -6.1937297,
+          "vn_data_version": null
+        },
+        "disable_shipping_drawer": null
+      },
+      "shop_vouchers": [
+        {
+          "promotionid": 1516468140261376,
+          "voucher_code": "INBEHGMKJ",
+          "signature": "376df099560a17ebc3736d39388cea12d167292590268c445f9bc60fd6c42629",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 29900000000,
+          "used_price": 550000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 45,
+          "start_time": 1790355600,
+          "end_time": 1791478800,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 550000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "icon_text": "INBEX Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 159394078,
+          "shop_name": "INBEX Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-9002798A18A222280000001114050540",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 550000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1516467888734208,
+          "voucher_code": "INBEKMUGT",
+          "signature": "613af2b9e43df14c313d28b7223704036bf69a85510f4cdc8c8e246ffe95fa7a",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 59900000000,
+          "used_price": 1200000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 16,
+          "start_time": 1790355600,
+          "end_time": 1791478800,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 1200000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "icon_text": "INBEX Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 159394078,
+          "shop_name": "INBEX Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-A529798E18A222280000001114050540",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 1200000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1516467670106112,
+          "voucher_code": "INBEUJCTG",
+          "signature": "49089cb15f9633d27cb0edba9ab4df493f2a463ab8aba9da0864d09cf51d6722",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 75900000000,
+          "used_price": 1600000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 23,
+          "start_time": 1790355600,
+          "end_time": 1791478800,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 1600000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "icon_text": "INBEX Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 159394078,
+          "shop_name": "INBEX Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-861878CE18A222280000001114050540",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 1600000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1516467418054656,
+          "voucher_code": "INBEJNHCG",
+          "signature": "08fc1ac80c8021b63e6b4cf2c77e9d4c539728b67c94b61387ae32b77def7c6b",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 99900000000,
+          "used_price": 2200000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 19,
+          "start_time": 1790355600,
+          "end_time": 1791478800,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 2200000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "icon_text": "INBEX Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 159394078,
+          "shop_name": "INBEX Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-A331789A18A222280000001114050540",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 2200000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1516467183435776,
+          "voucher_code": "INBEFGHBN",
+          "signature": "48b988e032c679d3669288a786f80dc05d3e4d1d3ed993cf45f1233d0d7735bc",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 129000000000,
+          "used_price": 2800000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 23,
+          "start_time": 1790355600,
+          "end_time": 1791478800,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 2800000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "icon_text": "INBEX Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 159394078,
+          "shop_name": "INBEX Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-AA1578CA18A222280000001114050540",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 2800000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        },
+        {
+          "promotionid": 1516466730057728,
+          "voucher_code": "INBEFGTNH",
+          "signature": "29fec528b3a3f725ed64ee72c63bc96c6a7f9b13e1769fe2d930237cf6c1358d",
+          "use_type": 0,
+          "platform_type": null,
+          "voucher_market_type": 1,
+          "min_spend": 159900000000,
+          "used_price": 3500000000,
+          "current_spend": null,
+          "product_limit": false,
+          "quota_type": 1,
+          "percentage_claimed": 0,
+          "percentage_used": 46,
+          "start_time": 1790355600,
+          "end_time": 1791478800,
+          "collect_time": 0,
+          "claim_start_time": 0,
+          "valid_days": 0,
+          "reward_type": 0,
+          "reward_percentage": 0,
+          "reward_value": 3500000000,
+          "reward_cap": 0,
+          "coin_earned": null,
+          "title": null,
+          "use_link": null,
+          "icon_hash": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "icon_text": "INBEX Official Shop",
+          "icon_url": null,
+          "customised_labels": [],
+          "customised_product_scope_tags": null,
+          "shop_id": 159394078,
+          "shop_name": "INBEX Official Shop",
+          "is_shop_preferred": false,
+          "is_shop_official": true,
+          "shop_count": null,
+          "ui_display_type": null,
+          "customised_mall_name": null,
+          "small_icon_list": null,
+          "dp_category_name": null,
+          "invalid_message_code": null,
+          "invalid_message": null,
+          "display_labels": null,
+          "wallet_redeemable": false,
+          "customer_reference_id": "SHOP-D6DAD88E18A222280000001114050515",
+          "fully_redeemed": null,
+          "has_expired": null,
+          "disabled": null,
+          "voucher_external_market_type": null,
+          "now_food_extra_info": null,
+          "airpay_opv_extra_info": null,
+          "partner_extra_info": null,
+          "discount_value": 3500000000,
+          "discount_percentage": 0,
+          "discount_cap": 0,
+          "coin_percentage": null,
+          "coin_cap": null,
+          "usage_limit": null,
+          "used_count": null,
+          "left_count": null,
+          "shopee_wallet_only": false,
+          "new_user_only": null,
+          "description": "Versi aplikasimu tidak mendukung untuk mengakses halaman ini. Mohon update ke versi terbaru untuk mengakses halaman ini.",
+          "shop_logo": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "error_code": 9,
+          "is_claimed_before": false,
+          "customised_product_scope_tag_image_hash": null,
+          "usage_limit_per_user": 1,
+          "remaining_usage_limit": 1,
+          "action": null,
+          "sub_icon_text": null,
+          "is_customised_icon": null,
+          "fixed_flag": null,
+          "customised_flag": null,
+          "fsv_voucher_card_ui_info": null,
+          "min_item_quantity": null
+        }
+      ],
+      "free_return": null,
+      "coin_info": {
+        "spend_cash_unit": 100000,
+        "coin_earn_items": [
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          },
+          {
+            "coin_earn": 0
+          }
+        ],
+        "coin_earn_label": null
+      },
+      "product_attributes": {
+        "attrs": [
+          {
+            "name": "Merek",
+            "value": "Inbex",
+            "id": null,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": "/search?brands=1028692",
+            "brand_id": 1028692,
+            "full_url": "https://shopee.co.id/search?brands=1028692",
+            "type": 1,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Masa Garansi",
+            "value": "1 Bulan",
+            "id": 100121,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Jenis Garansi",
+            "value": "Garansi Supplier",
+            "id": 100370,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Bahan",
+            "value": "Lainnya",
+            "id": 100134,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Produk Custom",
+            "value": "Tidak",
+            "id": 101219,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Build-in Battery",
+            "value": "Ya",
+            "id": 100526,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Kondisi",
+            "value": "Baru",
+            "id": 100413,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "SIRIM Certified",
+            "value": "Yes",
+            "id": 101198,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Kapasitas Berat",
+            "value": "0.7kg",
+            "id": 100571,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Dimensi (P x L x T)",
+            "value": "50*10*10",
+            "id": 100942,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "No.Sertifikat (POSTEL)",
+            "value": "87156/SDPPI/2022",
+            "id": 101255,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Asal Produk",
+            "value": "-",
+            "id": 100037,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 5,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          },
+          {
+            "name": "Dikirim Dari",
+            "value": "KAB. BEKASI",
+            "id": null,
+            "is_timestamp": null,
+            "brand_option": null,
+            "val_id": null,
+            "url": null,
+            "brand_id": null,
+            "full_url": null,
+            "type": 6,
+            "item_attribute_type": null,
+            "name_tr": null,
+            "value_tr": null
+          }
+        ],
+        "categories": [
+          {
+            "catid": 11044588,
+            "display_name": "Fotografi",
+            "no_sub": false,
+            "is_default_subcat": false
+          },
+          {
+            "catid": 11044616,
+            "display_name": "Tripod, Monopod, & Aksesoris",
+            "no_sub": true,
+            "is_default_subcat": false
+          }
+        ],
+        "related_items": [],
+        "upfront_attrs": null,
+        "fresh_featured_attrs": null
+      },
+      "shop_detailed": {
+        "shopid": 159394078,
+        "userid": 159396113,
+        "last_active_time": 1791163416,
+        "vacation": false,
+        "place": null,
+        "account": {
+          "portrait": "8a4f4104cc0d0cec1cceb81391e1f7b2",
+          "username": "inbexofficial",
+          "status": 1
+        },
+        "is_shopee_verified": false,
+        "is_preferred_plus_seller": false,
+        "is_official_shop": true,
+        "shop_location": null,
+        "item_count": 256,
+        "rating_star": 4.801472,
+        "response_rate": 100,
+        "session_info": null,
+        "name": "INBEX Official Shop",
+        "ctime": 1561975637,
+        "response_time": 98,
+        "follower_count": 682441,
+        "show_official_shop_label": true,
+        "rating_bad": 7485,
+        "rating_good": 768956,
+        "rating_normal": 22688,
+        "session_infos": null,
+        "status": 1,
+        "is_individual_seller": null,
+        "is_mart": false,
+        "favorite_shop_info": null,
+        "is_3pf": false,
+        "sold_total": null,
+        "is_shopee_choice": false,
+        "is_high_end": false,
+        "banner": {
+          "shopee_choice": null
+        },
+        "authorized_brand": null,
+        "is_scs": false,
+        "shop_location_tr": null,
+        "sold_total_display": null,
+        "is_outlet": false,
+        "display_fbs_logo": false,
+        "is_chatroom_online": null,
+        "outlet_shop": null,
+        "vacation_status": null,
+        "display_shopee_choice_tick": false,
+        "is_smeter_shop": false,
+        "is_pharmacy": false,
+        "is_instant_mart": false,
+        "fbs_display_type": 0
+      },
+      "age_gate_control": null,
+      "abnormal_popup": null,
+      "return_on_spot": null,
+      "display_sections": {
+        "add_on_deal": null,
+        "bundle_deal": null,
+        "exclusive_price_label": null,
+        "free_return": null,
+        "coin": null,
+        "wholesale": null
+      },
+      "ineligible_ep": null,
+      "tax_disclaimer": null,
+      "alcohol_disclaimer": null,
+      "design_control": {
+        "use_new_revamp_first_screen": null,
+        "display_on_time_delivery_guarantee": true,
+        "disable_price_with_variation": false,
+        "display_direct_delivery": false,
+        "use_new_featured_video_revamp": null,
+        "first_screen_revamp_abtest_group": null,
+        "display_choice_customised_section": false,
+        "is_support_fbs_enabled": false,
+        "top_section_featured_video_ab_test_group": null,
+        "enable_ksp_config": null,
+        "disable_main_page_select_variation": null,
+        "support_shop_review_preview": null,
+        "pdp_revamp_phase1_improvement_ui_review_down": null,
+        "display_fashion_attributes": null,
+        "display_fashion_review_section": null,
+        "display_fashion_first_screen": null,
+        "enable_fashion_review_improvements": null,
+        "display_fbs_floating_counter": null,
+        "display_shipping_drawer_new_free_shipping_text": false,
+        "display_shipping_drawer_new_free_shipping_ui": false,
+        "shift_featured_videos_above_review_ratings_section": null,
+        "enable_fashion_featured_videos_improvements": null,
+        "hide_shipping_channel_promotion_text": false,
+        "expand_size_guide_section_by_default": null,
+        "hide_ftss_tpfs_section": null,
+        "merge_attributes_and_description": null,
+        "hide_review_view_all": null
+      },
+      "shopee_free_return": null,
+      "detail_level": 0,
+      "removed_fields": null,
+      "size_guide": null,
+      "designer_info": null,
+      "shipping_info": null,
+      "vehicle_compatibility_info": null,
+      "nea": null,
+      "button_group": {
+        "buy_with_voucher": null,
+        "ineligible_user_platform_exclusive_sku": null
+      },
+      "installment_drawer": {
+        "priority": [
+          0,
+          1
+        ],
+        "spl": null,
+        "bank": {
+          "channels": null
+        },
+        "credit_card": null
+      },
+      "ongoing_banner": null,
+      "teaser_banner": null,
+      "price_breakdown": null,
+      "membership_exclusive": null,
+      "membership_exclusive_teaser": null,
+      "service_entrance": {
+        "services": [
+          {
+            "text": "15 Hari Pengembalian",
+            "type": null,
+            "id": 30
+          },
+          {
+            "text": "100% Original",
+            "type": null,
+            "id": 23
+          },
+          {
+            "text": "COD-Cek Dulu",
+            "type": null,
+            "id": 24
+          },
+          {
+            "text": "Proteksi Kerusakan +",
+            "type": null,
+            "id": 25
+          }
+        ]
+      },
+      "service_drawer": {
+        "services": [
+          {
+            "title": "15 Hari Pengembalian",
+            "description": "Untuk memastikan kepuasanmu, Shopee Mall memberikan periode pengembalian yang lebih panjang (15 hari setelah barang diterima).",
+            "type": null,
+            "free_return": null,
+            "insurance": null,
+            "id": 30,
+            "redirection_url": "https://shopee.co.id/m/bebas-pengembalian",
+            "icon": "id-11134258-7rasd-m3bt5w8dhhjxdf",
+            "insurance_drawer": null,
+            "product_type": 0
+          },
+          {
+            "title": "100% Original",
+            "description": "Produk ini dijamin 100% asli dan akan dikirimkan secara langsung. Jika produk yang diterima tidak asli, kamu dapat mengajukan Pengembalian Dana.",
+            "type": null,
+            "free_return": null,
+            "insurance": null,
+            "id": 23,
+            "redirection_url": "https://shopee.co.id/m/shopee-garansi-ori",
+            "icon": "id-11134258-7ras8-m3bt6aa6vxsk65",
+            "insurance_drawer": null,
+            "product_type": 0
+          },
+          {
+            "title": "COD-Cek Dulu",
+            "description": "Bayar pesanan di tempat. Kamu berhak untuk membuka dan memeriksa barang sebelum melakukan pembayaran ke Kurir.",
+            "type": null,
+            "free_return": null,
+            "insurance": null,
+            "id": 24,
+            "redirection_url": "https://shopee.co.id/m/tentang-cod-cekdulu",
+            "icon": "id-11134258-7rasa-m3bt6h54uk8edb",
+            "insurance_drawer": null,
+            "product_type": 0
+          },
+          {
+            "title": "Proteksi Kerusakan +",
+            "description": "Melindungi barang belanjaanmu dari kerusakan total hingga 6 bulan",
+            "type": null,
+            "free_return": null,
+            "insurance": null,
+            "id": 25,
+            "redirection_url": "https://insurance.shopee.co.id/ec/ec-pdp.html?from=pdp&locale=ID&product_id=1749285878540410882",
+            "icon": "id-11134258-7rasa-m3bt6nx0z2dw71",
+            "insurance_drawer": {},
+            "product_type": 0
+          }
+        ]
+      },
+      "trade_in": null,
+      "product_description": {
+        "paragraph_list": [
+          {
+            "type": 0,
+            "text": "Selamat datang di Toko Resmi INBEX",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "1. Semua Barang READY STOCK di Cikarang & Surabaya",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "2.PENGIRIMAN CEPAT dalam 24 JAM",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "3.Dropshipper/Agen/Reseller dipersilakan ",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "4.KEPUASAN DIJAMIN 100% -Jika Anda tidak puas dengan item di toko kami dengan alasan apapun, silahkan hubungi kami, kami akan segera memberi solusi dalam waktu 12 jam",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "5. Ikuti toko kami untuk mendapatkan lebih banyak kejutan!",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "Postel Certificate",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 10001,
+            "text": null,
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": 1
+          },
+          {
+            "type": 0,
+            "text": "NOMOR : 87156/SDPPI/2022",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "PLG ID : 10100",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "id-11134208-7qul6-lilc49hboru55b",
+            "ratio": 0.769,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "id-11134208-7qula-lilc49hbq6elf9",
+            "ratio": 0.769,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "id-11134208-7qul7-lilc49hbrkz1b7",
+            "ratio": 0.769,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "id-11134208-7qul6-lilc49hbszjh05",
+            "ratio": 0.769,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "id-11134208-7qul0-litu37n22kcbdb",
+            "ratio": 0.769,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 1,
+            "text": null,
+            "img_id": "id-11134208-7qul2-lisfii4xz7dt89",
+            "ratio": 0.769,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "Fitur:",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "- Built-in, dengan engsel bola, menampilkan setiap sudut pengambilan gambar, stabil dan efisien.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "- jepitan instant mudah disambungkan ke kamera atau camcorder.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "- kuncidi setiap kaki tripod.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "- engsel baja, dapat mengatur kepala bola selama pemotretan.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "- desain bulat, lebih nyaman digunakan.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "- alas karet non-slip.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "- Kantong jinjing portabel membuatnya mudah dibawa dan disimpan.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "- Pilihan terbaik untuk kamera Canon Nikon Sony SLR di perjalanan Anda.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 10001,
+            "text": null,
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": 1
+          },
+          {
+            "type": 0,
+            "text": "3366 Tripod Spesifikasi:",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "Nama Produk: Tripod Kamera bisa untuk Telepon",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "Tinggi Maksimal: 133cm",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "Tinggi Min: 50cm",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "Panjang Dilipat: 50cm",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "Ketebalan: Max.18mm",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "Beban Maksimum: 3.0kg / 6.6Lbs",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 10001,
+            "text": null,
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": 2
+          },
+          {
+            "type": 0,
+            "text": "3366(135CM) Isi paket:",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "1 * 3366 Tripod Kamera",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "1 * Carry Bag",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "1 * Holder",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "1 * Bluetooth Remote",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 10001,
+            "text": null,
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": 2
+          },
+          {
+            "type": 0,
+            "text": "--FAQ--",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "1. Apakah barang ini asli?",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "--Ya, semua barang kami adalah 100% original.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "2.Apakah produk ini tersedia?",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "--Ya, ini ready stock, silakan dipesan.Semua orderan yang masuk sebelum jam 4 sore akan diproses di hari yang sama, jika order di atas jam 4 sore akan kami proses keesokan harinya",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "3. Berapa lama waktu pengiriman?",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "--Waktu pengiriman maksimal 2x24 jam setelah pesanan diterima, estimasi pengiriman 1-5 hari tergantung pada lokasi alamat pengiriman.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "4. Apakah ada layanan garansi?",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "--Ya, Shopee INBEX Resmi memberikan garansi 7 hari untuk penukaran dengan unit baru. Untuk kerusakan teknis, Kakak dapat menghubungi kami dalam jangka waktu 1 bulan.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "5.Apakah pesanan yang sudah dibayarkan bisa dibatalkan?",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "-- Paket yang sudah terbit resi otomatis tidak bisa dibatalkan lagi dengan alasan apapun. Hanya bisa dibatalkan jika belum terbit resi. Mohon teliti terlebih dahulu sebelum check out",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "6.Bagaimana cara klaim garansi?",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "-- Untuk segala bentuk komplain barang kurang, rusak atau kendala apapun mohon untuk chat admin terlebih dahulu dengan menyertakan VIDEO UNBOXING & Foto label pengiriman.",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 10001,
+            "text": null,
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": 1
+          },
+          {
+            "type": 0,
+            "text": "SERTIFIKAT CERTIFICATE",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 10001,
+            "text": null,
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": 1
+          },
+          {
+            "type": 0,
+            "text": "NOMOR : 87156/SDPPI/2022",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 0,
+            "text": "PLG ID : 10100",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          },
+          {
+            "type": 10001,
+            "text": null,
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": 2
+          },
+          {
+            "type": 0,
+            "text": "#tripod hp dan kamera #tripod # living stream #gopro camera #inbex #phoneholder #uholder",
+            "img_id": null,
+            "ratio": null,
+            "description_type": 1,
+            "empty_paragraph_count": null
+          }
+        ],
+        "source_language": ""
+      },
+      "selected_tiers": null,
+      "size_info": null,
+      "size_recommendation": null,
+      "translation_status": 0,
+      "product_description_tr": null,
+      "default_warnings": null,
+      "bcrs_disclaimer": null,
+      "top_banner": {
+        "welcome_package": null,
+        "flash_sale": {
+          "skin": {
+            "main_color": "#EE4D2D",
+            "secondary_color": "#FF7337",
+            "end_time": 1791176400
+          },
+          "promotion_id": 510893289111768
+        },
+        "deep_discount": null,
+        "live_stream": null,
+        "exclusive_price": null,
+        "membership_exclusive": null,
+        "recommended_shop_voucher": null,
+        "recommended_voucher": null,
+        "platform_exclusive_sku": null,
+        "vip_savings_banner": null,
+        "shopee_vip": null,
+        "banner_display_type": null
+      },
+      "bottom_banner": null
+    }
+  }
+}
