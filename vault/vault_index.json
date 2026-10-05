@@ -1,5 +1,42 @@
 [
   {
+    "id": "VLT-06084",
+    "filename": "20261005_123225_sprint31_campaign.json",
+    "category": "campaign_doc",
+    "producer_agent": "bagong",
+    "title": "Sprint 31 INBEX IB-2R Tripod Campaign Documentation",
+    "description": "Dokumentasi dan naskah copywriting Sprint 31 INBEX IB-2R Tripod",
+    "file_path": "/root/storage/projects/dalang-ai/vault/campaign_doc/20261005_123225_sprint31_campaign.json",
+    "relative_url": "/vault/campaign_doc/20261005_123225_sprint31_campaign.json",
+    "size_bytes": 5117,
+    "created_at": "2026-10-05 12:32:25",
+    "metadata": {
+      "product": "INBEX IB-2R 170CM Tripod Kamera Hp Bluetooth Remote",
+      "sprint": "sprint-31",
+      "type": "campaign_doc"
+    }
+  },
+  {
+    "id": "VLT-43357",
+    "filename": "20261005_123225_threads_sprint31_live.png",
+    "category": "live_proof",
+    "producer_agent": "bagong",
+    "title": "Threads Live Proof Sprint 31 INBEX IB-2R 170CM Tripod",
+    "description": "Bukti visual nyata postingan INBEX IB-2R 170CM Tripod di Threads @rizki_mubarakid",
+    "file_path": "/root/storage/projects/dalang-ai/vault/live_proof/20261005_123225_threads_sprint31_live.png",
+    "relative_url": "/vault/live_proof/20261005_123225_threads_sprint31_live.png",
+    "size_bytes": 299870,
+    "created_at": "2026-10-05 12:32:25",
+    "metadata": {
+      "product": "INBEX IB-2R 170CM Tripod Kamera Hp Bluetooth Remote",
+      "url": "https://s.shopee.co.id/gQbH58w3m",
+      "platform": "Threads",
+      "account": "@rizki_mubarakid",
+      "sprint": "sprint-31",
+      "status": "verified_live"
+    }
+  },
+  {
     "id": "VLT-14179",
     "filename": "20261005_101125_sprint30_campaign.json",
     "category": "campaign_doc",
